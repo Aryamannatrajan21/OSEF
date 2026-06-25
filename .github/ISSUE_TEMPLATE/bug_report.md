@@ -27,7 +27,7 @@ If applicable, add screenshots or paste the terminal traceback here.
 **Environment (please complete the following information):**
  - OS: [e.g. macOS, Windows, Ubuntu]
  - Python Version: [e.g. 3.13.0]
- - OSEF Version: [e.g. 0.1.0-alpha]
+ - OSEF Version: [e.g. 0.2.0a0]
 
 **Additional context**
 Add any other context about the problem here.

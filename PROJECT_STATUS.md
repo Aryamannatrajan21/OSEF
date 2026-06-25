@@ -1,6 +1,6 @@
 # OSEF Project Status
 
-## Current Release: v0.1.0-alpha (Foundation Release)
+## Current Release: v0.2.0-alpha (Engineering Foundation)
 
 This document clarifies the current state of the Open Source Engineering Framework (OSEF) for anyone discovering the repository.
 

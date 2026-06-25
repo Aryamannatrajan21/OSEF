@@ -45,7 +45,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "osef"
-version = "0.1.0"
+version = "0.2.0a0"
 description = "The universal standardization layer for open source."
 requires-python = ">=3.13"
 dependencies = [

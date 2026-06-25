@@ -5,11 +5,11 @@ This roadmap outlines the strategic milestones leading up to the `v1.0.0` Stable
 
 ---
 
-### v0.1.0-alpha: Foundation Release (Current)
-- **Status:** ✅ Complete
-- **Success:** Architecture, Governance, and DX specifications are publicly published. Repository is ready for contributors.
+### v0.1.0-alpha: Foundation Release (Completed)
+- **Status:** Done
+- **Objective:** Establish the repository, governance models, documentation framework, and frozen architecture.
 
-### v0.2.x: The Core Runtime
+### v0.2.0-alpha: Engineering Foundation (Current)
 - **Status:** 🟡 In Progress
 - **Success:** The Dependency Injection container and asynchronous Event Bus are operational. Internal services can communicate via events.
 
