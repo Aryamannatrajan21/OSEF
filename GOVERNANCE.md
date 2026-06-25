@@ -7,7 +7,8 @@ All technical decisions, release policies, and community guidelines are defined 
 ## Key Documents
 
 - **[The Constitution](governance/CONSTITUTION.md):** The primary engineering directive.
+- **[Engineering Principles](governance/ENGINEERING_PRINCIPLES.md):** The engineering heuristics that guide all implementation.
 - **[RFC Gatekeeping Policy](implementation/RFC_GATEKEEPING.md):** How architectural changes are proposed.
 - **[Change Control Policy](release/CHANGE_CONTROL_POLICY.md):** How releases and versions are managed.
 
-Please read the Constitution before contributing to ensure your pull requests align with the frozen architecture.
+Please read the Constitution and Engineering Principles before contributing to ensure your pull requests align with the frozen architecture.
