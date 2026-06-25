@@ -59,6 +59,10 @@ OSEF is a massive engineering effort. The repository is heavily structured to se
 - `release/`: Change control, versioning, and MVP boundaries.
 - `src/osef/`: (Coming Soon) The Python production codebase.
 
+> [!WARNING]
+> **Python 3.12+ Required**
+> OSEF strictly requires Python 3.12 or higher for installation and development. Attempting to install via `pip` on older environments will fail.
+
 ---
 
 ## 🛣 Development Roadmap
