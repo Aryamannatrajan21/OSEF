@@ -1,0 +1,32 @@
+site_name: OSEF Documentation
+site_description: Open Source Engineering Framework
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Installation: installation.md
+    - Quick Start: quickstart.md
+  - Architecture: architecture.md
+  - Engineering Knowledge Graph: ekg.md
+  - Reference:
+    - CLI Reference: cli_reference.md
+    - SDK Guide: sdk_guide.md
+    - Plugin Guide: plugin_guide.md
+  - Governance:
+    - RFC Index: rfc_index.md
+    - ADR Index: adr_index.md
+    - Contributing: contributing.md
+    - Release Process: release_process.md
+
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - admonition
+  - toc:
+      permalink: true

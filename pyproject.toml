@@ -11,15 +11,20 @@ dependencies = [
     "typer>=0.9.0",
     "pydantic>=2.0.0",
     "pydantic-settings>=2.0.0",
-    "jinja2>=3.0.0"
+    "jinja2>=3.0.0",
+    "rich>=13.0.0"
 ]
 
 [project.optional-dependencies]
 dev = [
     "pytest",
     "pytest-asyncio",
+    "pytest-cov",
     "ruff",
     "mypy"
+]
+docs = [
+    "mkdocs-material>=9.0.0"
 ]
 
 [project.scripts]
