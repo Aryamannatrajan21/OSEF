@@ -2,6 +2,9 @@
 OSEF Command Line Interface.
 """
 
+import os
+import sys
+import subprocess
 from importlib.metadata import version as get_version, PackageNotFoundError
 
 import typer
@@ -29,7 +32,13 @@ def get_osef_version() -> str:
 def init() -> None:
     """Initialize a new OSEF project in the current directory."""
     console.print("[bold green]Initializing OSEF project...[/bold green]")
-    # Placeholder for actual init logic
+    config_path = "osef.toml"
+    if os.path.exists(config_path):
+        console.print(f"[yellow]Warning:[/yellow] {config_path} already exists.")
+    else:
+        with open(config_path, "w") as f:
+            f.write('[project]\nname = "my-osef-project"\nversion = "0.1.0"\n')
+        console.print(f"[green]✔[/green] Created {config_path}")
     console.print("Project initialized successfully.")
 
 
@@ -58,7 +67,11 @@ def validate() -> None:
 def docs() -> None:
     """Generate and serve documentation."""
     console.print("Starting MkDocs documentation server...")
-    console.print("(Placeholder: Run `mkdocs serve` manually for now.)")
+    try:
+        subprocess.run([sys.executable, "-m", "mkdocs", "serve"], check=True)
+    except subprocess.CalledProcessError:
+        console.print("[bold red]Failed to start MkDocs server.[/bold red]")
+        raise typer.Exit(code=1)
 
 
 @app.command()

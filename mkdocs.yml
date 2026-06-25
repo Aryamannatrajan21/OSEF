@@ -13,6 +13,9 @@ nav:
     - Installation: installation.md
     - Quick Start: quickstart.md
   - Architecture: architecture.md
+  - Specifications:
+    - Product Requirements Document: PRD.md
+    - Software Requirements Specification: SRS.md
   - Engineering Knowledge Graph: ekg.md
   - Reference:
     - CLI Reference: cli_reference.md
