@@ -3,7 +3,7 @@
 > **The Architecture is Complete. Engineering Begins.**
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
-[![Status: Foundation Release](https://img.shields.io/badge/Status-v0.1.0--alpha-orange.svg)](PROJECT_STATUS.md)
+[![Status: Sprint 1 Released](https://img.shields.io/badge/Status-v0.2.0--alpha-orange.svg)](PROJECT_STATUS.md)
 
 OSEF is an AI-native engineering platform designed to transform software repositories into sustainable, production-quality open-source projects. 
 
@@ -11,18 +11,18 @@ It is not a documentation generator or a simple repository template. It is an **
 
 ---
 
-## ⚠️ Current Project Status: Architecture Frozen
+## ⚠️ Current Project Status: Engineering Foundation Complete
 
-OSEF is entering public development. We are currently at **v0.1.0-alpha (Foundation Release)**.
+OSEF is in active development. We have released **v0.2.0-alpha (Sprint 1: Core Runtime Implementation)**.
 
 **What this means:**
 1. The **Architecture is 100% complete and frozen**. The vision, data models, event buses, and plugin systems are fully specified.
 2. The **Developer Experience is fully designed**. Over 100 user stories and 10 playbooks have been mapped.
-3. **Implementation is beginning now.**
+3. The **Engineering Foundation** (CLI, EKG Models, Dependency Injection, Event Bus, Plugin SDK) is built and released with 100% test coverage.
 
 We value engineering quality over implementation speed. We have spent extensive time designing this system to ensure it is robust, extensible, and mathematically sound before writing production code.
 
-See [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) for live progress on Sprint 1.
+See [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) for live progress on Sprint 2.
 
 ---
 
@@ -57,7 +57,7 @@ OSEF is a massive engineering effort. The repository is heavily structured to se
 - `playbooks/`: End-to-end guides on using OSEF.
 - `implementation/`: Sprint plans, backlogs, and coding standards.
 - `release/`: Change control, versioning, and MVP boundaries.
-- `src/osef/`: (Coming Soon) The Python production codebase.
+- `src/osef/`: The Python production codebase.
 
 > [!WARNING]
 > **Python 3.12+ Required**
@@ -67,8 +67,8 @@ OSEF is a massive engineering effort. The repository is heavily structured to se
 
 ## 🛣 Development Roadmap
 
-- **v0.1.0-alpha (Current):** Foundation Release (Architecture Complete).
-- **v0.2.x:** Core Runtime & Event Bus implementation.
+- **v0.1.0-alpha:** Foundation Release (Architecture Complete).
+- **v0.2.0-alpha (Current):** Core Runtime & Event Bus implementation.
 - **v0.5.x:** SDK & CLI Alpha.
 - **v0.8.x:** Transformation Engine (OSTE) MVP.
 - **v1.0.0:** Stable Release.
