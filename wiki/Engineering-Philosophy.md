@@ -12,7 +12,7 @@ The Constitution defines the governance of the repository.
 - No architectural change is made without an RFC.
 
 ## 3. Project Execution Directive (PED)
-Our PED outlines our sprint cadence. We do not build features in a vacuum. Everything is scoped into discrete Sprints (e.g., Sprint 1: Foundation, Sprint 2: Transformation Engine).
+Our PED outlines our sprint cadence. We do not build features in a vacuum. Everything is scoped into discrete Sprints (e.g., Phase I: Platform Engineering, Phase II: Ecosystem Engineering).
 
 ## 4. Engineering Principles
 - **Architecture First**: We write the RFC before we write the code.
@@ -20,4 +20,4 @@ Our PED outlines our sprint cadence. We do not build features in a vacuum. Every
 - **Fail Fast, Fail Loud**: We prefer a hard crash over a silent failure.
 
 ---
-*Last Updated: Sprint 2 | Related Docs: [CONSTITUTION.md](../governance/CONSTITUTION.md)*
+*Last Updated: Phase II | Related Docs: [CONSTITUTION.md](../governance/CONSTITUTION.md)*

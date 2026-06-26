@@ -29,4 +29,4 @@ The engine that executes changes safely. It validates that an AI's proposed code
 OSEF is extensible. The Plugin SDK allows you to write custom parsers for new languages, new validation rules for the Transformation Engine, or custom heuristics for the EKG.
 
 ---
-*Last Updated: Sprint 2 | Related Architecture: [REFERENCE_ARCHITECTURE.md](../architectures/REFERENCE_ARCHITECTURE.md)*
+*Last Updated: Phase II | Related Architecture: [REFERENCE_ARCHITECTURE.md](../architectures/REFERENCE_ARCHITECTURE.md)*

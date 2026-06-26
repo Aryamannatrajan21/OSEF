@@ -14,7 +14,7 @@ Common acronyms and terminology used in the OSEF ecosystem.
 - **Repository Intelligence:** The combined capability of the Scanner, Parser, EKG, and EIL.
 - **RFC (Request for Comments):** A formal proposal for a major architectural change.
 - **SDK (Software Development Kit):** Tools provided for writing custom Plugins.
-- **Sprint:** A focused development phase (e.g., Sprint 1: Foundation).
+- **Sprint:** A focused development phase (e.g., Phase I: Platform Engineering).
 
 ---
-*Last Updated: Sprint 2 | Maintainer: @Aryamannatrajan21*
+*Last Updated: Phase II | Maintainer: @Aryamannatrajan21*

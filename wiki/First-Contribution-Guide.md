@@ -44,4 +44,4 @@ If you want to make a structural or architectural change, **do not write code fi
 4. Only then should you begin implementation.
 
 ---
-*Last Updated: Sprint 2 | Related Docs: [CODE_OF_CONDUCT.md](../CODE_OF_CONDUCT.md)*
+*Last Updated: Phase II | Related Docs: [CODE_OF_CONDUCT.md](../CODE_OF_CONDUCT.md)*

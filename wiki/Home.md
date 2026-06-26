@@ -17,7 +17,7 @@ OSEF treats codebases not as raw strings of text, but as a semantically connecte
 
 ## 🚀 Status
 - **Latest Release:** `v0.2.0-alpha`
-- **Current Sprint:** Sprint 2 (Transformation Engine / OSTE)
+- **Current Phase:** Phase II (Ecosystem Engineering)
 - **Roadmap Summary:** Scaling the EKG to support multi-language parsing, establishing the AI Transformation Engine, and standardizing the Plugin SDK.
 
 ---
@@ -36,4 +36,4 @@ This Wiki is a supplementary guide. The repository itself contains the canonical
 - **[Issues](https://github.com/Aryamannatrajan21/OSEF/issues)**: Report bugs, propose features, and submit Security Reports.
 
 ---
-*Last Updated: Sprint 2 | Maintainer: @Aryamannatrajan21*
+*Last Updated: Phase II | Maintainer: @Aryamannatrajan21*
