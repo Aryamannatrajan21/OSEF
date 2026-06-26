@@ -12,12 +12,16 @@ from rich.console import Console
 
 from osef.core.bootstrapper import bootstrap
 from osef.contracts.exceptions import OSEFError
+from osef.core.builder import EKGBuilder
 
 app = typer.Typer(
     help="Open Source Engineering Framework",
     no_args_is_help=True,
     add_completion=False,
 )
+graph_app = typer.Typer(help="Engineering Knowledge Graph operations.")
+app.add_typer(graph_app, name="graph")
+
 console = Console()
 
 
@@ -75,10 +79,63 @@ def docs() -> None:
 
 
 @app.command()
-def graph() -> None:
-    """Analyze and interact with the Engineering Knowledge Graph."""
-    console.print("Engineering Knowledge Graph operations.")
-    console.print("Use subcommands to export or query the graph in the future.")
+def analyze(path: str = typer.Argument(".", help="Path to repository")) -> None:
+    """Analyze a repository and build its Knowledge Graph."""
+    console.print(f"[bold blue]Analyzing repository at {path}...[/bold blue]")
+    try:
+        builder = EKGBuilder(path)
+        graph = builder.build()
+        console.print(f"[green]✔[/green] Analysis complete.")
+        console.print(f"Discovered [bold]{len(graph.nodes)}[/bold] nodes and [bold]{len(graph.edges)}[/bold] edges.")
+    except Exception as e:
+        console.print(f"[bold red]Analysis failed:[/bold red] {e}")
+        raise typer.Exit(code=1)
+
+
+@app.command()
+def report(path: str = typer.Argument(".", help="Path to repository")) -> None:
+    """Generate a human-readable repository intelligence report."""
+    console.print(f"[bold blue]Generating report for {path}...[/bold blue]")
+    try:
+        builder = EKGBuilder(path)
+        graph = builder.build()
+        
+        counts: dict[str, int] = {}
+        for node in graph.nodes.values():
+            counts[node.type] = counts.get(node.type, 0) + 1
+            
+        console.print("\n[bold]Repository Intelligence Report[/bold]")
+        console.print("==============================")
+        for type_name, count in sorted(counts.items()):
+            console.print(f"{type_name.capitalize()}s: [bold cyan]{count}[/bold cyan]")
+            
+    except Exception as e:
+        console.print(f"[bold red]Report generation failed:[/bold red] {e}")
+        raise typer.Exit(code=1)
+
+
+@graph_app.command("export")
+def graph_export(
+    path: str = typer.Argument(".", help="Path to repository"),
+    out: str = typer.Option(None, "--out", "-o", help="Output JSON file path")
+) -> None:
+    """Export the Engineering Knowledge Graph as JSON."""
+    console.print(f"[bold blue]Building graph for {path}...[/bold blue]")
+    try:
+        builder = EKGBuilder(path)
+        graph = builder.build()
+        json_data = graph.export_json()
+        
+        if out:
+            with open(out, "w", encoding="utf-8") as f:
+                f.write(json_data)
+            console.print(f"[green]✔[/green] Graph exported to {out}")
+        else:
+            console.print(json_data)
+            
+    except Exception as e:
+        console.print(f"[bold red]Export failed:[/bold red] {e}")
+        raise typer.Exit(code=1)
 
 
 @app.command()

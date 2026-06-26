@@ -54,7 +54,7 @@ def test_cli_info():
 
 
 def test_cli_graph():
-    result = runner.invoke(app, ["graph"])
+    result = runner.invoke(app, ["graph", "--help"])
     assert result.exit_code == 0
     assert "Engineering Knowledge Graph operations" in result.stdout
 
