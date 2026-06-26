@@ -7,6 +7,7 @@ from osef.sdk.context import ExtensionContext
 from osef.core.ekg import KnowledgeGraph
 from osef.sdk.events import EventBus, EventType
 from osef.sdk.version import SDK_VERSION
+from osef.sdk.registry import CapabilityRegistry
 
 logger = logging.getLogger(__name__)
 
@@ -16,6 +17,7 @@ class ExtensionHost:
         self.workspace_dir = workspace_dir
         self.graph = graph
         self.event_bus = EventBus()
+        self.registry = CapabilityRegistry()
         self.plugins: Dict[str, OsefPlugin] = {}
 
     def load_plugin(self, plugin_class: Type[OsefPlugin]) -> None:
@@ -36,6 +38,7 @@ class ExtensionHost:
             workspace_dir=self.workspace_dir,
             graph=self.graph,
             event_bus=self.event_bus,
+            host=self,
         )
 
         plugin.activate(context)

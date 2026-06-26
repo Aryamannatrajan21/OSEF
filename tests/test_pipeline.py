@@ -1,4 +1,4 @@
-from osef.core.builder import EKGBuilder
+from osef.core.pipeline import PipelineEngine
 
 
 def test_builder_creates_graph(tmp_path):
@@ -11,7 +11,7 @@ def test_func():
     pass
 """)
 
-    builder = EKGBuilder(tmp_path)
+    builder = PipelineEngine(tmp_path)
     graph = builder.build()
 
     # module, class, method, function

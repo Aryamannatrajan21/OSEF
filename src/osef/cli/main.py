@@ -10,10 +10,9 @@ from importlib.metadata import version as get_version, PackageNotFoundError
 import typer
 from rich.console import Console
 from rich.tree import Tree
-
 from osef.core.bootstrapper import bootstrap
 from osef.contracts.exceptions import OSEFError
-from osef.core.builder import EKGBuilder
+from osef.core.pipeline import PipelineEngine
 from osef.intelligence.layer import IntelligenceLayer
 
 app = typer.Typer(
@@ -85,7 +84,7 @@ def analyze(path: str = typer.Argument(".", help="Path to repository")) -> None:
     """Analyze a repository and build its Knowledge Graph."""
     console.print(f"[bold blue]Analyzing repository at {path}...[/bold blue]")
     try:
-        builder = EKGBuilder(path)
+        builder = PipelineEngine(path)
         graph = builder.build()
         console.print("[green]✔ Analysis complete.[/green]")
         console.print(
@@ -139,7 +138,7 @@ def report(path: str = typer.Argument(".", help="Path to repository")) -> None:
     """Generate a human-readable repository intelligence report."""
     console.print(f"[bold blue]Generating report for {path}...[/bold blue]")
     try:
-        builder = EKGBuilder(path)
+        builder = PipelineEngine(path)
         graph = builder.build()
 
         counts: dict[str, int] = {}
@@ -164,7 +163,7 @@ def graph_export(
     """Export the Engineering Knowledge Graph as JSON."""
     console.print(f"[bold blue]Building graph for {path}...[/bold blue]")
     try:
-        builder = EKGBuilder(path)
+        builder = PipelineEngine(path)
         graph = builder.build()
         json_data = graph.export_json()
 
