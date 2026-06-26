@@ -6,7 +6,7 @@
 
 OSEF transforms unstructured source code into an immutable Engineering Knowledge Graph, allowing you to enforce architectural policies, audit dependencies, and build custom intelligence extensions natively in Python.
 
-[![Version](https://img.shields.io/badge/version-v0.4.0-blue.svg)](#)
+[![Version](https://img.shields.io/badge/version-v1.0.0--rc1-blue.svg)](#)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](#)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](#)
 [![Status](https://img.shields.io/badge/status-active-success.svg)](#)
