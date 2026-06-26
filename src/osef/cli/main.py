@@ -102,7 +102,7 @@ def info() -> None:
 @app.command()
 def version() -> None:
     """Print the CLI version."""
-    console.print(get_osef_version())
+    console.print(f"osef version {get_osef_version()}")
 
 
 if __name__ == "__main__":
