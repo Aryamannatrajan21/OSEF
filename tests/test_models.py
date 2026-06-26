@@ -1,4 +1,3 @@
-
 from osef.contracts.models import OSEFModel
 
 
