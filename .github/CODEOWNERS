@@ -1,0 +1,25 @@
+# GitHub CODEOWNERS
+# This file restricts direct merges and requires specific maintainers to review architectural changes.
+
+# Global owner fallback
+* @Aryamannatrajan21
+
+# Core Systems
+/src/ @Aryamannatrajan21
+/tests/ @Aryamannatrajan21
+
+# Documentation & Specifications
+/docs/ @Aryamannatrajan21
+/site/ @Aryamannatrajan21
+
+# Governance & Decision Making
+/governance/ @Aryamannatrajan21
+/implementation/ @Aryamannatrajan21
+
+# Automation & Tooling
+/.github/ @Aryamannatrajan21
+/scripts/ @Aryamannatrajan21
+
+# How to add maintainers:
+# When community members achieve maintainer status, their GitHub handles
+# will be appended to specific directories they govern.

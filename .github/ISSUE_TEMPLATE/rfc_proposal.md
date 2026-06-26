@@ -1,28 +1,25 @@
 ---
 name: RFC Proposal
-about: Propose a major architectural change or new subsystem
-title: "[RFC] "
-labels: rfc, architecture
+about: Propose a major architectural change or standard for OSEF
+title: '[RFC] '
+labels: 'architecture, governance, review'
 assignees: ''
-
 ---
 
-**⚠️ NOTE: Before submitting an RFC, please review the `architectures/REFERENCE_ARCHITECTURE.md` to ensure your proposal does not violate core principles.**
+## RFC Objective
+<!-- What is the purpose of this RFC? What architectural problem are you trying to solve? -->
 
-## Abstract
-A short (~200 word) description of the proposed technical change.
-
-## Motivation
-Why should we do this? What use cases does it support? What is the expected outcome?
+## Background & Context
+<!-- Why is this change necessary? How does it fit into the existing OSEF Constitution? -->
 
 ## Proposed Architecture
-Explain the proposed changes to the system. Provide code examples of the new API, Event signatures, or CLI workflows.
+<!-- Detail the technical implementation, constraints, and contracts. Use diagrams if necessary. -->
 
-## Drawbacks
-Why should we *not* do this? (e.g., complexity, dependency additions, backward incompatibility).
+## Trade-offs & Drawbacks
+<!-- What are the downsides of this approach? Why should we NOT do this? -->
 
-## Alternatives
-What other designs have been considered? What is the impact of not doing this?
+## Alternatives Considered
+<!-- What other architectures were evaluated and why were they rejected? -->
 
-## Unresolved Questions
-What parts of the design do you expect to resolve through the RFC process before this gets merged?
+## Alignment with Engineering Principles
+<!-- How does this proposal align with OSEF's core engineering principles? -->
