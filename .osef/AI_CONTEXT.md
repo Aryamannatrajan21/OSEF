@@ -14,7 +14,7 @@ The OSEF runtime architecture is **FROZEN**.
 Any deviation requires a formal RFC and ADR.
 
 ### 3. Modus Operandi
-- All new language support requires a dedicated Parser provider.
+- All new language support requires a dedicated Parser Capability.
 - Go and TypeScript parsers have been formally prioritized for Q2.
 - **Decision:** All parsers MUST implement the standard `ParserContract` (v0.4.0+).
 

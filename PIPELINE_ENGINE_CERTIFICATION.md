@@ -2,7 +2,7 @@
 
 **Status**: Certified
 **Version**: 0.4.0
-**Architectural Role**: Deterministic Orchestrator (Formerly `EKGBuilder`)
+**Architectural Role**: Deterministic Orchestrator (Formerly `Pipeline Engine`)
 
 ## Validated Criteria
 - `[x]` Orchestrates immutable execution stages.

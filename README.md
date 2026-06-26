@@ -89,8 +89,26 @@ graph TD
 - ✅ **Engineering Knowledge Graph API**
 - ✅ **Engineering Policy Engine (EPE)**
 - ✅ **Engineering Platform SDK (EPSDK)**
+- ✅ **Capability-Driven Runtime**
+- ✅ **Documentation Intelligence Plugin**
 - 🚧 **TypeScript & Go Parsers** *(In Progress)*
-- 🚧 **Ecosystem Marketplace** *(Planned)*
+
+---
+
+## 🔌 Plugin Ecosystem
+
+**Current Official Plugins**
+- ✅ **Python Reference Platform**: Parser capability anchor.
+- ✅ **Documentation Intelligence Plugin**: Reference Plugin #1 (Certified).
+
+**Future Official Plugins**
+- 🚧 Graph Visualization
+- 🚧 Infrastructure Intelligence
+- 🚧 Docker Intelligence
+- 🚧 GitHub Actions Intelligence
+- 🚧 Enterprise Policy Pack
+- 🚧 FastAPI Intelligence
+- 🚧 Language Packs (Java, Go, Rust, TypeScript, C#, Kotlin)
 
 ---
 
@@ -171,17 +189,20 @@ OSEF's documentation is treated as a first-class product feature. We operate on 
 
 ## 🗺️ Roadmap Snapshot
 
-**Completed Milestones**
+**Phase I — Platform Engineering (Completed)**
 - Foundation & Governance
 - Repository Intelligence (EKG)
 - Engineering Policy Engine (EPE)
 - Engineering Platform SDK (EPSDK)
+- Capability-Driven Runtime
+- Platform Validation (Documentation Intelligence Plugin)
 
-**Upcoming Milestones**
-- Reference Plugin Ecosystem
-- Capabilities Marketplace
-- Engineering Query Language (EQL)
-- AI Engineering Agents
+**Phase II — Ecosystem Engineering (Active)**
+- Reference Plugins
+- Language Packs
+- Enterprise Packs
+- Marketplace
+- AI Engineering Intelligence
 
 > Read the full [Roadmap](ROADMAP.md).
 

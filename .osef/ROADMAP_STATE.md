@@ -1,16 +1,30 @@
-# OSEF Roadmap State
+# OSEF Master Roadmap
 
-## Completed
-- [x] Foundation (v0.1.0)
-- [x] Repository Intelligence (v0.2.0)
-- [x] Engineering Policy Engine (v0.3.0)
-- [x] Engineering Platform SDK (v0.4.0)
+## Phase I — Platform Engineering ✅ [COMPLETE]
+* Foundation & Governance
+* Repository Intelligence
+* Engineering Knowledge Graph (EKG)
+* Engineering Policy Engine (EPE)
+* Engineering Platform SDK (EPSDK)
+* Capability-Driven Runtime
+* Platform Validation (Documentation Intelligence Reference Plugin)
 
-## Active Sprint
-- [ ] Sprint 5: Ecosystem Validation (Reference Plugins, Event Bus Hooks)
+## Phase II — Ecosystem Engineering 🚀 [CURRENT]
+**Status:** In Progress (Commencing Sprint 6)
 
-## Upcoming
-- [ ] Capabilities Marketplace
-- [ ] Engineering Query Language (EQL)
-- [ ] Multi-language parsers (TS, Go)
-- [ ] AI Engineering Agents
+The platform is frozen. All development is now focused on ecosystem extensions through the public SDK.
+
+### Sprint 6 — Ecosystem Expansion
+1. **Graph Visualization Plugin**
+2. **Infrastructure Intelligence Plugin**
+3. **GitHub Actions Plugin**
+4. **Docker Plugin**
+5. **Enterprise Policy Pack**
+6. **FastAPI Plugin**
+
+### Future Language Packs
+* Java, Go, Rust, TypeScript, C#, Kotlin
+
+### Future Enterprise & AI
+* Marketplace, Plugin Registry, Enterprise Packs
+* Engineering Agents, Architecture Assistants, AI Reviewers

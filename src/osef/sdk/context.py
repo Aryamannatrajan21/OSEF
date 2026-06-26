@@ -2,6 +2,7 @@ from pathlib import Path
 from typing import Dict, Any
 from osef.core.ekg import KnowledgeGraph
 from osef.sdk.events import EventBus
+from osef.sdk.capabilities import CapabilityDescriptor
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -28,9 +29,7 @@ class ExtensionContext:
         self.cache: Dict[str, Any] = {}
         self.state: Dict[str, Any] = {}
 
-    def register_provider(self, provider: "BaseProvider") -> None:
-        """
-        Register an execution provider (e.g. BaseParserProvider) with the Capability Registry.
-        """
+    def register_capability(self, capability: CapabilityDescriptor) -> None:
+        """Register a runtime capability from this plugin."""
         if self.host and hasattr(self.host, "registry"):
-            self.host.registry.register(provider, self.plugin_id)
+            self.host.registry.register(capability, self.plugin_id)

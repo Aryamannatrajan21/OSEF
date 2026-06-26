@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. 
 We track releases by major Architectural Milestones rather than granular commits.
+## [v1.0.0-rc1] - Platform Completion & Documentation Intelligence Plugin
+The official completion of Phase I (Platform Engineering) and transition to Phase II (Ecosystem Engineering).
+- **Completed**: Platform Completion, freezing the OSEF Core runtime architecture.
+- **Added**: Documentation Intelligence Plugin (Sprint 5C.1). First official ecosystem plugin proving the Capability-Driven architecture via `GraphDelta` overlays.
+- **Added**: Platform Validation (Sprint 5B). Certified the SDK and extension host.
+- **Added**: Capability-Driven Runtime (Sprint 5A). Replaced inheritance-based providers with lightweight `CapabilityDescriptors`. Plugins now expose declarative capabilities for the `PipelineEngine` to orchestrate deterministically.
 
 ## [v0.4.0] - Engineering Platform SDK (EPSDK)
 The transition from an internal monolith to an extensible Plugin Ecosystem.
