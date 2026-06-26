@@ -114,6 +114,16 @@ class PythonASTVisitor(ast.NodeVisitor):
     def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef) -> Any:
         self._handle_function(node, is_async=True)
 
+    def _extract_calls(self, node: ast.AST) -> list[str]:
+        calls = []
+        for child in ast.walk(node):
+            if isinstance(child, ast.Call):
+                if isinstance(child.func, ast.Name):
+                    calls.append(child.func.id)
+                elif isinstance(child.func, ast.Attribute):
+                    calls.append(child.func.attr)
+        return calls
+
     def _handle_function(self, node: ast.FunctionDef | ast.AsyncFunctionDef, is_async: bool) -> None:
         parent_sym = self.symbol_table.get_symbol(self._current_parent_id or "")
         func_type = "method" if parent_sym and parent_sym.type == "class" else "function"
@@ -130,6 +140,7 @@ class PythonASTVisitor(ast.NodeVisitor):
             metadata={
                 "is_async": str(is_async).lower(),
                 "decorators": ",".join(self._parse_decorators(node.decorator_list)),
+                "calls": ",".join(self._extract_calls(node))
             }
         )
         self.symbol_table.add_symbol(func_sym)
