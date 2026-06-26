@@ -2,27 +2,45 @@
 
 First off, thank you for considering contributing to OSEF! It's people like you that make open source such a fantastic community.
 
-## ⚠️ Important Note: We are in Sprint 1
-OSEF is currently entering its very first implementation sprint. 
-If you are reading this, you are looking at the frozen foundational architecture. **Production coding is just beginning.**
+## ⚠️ Important Note: Our Engineering Philosophy
+OSEF is not a typical open-source project. We operate under strict enterprise governance and adhere to an immutable set of engineering heuristics.
+Before you write any code or submit a PR, you **must** read and understand:
+1. **[The OSEF Constitution](governance/CONSTITUTION.md)**
+2. **[The Engineering Principles](governance/ENGINEERING_PRINCIPLES.md)**
+
+If a Pull Request violates these principles, it will be rejected.
 
 ## How Decisions Are Made
-Before proposing a massive PR, please read:
-1. **The Architecture:** `architectures/REFERENCE_ARCHITECTURE.md`.
-2. **The Change Control Policy:** `release/CHANGE_CONTROL_POLICY.md`.
 
-We use an **RFC (Request for Comments)** process for architectural shifts. If you want to change how the Event Bus works, submit an RFC first. If you want to fix a typo or solve an open issue on the backlog, just open a PR!
+We use an **RFC (Request for Comments)** process for all architectural shifts. 
+- **Want to fix a bug or add a minor feature?** Open an Issue using our templates, then open a Pull Request.
+- **Want to change how a core component works?** Submit an RFC Proposal Issue first. Do not write code until the RFC is accepted.
 
-## Development Setup (Coming Soon)
-Since we are in Sprint 1, the `pyproject.toml` and standard `uv` commands are actively being written. 
-Check back in a few days for the exact commands to run the test suite and local environment.
+## Development Setup
 
-## Where to Start?
-1. Check the [Engineering Backlog](implementation/ENGINEERING_BACKLOG.md).
-2. Look for issues labeled `good first issue` or `help wanted` on GitHub.
-3. Drop into our [Discussions](COMMUNITY.md) and say hi!
+We recommend using `uv` for dependency management, though `pip` works fine.
+
+```bash
+# Clone the repository
+git clone https://github.com/Aryamannatrajan21/OSEF.git
+cd OSEF
+
+# Create virtual environment and install dependencies
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev,docs]"
+```
 
 ## Code Review Expectations
-- All PRs must pass `mypy --strict`.
-- All PRs must maintain test coverage and pass `ruff` formatting.
-- Follow the guidelines in the [Coding Standards](implementation/CODING_STANDARDS.md).
+
+All code must pass our strict CI pipeline before merging:
+- **Linting:** Must pass `ruff check .` and `ruff format --check .`
+- **Type Checking:** Must pass `mypy src/` strictly.
+- **Tests:** Must pass the `pytest` suite on all supported Python versions.
+- **Reviews:** Requires at least one approval from a designated `CODEOWNER`.
+
+## Where to Start?
+
+1. Check the [Engineering Backlog](implementation/ENGINEERING_BACKLOG.md) to see what we are currently working on. (We are currently in **Sprint 2: Transformation Engine**).
+2. Look for issues labeled `good first issue` or `help wanted`.
+3. Drop into our [GitHub Discussions](https://github.com/Aryamannatrajan21/OSEF/discussions) and say hi!
