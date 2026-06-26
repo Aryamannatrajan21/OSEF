@@ -19,4 +19,13 @@ This is the architectural constitution of OSEF. Every pull request and future en
 ## 5. Core vs. Ecosystem
 - **Core owns abstractions. Plugins own functionality.** Do not bloat the Core with specific formatters (e.g., Markdown generation) or niche linting rules. Write a plugin.
 
+## 6. Execution vs Observation Laws
+1. **No External Network Calls** during Repository Scanning or Parsing.
+2. **Strict Encapsulation**: The Symbol Table and Intermediate Representation formats are internal.
+3. **Immutable Knowledge Graph**: Never mutate the EKG from plugins.
+4. **No Magic**: Explicit dependency injection over global state.
+5. **Execution vs Observation**: Execution is capability-driven. Observation is event-driven. Events never own execution state. The Event Bus is never RPC.
+6. **Provider Statelessness**: Providers must remain completely stateless.
+7. **Responsibility Laws**: Extension Host owns discovery. Capability Registry owns resolution. Pipeline Engine owns orchestration. Plugins own implementation.
+
 *If an implementation violates these guardrails, stop, explain why, and request an Architecture Decision Record (ADR) override before proceeding.*

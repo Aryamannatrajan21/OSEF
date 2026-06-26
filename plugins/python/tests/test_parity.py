@@ -1,7 +1,7 @@
 import pytest
 from pathlib import Path
 
-from osef.core.builder import EKGBuilder
+from osef.core.pipeline import PipelineEngine
 from osef_python.python import PythonParser as PluginPythonParser
 from osef_python.symbol_table import SymbolTable as PluginSymbolTable
 from osef.parser.symbol_table import SymbolTable as CoreSymbolTable
@@ -22,7 +22,7 @@ def test_parser_parity():
     plugin_parser = PluginPythonParser(plugin_sym)
     
     # 3. Parse a file
-    target_file = Path(__file__).parent.parent.parent.parent / "src" / "osef" / "core" / "builder.py"
+    target_file = Path(__file__).parent.parent.parent.parent / "src" / "osef" / "core" / "pipeline.py"
     
     core_parser.parse_file(str(target_file))
     plugin_parser.parse_file(str(target_file))
