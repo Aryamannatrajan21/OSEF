@@ -24,3 +24,11 @@ This roadmap tracks the strategic progression of the Open Source Engineering Fra
 - **Enterprise Packs**: Enterprise Policy Pack and auditing tools.
 - **Marketplace**: Plugin registry, cryptographic signatures, and plugin discovery.
 - **AI Engineering Intelligence**: AI reviewers, architecture assistants, and agentic refactoring.
+
+---
+
+## Future Vision
+
+- **Engineering Memory**: Persisting the EKG across builds to track architectural drift over time.
+- **Enterprise Platform**: Distributed graph querying and cross-repository policy enforcement.
+- **Cloud Services**: Hosted EPE runs integrated directly into GitHub/GitLab CI pipelines.
