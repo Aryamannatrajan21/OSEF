@@ -1,9 +1,11 @@
 from pydantic import BaseModel
 from typing import Optional
 
+
 class Capability(BaseModel):
     name: str
     version: str
+
 
 class PluginCapabilities(BaseModel):
     provides_parser: Optional[Capability] = None

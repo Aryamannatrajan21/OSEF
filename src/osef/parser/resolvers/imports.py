@@ -9,6 +9,7 @@ class ImportResolver:
     """
     Resolves import statements to concrete symbols within the SymbolTable.
     """
+
     def __init__(self, symbol_table: SymbolTable):
         self.symbol_table = symbol_table
 
@@ -17,14 +18,14 @@ class ImportResolver:
         Attempt to resolve all imports.
         """
         imports = self.symbol_table.find_by_type("import")
-        
+
         for imp in imports:
             # Mark as unresolved by default
             imp.metadata["resolved"] = "false"
-            
+
             # Simple heuristic matching for now
             target = imp.metadata.get("module") or imp.name
-            
+
             # Search for matching module
             for mod in self.symbol_table.find_by_type("module"):
                 # If the module's file path loosely matches the import target

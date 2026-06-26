@@ -9,6 +9,7 @@ class SemanticClassifier:
     """
     Infers engineering intent from raw symbols.
     """
+
     def __init__(self, symbol_table: SymbolTable):
         self.symbol_table = symbol_table
 
@@ -25,9 +26,9 @@ class SemanticClassifier:
     def _classify_class(self, symbol: Symbol) -> None:
         name = symbol.name.lower()
         bases = symbol.metadata.get("bases", "").lower()
-        
+
         classification = "Component"
-        
+
         if "service" in name:
             classification = "Service"
         elif "controller" in name or "router" in name:
@@ -38,20 +39,26 @@ class SemanticClassifier:
             classification = "DTO"
         elif "exception" in bases or "error" in bases:
             classification = "Exception"
-            
+
         symbol.metadata["semantic_role"] = classification
 
     def _classify_function(self, symbol: Symbol) -> None:
         name = symbol.name.lower()
         decs = symbol.metadata.get("decorators", "").lower()
-        
+
         classification = "Function"
-        
-        if "get" in decs or "post" in decs or "put" in decs or "delete" in decs or "router" in decs:
+
+        if (
+            "get" in decs
+            or "post" in decs
+            or "put" in decs
+            or "delete" in decs
+            or "router" in decs
+        ):
             classification = "API_Endpoint"
         elif "command" in decs:
             classification = "CLI_Command"
         elif name.startswith("test_"):
             classification = "Test"
-            
+
         symbol.metadata["semantic_role"] = classification

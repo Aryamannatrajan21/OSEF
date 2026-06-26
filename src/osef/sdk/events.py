@@ -1,6 +1,7 @@
 from enum import Enum
 from typing import Callable, Any, Dict, List
 
+
 class EventType(str, Enum):
     BeforeRepositoryScan = "BeforeRepositoryScan"
     AfterRepositoryScan = "AfterRepositoryScan"
@@ -21,11 +22,15 @@ class EventType(str, Enum):
     BeforePluginLoad = "BeforePluginLoad"
     AfterPluginLoad = "AfterPluginLoad"
 
+
 EventCallback = Callable[[EventType, Dict[str, Any]], None]
+
 
 class EventBus:
     def __init__(self) -> None:
-        self._subscribers: Dict[EventType, List[EventCallback]] = {e: [] for e in EventType}
+        self._subscribers: Dict[EventType, List[EventCallback]] = {
+            e: [] for e in EventType
+        }
 
     def subscribe(self, event_type: EventType, callback: EventCallback) -> None:
         self._subscribers[event_type].append(callback)

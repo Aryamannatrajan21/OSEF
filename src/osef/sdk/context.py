@@ -3,13 +3,14 @@ from typing import Dict, Any
 from osef.core.ekg import KnowledgeGraph
 from osef.sdk.events import EventBus
 
+
 class ExtensionContext:
     def __init__(
         self,
         plugin_id: str,
         workspace_dir: Path,
         graph: KnowledgeGraph,
-        event_bus: EventBus
+        event_bus: EventBus,
     ) -> None:
         self.plugin_id = plugin_id
         self.workspace_dir = workspace_dir

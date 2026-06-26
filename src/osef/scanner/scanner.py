@@ -4,7 +4,6 @@ Repository Scanner implementation.
 
 import os
 from pathlib import Path
-from typing import List, Optional
 
 import pathspec
 
@@ -35,12 +34,12 @@ class RepositoryScanner:
     def _load_ignore_patterns(self) -> pathspec.PathSpec:  # type: ignore[type-arg]
         """Load .gitignore patterns and combine with defaults."""
         patterns = list(self.DEFAULT_IGNORES)
-        
+
         gitignore_path = self.root_path / ".gitignore"
         if gitignore_path.exists():
             with open(gitignore_path, "r", encoding="utf-8") as f:
                 patterns.extend(f.readlines())
-                
+
         osefignore_path = self.root_path / ".osefignore"
         if osefignore_path.exists():
             with open(osefignore_path, "r", encoding="utf-8") as f:
@@ -57,13 +56,13 @@ class RepositoryScanner:
         Scan the repository and produce a manifest.
         """
         manifest = RepositoryManifest(root_path=str(self.root_path))
-        
+
         # Check metadata
         pyproject_path = self.root_path / "pyproject.toml"
         requirements_path = self.root_path / "requirements.txt"
         poetry_lock = self.root_path / "poetry.lock"
         uv_lock = self.root_path / "uv.lock"
-        
+
         if pyproject_path.exists():
             manifest.has_pyproject = True
             if poetry_lock.exists():
@@ -72,7 +71,7 @@ class RepositoryScanner:
                 manifest.package_manager = "uv"
             else:
                 manifest.package_manager = "pip/hatch"
-                
+
         if requirements_path.exists():
             manifest.has_requirements = True
             if not manifest.package_manager:
@@ -81,21 +80,21 @@ class RepositoryScanner:
         # Walk directory
         for dirpath, dirnames, filenames in os.walk(self.root_path):
             dir_path = Path(dirpath)
-            
+
             # Prune ignored directories
             dirnames_copy = list(dirnames)
             for d in dirnames_copy:
                 rel_d = str((dir_path / d).relative_to(self.root_path)) + "/"
                 if self.is_ignored(rel_d):
                     dirnames.remove(d)
-                    
+
             for f in filenames:
                 file_path = dir_path / f
                 rel_f = str(file_path.relative_to(self.root_path))
-                
+
                 if self.is_ignored(rel_f):
                     continue
-                    
+
                 if f.endswith(".py"):
                     manifest.python_files.append(rel_f)
 

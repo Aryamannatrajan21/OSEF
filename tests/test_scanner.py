@@ -1,6 +1,5 @@
-import os
-from pathlib import Path
 from osef.scanner.scanner import RepositoryScanner
+
 
 def test_scanner_discovers_python_files(tmp_path):
     # Setup mock repo
@@ -12,7 +11,7 @@ def test_scanner_discovers_python_files(tmp_path):
     # Add ignored dir
     (tmp_path / ".venv").mkdir()
     (tmp_path / ".venv" / "ignore_me.py").write_text("")
-    
+
     # Custom ignore
     (tmp_path / ".gitignore").write_text("ignore_this.py\n")
     (tmp_path / "ignore_this.py").write_text("")

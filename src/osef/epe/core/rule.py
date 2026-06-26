@@ -8,6 +8,7 @@ class Rule(ABC):
     """
     Abstract base class for all Engineering Policies.
     """
+
     def __init__(self) -> None:
         pass
 

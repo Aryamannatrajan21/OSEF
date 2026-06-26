@@ -12,6 +12,7 @@ class SemanticEnricher:
     Applies multiple heuristic passes to the SymbolTable to enrich nodes
     with semantic intent, documentation intelligence, and call graph data.
     """
+
     def __init__(self, symbol_table: SymbolTable):
         self.symbol_table = symbol_table
         self.classifier = SemanticClassifier(symbol_table)

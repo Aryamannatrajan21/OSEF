@@ -88,13 +88,15 @@ def analyze(path: str = typer.Argument(".", help="Path to repository")) -> None:
         builder = EKGBuilder(path)
         graph = builder.build()
         console.print("[green]✔ Analysis complete.[/green]")
-        console.print(f"Discovered {len(graph.nodes)} nodes and {len(graph.edges)} edges.")
-        
+        console.print(
+            f"Discovered {len(graph.nodes)} nodes and {len(graph.edges)} edges."
+        )
+
         # Intelligence Layer
         console.print("\n[bold cyan]Generating Engineering Assessment...[/bold cyan]")
         intelligence = IntelligenceLayer(graph)
         assessment = intelligence.assess()
-        
+
         # Display Architecture
         arch_tree = Tree("🏛️  Architecture")
         arch_tree.add(f"Components: {assessment.architecture.total_components}")
@@ -103,26 +105,30 @@ def analyze(path: str = typer.Argument(".", help="Path to repository")) -> None:
         arch_tree.add(f"Repositories: {assessment.architecture.repositories}")
         arch_tree.add(f"DTOs: {assessment.architecture.dtos}")
         console.print(arch_tree)
-        
+
         # Display Dependencies
         dep_tree = Tree("📦 Dependencies")
         dep_tree.add(f"Imports: {assessment.dependencies.total_imports}")
         dep_tree.add(f"Resolved: {assessment.dependencies.resolved_imports}")
-        dep_tree.add(f"Broken: [red]{assessment.dependencies.broken_imports}[/red]" if assessment.dependencies.broken_imports > 0 else f"Broken: {assessment.dependencies.broken_imports}")
+        dep_tree.add(
+            f"Broken: [red]{assessment.dependencies.broken_imports}[/red]"
+            if assessment.dependencies.broken_imports > 0
+            else f"Broken: {assessment.dependencies.broken_imports}"
+        )
         console.print(dep_tree)
-        
+
         # Display Documentation
         doc_tree = Tree("📝 Documentation")
         doc_tree.add(f"Elements: {assessment.documentation.total_elements}")
         doc_tree.add(f"Coverage: {assessment.documentation.coverage_percentage:.1f}%")
         console.print(doc_tree)
-        
+
         # Display Findings
         if assessment.findings:
             console.print("\n[bold yellow]🔍 Key Findings:[/bold yellow]")
             for finding in assessment.findings:
                 console.print(f"  • {finding}")
-                
+
     except Exception as e:
         console.print(f"[bold red]✖ Error during analysis: {e}[/bold red]")
         raise typer.Exit(code=1)
@@ -135,16 +141,16 @@ def report(path: str = typer.Argument(".", help="Path to repository")) -> None:
     try:
         builder = EKGBuilder(path)
         graph = builder.build()
-        
+
         counts: dict[str, int] = {}
         for node in graph.nodes.values():
             counts[node.type] = counts.get(node.type, 0) + 1
-            
+
         console.print("\n[bold]Repository Intelligence Report[/bold]")
         console.print("==============================")
         for type_name, count in sorted(counts.items()):
             console.print(f"{type_name.capitalize()}s: [bold cyan]{count}[/bold cyan]")
-            
+
     except Exception as e:
         console.print(f"[bold red]Report generation failed:[/bold red] {e}")
         raise typer.Exit(code=1)
@@ -153,7 +159,7 @@ def report(path: str = typer.Argument(".", help="Path to repository")) -> None:
 @graph_app.command("export")
 def graph_export(
     path: str = typer.Argument(".", help="Path to repository"),
-    out: str = typer.Option(None, "--out", "-o", help="Output JSON file path")
+    out: str = typer.Option(None, "--out", "-o", help="Output JSON file path"),
 ) -> None:
     """Export the Engineering Knowledge Graph as JSON."""
     console.print(f"[bold blue]Building graph for {path}...[/bold blue]")
@@ -161,14 +167,14 @@ def graph_export(
         builder = EKGBuilder(path)
         graph = builder.build()
         json_data = graph.export_json()
-        
+
         if out:
             with open(out, "w", encoding="utf-8") as f:
                 f.write(json_data)
             console.print(f"[green]✔[/green] Graph exported to {out}")
         else:
             console.print(json_data)
-            
+
     except Exception as e:
         console.print(f"[bold red]Export failed:[/bold red] {e}")
         raise typer.Exit(code=1)

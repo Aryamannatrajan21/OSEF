@@ -1,6 +1,7 @@
 """
 Domain models for Engineering Intelligence.
 """
+
 from typing import List
 from pydantic import BaseModel, Field
 

@@ -9,6 +9,7 @@ class TypeResolver:
     """
     Resolves type hints to concrete symbols within the SymbolTable.
     """
+
     def __init__(self, symbol_table: SymbolTable):
         self.symbol_table = symbol_table
 

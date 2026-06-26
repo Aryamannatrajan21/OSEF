@@ -6,6 +6,7 @@ class RulePack:
     """
     A collection of rules versioned together.
     """
+
     def __init__(self, id: str, version: str, rules: List[Rule]):
         self.id = id
         self.version = version
@@ -16,6 +17,7 @@ class RuleRegistry:
     """
     Holds registered RulePacks and handles lookups.
     """
+
     def __init__(self) -> None:
         self.packs: Dict[str, RulePack] = {}
         self.rules_by_id: Dict[str, Rule] = {}
