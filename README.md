@@ -1,16 +1,76 @@
+<div align="center">
+
 # Open Source Engineering Framework (OSEF)
 
-OSEF is the foundational ecosystem for AI-assisted software engineering. It is not just a static analysis tool—it is a comprehensive **Engineering Platform SDK** designed to parse, enrich, and analyze complex codebases while providing a fully extensible plugin architecture.
+**The Engineering Operating System for AI-Assisted Software Development**
 
-## Project Vision
-Our mission is to establish the definitive **Engineering Operating System**. OSEF extracts architectural truths into an immutable graph, executes deterministic engineering policies, and provides a strict contract for the open-source community to build integrations, rules, and AI agents on top of our abstractions.
+OSEF transforms unstructured source code into an immutable Engineering Knowledge Graph, allowing you to enforce architectural policies, audit dependencies, and build custom intelligence extensions natively in Python.
 
-*Architecture is permanent. Features are replaceable. Contracts are forever.*
+[![Version](https://img.shields.io/badge/version-v0.4.0-blue.svg)](#)
+[![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](#)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](#)
+[![Status](https://img.shields.io/badge/status-active-success.svg)](#)
+
+</div>
+
+<br />
+
+## 📖 What is OSEF?
+
+Modern software engineering struggles with architectural drift, hidden dependencies, and tribal knowledge. OSEF solves this by providing a universal, programmatic interface to your codebase. 
+
+Instead of relying on regex or fragile AST traversal scripts, OSEF parses your repository into a queryable **Engineering Knowledge Graph (EKG)**. Developers and AI agents can query this graph to instantly understand how components communicate, where policies are violated, and how the architecture has evolved.
 
 ---
 
-## Architecture Overview
-The OSEF pipeline operates as a one-way transformation engine ending in the Extension Host:
+## ⚡ Why OSEF?
+
+| Feature | Description |
+| :--- | :--- |
+| **🧠 Engineering Knowledge Graph** | An immutable, language-agnostic representation of your software's architecture. |
+| **⚖️ Engineering Policy Engine** | Execute deterministic architectural rules via a lightning-fast graph query cache. |
+| **🔌 Extensible SDK** | Write custom parsers, rules, and CLI commands via the sandboxed Extension Host. |
+| **🤖 AI-Ready Abstractions** | Provide LLMs and Agents with a structured API to reason about codebase architecture. |
+| **🏢 Enterprise-Grade Design** | Built on immutable contracts, versioned capabilities, and strict decoupling. |
+
+---
+
+## 🏗️ Architecture Overview
+
+OSEF Core is intentionally small. It defines abstractions, while community plugins implement language support and rules.
+
+```mermaid
+graph TD
+    classDef core fill:#1a202c,stroke:#4a5568,color:#fff;
+    classDef plugin fill:#2b6cb0,stroke:#63b3ed,color:#fff;
+    classDef output fill:#2f855a,stroke:#68d391,color:#fff;
+
+    A(Source Repository) --> B[Repository Scanner]
+    B --> C[Parser Plugins]
+    
+    C --> D(Symbol Table IR)
+    D --> E[Semantic Enrichment]
+    E --> F[(Engineering Knowledge Graph)]
+    
+    F --> G[Engineering Policy Engine]
+    G --> H(Findings & Assessments)
+    
+    H --> I{Extension Host & EPSDK}
+    
+    I -->|Hooks| J[CLI Plugins]
+    I -->|Hooks| K[Report Plugins]
+    I -->|Hooks| L[AI Agents]
+
+    class B,D,E,F,G,H,I core;
+    class C,J,K,L plugin;
+    class A output;
+```
+
+> **Read the specs**: Discover the internal design in our [Architecture Index](ARCHITECTURE_INDEX.md).
+
+---
+
+## ⚙️ Engineering Pipeline
 
 1. **Repository Scanner**: Discovers the project root and metadata.
 2. **Parser**: Translates source code into the canonical Symbol Table (Intermediate Representation).
@@ -22,50 +82,127 @@ The OSEF pipeline operates as a one-way transformation engine ending in the Exte
 
 ---
 
-## Extension System (EPSDK)
-OSEF Core is deliberately small. All language support, complex rules, and reporting formats are designed as **Plugins**.
+## 📊 Current Capabilities
 
-External developers use the **Engineering Platform SDK (EPSDK)** to build extensions. Plugins interface securely with the platform via the `ExtensionContext`, utilizing the Event Bus and the Graph Query API without ever touching internal implementations. 
-
-For plugin development, see our [Extension Developer Guide](docs/architecture/EXTENSION_DEVELOPER_GUIDE.md).
+- ✅ **Python Standard Library Parsing** (via `ast`)
+- ✅ **Symbol Table Generation & Semantic Enrichment**
+- ✅ **Engineering Knowledge Graph API**
+- ✅ **Engineering Policy Engine (EPE)**
+- ✅ **Engineering Platform SDK (EPSDK)**
+- 🚧 **TypeScript & Go Parsers** *(In Progress)*
+- 🚧 **Ecosystem Marketplace** *(Planned)*
 
 ---
 
-## Quick Start (CLI Overview)
-*(Note: OSEF currently supports Python via the standard library `ast`).*
+## 🚀 Quick Start
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/Aryamannatrajan21/OSEF.git
+cd OSEF
+
+# Setup a virtual environment
+python3 -m venv .venv
+source .venv/bin/activate
+
+# Install OSEF
+pip install -e .
+```
+
+### Basic Usage
+
+```bash
+# Verify installation
+osef --version
+
 # Analyze the current repository
 osef analyze .
 
-# Plugins can inject custom commands:
-osef security audit
-osef architecture analyze
+# Generate an architectural report
+osef report --format markdown
 ```
 
 ---
 
-## Documentation Hierarchy
-OSEF's documentation is treated as a first-class product feature:
-- [Specifications Index](SPECIFICATIONS.md)
-- [Architecture Index](ARCHITECTURE_INDEX.md)
-- [Roadmap](ROADMAP.md)
-- [Changelog](CHANGELOG.md)
+## 💻 CLI Overview
+
+| Command | Description |
+| :--- | :--- |
+| `osef analyze <path>` | Scans the repository and executes enabled Policy Packs. |
+| `osef report` | Outputs findings into Markdown, JSON, or HTML. |
+| `osef doctor` | Validates environment and installed plugins. |
+| `osef plugins` | *(Plugin-injected)* Lists active extensions and capabilities. |
+
+> See the full [CLI Extension Specification](docs/architecture/CLI_EXTENSION_SPEC.md) for how to build custom commands.
 
 ---
 
-## Platform Philosophy
-- **Core owns abstractions. Plugins own functionality.**
-- **Never expose internal implementation details.**
-- **Every public interface must be versioned.**
-- **Prefer explicit contracts over conventions.**
+## 📁 Repository Structure
+
+```text
+OSEF/
+├── docs/                 # Frozen architectural contracts and guides
+├── src/osef/
+│   ├── analyzers/        # Assessment mapping orchestrators
+│   ├── cli/              # Core Typer CLI
+│   ├── core/             # EKG, Parsing, and Semantics
+│   ├── epe/              # Engineering Policy Engine
+│   ├── sdk/              # Extension Host and Public Interfaces
+│   └── intelligence/     # Core domain models
+├── tests/                # Test suites
+└── pyproject.toml
+```
 
 ---
 
-## Governance & Community
-- [Contributing Guidelines](CONTRIBUTING.md)
-- [Code of Conduct](CODE_OF_CONDUCT.md)
-- [Security Policy](SECURITY.md)
-- [License](LICENSE)
+## 📚 Documentation
 
-*Join us in building the open standard for engineering intelligence.*
+OSEF's documentation is treated as a first-class product feature. We operate on a strict *Documentation Freeze* model where architecture contracts are immutable.
+
+- 🧭 **[Specifications Index](SPECIFICATIONS.md)**: The master index of all frozen architectural contracts.
+- 🏗️ **[Architecture Index](ARCHITECTURE_INDEX.md)**: A guided tour of OSEF's internal design.
+- 🛠️ **[Extension Developer Guide](docs/architecture/EXTENSION_DEVELOPER_GUIDE.md)**: How to build an OSEF Plugin.
+- 🗺️ **[Roadmap](ROADMAP.md)**: Our strategic vision.
+- 📝 **[Changelog](CHANGELOG.md)**: Historical architectural milestones.
+
+---
+
+## 🗺️ Roadmap Snapshot
+
+**Completed Milestones**
+- Foundation & Governance
+- Repository Intelligence (EKG)
+- Engineering Policy Engine (EPE)
+- Engineering Platform SDK (EPSDK)
+
+**Upcoming Milestones**
+- Reference Plugin Ecosystem
+- Capabilities Marketplace
+- Engineering Query Language (EQL)
+- AI Engineering Agents
+
+> Read the full [Roadmap](ROADMAP.md).
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions from the community! Whether you want to build a custom language parser, a new architectural rule pack, or improve the core platform, we are excited to have you.
+
+Please read our [Contributing Guidelines](CONTRIBUTING.md) to get started.
+
+---
+
+## 💬 Community
+
+- **Discussions**: [GitHub Discussions](#)
+- **Issues**: [GitHub Issues](https://github.com/Aryamannatrajan21/OSEF/issues)
+- **Wiki**: [GitHub Wiki](#)
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
