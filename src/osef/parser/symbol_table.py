@@ -12,6 +12,7 @@ from pydantic import BaseModel, Field
 
 class SourceLocation(BaseModel):
     """Precise source code location."""
+
     line: int
     column: int
     end_line: Optional[int] = None
@@ -22,6 +23,7 @@ class Symbol(BaseModel):
     """
     A semantic component in the software architecture.
     """
+
     id: str
     name: str
     type: str  # package, module, class, method, function, variable, import
@@ -30,7 +32,7 @@ class Symbol(BaseModel):
     docstring: Optional[str] = None
     visibility: str = "public"  # public, protected, private
     metadata: Dict[str, Any] = Field(default_factory=dict)
-    
+
     # Relationships
     parent_id: Optional[str] = None
     children_ids: List[str] = Field(default_factory=list)
@@ -41,6 +43,7 @@ class SymbolTable:
     """
     The global registry for all extracted software components.
     """
+
     def __init__(self) -> None:
         self.symbols: Dict[str, Symbol] = {}
 

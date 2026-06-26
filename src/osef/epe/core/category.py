@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Category(str, Enum):
     ARCHITECTURE = "Architecture"
     DOCUMENTATION = "Documentation"

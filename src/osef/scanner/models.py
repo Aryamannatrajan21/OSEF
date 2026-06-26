@@ -10,6 +10,7 @@ class RepositoryManifest(BaseModel):
     """
     A manifest representing the discovered files and project metadata.
     """
+
     root_path: str
     project_name: Optional[str] = None
     python_files: List[str] = Field(default_factory=list)

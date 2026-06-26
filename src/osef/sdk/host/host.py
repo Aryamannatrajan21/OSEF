@@ -10,6 +10,7 @@ from osef.sdk.version import SDK_VERSION
 
 logger = logging.getLogger(__name__)
 
+
 class ExtensionHost:
     def __init__(self, workspace_dir: Path, graph: KnowledgeGraph) -> None:
         self.workspace_dir = workspace_dir
@@ -20,24 +21,26 @@ class ExtensionHost:
     def load_plugin(self, plugin_class: Type[OsefPlugin]) -> None:
         plugin = plugin_class()
         manifest = plugin.manifest
-        
+
         # Negotiate Capabilities
         if manifest.capabilities.supports_sdk.version != SDK_VERSION:
-            logger.error(f"Plugin {manifest.id} requires SDK {manifest.capabilities.supports_sdk.version}, but host is {SDK_VERSION}.")
+            logger.error(
+                f"Plugin {manifest.id} requires SDK {manifest.capabilities.supports_sdk.version}, but host is {SDK_VERSION}."
+            )
             raise RuntimeError(f"Incompatible SDK version for {manifest.id}")
-            
+
         self.event_bus.publish(EventType.BeforePluginLoad, {"plugin_id": manifest.id})
-        
+
         context = ExtensionContext(
             plugin_id=manifest.id,
             workspace_dir=self.workspace_dir,
             graph=self.graph,
-            event_bus=self.event_bus
+            event_bus=self.event_bus,
         )
-        
+
         plugin.activate(context)
         self.plugins[manifest.id] = plugin
-        
+
         self.event_bus.publish(EventType.AfterPluginLoad, {"plugin_id": manifest.id})
         logger.info(f"Loaded plugin: {manifest.name} v{manifest.version}")
 

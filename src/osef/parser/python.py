@@ -12,7 +12,7 @@ class PythonASTVisitor(ast.NodeVisitor):
     def __init__(self, symbol_table: SymbolTable, file_path: str):
         self.symbol_table = symbol_table
         self.file_path = file_path
-        
+
         # We assume the module ID is derived from its file path
         self.module_id = self.symbol_table.generate_id("module", file_path)
         self._current_parent_id: Optional[str] = self.module_id
@@ -28,7 +28,9 @@ class PythonASTVisitor(ast.NodeVisitor):
     def visit_Module(self, node: ast.Module) -> Any:
         module_symbol = Symbol(
             id=self.module_id,
-            name=self.file_path.split("/")[-1] if "/" in self.file_path else self.file_path,
+            name=self.file_path.split("/")[-1]
+            if "/" in self.file_path
+            else self.file_path,
             type="module",
             file_path=self.file_path,
             docstring=ast.get_docstring(node),
@@ -38,7 +40,9 @@ class PythonASTVisitor(ast.NodeVisitor):
 
     def visit_Import(self, node: ast.Import) -> Any:
         for alias in node.names:
-            import_id = self.symbol_table.generate_id("import", self.file_path, alias.name)
+            import_id = self.symbol_table.generate_id(
+                "import", self.file_path, alias.name
+            )
             import_sym = Symbol(
                 id=import_id,
                 name=alias.name,
@@ -46,7 +50,7 @@ class PythonASTVisitor(ast.NodeVisitor):
                 file_path=self.file_path,
                 location=self._create_location(node),
                 parent_id=self._current_parent_id,
-                metadata={"asname": alias.asname or alias.name, "is_from": "false"}
+                metadata={"asname": alias.asname or alias.name, "is_from": "false"},
             )
             self.symbol_table.add_symbol(import_sym)
         self.generic_visit(node)
@@ -54,7 +58,9 @@ class PythonASTVisitor(ast.NodeVisitor):
     def visit_ImportFrom(self, node: ast.ImportFrom) -> Any:
         if node.module:
             for alias in node.names:
-                import_id = self.symbol_table.generate_id("import", self.file_path, node.module, alias.name)
+                import_id = self.symbol_table.generate_id(
+                    "import", self.file_path, node.module, alias.name
+                )
                 import_sym = Symbol(
                     id=import_id,
                     name=alias.name,
@@ -62,7 +68,11 @@ class PythonASTVisitor(ast.NodeVisitor):
                     file_path=self.file_path,
                     location=self._create_location(node),
                     parent_id=self._current_parent_id,
-                    metadata={"module": node.module, "asname": alias.asname or alias.name, "is_from": "true"}
+                    metadata={
+                        "module": node.module,
+                        "asname": alias.asname or alias.name,
+                        "is_from": "true",
+                    },
                 )
                 self.symbol_table.add_symbol(import_sym)
         self.generic_visit(node)
@@ -98,7 +108,7 @@ class PythonASTVisitor(ast.NodeVisitor):
             metadata={
                 "bases": ",".join(bases),
                 "decorators": ",".join(self._parse_decorators(node.decorator_list)),
-            }
+            },
         )
         self.symbol_table.add_symbol(cls_sym)
 
@@ -124,11 +134,17 @@ class PythonASTVisitor(ast.NodeVisitor):
                     calls.append(child.func.attr)
         return calls
 
-    def _handle_function(self, node: ast.FunctionDef | ast.AsyncFunctionDef, is_async: bool) -> None:
+    def _handle_function(
+        self, node: ast.FunctionDef | ast.AsyncFunctionDef, is_async: bool
+    ) -> None:
         parent_sym = self.symbol_table.get_symbol(self._current_parent_id or "")
-        func_type = "method" if parent_sym and parent_sym.type == "class" else "function"
-        func_id = self.symbol_table.generate_id(func_type, self.file_path, str(self._current_parent_id), node.name)
-        
+        func_type = (
+            "method" if parent_sym and parent_sym.type == "class" else "function"
+        )
+        func_id = self.symbol_table.generate_id(
+            func_type, self.file_path, str(self._current_parent_id), node.name
+        )
+
         func_sym = Symbol(
             id=func_id,
             name=node.name,
@@ -140,8 +156,8 @@ class PythonASTVisitor(ast.NodeVisitor):
             metadata={
                 "is_async": str(is_async).lower(),
                 "decorators": ",".join(self._parse_decorators(node.decorator_list)),
-                "calls": ",".join(self._extract_calls(node))
-            }
+                "calls": ",".join(self._extract_calls(node)),
+            },
         )
         self.symbol_table.add_symbol(func_sym)
         # Do not recursively visit function bodies to skip nested functions
@@ -151,6 +167,7 @@ class PythonParser:
     """
     Parses Python source code into the OSEF Symbol Table.
     """
+
     def __init__(self, symbol_table: SymbolTable):
         self.symbol_table = symbol_table
 

@@ -10,6 +10,7 @@ class PolicyEngine:
     """
     Orchestrates execution by resolving rule dependencies via a DAG, executing rules, and collecting findings.
     """
+
     def __init__(self, registry: RuleRegistry, policy_version: str):
         self.registry = registry
         self.policy_version = policy_version
@@ -17,14 +18,14 @@ class PolicyEngine:
     def evaluate(self, graph: KnowledgeGraph) -> List[Finding]:
         context = RuleContext(graph, self.policy_version)
         all_findings: List[Finding] = []
-        
+
         # Sort rules via DAG
         ordered_rules = self._topological_sort(list(self.registry.rules_by_id.values()))
-        
+
         for rule in ordered_rules:
             result = rule.evaluate(context)
             all_findings.extend(result.findings)
-            
+
         return all_findings
 
     def _topological_sort(self, rules: List[Rule]) -> List[Rule]:
@@ -35,7 +36,9 @@ class PolicyEngine:
 
         def visit(rule_id: str) -> None:
             if rule_id in temp_mark:
-                raise ValueError(f"Circular dependency detected involving rule {rule_id}")
+                raise ValueError(
+                    f"Circular dependency detected involving rule {rule_id}"
+                )
             if rule_id not in visited:
                 temp_mark.add(rule_id)
                 rule = self.registry.get_rule(rule_id)
@@ -48,5 +51,5 @@ class PolicyEngine:
         for rule in rules:
             if rule.id not in visited:
                 visit(rule.id)
-                
+
         return ordered

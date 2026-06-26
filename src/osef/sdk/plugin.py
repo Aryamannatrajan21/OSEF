@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from osef.sdk.capabilities import PluginCapabilities
 from osef.sdk.context import ExtensionContext
 
+
 class PluginManifest(BaseModel):
     id: str
     name: str
@@ -15,6 +16,7 @@ class PluginManifest(BaseModel):
     signature: Optional[str] = None
     checksum: Optional[str] = None
     capabilities: PluginCapabilities
+
 
 class OsefPlugin(ABC):
     @property

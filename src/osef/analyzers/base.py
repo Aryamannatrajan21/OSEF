@@ -1,6 +1,7 @@
 """
 Analyzer Interface.
 """
+
 from abc import ABC, abstractmethod
 from typing import Dict, Any, List
 
@@ -10,9 +11,10 @@ from osef.epe.core.result import Finding
 
 class BaseAnalyzer(ABC):
     """
-    Analyzers act as orchestrators. They consume the Knowledge Graph and the Findings 
+    Analyzers act as orchestrators. They consume the Knowledge Graph and the Findings
     produced by the Policy Engine to return structured facts.
     """
+
     def __init__(self, graph: KnowledgeGraph, findings: List[Finding]):
         self.graph = graph
         self.findings = findings

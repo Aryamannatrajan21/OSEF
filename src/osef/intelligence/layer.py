@@ -1,6 +1,7 @@
 """
 Engineering Intelligence Layer.
 """
+
 from osef.core.ekg import KnowledgeGraph
 from osef.analyzers.architecture import ArchitectureAnalyzer
 from osef.analyzers.dependency import DependencyAnalyzer
@@ -9,7 +10,7 @@ from osef.intelligence.models import (
     ArchitectureAssessment,
     DependencyAssessment,
     DocumentationAssessment,
-    EngineeringAssessment
+    EngineeringAssessment,
 )
 
 
@@ -20,6 +21,7 @@ class IntelligenceLayer:
     """
     Orchestrates the Policy Engine and produces rich domain objects.
     """
+
     def __init__(self, graph: KnowledgeGraph):
         self.graph = graph
 
@@ -37,5 +39,5 @@ class IntelligenceLayer:
             architecture=ArchitectureAssessment(**arch_data),
             dependencies=DependencyAssessment(**dep_data),
             documentation=DocumentationAssessment(**doc_data),
-            findings=finding_strings
+            findings=finding_strings,
         )
