@@ -53,9 +53,9 @@ graph TD
     E --> F[(Engineering Knowledge Graph)]
     
     F --> G[Engineering Policy Engine]
-    G --> H(Findings & Assessments)
+    G --> H(Findings and Assessments)
     
-    H --> I{Extension Host & EPSDK}
+    H --> I{Extension Host and EPSDK}
     
     I -->|Hooks| J[CLI Plugins]
     I -->|Hooks| K[Report Plugins]
