@@ -24,19 +24,19 @@ class Runtime:
         """Starts the OSEF runtime."""
         # 1. Load Config
         config = DefaultConfigProvider()
-        self.container.register_singleton(ConfigProvider, config)
+        self.container.register_singleton(ConfigProvider, config)  # type: ignore[type-abstract]
 
         # 2. Setup Logging
         level_name = config.get("log_level", "INFO").upper()
         level = getattr(logging, level_name, logging.INFO)
         logger = DefaultLogger(level=level)
-        self.container.register_singleton(LoggerProvider, logger)
+        self.container.register_singleton(LoggerProvider, logger)  # type: ignore[type-abstract]
 
         logger.info("Starting OSEF Runtime...")
 
         # 3. Setup Event Bus
         event_bus = DefaultEventBus(logger=logger)
-        self.container.register_singleton(EventBusProvider, event_bus)
+        self.container.register_singleton(EventBusProvider, event_bus)  # type: ignore[type-abstract]
 
         # 4. Dispatch Startup Event
         startup_event = LifecycleEvent(name="runtime.startup", state="starting")
@@ -50,10 +50,10 @@ class Runtime:
         if not self.is_running:
             return
 
-        logger = self.container.resolve(LoggerProvider)
+        logger = self.container.resolve(LoggerProvider)  # type: ignore[type-abstract]
         logger.info("Shutting down OSEF Runtime...")
 
-        event_bus = self.container.resolve(EventBusProvider)
+        event_bus = self.container.resolve(EventBusProvider)  # type: ignore[type-abstract]
         shutdown_event = LifecycleEvent(name="runtime.shutdown", state="shutting_down")
         await event_bus.publish(shutdown_event)
 
