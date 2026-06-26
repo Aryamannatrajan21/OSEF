@@ -11,6 +11,8 @@ from osef.parser.python import PythonParser
 from osef.parser.symbol_table import SymbolTable
 from osef.parser.resolvers.imports import ImportResolver
 from osef.parser.resolvers.types import TypeResolver
+from osef.semantic.enrichers import SemanticEnricher
+from osef.config.parser import ConfigParser
 
 
 class EKGBuilder:
@@ -34,6 +36,9 @@ class EKGBuilder:
         for python_file in manifest.python_files:
             abs_path = self.root_path / python_file
             self.parser.parse_file(str(abs_path))
+            
+        config_parser = ConfigParser(self.root_path, self.symbol_table)
+        config_parser.parse_all()
 
         # 2. Resolve Semantics
         import_resolver = ImportResolver(self.symbol_table)
@@ -41,6 +46,9 @@ class EKGBuilder:
         
         type_resolver = TypeResolver(self.symbol_table)
         type_resolver.resolve()
+
+        enricher = SemanticEnricher(self.symbol_table)
+        enricher.enrich()
 
         # 3. Build Graph
         for symbol in self.symbol_table.symbols.values():
@@ -69,6 +77,11 @@ class EKGBuilder:
                 if target_id:
                     edge = Edge(source_id=symbol.id, target_id=target_id, relation_type="IMPORTS")
                     self.graph.add_edge(edge)
+                    
+            # Call Graph edges
+            for callee_id in symbol.related_ids.get("CALLS", []):
+                edge = Edge(source_id=symbol.id, target_id=callee_id, relation_type="CALLS")
+                self.graph.add_edge(edge)
 
         # 4. Validate
         if not self.graph.validate_graph():

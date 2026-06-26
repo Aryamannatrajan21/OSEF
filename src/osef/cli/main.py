@@ -9,10 +9,12 @@ from importlib.metadata import version as get_version, PackageNotFoundError
 
 import typer
 from rich.console import Console
+from rich.tree import Tree
 
 from osef.core.bootstrapper import bootstrap
 from osef.contracts.exceptions import OSEFError
 from osef.core.builder import EKGBuilder
+from osef.intelligence.layer import IntelligenceLayer
 
 app = typer.Typer(
     help="Open Source Engineering Framework",
@@ -85,10 +87,44 @@ def analyze(path: str = typer.Argument(".", help="Path to repository")) -> None:
     try:
         builder = EKGBuilder(path)
         graph = builder.build()
-        console.print(f"[green]✔[/green] Analysis complete.")
-        console.print(f"Discovered [bold]{len(graph.nodes)}[/bold] nodes and [bold]{len(graph.edges)}[/bold] edges.")
+        console.print("[green]✔ Analysis complete.[/green]")
+        console.print(f"Discovered {len(graph.nodes)} nodes and {len(graph.edges)} edges.")
+        
+        # Intelligence Layer
+        console.print("\n[bold cyan]Generating Engineering Assessment...[/bold cyan]")
+        intelligence = IntelligenceLayer(graph)
+        assessment = intelligence.assess()
+        
+        # Display Architecture
+        arch_tree = Tree("🏛️  Architecture")
+        arch_tree.add(f"Components: {assessment.architecture.total_components}")
+        arch_tree.add(f"Services: {assessment.architecture.services}")
+        arch_tree.add(f"Controllers: {assessment.architecture.controllers}")
+        arch_tree.add(f"Repositories: {assessment.architecture.repositories}")
+        arch_tree.add(f"DTOs: {assessment.architecture.dtos}")
+        console.print(arch_tree)
+        
+        # Display Dependencies
+        dep_tree = Tree("📦 Dependencies")
+        dep_tree.add(f"Imports: {assessment.dependencies.total_imports}")
+        dep_tree.add(f"Resolved: {assessment.dependencies.resolved_imports}")
+        dep_tree.add(f"Broken: [red]{assessment.dependencies.broken_imports}[/red]" if assessment.dependencies.broken_imports > 0 else f"Broken: {assessment.dependencies.broken_imports}")
+        console.print(dep_tree)
+        
+        # Display Documentation
+        doc_tree = Tree("📝 Documentation")
+        doc_tree.add(f"Elements: {assessment.documentation.total_elements}")
+        doc_tree.add(f"Coverage: {assessment.documentation.coverage_percentage:.1f}%")
+        console.print(doc_tree)
+        
+        # Display Findings
+        if assessment.findings:
+            console.print("\n[bold yellow]🔍 Key Findings:[/bold yellow]")
+            for finding in assessment.findings:
+                console.print(f"  • {finding}")
+                
     except Exception as e:
-        console.print(f"[bold red]Analysis failed:[/bold red] {e}")
+        console.print(f"[bold red]✖ Error during analysis: {e}[/bold red]")
         raise typer.Exit(code=1)
 
 

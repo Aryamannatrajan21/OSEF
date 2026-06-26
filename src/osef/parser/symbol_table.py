@@ -34,6 +34,7 @@ class Symbol(BaseModel):
     # Relationships
     parent_id: Optional[str] = None
     children_ids: List[str] = Field(default_factory=list)
+    related_ids: Dict[str, List[str]] = Field(default_factory=dict)
 
 
 class SymbolTable:
