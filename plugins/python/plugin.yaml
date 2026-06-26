@@ -1,0 +1,34 @@
+id: osef.plugins.python
+name: OSEF Python Reference Platform
+version: 1.0.0
+author: OSEF Core Team
+license: Apache-2.0
+homepage: https://github.com/Aryamannatrajan21/OSEF
+documentation: https://github.com/Aryamannatrajan21/OSEF/tree/main/plugins/python/docs
+sdk_version: ^0.4.0
+graph_schema: ^4.0.0
+policy_api: ^2.0.0
+capabilities:
+  provides_parser:
+    name: "python_parser"
+    version: "1.0.0"
+  provides_semantic_enrichment:
+    name: "python_enricher"
+    version: "1.0.0"
+  provides_rule_packs:
+    name: "python_policies"
+    version: "1.0.0"
+  supports_sdk:
+    name: "osef_sdk"
+    version: "^0.4.0"
+  supports_graph_schema:
+    name: "osef_graph"
+    version: "^4.0.0"
+dependencies: []
+entry_points:
+  plugin: osef_python.plugin:PythonPlugin
+keywords:
+  - python
+  - ast
+  - parser
+description: The official Python reference plugin for OSEF. Provides parsing, semantic enrichment, and Python-specific policy packs.
