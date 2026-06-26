@@ -1,20 +1,24 @@
-# Support
+# Support Guidelines
 
-If you need help using OSEF, there are several avenues available to you.
+## Where to get help
 
-## 1. Documentation
-Always start here. Our documentation is extensive.
-- **Architecture & Design:** Check `architectures/` and `dx/`.
-- **Implementation Status:** Check `IMPLEMENTATION_STATUS.md` to see if the feature you are trying to use is actually built yet.
+If you are looking for help or have a question about using OSEF, please review the following resources before opening an issue:
 
-## 2. GitHub Discussions
-If your question isn't answered in the docs, try [GitHub Discussions](COMMUNITY.md). 
-This is the best place for "How do I...?" questions.
+1. **Documentation:** Check out the [Documentation Site](https://aryamannatrajan21.github.io/OSEF/) for quickstarts, SDK guides, and architectural overviews.
+2. **GitHub Discussions:** Ask questions, share ideas, and engage with the community in our [GitHub Discussions](https://github.com/Aryamannatrajan21/OSEF/discussions).
 
-## 3. GitHub Issues
-If you believe you've found a bug, or if you want to request a new feature, please open an Issue.
-- Use the **Bug Report** template if something is broken.
-- Use the **Feature Request** template for new ideas.
+## When to open an issue
 
-## 4. Enterprise Support
-*At this time, OSEF is an Alpha open-source project. Dedicated SLA-backed enterprise support is not yet available, but may be offered in the future by the maintainers.*
+Please only use the GitHub Issue Tracker for:
+- 🐛 **Bug Reports** (the framework is crashing, throwing errors, or behaving contrary to documentation).
+- ✨ **Feature Requests** (proposing a new feature or plugin).
+- 🏗️ **RFC Proposals** (proposing an architectural change).
+- 📚 **Documentation Issues** (reporting typos or outdated information).
+- ⚡ **Performance Improvements**.
+
+Do **NOT** open an issue for general "how-to" questions. Use GitHub Discussions instead.
+
+## Security Vulnerabilities
+
+Please do **NOT** report security vulnerabilities via public issues or discussions. 
+Read our [Security Policy](SECURITY.md) for instructions on how to securely disclose vulnerabilities to the maintainers.

@@ -1,30 +1,35 @@
-## Description
-Please include a summary of the change and which issue is fixed. Please also include relevant motivation and context.
+## Pull Request Summary
+<!-- Provide a brief description of what this PR accomplishes. -->
 
-Fixes # (issue)
+## Motivation & Context
+<!-- Why is this change required? What problem does it solve? -->
+<!-- If it fixes an open issue, please link to the issue here (e.g. "Fixes #123") -->
 
-## Type of change
-Please delete options that are not relevant.
+## Related Issues
+- Related to #
 
-- [ ] Bug fix (non-breaking change which fixes an issue)
-- [ ] New feature (non-breaking change which adds functionality)
-- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
-- [ ] This change requires a documentation update
+## Testing Performed
+<!-- Describe the tests that you ran to verify your changes. -->
+<!-- Provide instructions so we can reproduce. Please also list any relevant details for your test configuration. -->
 
-## Architectural Alignment
-- [ ] This PR aligns with the frozen Architecture (Phase 0).
-- [ ] If this PR introduces a new dependency, it has been approved via RFC.
+## Documentation Updated
+- [ ] Yes (Please link to the updated files)
+- [ ] No documentation changes required
+- [ ] N/A
 
-## How Has This Been Tested?
-Please describe the tests that you ran to verify your changes.
+## Breaking Changes
+<!-- Does this PR introduce a breaking change to the public API, CLI, or Plugin SDK? -->
+- [ ] Yes (If yes, please explain the mitigation strategy)
+- [ ] No
 
-- [ ] Unit Tests
-- [ ] Integration Tests
-- [ ] CLI Snapshot Tests
+## RFC / ADR References
+<!-- If this PR implements an architectural change, link the accepted RFC or ADR here. -->
+- RFC/ADR Link: 
 
-## Checklist:
-- [ ] My code follows the `implementation/CODING_STANDARDS.md`.
-- [ ] I have performed a self-review of my own code.
-- [ ] I have commented my code, particularly in hard-to-understand areas.
-- [ ] `mypy --strict src/` passes with 0 errors.
-- [ ] `ruff check` and `ruff format` pass.
+## Checklist
+<!-- Make sure all of these are true before requesting review. -->
+- [ ] I have read the `CONTRIBUTING.md` and `CONSTITUTION.md` documents.
+- [ ] My code follows the established engineering principles of OSEF.
+- [ ] I have added tests that prove my fix is effective or that my feature works.
+- [ ] Local checks passed (`ruff check .`, `mypy src/`, `pytest`).
+- [ ] I have squashed my commits into logical units.
