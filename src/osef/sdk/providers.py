@@ -8,11 +8,12 @@ class BaseProvider(ABC):
     Base contract for all OSEF capabilities.
     Providers must be stateless.
     """
+
     @property
     @abstractmethod
     def name(self) -> str:
         pass
-        
+
     @property
     @abstractmethod
     def version(self) -> str:
@@ -23,11 +24,12 @@ class BaseParserProvider(BaseProvider):
     """
     Contract for Language Parsers.
     """
+
     @property
     @abstractmethod
     def language(self) -> str:
         pass
-        
+
     @abstractmethod
     def parse(self, context: PipelineContext) -> SymbolTable:
         """

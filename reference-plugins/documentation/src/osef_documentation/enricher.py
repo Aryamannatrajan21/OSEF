@@ -10,31 +10,29 @@ class DocumentationEnricher:
     """
     Discovers markdown documents, parses them, and produces a GraphDelta.
     """
+
     def __init__(self):
         # A simple regex for markdown links [text](url)
-        self.link_pattern = re.compile(r'\[([^\]]+)\]\(([^)]+)\)')
+        self.link_pattern = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
 
     def enrich(self, context: PipelineContext, graph: KnowledgeGraph) -> GraphDelta:
         delta = GraphDelta()
-        
+
         doc_files = self._discover_docs(context.workspace_dir)
-        
+
         for doc_path in doc_files:
             rel_path = doc_path.relative_to(context.workspace_dir)
             doc_id = f"doc:{rel_path}"
-            
+
             # 1. Create Document Node
             node = Node(
                 id=doc_id,
                 type="document",
                 name=doc_path.name,
-                metadata={
-                    "file_path": str(rel_path),
-                    "layer": "documentation"
-                }
+                metadata={"file_path": str(rel_path), "layer": "documentation"},
             )
             delta.nodes_to_add.append(node)
-            
+
             # 2. Parse Markdown for links
             links = self._parse_links(doc_path)
             for link_text, link_target in links:
@@ -49,15 +47,15 @@ class DocumentationEnricher:
                             source_id=doc_id,
                             target_id=target_id,
                             relation_type="REFERENCES",
-                            metadata={"text": link_text}
+                            metadata={"text": link_text},
                         )
                         delta.edges_to_add.append(edge)
                     except ValueError:
                         # Outside workspace, ignore
                         pass
-                        
+
         return delta
-        
+
     def _discover_docs(self, workspace_dir: Path) -> List[Path]:
         """Finds all markdown files, respecting basic ignores."""
         docs = []
@@ -68,7 +66,7 @@ class DocumentationEnricher:
                 if file.endswith(".md"):
                     docs.append(Path(root) / file)
         return docs
-        
+
     def _parse_links(self, doc_path: Path) -> List[tuple[str, str]]:
         """Extracts markdown links."""
         links = []

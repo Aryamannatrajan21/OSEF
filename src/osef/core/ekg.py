@@ -65,7 +65,7 @@ class KnowledgeGraph(BaseModel):
         """Export the graph to a JSON string."""
         return self.model_dump_json(indent=2)
 
-    def merge_delta(self, delta: 'GraphDelta', provenance: Dict[str, str]) -> None:
+    def merge_delta(self, delta: "GraphDelta", provenance: Dict[str, str]) -> None:
         """
         Merge an immutable GraphDelta into the EKG.
         Records provenance on all added elements.
@@ -75,7 +75,7 @@ class KnowledgeGraph(BaseModel):
 
         for node in delta.nodes_to_add:
             if node.id in self.nodes:
-                continue # or raise error depending on merge strategy
+                continue  # or raise error depending on merge strategy
             node.metadata["created_by"] = provenance.get("plugin", "unknown")
             node.metadata["execution_id"] = provenance.get("execution_id", "unknown")
             self.nodes[node.id] = node
@@ -85,11 +85,13 @@ class KnowledgeGraph(BaseModel):
             edge.metadata["execution_id"] = provenance.get("execution_id", "unknown")
             self.edges.append(edge)
 
+
 class GraphDelta(BaseModel):
     """
     An immutable proposal of changes to the KnowledgeGraph.
     Returned by GraphEnrichmentCapabilities.
     """
+
     nodes_to_add: List[Node] = Field(default_factory=list)
     edges_to_add: List[Edge] = Field(default_factory=list)
     nodes_to_update: List[Node] = Field(default_factory=list)
@@ -100,18 +102,26 @@ class GraphDelta(BaseModel):
     metadata: Dict[str, str] = Field(default_factory=dict)
     validation_state: str = "PENDING"
 
-    def validate(self, current_graph: 'KnowledgeGraph') -> bool:
+    def validate_delta(self, current_graph: "KnowledgeGraph") -> bool:
         """Validate delta against current graph."""
         # Check dangling edges
         for edge in self.edges_to_add:
-            if edge.source_id not in current_graph.nodes and edge.source_id not in [n.id for n in self.nodes_to_add]:
-                self.diagnostics.append({"error": f"Missing source node: {edge.source_id}"})
+            if edge.source_id not in current_graph.nodes and edge.source_id not in [
+                n.id for n in self.nodes_to_add
+            ]:
+                self.diagnostics.append(
+                    {"error": f"Missing source node: {edge.source_id}"}
+                )
                 self.validation_state = "FAILED"
                 return False
-            if edge.target_id not in current_graph.nodes and edge.target_id not in [n.id for n in self.nodes_to_add]:
-                self.diagnostics.append({"error": f"Missing target node: {edge.target_id}"})
+            if edge.target_id not in current_graph.nodes and edge.target_id not in [
+                n.id for n in self.nodes_to_add
+            ]:
+                self.diagnostics.append(
+                    {"error": f"Missing target node: {edge.target_id}"}
+                )
                 self.validation_state = "FAILED"
                 return False
-        
+
         self.validation_state = "VALIDATED"
         return True
