@@ -13,4 +13,4 @@ A summary of every major OSEF release. For exhaustive details, see the official 
 - **Official Notes**: [RELEASE_NOTES_v0.1.0-alpha.md](../RELEASE_NOTES_v0.1.0-alpha.md)
 
 ---
-*Last Updated: Sprint 2 | Related Docs: [CHANGELOG.md](../CHANGELOG.md)*
+*Last Updated: Phase II | Related Docs: [CHANGELOG.md](../CHANGELOG.md)*

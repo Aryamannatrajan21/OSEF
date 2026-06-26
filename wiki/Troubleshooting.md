@@ -27,4 +27,4 @@ Common issues and how to resolve them when working with OSEF locally.
 - OSEF is strictly typed. If you import a third-party library without types, you must add a `# type: ignore` comment or install the corresponding `types-*` package.
 
 ---
-*Last Updated: Sprint 2 | Related Docs: [SUPPORT.md](../SUPPORT.md)*
+*Last Updated: Phase II | Related Docs: [SUPPORT.md](../SUPPORT.md)*
