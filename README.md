@@ -1,96 +1,251 @@
-# Open Source Engineering Framework (OSEF)
+<div align="center">
+  <!-- TODO: Insert Project Logo Here -->
+  <!-- <img src="docs/assets/logo.png" alt="OSEF Logo" width="200"/> -->
 
-> **The Architecture is Complete. Engineering Begins.**
+  # OSEF: Open Source Engineering Framework
+  
+  **The engineering operating system for AI-assisted software development.**
 
-[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
-[![Status: Sprint 1 Released](https://img.shields.io/badge/Status-v0.2.0--alpha-orange.svg)](PROJECT_STATUS.md)
+  [![Python Version](https://img.shields.io/badge/python-3.12%2B-blue.svg)](https://www.python.org/downloads/)
+  [![Build Status](https://img.shields.io/github/actions/workflow/status/Aryamannatrajan21/OSEF/ci.yml?branch=main)](https://github.com/Aryamannatrajan21/OSEF/actions)
+  [![Test Coverage](https://img.shields.io/badge/coverage-100%25-success.svg)](https://github.com/Aryamannatrajan21/OSEF/actions)
+  [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+  [![Version](https://img.shields.io/badge/version-0.2.0a0-orange.svg)](https://pypi.org/project/osef/)
+  [![Documentation](https://img.shields.io/badge/docs-MkDocs-brightgreen.svg)](https://aryamannatrajan21.github.io/OSEF/)
+  [![Code Style: ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+  [![Checked with mypy](https://www.mypy-lang.org/static/mypy_badge.svg)](https://mypy-lang.org/)
+  [![Release](https://img.shields.io/github/v/release/Aryamannatrajan21/OSEF)](https://github.com/Aryamannatrajan21/OSEF/releases)
 
-OSEF is an AI-native engineering platform designed to transform software repositories into sustainable, production-quality open-source projects. 
-
-It is not a documentation generator or a simple repository template. It is an **Engineering Operating System** that enforces architectural rigor, governance, and developer experience through static analysis and interactive workflows.
-
----
-
-## ⚠️ Current Project Status: Engineering Foundation Complete
-
-OSEF is in active development. We have released **v0.2.0-alpha (Sprint 1: Core Runtime Implementation)**.
-
-**What this means:**
-1. The **Architecture is 100% complete and frozen**. The vision, data models, event buses, and plugin systems are fully specified.
-2. The **Developer Experience is fully designed**. Over 100 user stories and 10 playbooks have been mapped.
-3. The **Engineering Foundation** (CLI, EKG Models, Dependency Injection, Event Bus, Plugin SDK) is built and released with 100% test coverage.
-
-We value engineering quality over implementation speed. We have spent extensive time designing this system to ensure it is robust, extensible, and mathematically sound before writing production code.
-
-See [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) for live progress on Sprint 2.
+</div>
 
 ---
 
-## 🌟 Why OSEF Exists
+## 🔭 Vision
 
-Most developers know *how to code*, but struggle with *how to open source*. They reinvent licensing, contributing guides, CI/CD pipelines, architecture documentation, and release management for every new project.
-
-OSEF fixes this by acting as the **standardization layer for open source**. It analyzes your codebase, identifies architectural and governance gaps, and interactively repairs them based on the **Engineering Knowledge Kernel (EKK)**.
+Software engineering is fundamentally about managing complexity, architecture, and constraints—not just generating code. Today's AI tools treat repositories as collections of text files. OSEF exists to shift the paradigm: **a repository should be understood before it is transformed.**
 
 ---
 
-## 🏗 Architecture Overview
+## 🧠 What is OSEF?
 
-OSEF is built on a strict, interface-first architecture:
-- **Core Runtime:** A strictly typed Dependency Injection container and asynchronous Event Bus.
-- **Engineering Knowledge Kernel (EKK):** A markdown-backed database of engineering rules and heuristics.
-- **Transformation Engine (OSTE):** Parses Python ASTs to map your code against the EKK.
-- **Plugin Runtime:** A highly extensible hook system allowing the community to define new rules and languages.
+**OSEF** is not an AI code generator. It is an **AI-native engineering platform** designed to provide structure, context, and semantic understanding to automated agents and developers alike. 
 
-Read the full [Reference Architecture](architectures/REFERENCE_ARCHITECTURE.md) to understand the system.
-
----
-
-## 📂 Repository Structure
-
-OSEF is a massive engineering effort. The repository is heavily structured to separate concerns:
-
-- `architectures/`: The core system designs and Event models.
-- `knowledge/`: The Engineering Knowledge Kernel (EKK) markdown database.
-- `governance/`: The Constitution and master directives.
-- `dx/`: Developer Experience principles, UI/UX specs, and 100+ User Stories.
-- `playbooks/`: End-to-end guides on using OSEF.
-- `implementation/`: Sprint plans, backlogs, and coding standards.
-- `release/`: Change control, versioning, and MVP boundaries.
-- `src/osef/`: The Python production codebase.
-
-> [!WARNING]
-> **Python 3.12+ Required**
-> OSEF strictly requires Python 3.12 or higher for installation and development. Attempting to install via `pip` on older environments will fail.
+At its core, OSEF features:
+- **Engineering Operating System:** A foundational framework that enforces architectural boundaries and principles.
+- **Engineering Knowledge Graph (EKG):** An intelligent, graph-based representation of your repository that models dependencies, contracts, and architecture.
+- **Repository Intelligence:** Semantic parsing that uncovers the hidden design decisions, constraints, and intent embedded within the project.
+- **Transformation Engine (OSTE):** A robust engine that executes safe, verified code modifications based on the intelligence gathered.
+- **Plugin SDK:** A highly extensible architecture allowing custom intelligence and transformation modules.
 
 ---
 
-## 🛣 Development Roadmap
+## ⚡ Why OSEF?
 
-- **v0.1.0-alpha:** Foundation Release (Architecture Complete).
-- **v0.2.0-alpha (Current):** Core Runtime & Event Bus implementation.
-- **v0.5.x:** SDK & CLI Alpha.
-- **v0.8.x:** Transformation Engine (OSTE) MVP.
-- **v1.0.0:** Stable Release.
+| The "Code Generation" Workflow | The OSEF Engineering Workflow |
+| :--- | :--- |
+| **Starts with source code** | **Starts with the engineering system** |
+| Treats files as isolated text | Understands cross-file architectural constraints |
+| Generates code based on patterns | Solves problems based on intent and contracts |
+| Leads to tech debt and fragmentation | Preserves maintainability and design principles |
 
-See the full [Public Roadmap](ROADMAP.md).
+OSEF is built for Senior Engineers, Platform Architects, and Open Source Maintainers who demand reliability, extensibility, and rigorous engineering standards from AI tools.
+
+---
+
+## 📜 Core Principles
+
+Everything built within OSEF adheres to the **OSEF Constitution** and its strict engineering heuristics. Our core philosophies include:
+
+1. **Engineering Before Implementation:** Think, design, and plan before writing a single line of code.
+2. **Context Over Output:** Quality transformations require absolute understanding of the repository’s state and history.
+3. **Immutability & Safety:** Changes must be deterministic, reversible, and explicitly authorized.
+4. **Extensibility by Design:** OSEF is built as a microkernel-style plugin architecture.
+
+> Read the full [Engineering Principles](https://aryamannatrajan21.github.io/OSEF/engineering_principles/) in our documentation.
+
+---
+
+## 🏗️ Architecture Overview
+
+```mermaid
+flowchart TD
+    Repo[(Target Repository)]
+    
+    subgraph OSEF [OSEF Framework]
+        Analysis[Analysis Engine]
+        EKG[(Engineering Knowledge Graph)]
+        Intelligence[Engineering Intelligence Layer]
+        Transformation[Transformation Engine / OSTE]
+    end
+    
+    Developer((Developer / AI Agent))
+
+    Repo -->|Parses AST & Artifacts| Analysis
+    Analysis -->|Populates| EKG
+    EKG <-->|Queries & Context| Intelligence
+    Intelligence -->|Formulates Plan| Transformation
+    Transformation -->|Safe Modifications| Repo
+    
+    Developer <-->|CLI / SDK Interacts| OSEF
+```
+
+---
+
+## 🚀 Installation
+
+You can install OSEF globally or within your project environment. We recommend using `uv` for modern, fast dependency management, but standard `pip` works perfectly.
+
+### Using `pip`
+```bash
+pip install osef
+```
+
+### Using `uv`
+```bash
+uv pip install osef
+```
+
+<details>
+<summary><strong>Development Setup</strong></summary>
+
+To contribute to OSEF or run it locally from source:
+
+```bash
+# Clone the repository
+git clone https://github.com/Aryamannatrajan21/OSEF.git
+cd OSEF
+
+# Install in editable mode with dev dependencies
+pip install -e ".[dev,docs]"
+
+# Run tests to verify
+pytest
+```
+</details>
+
+**Requirements:** Python 3.12+
+
+---
+
+## ⏱️ Quick Start
+
+Get OSEF running in your repository in under 5 minutes:
+
+1. **Initialize the Project**
+   ```bash
+   osef init
+   ```
+   *Creates the `.osef/` configuration folder and sets up your environment.*
+
+2. **Generate the Knowledge Graph**
+   ```bash
+   osef graph build
+   ```
+   *Parses your codebase and populates the Engineering Knowledge Graph.*
+
+3. **Audit the Architecture**
+   ```bash
+   osef validate
+   ```
+   *Checks your repository against its defined architectural constraints.*
+
+---
+
+## 💻 CLI Examples
+
+OSEF provides a powerful command-line interface for direct interaction.
+
+```bash
+# Initialize a new OSEF project context
+osef init
+
+# Run a diagnostic health check on your environment
+osef doctor
+
+# Build and visualize the Engineering Knowledge Graph
+osef graph build
+osef graph view --format json
+
+# Validate current code against architectural contracts
+osef validate --strict
+```
+
+---
+
+## 📁 Repository Structure
+
+```text
+OSEF/
+├── .github/          # Enterprise governance, issue templates, workflows
+├── docs/             # MkDocs material documentation
+├── governance/       # Constitution, Engineering Principles, ADRs, RFCs
+├── implementation/   # Backlogs, active sprint plans, and tracking
+├── scripts/          # Automation and development utility scripts
+├── src/
+│   └── osef/         # Core framework source code
+└── tests/            # Pytest suite
+```
+
+---
+
+## 📚 Documentation
+
+Our documentation is the source of truth for all architectural decisions and API designs.
+
+- [Documentation Site](https://aryamannatrajan21.github.io/OSEF/)
+- [The Manifesto](https://aryamannatrajan21.github.io/OSEF/manifesto/)
+- [The Constitution](https://aryamannatrajan21.github.io/OSEF/constitution/)
+- [Architecture Decision Records (ADRs)](https://aryamannatrajan21.github.io/OSEF/adrs/)
+- [Request For Comments (RFCs)](https://aryamannatrajan21.github.io/OSEF/rfcs/)
+
+---
+
+## 📊 Current Status
+
+OSEF is currently under active development.
+
+- **Current Milestone:** `v0.2.0-alpha` (Engineering Foundation Released)
+- **Completed:** Repository intelligence, foundational CLI, strict enterprise governance.
+- **Current Sprint (Sprint 2):** Open Source Transformation Engine (OSTE) development.
+- **Next Up:** Plugin SDK stabilization and AST parsers.
 
 ---
 
 ## 🤝 Contributing
 
-We are actively seeking contributors! Because the architecture is completely mapped out, there is zero ambiguity about what needs to be built. 
+We welcome contributions from developers, researchers, and maintainers who share our vision for an engineering-first AI ecosystem.
 
-If you love strict typing, Dependency Injection, and building developer tools, this is the project for you.
-
-1. Read [CONTRIBUTING.md](CONTRIBUTING.md) to understand our workflow.
-2. Review the [Implementation Backlog](implementation/ENGINEERING_BACKLOG.md) to see what tasks are active in the current sprint.
-3. Join the discussion in [GitHub Discussions](COMMUNITY.md).
+1. Read our [CONTRIBUTING.md](CONTRIBUTING.md).
+2. Familiarize yourself with the [Engineering Principles](governance/ENGINEERING_PRINCIPLES.md).
+3. Pick up a `triage` or `help wanted` issue.
+4. Open a Pull Request!
 
 ---
 
-## ⚖️ License & Governance
+## 🏛️ Governance
 
-OSEF is licensed under the **Apache License 2.0**. See [LICENSE](LICENSE).
+OSEF is governed by a rigorous maintainer model designed for enterprise scalability.
 
-For details on how architectural decisions are made, please refer to the [RFC Gatekeeping Policy](implementation/RFC_GATEKEEPING.md) and the [Change Control Policy](release/CHANGE_CONTROL_POLICY.md).
+- **Direct pushes to `main` are strictly forbidden.**
+- All architectural changes must pass through the **RFC Process**.
+- Decisions are documented immutably via **ADRs**.
+- Code reviews strictly enforce the **OSEF Constitution**.
+
+> For security reports, please refer to our [SECURITY.md](SECURITY.md). For support, use [GitHub Discussions](https://github.com/Aryamannatrajan21/OSEF/discussions).
+
+---
+
+## 📄 License
+
+This project is licensed under the **Apache License 2.0**. See the [LICENSE](LICENSE) file for more details.
+
+---
+
+<div align="center">
+  <p><strong>OSEF: Understand before you transform.</strong></p>
+  <p>
+    <a href="https://github.com/Aryamannatrajan21/OSEF/discussions">Discussions</a> •
+    <a href="https://github.com/Aryamannatrajan21/OSEF/issues">Issues</a> •
+    <a href="https://aryamannatrajan21.github.io/OSEF/">Documentation</a>
+  </p>
+</div>
