@@ -16,7 +16,7 @@ OSEF treats codebases not as raw strings of text, but as a semantically connecte
 - **[Engineering Philosophy](Engineering-Philosophy)**: Dive into the principles that shape OSEF.
 
 ## 🚀 Status
-- **Latest Release:** `v0.2.0-alpha`
+- **Latest Release:** `v1.0.0-rc1`
 - **Current Phase:** Phase II (Ecosystem Engineering)
 - **Roadmap Summary:** Scaling the EKG to support multi-language parsing, establishing the AI Transformation Engine, and standardizing the Plugin SDK.
 
