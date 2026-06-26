@@ -6,7 +6,7 @@ Orchestrates capability-driven execution.
 import logging
 from pathlib import Path
 
-from osef.core.ekg import KnowledgeGraph, Node, Edge
+from osef.core.ekg import KnowledgeGraph, Node, Edge, GraphDelta
 from osef.scanner.scanner import RepositoryScanner
 from osef.sdk.host.host import ExtensionHost
 from osef.sdk.pipeline import PipelineContext
@@ -59,13 +59,13 @@ class PipelineEngine:
         symbol_table = None
         
         # Resolve Capability
-        parser_provider = self.host.registry.resolve_parser(language="python")
+        parser_cap = self.host.registry.resolve_parser(language="python")
         
-        if parser_provider:
-            logger.info(f"Executing parsing via {parser_provider.name} v{parser_provider.version}")
-            symbol_table = parser_provider.parse(context)
+        if parser_cap:
+            logger.info(f"Executing parsing via python capability factory")
+            symbol_table = parser_cap.factory(context)
         else:
-            logger.warning("No parser plugin found for Python. Falling back to LegacyPythonParser. This will be removed in v1.0.")
+            logger.warning("No parser plugin found for Python. Falling back to LegacyPythonParser.")
             symbol_table = SymbolTable()
             parser = LegacyPythonParser(symbol_table)
             for python_file in manifest.python_files:
@@ -126,6 +126,24 @@ class PipelineEngine:
             raise RuntimeError("Generated EKG is invalid (dangling edges).")
             
         self.event_bus.publish(EventType.AfterGraphGeneration, {"nodes": len(self.graph.nodes), "edges": len(self.graph.edges)})
+        
+        # --- STAGE: Graph Enrichment ---
+        enrichers = self.host.registry.get_enrichers()
+        for enricher_cap in enrichers:
+            logger.info(f"Executing enrichment via {enricher_cap.name}")
+            delta = enricher_cap.factory(context, self.graph)
+            
+            # Validate and merge the delta back into the graph
+            if not delta.validate(self.graph):
+                logger.error(f"GraphDelta validation failed from {enricher_cap.name}: {delta.diagnostics}")
+                continue
+                
+            provenance = {
+                "plugin": self.host.registry._plugin_mapping.get(enricher_cap, "unknown"),
+                "execution_id": "pipeline_run", # Could be dynamic UUID in future
+            }
+            self.graph.merge_delta(delta, provenance)
+            logger.info(f"Merged GraphDelta from {enricher_cap.name}: +{len(delta.nodes_to_add)} nodes, +{len(delta.edges_to_add)} edges")
 
         return self.graph
 

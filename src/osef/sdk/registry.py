@@ -1,47 +1,58 @@
 import logging
-from typing import Dict, List, Optional, Type, TypeVar
-from osef.sdk.providers import BaseProvider, BaseParserProvider
+from typing import Dict, List, Optional, Type, Callable, Any
+from osef.sdk.capabilities import CapabilityDescriptor, ParserCapability, GraphEnrichmentCapability
 
 logger = logging.getLogger(__name__)
 
-T = TypeVar("T", bound=BaseProvider)
-
 class CapabilityRegistry:
     """
-    Internal registry that owns provider registration, validation, language matching,
+    Internal registry that owns capability registration, language matching,
     priority resolution, and conflict detection.
     """
     def __init__(self):
-        # We store providers by capability interface.
-        self._providers: Dict[Type[BaseProvider], List[BaseProvider]] = {
-            BaseParserProvider: []
+        # We store capabilities by descriptor type.
+        self._capabilities: Dict[Type[CapabilityDescriptor], List[CapabilityDescriptor]] = {
+            ParserCapability: [],
+            GraphEnrichmentCapability: []
         }
-        self._plugin_mapping: Dict[str, str] = {} # provider name -> plugin id
+        self._plugin_mapping: Dict[CapabilityDescriptor, str] = {} # capability -> plugin id
 
-    def register(self, provider: BaseProvider, plugin_id: str) -> None:
-        """Register a provider capability from a plugin."""
-        # Detect interface
-        if isinstance(provider, BaseParserProvider):
-            self._providers[BaseParserProvider].append(provider)
-            self._plugin_mapping[provider.name] = plugin_id
-            logger.info(f"Registered Parser Provider: {provider.name} v{provider.version} (from {plugin_id})")
-        else:
-            logger.warning(f"Unknown provider type for {provider.name}")
+    def register(self, capability: CapabilityDescriptor, plugin_id: str) -> None:
+        """Register a runtime capability from a plugin."""
+        cap_type = type(capability)
+        if cap_type not in self._capabilities:
+            self._capabilities[cap_type] = []
+            
+        self._capabilities[cap_type].append(capability)
+        self._plugin_mapping[capability] = plugin_id
+        
+        name = getattr(capability, 'name', getattr(capability, 'language', 'unknown'))
+        logger.info(f"Registered {cap_type.__name__}: {name} (from {plugin_id})")
 
-    def resolve_parser(self, language: str) -> Optional[BaseParserProvider]:
+    def resolve_parser(self, language: str) -> Optional[ParserCapability]:
         """
         Resolution Algorithm:
         - Match Language
         - (Future) Priority/Ranking Score
         """
         candidates = [
-            p for p in self._providers[BaseParserProvider] 
-            if getattr(p, "language", None) == language
+            c for c in self._capabilities[ParserCapability] 
+            if isinstance(c, ParserCapability) and c.language == language
         ]
         
         if not candidates:
             return None
             
-        # For now, just return the first matched candidate
-        # Ranking/Scoring goes here in future iterations
         return candidates[0]
+        
+    def get_enrichers(self) -> List[GraphEnrichmentCapability]:
+        """Returns all registered graph enrichment capabilities."""
+        return [c for c in self._capabilities.get(GraphEnrichmentCapability, []) if isinstance(c, GraphEnrichmentCapability)]
+
+    def get_policies(self) -> List[Any]:
+        """Returns all registered policy rules from plugins."""
+        policies = []
+        for cap in self._capabilities.get(PolicyCapability, []):
+            if isinstance(cap, PolicyCapability):
+                policies.extend(cap.factory())
+        return policies

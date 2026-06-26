@@ -9,4 +9,4 @@ The Parser identifies `ast.Call` nodes and assigns them to the invoking symbol's
 The `RelationshipEnricher` resolves these strings into actual canonical `Symbol` IDs and attaches them to `Symbol.related_ids["CALLS"]`.
 
 ## 3. EKG Phase
-The `EKGBuilder` consumes the `related_ids` and injects deterministic `Edge` structures into the graph.
+The `Pipeline Engine` consumes the `related_ids` and injects deterministic `Edge` structures into the graph.
