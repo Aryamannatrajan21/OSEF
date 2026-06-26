@@ -4,7 +4,7 @@ version: 1.0.0
 author: OSEF Core Team
 license: Apache-2.0
 homepage: https://github.com/Aryamannatrajan21/OSEF
-documentation: https://github.com/Aryamannatrajan21/OSEF/tree/main/plugins/python/docs
+documentation: https://github.com/Aryamannatrajan21/OSEF/tree/main/reference-plugins/python/docs
 sdk_version: ^0.4.0
 graph_schema: ^4.0.0
 policy_api: ^2.0.0
