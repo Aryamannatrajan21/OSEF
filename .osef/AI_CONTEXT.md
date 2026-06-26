@@ -5,6 +5,19 @@
 ## Project Summary
 OSEF is the Engineering Operating System for AI-assisted software development. It parses source code into an immutable **Engineering Knowledge Graph (EKG)**, executes rules via the **Engineering Policy Engine (EPE)**, and exposes a decoupled **Engineering Platform SDK (EPSDK)** for extensibility. 
 
+### 2. Execution Runtime
+The OSEF runtime architecture is **FROZEN**.
+- **PipelineEngine** orchestrates stages.
+- **ExtensionHost** discovers capabilities.
+- **CapabilityRegistry** resolves stateless providers.
+- **EventBus** purely observes.
+Any deviation requires a formal RFC and ADR.
+
+### 3. Modus Operandi
+- All new language support requires a dedicated Parser provider.
+- Go and TypeScript parsers have been formally prioritized for Q2.
+- **Decision:** All parsers MUST implement the standard `ParserContract` (v0.4.0+).
+
 ## Current State
 - **Current Version:** `v0.4.0-alpha`
 - **Current Sprint:** Sprint 5 - Ecosystem Validation
