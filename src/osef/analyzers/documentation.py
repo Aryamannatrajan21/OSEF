@@ -10,7 +10,7 @@ class DocumentationAnalyzer(BaseAnalyzer):
     """
     Extracts documentation facts from the Engineering Knowledge Graph.
     """
-    def analyze(self, graph: KnowledgeGraph) -> Dict[str, Any]:
+    def analyze(self) -> Dict[str, Any]:
         findings = {
             "total_elements": 0,
             "documented_elements": 0,
@@ -18,7 +18,7 @@ class DocumentationAnalyzer(BaseAnalyzer):
             "coverage_percentage": 0.0
         }
         
-        for node in graph.nodes.values():
+        for node in self.graph.nodes.values():
             if node.type in ("module", "class", "method", "function"):
                 findings["total_elements"] += 1
                 if node.description:

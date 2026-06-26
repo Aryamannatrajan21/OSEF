@@ -10,7 +10,7 @@ class DependencyAnalyzer(BaseAnalyzer):
     """
     Extracts dependency facts from the Engineering Knowledge Graph.
     """
-    def analyze(self, graph: KnowledgeGraph) -> Dict[str, Any]:
+    def analyze(self) -> Dict[str, Any]:
         findings = {
             "total_imports": 0,
             "resolved_imports": 0,
@@ -18,7 +18,7 @@ class DependencyAnalyzer(BaseAnalyzer):
             "external_dependencies": set()
         }
         
-        for node in graph.nodes.values():
+        for node in self.graph.nodes.values():
             if node.type == "import":
                 findings["total_imports"] += 1
                 if node.metadata.get("resolved") == "true":

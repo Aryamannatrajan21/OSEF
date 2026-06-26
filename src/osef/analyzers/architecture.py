@@ -10,7 +10,7 @@ class ArchitectureAnalyzer(BaseAnalyzer):
     """
     Extracts architectural facts from the Engineering Knowledge Graph.
     """
-    def analyze(self, graph: KnowledgeGraph) -> Dict[str, Any]:
+    def analyze(self) -> Dict[str, Any]:
         findings = {
             "services": 0,
             "controllers": 0,
@@ -20,7 +20,7 @@ class ArchitectureAnalyzer(BaseAnalyzer):
             "total_components": 0
         }
         
-        for node in graph.nodes.values():
+        for node in self.graph.nodes.values():
             if node.type == "class":
                 findings["total_components"] += 1
                 role = node.metadata.get("semantic_role", "").lower()

@@ -13,29 +13,29 @@ from osef.intelligence.models import (
 )
 
 
+from osef.epe.setup import get_default_engine
+
+
 class IntelligenceLayer:
     """
-    Orchestrates the analyzers and produces rich domain objects.
+    Orchestrates the Policy Engine and produces rich domain objects.
     """
     def __init__(self, graph: KnowledgeGraph):
         self.graph = graph
 
     def assess(self) -> EngineeringAssessment:
-        arch_data = ArchitectureAnalyzer().analyze(self.graph)
-        dep_data = DependencyAnalyzer().analyze(self.graph)
-        doc_data = DocumentationAnalyzer().analyze(self.graph)
+        engine = get_default_engine()
+        findings = engine.evaluate(self.graph)
 
-        findings = []
-        if doc_data["coverage_percentage"] < 80.0:
-            findings.append(f"Documentation coverage is below threshold ({doc_data['coverage_percentage']:.1f}%).")
-        if dep_data["broken_imports"] > 0:
-            findings.append(f"Found {dep_data['broken_imports']} unresolved internal imports.")
-        if arch_data["services"] == 0 and arch_data["controllers"] == 0:
-            findings.append("No distinct structural components (Services, Controllers) detected.")
+        arch_data = ArchitectureAnalyzer(self.graph, findings).analyze()
+        dep_data = DependencyAnalyzer(self.graph, findings).analyze()
+        doc_data = DocumentationAnalyzer(self.graph, findings).analyze()
+
+        finding_strings = [f.description for f in findings]
 
         return EngineeringAssessment(
             architecture=ArchitectureAssessment(**arch_data),
             dependencies=DependencyAssessment(**dep_data),
             documentation=DocumentationAssessment(**doc_data),
-            findings=findings
+            findings=finding_strings
         )
