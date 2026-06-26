@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Dict, Any
+from typing import Any, Dict, Optional
 from osef.core.ekg import KnowledgeGraph
 from osef.sdk.events import EventBus
 from osef.sdk.capabilities import CapabilityDescriptor
@@ -16,7 +16,7 @@ class ExtensionContext:
         workspace_dir: Path,
         graph: KnowledgeGraph,
         event_bus: EventBus,
-        host: "ExtensionHost" = None,
+        host: Optional["ExtensionHost"] = None,
     ) -> None:
         self.plugin_id = plugin_id
         self.workspace_dir = workspace_dir

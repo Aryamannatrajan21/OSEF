@@ -7,11 +7,13 @@ from osef.sdk.capabilities import ParserCapability
 from osef_python.python import PythonParser
 from osef_python.symbol_table import SymbolTable
 
+
 class PythonPlugin(OsefPlugin):
     """
     The official Python reference implementation.
     Validates the Strangler Migration Strategy by providing an SDK-compliant parser.
     """
+
     @property
     def manifest(self) -> PluginManifest:
         # Load from plugin.yaml
@@ -24,6 +26,7 @@ class PythonPlugin(OsefPlugin):
         """
         Register parsers, enrichers, and policies into the provided ExtensionContext.
         """
+
         def _parse(pipeline_context):
             sym = SymbolTable()
             parser = PythonParser(sym)
