@@ -61,7 +61,7 @@ Everything built within OSEF adheres to the **OSEF Constitution** and its strict
 3. **Immutability & Safety:** Changes must be deterministic, reversible, and explicitly authorized.
 4. **Extensibility by Design:** OSEF is built as a microkernel-style plugin architecture.
 
-> Read the full [Engineering Principles](https://aryamannatrajan21.github.io/OSEF/engineering_principles/) in our documentation.
+> Read the full [Engineering Principles](governance/ENGINEERING_PRINCIPLES.md) in our documentation.
 
 ---
 
