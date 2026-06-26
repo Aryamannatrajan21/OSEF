@@ -8,7 +8,7 @@ version = "0.2.0a0"
 description = "The universal standardization layer for open source."
 requires-python = ">=3.12"
 dependencies = [
-    "typer>=0.9.0",
+    "typer>=0.26.7",
     "pydantic>=2.0.0",
     "pydantic-settings>=2.0.0",
     "jinja2>=3.0.0",
