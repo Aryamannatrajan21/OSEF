@@ -1,46 +1,47 @@
-# OSEF Public Roadmap
+# OSEF Roadmap
 
-This roadmap outlines the strategic milestones leading up to the `v1.0.0` Stable release. 
-*Note: For granular task-level planning, see the [Sprint Plan](implementation/SPRINT_PLAN.md).*
+This roadmap tracks the strategic progression of the Open Source Engineering Framework (OSEF) from foundation to the future marketplace ecosystem.
+
+## Completed Milestones
+
+### Phase 1: Foundation (v0.1.0)
+- Core repository initialization.
+- Strict parser abstractions and language-agnostic Symbol Table (IR).
+- Extensible CLI (via Typer) and basic configuration management.
+
+### Phase 2: Repository Intelligence (v0.2.0)
+- Implementation of the **Engineering Knowledge Graph (EKG)**.
+- Semantic Enrichment layer heuristics.
+- Foundational Analyzers producing Engineering Assessments.
+
+### Phase 3: Engineering Policy Engine (v0.3.0)
+- Extraction of imperative analyzer rules into the declarative **Engineering Policy Engine (EPE)**.
+- DAG-based rule dependency resolution and highly memoized graph queries.
+- Rich `Finding` domain models with Provenance, Evidence, and Recommendations.
+
+### Phase 4: Engineering Platform SDK (v0.4.0)
+- The launch of the **EPSDK**, moving all functionality out of Core and into extensions.
+- Creation of the `ExtensionHost`, `ExtensionContext`, and the decoupled Event Bus.
+- Formal Capability Negotiation and Plugin Sandboxing specifications.
 
 ---
 
-### v0.1.0-alpha: Foundation Release (Completed)
-- **Status:** Done
-- **Objective:** Establish the repository, governance models, documentation framework, and frozen architecture.
+## Upcoming Milestones
 
-### v0.2.0-alpha: Engineering Foundation (Current)
-- **Status:** 🟡 In Progress
-- **Success:** The Dependency Injection container and asynchronous Event Bus are operational. Internal services can communicate via events.
+### Phase 5: Ecosystem & Marketplace Validation
+- **Reference Plugins**: Developing official community plugins to prove the EPSDK (e.g., Markdown Report Plugin, Security Audit Rule Pack).
+- **Marketplace Launch**: Implementing the Marketplace Protocol (cryptographic signatures, plugin discovery CLI commands).
+- **Multi-language Support**: Expanding parser facades to natively support TypeScript and Go via plugins.
 
-### v0.3.x: The Knowledge Kernel
-- **Status:** ⚪ Planned
-- **Success:** OSEF can parse Markdown-based EKK rules from disk into strictly typed Python domain models.
+### Phase 6: Next-Gen Engineering Intelligence
+- **Engineering Query Language (EQL)**: A declarative DSL specifically designed for writing rules against the EKG.
+- **Transformation Engine**: Safely mutating source code using `AutoFix` capabilities derived from EPE findings.
+- **AI Engineering Agents**: Providing native SDK hooks for agentic frameworks to reason over the graph and execute transformations.
 
-### v0.4.x: Plugin Runtime
-- **Status:** ⚪ Planned
-- **Success:** The architecture can dynamically discover and load third-party Python plugins via entry points, successfully hooking them into the Event Bus.
+---
 
-### v0.5.x: SDK & CLI Alpha
-- **Status:** ⚪ Planned
-- **Success:** The `osef` command-line tool is functional. Users can run `osef init` to scaffold basic configuration files.
+## Future Vision
 
-### v0.6.x: Repository Analysis
-- **Status:** ⚪ Planned
-- **Success:** The Transformation Engine (OSTE) can successfully parse a target repository's ASTs and directory structure into a standard representation.
-
-### v0.7.x: Documentation Engine
-- **Status:** ⚪ Planned
-- **Success:** OSEF can generate interactive, Jinja2-templated governance files (e.g., `CONTRIBUTING.md`, ADRs) based on user prompts.
-
-### v0.8.x: OSTE MVP (Beta Release)
-- **Status:** ⚪ Planned
-- **Success:** The analyzer connects to the Knowledge Kernel. `osef analyze` correctly warns users about missing architectural constraints.
-
-### v0.9.x: Release Candidate
-- **Status:** ⚪ Planned
-- **Success:** Certification scoring algorithms are finalized. Headless GitHub Actions execution is verified. Zero critical bugs remain.
-
-### v1.0.0: Stable Release
-- **Status:** ⚪ Planned
-- **Success:** PyPI publishing. API strictly governed by Semantic Versioning. Production ready.
+- **Engineering Memory**: Persisting the EKG across builds to track architectural drift over time.
+- **Enterprise Platform**: Distributed graph querying and cross-repository policy enforcement.
+- **Cloud Services**: Hosted EPE runs integrated directly into GitHub/GitLab CI pipelines.
