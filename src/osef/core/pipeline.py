@@ -29,7 +29,9 @@ class PipelineEngine:
     Orchestrates execution stages using capabilities resolved by the ExtensionHost.
     """
 
-    def __init__(self, root_path: str | Path, host: Optional["ExtensionHost"] = None) -> None:
+    def __init__(
+        self, root_path: str | Path, host: Optional["ExtensionHost"] = None
+    ) -> None:
         self.root_path = Path(root_path).resolve()
         self.graph = KnowledgeGraph()
 
