@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, Callable, Any, TYPE_CHECKING, List
 
 
 class Capability(BaseModel):
@@ -16,8 +16,6 @@ class PluginCapabilities(BaseModel):
     supports_sdk: Capability
     supports_graph_schema: Capability
 
-
-from typing import Callable, Any, TYPE_CHECKING, List
 
 if TYPE_CHECKING:
     from osef.core.ekg import KnowledgeGraph, GraphDelta

@@ -1,7 +1,5 @@
-import pytest
 from pathlib import Path
 
-from osef.core.pipeline import PipelineEngine
 from osef_python.python import PythonParser as PluginPythonParser
 from osef_python.symbol_table import SymbolTable as PluginSymbolTable
 from osef.parser.symbol_table import SymbolTable as CoreSymbolTable

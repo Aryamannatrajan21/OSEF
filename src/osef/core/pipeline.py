@@ -6,7 +6,7 @@ Orchestrates capability-driven execution.
 import logging
 from pathlib import Path
 
-from osef.core.ekg import KnowledgeGraph, Node, Edge, GraphDelta
+from osef.core.ekg import KnowledgeGraph, Node, Edge
 from osef.scanner.scanner import RepositoryScanner
 from osef.sdk.host.host import ExtensionHost
 from osef.sdk.pipeline import PipelineContext
@@ -62,7 +62,7 @@ class PipelineEngine:
         parser_cap = self.host.registry.resolve_parser(language="python")
         
         if parser_cap:
-            logger.info(f"Executing parsing via python capability factory")
+            logger.info("Executing parsing via python capability factory")
             symbol_table = parser_cap.factory(context)
         else:
             logger.warning("No parser plugin found for Python. Falling back to LegacyPythonParser.")
