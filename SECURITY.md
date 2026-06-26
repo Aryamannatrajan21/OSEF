@@ -13,10 +13,7 @@ We do not yet recommend OSEF for production workloads. However, we take security
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability in OSEF (such as an issue with how we parse ASTs, local file traversal bugs, or dependency CVEs), **please do not report it by creating a public GitHub issue.**
-
-Instead, please responsibly disclose it by emailing:
-**security@osef.io** *(Placeholder: Please use GitHub's private vulnerability reporting feature for now).*
+If you discover a security vulnerability in OSEF (such as an issue with how we parse ASTs, local file traversal bugs, or dependency CVEs), please report it by creating a new [Security Report Issue](https://github.com/Aryamannatrajan21/OSEF/issues/new?template=security_report.md) using our template.
 
 **What to include:**
 - A detailed description of the vulnerability.
