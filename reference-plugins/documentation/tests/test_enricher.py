@@ -1,5 +1,3 @@
-import pytest
-from pathlib import Path
 from osef.core.ekg import KnowledgeGraph
 from osef.sdk.pipeline import PipelineContext
 from osef.scanner.models import RepositoryManifest

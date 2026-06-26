@@ -7,7 +7,6 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from osef.sdk.host.host import ExtensionHost
-    from osef.sdk.providers import BaseProvider
 
 
 class ExtensionContext:

@@ -1,7 +1,7 @@
 import os
 import re
 from pathlib import Path
-from typing import List, Dict, Set
+from typing import List
 from osef.core.ekg import KnowledgeGraph, GraphDelta, Node, Edge
 from osef.sdk.pipeline import PipelineContext
 

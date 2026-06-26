@@ -1,4 +1,3 @@
-import pytest
 from osef.sdk.registry import CapabilityRegistry
 from osef.sdk.capabilities import ParserCapability
 from osef.parser.symbol_table import SymbolTable

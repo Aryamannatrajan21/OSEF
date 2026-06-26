@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from typing import Optional
 from osef.sdk.pipeline import PipelineContext
 from osef.parser.symbol_table import SymbolTable
 

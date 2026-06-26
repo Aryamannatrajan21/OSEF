@@ -1,6 +1,6 @@
 import logging
-from typing import Dict, List, Optional, Type, Callable, Any
-from osef.sdk.capabilities import CapabilityDescriptor, ParserCapability, GraphEnrichmentCapability
+from typing import Dict, List, Optional, Type, Any
+from osef.sdk.capabilities import CapabilityDescriptor, ParserCapability, GraphEnrichmentCapability, PolicyCapability
 
 logger = logging.getLogger(__name__)
 
