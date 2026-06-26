@@ -51,4 +51,4 @@ an individual is officially representing the community in public spaces.
 ## Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported to the community leaders responsible for enforcement. All complaints will be reviewed and investigated promptly and fairly.
+reported to the community leaders responsible for enforcement by emailing **conduct@osef.io** *(Placeholder: reach out to maintainers directly for now)*. All complaints will be reviewed and investigated promptly and fairly.
