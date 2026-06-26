@@ -3,12 +3,14 @@ Engineering Knowledge Graph Builder.
 """
 
 from pathlib import Path
-import hashlib
+from typing import Dict
 
 from osef.core.ekg import KnowledgeGraph, Node, Edge
 from osef.scanner.scanner import RepositoryScanner
 from osef.parser.python import PythonParser
-from osef.parser.models import ParsedModule
+from osef.parser.symbol_table import SymbolTable
+from osef.parser.resolvers.imports import ImportResolver
+from osef.parser.resolvers.types import TypeResolver
 
 
 class EKGBuilder:
@@ -19,78 +21,57 @@ class EKGBuilder:
     def __init__(self, root_path: str | Path):
         self.root_path = Path(root_path).resolve()
         self.scanner = RepositoryScanner(self.root_path)
-        self.parser = PythonParser()
+        self.symbol_table = SymbolTable()
+        self.parser = PythonParser(self.symbol_table)
         self.graph = KnowledgeGraph()
-
-    def _generate_id(self, *parts: str) -> str:
-        """Generate a deterministic ID based on parts."""
-        return hashlib.sha256(":".join(parts).encode("utf-8")).hexdigest()[:16]
 
     def build(self) -> KnowledgeGraph:
         """
         Scan, parse, and build the graph.
         """
+        # 1. Scan and parse
         manifest = self.scanner.scan()
-
         for python_file in manifest.python_files:
             abs_path = self.root_path / python_file
-            parsed_module = self.parser.parse_file(str(abs_path))
-            self._incorporate_module(python_file, parsed_module)
+            self.parser.parse_file(str(abs_path))
 
-        # Validate
+        # 2. Resolve Semantics
+        import_resolver = ImportResolver(self.symbol_table)
+        import_resolver.resolve()
+        
+        type_resolver = TypeResolver(self.symbol_table)
+        type_resolver.resolve()
+
+        # 3. Build Graph
+        for symbol in self.symbol_table.symbols.values():
+            node = Node(
+                id=symbol.id,
+                type=symbol.type,
+                name=symbol.name,
+                description=symbol.docstring,
+                metadata={
+                    "file_path": symbol.file_path,
+                    "visibility": symbol.visibility,
+                    **symbol.metadata
+                }
+            )
+            self.graph.add_node(node)
+            
+        for symbol in self.symbol_table.symbols.values():
+            # Edges for containment (parent -> child)
+            for child_id in symbol.children_ids:
+                edge = Edge(source_id=symbol.id, target_id=child_id, relation_type="CONTAINS")
+                self.graph.add_edge(edge)
+                
+            # Specific edges for imports
+            if symbol.type == "import" and symbol.metadata.get("resolved") == "true":
+                target_id = symbol.metadata.get("resolved_to")
+                if target_id:
+                    edge = Edge(source_id=symbol.id, target_id=target_id, relation_type="IMPORTS")
+                    self.graph.add_edge(edge)
+
+        # 4. Validate
         if not self.graph.validate_graph():
             raise RuntimeError("Generated EKG is invalid (dangling edges).")
 
         return self.graph
-
-    def _incorporate_module(self, rel_path: str, parsed_module: ParsedModule) -> None:
-        """Add nodes and edges for a parsed module."""
-        module_id = self._generate_id("module", rel_path)
-        
-        module_node = Node(
-            id=module_id,
-            type="module",
-            name=rel_path,
-            description=parsed_module.docstring,
-            metadata={"file_path": rel_path},
-        )
-        self.graph.add_node(module_node)
-
-        # Add classes
-        for cls in parsed_module.classes:
-            cls_id = self._generate_id("class", rel_path, cls.name)
-            cls_node = Node(
-                id=cls_id,
-                type="class",
-                name=cls.name,
-                description=cls.docstring,
-                metadata={"bases": ",".join(cls.bases)},
-            )
-            self.graph.add_node(cls_node)
-            self.graph.add_edge(Edge(source_id=module_id, target_id=cls_id, relation_type="CONTAINS"))
-
-            # Add methods
-            for method in cls.methods:
-                method_id = self._generate_id("method", rel_path, cls.name, method.name)
-                method_node = Node(
-                    id=method_id,
-                    type="method",
-                    name=method.name,
-                    description=method.docstring,
-                    metadata={"is_async": str(method.is_async).lower()},
-                )
-                self.graph.add_node(method_node)
-                self.graph.add_edge(Edge(source_id=cls_id, target_id=method_id, relation_type="CONTAINS"))
-
-        # Add module-level functions
-        for func in parsed_module.functions:
-            func_id = self._generate_id("function", rel_path, func.name)
-            func_node = Node(
-                id=func_id,
-                type="function",
-                name=func.name,
-                description=func.docstring,
-                metadata={"is_async": str(func.is_async).lower()},
-            )
-            self.graph.add_node(func_node)
-            self.graph.add_edge(Edge(source_id=module_id, target_id=func_id, relation_type="CONTAINS"))
