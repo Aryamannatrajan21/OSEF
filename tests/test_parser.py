@@ -1,6 +1,7 @@
 from osef.parser.python import PythonParser
+from osef.parser.symbol_table import SymbolTable
 
-def test_parser_extracts_ast():
+def test_parser_populates_symbol_table():
     source = '''
 """Module docstring"""
 import os
@@ -17,25 +18,36 @@ class MyClass(Base):
 async def my_async_func():
     pass
 '''
-    parser = PythonParser()
-    module = parser.parse_source(source)
+    table = SymbolTable()
+    parser = PythonParser(table)
+    parser.parse_source(source, "test_file.py")
     
-    assert module.docstring == "Module docstring"
-    assert len(module.imports) == 2
-    assert module.imports[1].module == "typing"
-    assert module.imports[1].names == ["List"]
+    # Check Module
+    modules = table.find_by_type("module")
+    assert len(modules) == 1
+    assert modules[0].docstring == "Module docstring"
     
-    assert len(module.classes) == 1
-    cls = module.classes[0]
-    assert cls.name == "MyClass"
-    assert cls.bases == ["Base"]
-    assert cls.docstring == "Class docstring"
-    assert len(cls.decorators) == 1
-    assert cls.decorators[0].name == "decorator"
+    # Check Imports
+    imports = table.find_by_type("import")
+    assert len(imports) == 2
+    assert imports[1].name == "List"
+    assert imports[1].metadata["module"] == "typing"
     
-    assert len(cls.methods) == 1
-    assert cls.methods[0].name == "my_method"
+    # Check Class
+    classes = table.find_by_type("class")
+    assert len(classes) == 1
+    assert classes[0].name == "MyClass"
+    assert classes[0].docstring == "Class docstring"
+    assert classes[0].metadata["bases"] == "Base"
+    assert classes[0].metadata["decorators"] == "decorator"
     
-    assert len(module.functions) == 1
-    assert module.functions[0].name == "my_async_func"
-    assert module.functions[0].is_async is True
+    # Check Method
+    methods = table.find_by_type("method")
+    assert len(methods) == 1
+    assert methods[0].name == "my_method"
+    
+    # Check Function
+    functions = table.find_by_type("function")
+    assert len(functions) == 1
+    assert functions[0].name == "my_async_func"
+    assert functions[0].metadata["is_async"] == "true"
