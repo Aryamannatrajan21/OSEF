@@ -1,4 +1,3 @@
-import pytest
 from osef.contracts.models import OSEFModel
 
 
