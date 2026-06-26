@@ -8,7 +8,7 @@ OSEF transforms unstructured source code into an immutable Engineering Knowledge
 
 [![Version](https://img.shields.io/badge/version-v0.4.0-blue.svg)](#)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](#)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](#)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](#)
 [![Status](https://img.shields.io/badge/status-active-success.svg)](#)
 
 </div>
@@ -205,4 +205,4 @@ Please read our [Contributing Guidelines](CONTRIBUTING.md) to get started.
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
