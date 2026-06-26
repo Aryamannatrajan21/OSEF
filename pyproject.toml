@@ -24,7 +24,7 @@ dev = [
     "mypy"
 ]
 docs = [
-    "mkdocs-material>=9.0.0"
+    "mkdocs-material>=9.7.6"
 ]
 
 [project.scripts]
