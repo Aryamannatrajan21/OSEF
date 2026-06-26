@@ -26,7 +26,7 @@ OSEF treats codebases not as raw strings of text, but as a semantically connecte
 This Wiki is a supplementary guide. The repository itself contains the canonical source of truth for OSEF:
 - **[README](../README.md)**
 - **[Constitution](../governance/CONSTITUTION.md)**
-- **[Manifesto](../governance/MANIFESTO.md)**
+- **[Manifesto](../governance/FOUNDER_MANIFESTO.md)**
 - **[Documentation Site](https://aryamannatrajan21.github.io/OSEF)** *(Coming Soon)*
 - **[RFCs](../architectures/)**
 - **[ADRs](../architectures/)**
