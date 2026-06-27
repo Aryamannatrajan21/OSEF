@@ -1,5 +1,3 @@
-
-
 class RuntimeCorrelations:
     @staticmethod
     def get_rules():

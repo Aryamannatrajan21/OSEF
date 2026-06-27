@@ -11,6 +11,7 @@ from osef_infrastructure.projections import get_projections
 from osef_infrastructure.cli import InfraCliCommand
 from osef_infrastructure.dashboards import get_dashboards
 
+
 class InfrastructureEnricher:
     """Provides semantic enrichment for infrastructure configuration."""
 
@@ -37,15 +38,11 @@ class InfrastructurePolicyPack:
         return get_all_policies()
 
 
-
-
 class InfrastructureCli:
     """Provides infrastructure CLI commands."""
 
     def __call__(self, *args, **kwargs) -> Any:
         return InfraCliCommand()
-
-
 
 
 class InfrastructureReports:

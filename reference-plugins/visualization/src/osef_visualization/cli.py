@@ -14,7 +14,6 @@ from osef_visualization.ir import ProjectedGraph
 # Ensure registries are populated by importing concrete implementations
 
 
-
 class VisualizationCli(CliCommand):
     @property
     def name(self) -> str:
