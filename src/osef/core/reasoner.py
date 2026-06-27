@@ -70,8 +70,12 @@ class EngineeringReasoner:
         nodes = []
         if path:
             for edge in path:
-                nodes.append(self.query.get_node(edge.source_id))
-            nodes.append(self.query.get_node(path[-1].target_id))
+                n = self.query.get_node(edge.source_id)
+                if n:
+                    nodes.append(n)
+            last_n = self.query.get_node(path[-1].target_id)
+            if last_n:
+                nodes.append(last_n)
             
         return ReasoningResult(
             summary=f"Deployment chain for {start_node.name}",
@@ -93,7 +97,10 @@ class EngineeringReasoner:
         path = path_belongs or path_implements
         nodes = []
         if path:
-            nodes.append(self.query.get_node(path[-1].target_id))
+            for edge in path:
+                target_node = self.query.get_node(edge.target_id)
+                if target_node:
+                    nodes.append(target_node)
             
         return ReasoningResult(
             summary=f"Architecture trace for {start_node.name}",

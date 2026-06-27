@@ -4,7 +4,7 @@ from osef.sdk.correlation import CorrelationRule
 class CorrelationRegistry:
     """Registry for cataloging Cross-Domain Correlation Rules."""
     
-    def __init__(self):
+    def __init__(self) -> None:
         self._rules: Dict[str, CorrelationRule] = {}
         
     def register_rule(self, rule: CorrelationRule) -> None:

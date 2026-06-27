@@ -40,14 +40,15 @@ class GraphQuery:
         return [self.graph.nodes[edge.source_id] for edge in self._in_edges.get(node_id, []) if edge.source_id in self.graph.nodes]
 
     def find_path(self, source_id: str, target_id: str) -> List[Edge]:
+        from typing import Tuple, Any
         # Simple BFS
-        queue = deque([(source_id, [])])
+        queue: Any = deque([(source_id, [])])
         visited = {source_id}
         
         while queue:
             current, path = queue.popleft()
             if current == target_id:
-                return path
+                return path # type: ignore
                 
             for edge in self._out_edges.get(current, []):
                 if edge.target_id not in visited:

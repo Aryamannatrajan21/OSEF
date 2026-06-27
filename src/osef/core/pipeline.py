@@ -12,6 +12,9 @@ from osef.scanner.scanner import RepositoryScanner
 from osef.sdk.host.host import ExtensionHost
 from osef.sdk.pipeline import PipelineContext
 from osef.core.reasoner import EngineeringReasoner, ReasoningContext
+from osef.sdk.events import EventType
+from osef.core.correlation_engine import CorrelationEngine
+from osef.core.graph_query import GraphQuery
 from pydantic import BaseModel
 from typing import Dict
 
