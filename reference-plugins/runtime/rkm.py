@@ -1,6 +1,7 @@
 from enum import Enum
 from typing import Dict, Any
 
+
 class RuntimeNodeType(str, Enum):
     PROCESS = "Runtime.Process"
     THREAD = "Runtime.Thread"
@@ -17,6 +18,7 @@ class RuntimeNodeType(str, Enum):
     WORKER = "Runtime.Worker"
     SCHEDULE = "Runtime.Schedule"
     RESOURCE_USAGE = "Runtime.ResourceUsage"
+
 
 class RuntimeKnowledgeModel:
     @staticmethod

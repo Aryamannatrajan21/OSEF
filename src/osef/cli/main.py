@@ -182,19 +182,25 @@ def graph_export(
 
 @app.command()
 def certify(
-    fixture: str = typer.Option(None, "--fixture", "-f", help="Specific fixture to run"),
+    fixture: str = typer.Option(
+        None, "--fixture", "-f", help="Specific fixture to run"
+    ),
 ) -> None:
     """Execute the v1.0 Platform Certification Engine."""
-    console.print("[bold blue]Starting OSEF Platform Certification Engine...[/bold blue]")
-    
+    console.print(
+        "[bold blue]Starting OSEF Platform Certification Engine...[/bold blue]"
+    )
+
     fixtures_path = "tests/platform_acceptance/fixtures"
     engine = CertificationEngine(fixtures_path)
     results = engine.run_certification()
-    
+
     for layer, status in results.items():
         console.print(f"[green]✔[/green] {layer} Passed")
-        
-    console.print("\n[bold green]Platform Certification Complete. All Golden Snapshots match.[/bold green]")
+
+    console.print(
+        "\n[bold green]Platform Certification Complete. All Golden Snapshots match.[/bold green]"
+    )
 
 
 @app.command()

@@ -84,6 +84,7 @@ class ReportCapability(CapabilityDescriptor):
         self.name = name
         self.factory = factory
 
+
 class ProjectionCapability(CapabilityDescriptor):
     def __init__(self, name: str, factory: Callable[..., Any], **kwargs: Any):
         super().__init__(**kwargs)

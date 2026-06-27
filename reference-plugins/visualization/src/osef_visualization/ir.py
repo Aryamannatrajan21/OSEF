@@ -2,6 +2,7 @@ from typing import List, Dict, Any, Optional
 from datetime import datetime
 from pydantic import BaseModel, Field
 
+
 class ProjectionMetadata(BaseModel):
     name: str
     version: str
@@ -13,12 +14,14 @@ class ProjectionMetadata(BaseModel):
     renderer_hints: Dict[str, Any] = Field(default_factory=dict)
     statistics: Dict[str, Any] = Field(default_factory=dict)
 
+
 class ProjectedNode(BaseModel):
     id: str
     type: str
     label: str
     attributes: Dict[str, Any] = Field(default_factory=dict)
-    
+
+
 class ProjectedEdge(BaseModel):
     source_id: str
     target_id: str
@@ -26,11 +29,13 @@ class ProjectedEdge(BaseModel):
     label: Optional[str] = None
     attributes: Dict[str, Any] = Field(default_factory=dict)
 
+
 class ProjectedGraph(BaseModel):
     """
     Intermediate Representation (IR) for the Engineering Knowledge Graph.
     Decouples the EKG from the Renderers.
     """
+
     metadata: ProjectionMetadata
     nodes: List[ProjectedNode] = Field(default_factory=list)
     edges: List[ProjectedEdge] = Field(default_factory=list)

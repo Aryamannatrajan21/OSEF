@@ -3,6 +3,7 @@ import argparse
 from typing import Any
 from osef.sdk.cli import CliCommand
 from osef.sdk.queries import GraphQuery
+
 # Requires access to the main KnowledgeGraph, assuming args gives us context or we load it.
 # In OSEF, CLI commands usually get passed a parsed context or we initialize the pipeline here.
 # For simplicity in this plugin, we assume `args.ekg` might point to a dumped graph or we run the pipeline.
@@ -19,6 +20,7 @@ import osef_visualization.renderers.graphviz
 import osef_visualization.renderers.json_renderer
 import osef_visualization.renderers.html
 
+
 class VisualizationCli(CliCommand):
     @property
     def name(self) -> str:
@@ -29,9 +31,15 @@ class VisualizationCli(CliCommand):
         subparsers = parser.add_subparsers(dest="subcommand", required=True)
 
         project_parser = subparsers.add_parser("project")
-        project_parser.add_argument("projection", choices=ProjectionRegistry.list_projections())
-        project_parser.add_argument("--ekg-file", help="Path to EKG JSON file", required=True)
-        project_parser.add_argument("--output", help="Output file for IR JSON", default="-")
+        project_parser.add_argument(
+            "projection", choices=ProjectionRegistry.list_projections()
+        )
+        project_parser.add_argument(
+            "--ekg-file", help="Path to EKG JSON file", required=True
+        )
+        project_parser.add_argument(
+            "--output", help="Output file for IR JSON", default="-"
+        )
 
         render_parser = subparsers.add_parser("render")
         render_parser.add_argument("format", choices=RendererRegistry.list_renderers())
@@ -50,13 +58,13 @@ class VisualizationCli(CliCommand):
             return self._handle_project(parsed)
         elif parsed.subcommand == "render":
             return self._handle_render(parsed)
-        
+
         return 1
 
     def _handle_project(self, parsed: Any) -> int:
         with open(parsed.ekg_file, "r") as f:
             kg = KnowledgeGraph.model_validate_json(f.read())
-        
+
         query = GraphQuery(kg)
         projection = ProjectionRegistry.get(parsed.projection)
         ir_graph = projection.project(query)
@@ -78,7 +86,7 @@ class VisualizationCli(CliCommand):
 
         ir_graph = ProjectedGraph.model_validate_json(input_json)
         renderer = RendererRegistry.get(parsed.format)
-        
+
         try:
             output_str = renderer.render(ir_graph)
         except NotImplementedError as e:

@@ -1,9 +1,10 @@
 from typing import Dict, List, Optional
 from osef.sdk.plugin import KnowledgeDomainManifest
 
+
 class DomainRegistry:
     """Registry for cataloging loaded Knowledge Domains."""
-    
+
     def __init__(self) -> None:
         self._domains: Dict[str, KnowledgeDomainManifest] = {}
 

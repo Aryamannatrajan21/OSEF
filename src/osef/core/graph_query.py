@@ -2,11 +2,13 @@ from typing import List, Dict, Set, Optional
 from osef.core.ekg import KnowledgeGraph, Node, Edge
 from collections import deque
 
+
 class GraphQuery:
     """
     Generic traversal API for the Engineering Knowledge Graph.
     Contains no engineering semantics.
     """
+
     def __init__(self, graph: KnowledgeGraph):
         self.graph = graph
         # Index edges for fast traversal
@@ -34,22 +36,31 @@ class GraphQuery:
         return [self.graph.nodes[nid] for nid in node_ids if nid in self.graph.nodes]
 
     def successors(self, node_id: str) -> List[Node]:
-        return [self.graph.nodes[edge.target_id] for edge in self._out_edges.get(node_id, []) if edge.target_id in self.graph.nodes]
+        return [
+            self.graph.nodes[edge.target_id]
+            for edge in self._out_edges.get(node_id, [])
+            if edge.target_id in self.graph.nodes
+        ]
 
     def predecessors(self, node_id: str) -> List[Node]:
-        return [self.graph.nodes[edge.source_id] for edge in self._in_edges.get(node_id, []) if edge.source_id in self.graph.nodes]
+        return [
+            self.graph.nodes[edge.source_id]
+            for edge in self._in_edges.get(node_id, [])
+            if edge.source_id in self.graph.nodes
+        ]
 
     def find_path(self, source_id: str, target_id: str) -> List[Edge]:
         from typing import Tuple, Any
+
         # Simple BFS
         queue: Any = deque([(source_id, [])])
         visited = {source_id}
-        
+
         while queue:
             current, path = queue.popleft()
             if current == target_id:
-                return path # type: ignore
-                
+                return path  # type: ignore
+
             for edge in self._out_edges.get(current, []):
                 if edge.target_id not in visited:
                     visited.add(edge.target_id)
@@ -60,10 +71,14 @@ class GraphQuery:
         path = []
         visited = set()
         current = start_id
-        
+
         while current not in visited:
             visited.add(current)
-            edges = [e for e in self._out_edges.get(current, []) if e.relation_type == edge_type]
+            edges = [
+                e
+                for e in self._out_edges.get(current, [])
+                if e.relation_type == edge_type
+            ]
             if not edges:
                 break
             # Just take the first matching edge for a simple linear trace

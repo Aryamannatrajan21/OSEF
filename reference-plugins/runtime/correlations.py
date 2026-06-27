@@ -1,5 +1,6 @@
 from osef.core.ekg import GraphDelta
 
+
 class RuntimeCorrelations:
     @staticmethod
     def get_rules():

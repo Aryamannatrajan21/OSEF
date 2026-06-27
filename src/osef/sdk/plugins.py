@@ -8,6 +8,7 @@ from pydantic import BaseModel, Field
 
 class KnowledgeDomainManifest(BaseModel):
     """Manifest describing a Knowledge Domain."""
+
     name: str
     version: str
     node_types: List[str] = Field(default_factory=list)

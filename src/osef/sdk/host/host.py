@@ -49,7 +49,7 @@ class ExtensionHost:
         self.plugins[manifest.id] = plugin
 
         # Auto-register Knowledge Domain if present
-        if hasattr(manifest, 'knowledge_domain') and manifest.knowledge_domain:
+        if hasattr(manifest, "knowledge_domain") and manifest.knowledge_domain:
             self.domain_registry.register_domain(manifest.knowledge_domain)
 
         self.event_bus.publish(EventType.AfterPluginLoad, {"plugin_id": manifest.id})
