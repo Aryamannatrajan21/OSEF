@@ -1,4 +1,3 @@
-from typing import Any
 from osef.core.ekg import GraphDelta
 from .akm import AKM
 

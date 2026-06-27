@@ -12,13 +12,7 @@ from osef_visualization.registries import ProjectionRegistry, RendererRegistry
 from osef_visualization.ir import ProjectedGraph
 
 # Ensure registries are populated by importing concrete implementations
-import osef_visualization.projections.architecture
-import osef_visualization.projections.dependency
 
-import osef_visualization.renderers.mermaid
-import osef_visualization.renderers.graphviz
-import osef_visualization.renderers.json_renderer
-import osef_visualization.renderers.html
 
 
 class VisualizationCli(CliCommand):

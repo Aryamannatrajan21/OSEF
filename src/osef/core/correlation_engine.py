@@ -1,4 +1,3 @@
-from typing import Any
 from osef.core.ekg import KnowledgeGraph, GraphDelta
 from osef.sdk.registry.correlation_registry import CorrelationRegistry
 from osef.sdk.pipeline import PipelineContext

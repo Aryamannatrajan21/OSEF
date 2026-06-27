@@ -1,5 +1,4 @@
-from typing import List, Dict, Any
-from osef.core.ekg import KnowledgeGraph
+from typing import List, Any
 
 
 def get_networking_policies() -> List[Any]:

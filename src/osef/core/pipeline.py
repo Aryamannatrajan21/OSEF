@@ -16,7 +16,14 @@ from osef.sdk.events import EventType
 from osef.core.correlation_engine import CorrelationEngine
 from osef.core.graph_query import GraphQuery
 from pydantic import BaseModel
-from typing import Dict
+
+# Fallback imports (Strangler Migration)
+from osef.parser.python import PythonParser as LegacyPythonParser
+from osef.parser.symbol_table import SymbolTable
+from osef.parser.resolvers.imports import ImportResolver
+from osef.parser.resolvers.types import TypeResolver
+from osef.semantic.enrichers import SemanticEnricher
+from osef.config.parser import ConfigParser
 
 
 class ConfidenceDetail(BaseModel):
@@ -51,13 +58,6 @@ class EngineeringConfidenceScore(BaseModel):
         return sum(scores) / len(scores)
 
 
-# Fallback imports (Strangler Migration)
-from osef.parser.python import PythonParser as LegacyPythonParser
-from osef.parser.symbol_table import SymbolTable
-from osef.parser.resolvers.imports import ImportResolver
-from osef.parser.resolvers.types import TypeResolver
-from osef.semantic.enrichers import SemanticEnricher
-from osef.config.parser import ConfigParser
 
 logger = logging.getLogger(__name__)
 

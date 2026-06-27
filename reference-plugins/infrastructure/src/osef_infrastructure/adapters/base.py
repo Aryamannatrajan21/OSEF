@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List, Any
+from typing import Any
 from osef.core.ekg import GraphDelta
 
 

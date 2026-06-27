@@ -1,4 +1,3 @@
-from osef.core.ekg import GraphDelta
 
 
 class RuntimeCorrelations:

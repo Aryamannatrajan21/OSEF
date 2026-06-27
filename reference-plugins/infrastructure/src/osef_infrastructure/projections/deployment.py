@@ -1,4 +1,4 @@
-from typing import Any, Dict
+from typing import Any
 from osef.core.ekg import KnowledgeGraph
 from osef_infrastructure.ikm import IKM
 

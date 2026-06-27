@@ -50,7 +50,7 @@ class GraphQuery:
         ]
 
     def find_path(self, source_id: str, target_id: str) -> List[Edge]:
-        from typing import Tuple, Any
+        from typing import Any
 
         # Simple BFS
         queue: Any = deque([(source_id, [])])

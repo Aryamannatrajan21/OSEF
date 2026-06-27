@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Dict, Any, Optional
+from typing import Any
 from osef.sdk.queries import GraphQuery
 from osef_visualization.ir import ProjectedGraph
 

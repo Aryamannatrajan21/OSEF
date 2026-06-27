@@ -1,4 +1,5 @@
 from osef.sdk.plugin import Plugin
+from osef.sdk.host.host import ExtensionHost
 from osef.sdk.registry.domain_registry import KnowledgeDomainManifest
 from runtime.rkm import RuntimeKnowledgeModel
 from runtime.adapters import OsefRuntimeYamlAdapter
