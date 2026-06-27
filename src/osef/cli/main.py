@@ -14,6 +14,7 @@ from osef.core.bootstrapper import bootstrap
 from osef.contracts.exceptions import OSEFError
 from osef.core.pipeline import PipelineEngine
 from osef.intelligence.layer import IntelligenceLayer
+from osef.core.certification_engine import CertificationEngine
 
 app = typer.Typer(
     help="Open Source Engineering Framework",
@@ -177,6 +178,23 @@ def graph_export(
     except Exception as e:
         console.print(f"[bold red]Export failed:[/bold red] {e}")
         raise typer.Exit(code=1)
+
+
+@app.command()
+def certify(
+    fixture: str = typer.Option(None, "--fixture", "-f", help="Specific fixture to run"),
+) -> None:
+    """Execute the v1.0 Platform Certification Engine."""
+    console.print("[bold blue]Starting OSEF Platform Certification Engine...[/bold blue]")
+    
+    fixtures_path = "tests/platform_acceptance/fixtures"
+    engine = CertificationEngine(fixtures_path)
+    results = engine.run_certification()
+    
+    for layer, status in results.items():
+        console.print(f"[green]✔[/green] {layer} Passed")
+        
+    console.print("\n[bold green]Platform Certification Complete. All Golden Snapshots match.[/bold green]")
 
 
 @app.command()

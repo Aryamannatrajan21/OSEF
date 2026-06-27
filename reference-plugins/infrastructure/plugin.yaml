@@ -1,0 +1,27 @@
+name: "Infrastructure Intelligence Platform"
+version: "1.0.0-rc1"
+description: "Models infrastructure as engineering knowledge."
+author: "OSEF Maintainers"
+
+capabilities:
+  provides_semantic_enrichment:
+    name: "osef_infrastructure.plugin.InfrastructureEnricher"
+    version: "1.0.0"
+  provides_rule_packs:
+    name: "osef_infrastructure.plugin.InfrastructurePolicyPack"
+    version: "1.0.0"
+  provides_cli_commands:
+    name: "osef_infrastructure.plugin.InfrastructureCli"
+    version: "1.0.0"
+  provides_reports:
+    name: "osef_infrastructure.plugin.InfrastructureReports"
+    version: "1.0.0"
+  provides_projections:
+    name: "osef_infrastructure.plugin.InfrastructureProjections"
+    version: "1.0.0"
+  supports_sdk:
+    name: "osef.sdk"
+    version: ">=1.0.0rc1"
+  supports_graph_schema:
+    name: "osef.graph"
+    version: ">=1.0.0"

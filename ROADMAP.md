@@ -19,11 +19,14 @@ This roadmap tracks the strategic progression of the Open Source Engineering Fra
 ## Upcoming Milestones
 
 ### Phase II: Ecosystem Engineering
-- **Reference Plugins**: Graph Visualization, Infrastructure Intelligence, Docker Intelligence, GitHub Actions Intelligence.
-- **Language Packs**: Java, Go, Rust, TypeScript, C#, Kotlin.
-- **Enterprise Packs**: Enterprise Policy Pack and auditing tools.
-- **Marketplace**: Plugin registry, cryptographic signatures, and plugin discovery.
-- **AI Engineering Intelligence**: AI reviewers, architecture assistants, and agentic refactoring.
+- **Sprint 7.5 & 7.6 — Engineering Intelligence Foundation**: Finalization of the Engineering Ontology, separating the platform into frozen Foundation vs open Ecosystem. Introduction of `GraphQuery` and `EngineeringReasoner`.
+- **Track A — Knowledge Domains**: Software, Documentation, Infrastructure, Security, Architecture, Runtime (Focusing on execution behavior), Enterprise (Focusing on organizational and governance concepts).
+- **Track B — Capability Platform Expansion**: Visualization, Report, Export, Search, Query, CLI.
+- **Track C — Language Packs**: Java, Go, Rust, TypeScript, C#, Kotlin.
+- **Track D — Cross-Domain Intelligence**: Reusable correlation capabilities between Knowledge Domains.
+- **Track E — Engineering Intelligence**: Architecture Drift, Technical Debt, Repository Health, Dependency Risk.
+- **Track F — Enterprise Platform**: Plugin Registry, Marketplace Protocol, Plugin Signing, Compliance Packs.
+- **Track G — AI Engineering Intelligence**: Repository Q&A, Architecture Assistant, Agent Collaboration (consuming deterministic Engineering Reasoner context).
 
 ---
 

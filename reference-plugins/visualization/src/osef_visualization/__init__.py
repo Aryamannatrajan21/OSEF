@@ -1,0 +1,3 @@
+"""
+OSEF Graph Visualization Plugin
+"""

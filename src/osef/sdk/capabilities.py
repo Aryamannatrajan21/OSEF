@@ -13,6 +13,7 @@ class PluginCapabilities(BaseModel):
     provides_rule_packs: Optional[Capability] = None
     provides_reports: Optional[Capability] = None
     provides_cli_commands: Optional[Capability] = None
+    provides_projections: Optional[Capability] = None
     supports_sdk: Capability
     supports_graph_schema: Capability
 
@@ -78,6 +79,12 @@ class CLIExtensionCapability(CapabilityDescriptor):
 
 
 class ReportCapability(CapabilityDescriptor):
+    def __init__(self, name: str, factory: Callable[..., Any], **kwargs: Any):
+        super().__init__(**kwargs)
+        self.name = name
+        self.factory = factory
+
+class ProjectionCapability(CapabilityDescriptor):
     def __init__(self, name: str, factory: Callable[..., Any], **kwargs: Any):
         super().__init__(**kwargs)
         self.name = name

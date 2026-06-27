@@ -1,0 +1,49 @@
+{
+  "version": "1.0.0",
+  "nodes": {
+    "pkg1": {
+      "id": "pkg1",
+      "type": "Package",
+      "name": "osef",
+      "description": null,
+      "created_at": "2026-06-27T07:31:01.541199",
+      "metadata": {}
+    },
+    "mod1": {
+      "id": "mod1",
+      "type": "Module",
+      "name": "osef.core",
+      "description": null,
+      "created_at": "2026-06-27T07:31:01.544029",
+      "metadata": {}
+    },
+    "mod2": {
+      "id": "mod2",
+      "type": "Module",
+      "name": "osef.sdk",
+      "description": null,
+      "created_at": "2026-06-27T07:31:01.544043",
+      "metadata": {}
+    }
+  },
+  "edges": [
+    {
+      "source_id": "pkg1",
+      "target_id": "mod1",
+      "relation_type": "contains",
+      "metadata": {}
+    },
+    {
+      "source_id": "pkg1",
+      "target_id": "mod2",
+      "relation_type": "contains",
+      "metadata": {}
+    },
+    {
+      "source_id": "mod1",
+      "target_id": "mod2",
+      "relation_type": "imports",
+      "metadata": {}
+    }
+  ]
+}
