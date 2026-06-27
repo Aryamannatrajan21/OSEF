@@ -2,8 +2,8 @@
 
 ## Supported Versions
 
-Currently, OSEF is in a **Release Candidate** state (`v1.0.x`). 
-We do not yet recommend OSEF for production workloads. However, we take security seriously from day one.
+Currently, OSEF is in a **Release Candidate** state (specifically `v1.0.0-rc1`). 
+While the core architecture is frozen, we do not yet recommend OSEF for production workloads until the final stable `v1.0.0`. However, we take security seriously from day one.
 
 | Version | Supported          |
 | ------- | ------------------ |
