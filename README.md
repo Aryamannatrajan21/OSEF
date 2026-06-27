@@ -70,7 +70,8 @@ graph TD
 4. **Engineering Knowledge Graph (EKG)**: The immutable, queryable source of truth.
 5. **Engineering Policy Engine (EPE)**: Resolves rule dependencies via DAG and executes deterministic engineering policies.
 6. **Engineering Assessments**: Structures EPE Findings into domain-specific facts.
-7. **Extension Host & EPSDK**: The runtime that loads plugins, sandboxes execution, and exposes the SDK.
+7. **Certification Engine**: Validates the complete stack against canonical engineering fixtures, emitting deterministic regression guarantees.
+8. **Extension Host & EPSDK**: The runtime that loads plugins, sandboxes execution, and exposes the SDK.
 
 ---
 
@@ -80,26 +81,31 @@ graph TD
 - ✅ **Symbol Table Generation & Semantic Enrichment**
 - ✅ **Engineering Knowledge Graph API**
 - ✅ **Engineering Policy Engine (EPE)**
+- ✅ **Engineering Reasoner** (Pure Analysis)
+- ✅ **Certification Engine** (v1.0 Platform Acceptance)
 - ✅ **Engineering Platform SDK (EPSDK)**
 - ✅ **Capability-Driven Runtime**
-- ✅ **Documentation Intelligence Plugin**
-- 🚧 **TypeScript & Go Parsers** *(In Progress)*
+- ✅ **Engineering Confidence Score** (Deterministic Pipeline Validity)
+- ✅ **Knowledge Domains**: Software, Documentation, Infrastructure, Security, Architecture, Runtime.
+- 🚧 **TypeScript, Java, Go, Rust Parsers** *(In Progress)*
 
 ---
 
 ## 🔌 Plugin Ecosystem
 
-**Current Official Plugins**
-- ✅ **Python Reference Platform**: Parser capability anchor.
-- ✅ **Documentation Intelligence Plugin**: Reference Plugin #1 (Certified).
+**Current Knowledge Domains (Reference Plugins)**
+- ✅ **Software Intelligence** (Python Parser)
+- ✅ **Documentation Intelligence**
+- ✅ **Infrastructure Intelligence** (Docker, Kubernetes)
+- ✅ **Security Intelligence**
+- ✅ **Architecture Intelligence**
+- ✅ **Runtime Intelligence**
+- ✅ **Cross-Domain Correlation**
 
-**Future Official Plugins**
-- 🚧 Graph Visualization
-- 🚧 Infrastructure Intelligence
-- 🚧 Docker Intelligence
-- 🚧 GitHub Actions Intelligence
-- 🚧 Enterprise Policy Pack
-- 🚧 FastAPI Intelligence
+**Future Ecosystem Expansion**
+- 🚧 Enterprise Knowledge Domain
+- 🚧 Plugin Marketplace
+- 🚧 AI Engineering Intelligence Agents
 - 🚧 Language Packs (Java, Go, Rust, TypeScript, C#, Kotlin)
 
 ---
@@ -142,6 +148,7 @@ osef report --format markdown
 | :--- | :--- |
 | `osef analyze <path>` | Scans the repository and executes enabled Policy Packs. |
 | `osef report` | Outputs findings into Markdown, JSON, or HTML. |
+| `osef certify` | Runs the Certification Engine against canonical fixtures. |
 | `osef doctor` | Validates environment and installed plugins. |
 | `osef plugins` | *(Plugin-injected)* Lists active extensions and capabilities. |
 

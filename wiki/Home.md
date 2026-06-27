@@ -18,7 +18,7 @@ OSEF treats codebases not as raw strings of text, but as a semantically connecte
 ## 🚀 Status
 - **Latest Release:** `v1.0.0-rc1`
 - **Current Phase:** Phase II (Ecosystem Engineering)
-- **Roadmap Summary:** Scaling the EKG to support multi-language parsing, establishing the AI Transformation Engine, and standardizing the Plugin SDK.
+- **Roadmap Summary:** Building out the Ecosystem (Enterprise Knowledge Domain, Language Packs, Marketplace) atop the now-frozen and certified Engineering Intelligence Stack.
 
 ---
 
