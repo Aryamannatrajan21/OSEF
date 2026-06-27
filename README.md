@@ -44,6 +44,7 @@ graph TD
     classDef core fill:#1a202c,stroke:#4a5568,color:#fff;
     classDef plugin fill:#2b6cb0,stroke:#63b3ed,color:#fff;
     classDef output fill:#2f855a,stroke:#68d391,color:#fff;
+    classDef highlight fill:#d53f8c,stroke:#97266d,color:#fff;
 
     A(Source Repository) --> B[Repository Scanner]
     B --> C[Parser Plugins]
@@ -52,10 +53,16 @@ graph TD
     D --> E[Semantic Enrichment]
     E --> F[(Engineering Knowledge Graph)]
     
+    F --> G[Correlation Engine]
+    G --> H[Engineering Reasoner]
+    H --> I[Engineering Policy Engine]
+    I --> J{Engineering Confidence Score}
+    J --> K[Certification Engine]
 
-    class B,D,E,F,G,H,I core;
-    class C,J,K,L plugin;
+    class B,D,E,F,G,H,I,K core;
+    class C plugin;
     class A output;
+    class J highlight;
 ```
 
 > **Read the specs**: Discover the internal design in our [Architecture Index](ARCHITECTURE_INDEX.md).
