@@ -4,8 +4,10 @@ from typing import Optional, List, Dict, Any
 from osef.sdk.capabilities import PluginCapabilities
 from osef.sdk.context import ExtensionContext
 
+
 class KnowledgeDomainManifest(BaseModel):
     """Manifest describing a Knowledge Domain."""
+
     name: str
     version: str
     node_types: List[str] = Field(default_factory=list)

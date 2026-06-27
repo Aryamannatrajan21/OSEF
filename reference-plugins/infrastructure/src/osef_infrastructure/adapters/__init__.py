@@ -11,5 +11,5 @@ __all__ = [
     "KubernetesAdapter",
     "TerraformAdapter",
     "PulumiAdapter",
-    "HelmAdapter"
+    "HelmAdapter",
 ]

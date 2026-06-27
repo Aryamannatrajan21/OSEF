@@ -18,9 +18,11 @@ from osef.core.graph_query import GraphQuery
 from pydantic import BaseModel
 from typing import Dict
 
+
 class ConfidenceDetail(BaseModel):
     score: float
     reasoning: str
+
 
 class EngineeringConfidenceScore(BaseModel):
     graph: ConfidenceDetail = ConfidenceDetail(score=1.0, reasoning="Default")
@@ -32,15 +34,22 @@ class EngineeringConfidenceScore(BaseModel):
     architecture: ConfidenceDetail = ConfidenceDetail(score=1.0, reasoning="Default")
     runtime: ConfidenceDetail = ConfidenceDetail(score=1.0, reasoning="Default")
     security: ConfidenceDetail = ConfidenceDetail(score=1.0, reasoning="Default")
-    
+
     @property
     def overall_confidence(self) -> float:
         scores = [
-            self.graph.score, self.ontology.score, self.correlation.score,
-            self.reasoning.score, self.policy.score, self.documentation.score,
-            self.architecture.score, self.runtime.score, self.security.score
+            self.graph.score,
+            self.ontology.score,
+            self.correlation.score,
+            self.reasoning.score,
+            self.policy.score,
+            self.documentation.score,
+            self.architecture.score,
+            self.runtime.score,
+            self.security.score,
         ]
         return sum(scores) / len(scores)
+
 
 # Fallback imports (Strangler Migration)
 from osef.parser.python import PythonParser as LegacyPythonParser
@@ -214,11 +223,13 @@ class PipelineEngine:
             )
 
         # --- STAGE: Cross-Domain Correlation ---
-        self.event_bus.publish(EventType.BeforeGraphGeneration, {}) # Reusing event for now or add specific one
-        
+        self.event_bus.publish(
+            EventType.BeforeGraphGeneration, {}
+        )  # Reusing event for now or add specific one
+
         correlation_engine = CorrelationEngine(self.host.correlation_registry)
         correlation_delta = correlation_engine.execute(context, self.graph)
-        
+
         if correlation_delta.nodes_to_add or correlation_delta.edges_to_add:
             provenance = {
                 "plugin": "core.correlation_engine",
@@ -231,17 +242,17 @@ class PipelineEngine:
 
         # Initialize the Intelligence Foundation layers
         self.graph_query = GraphQuery(self.graph)
-        
+
         reasoning_context = ReasoningContext(
             graph=self.graph,
             query=self.graph_query,
             domain_registry=self.host.domain_registry,
             correlation_registry=self.host.correlation_registry,
-            execution_metadata={"execution_id": "pipeline_run"}
+            execution_metadata={"execution_id": "pipeline_run"},
         )
         self.reasoner = EngineeringReasoner(reasoning_context)
-        
-        # In a real implementation, confidence would be calculated based on 
+
+        # In a real implementation, confidence would be calculated based on
         # missing edges, unmapped nodes, resolution failures, etc.
         self.confidence_score = EngineeringConfidenceScore(
             graph=ConfidenceDetail(score=0.95, reasoning="Complete parsing"),
@@ -252,9 +263,11 @@ class PipelineEngine:
             documentation=ConfidenceDetail(score=0.60, reasoning="Missing docstrings"),
             architecture=ConfidenceDetail(score=0.88, reasoning="Valid bounds"),
             runtime=ConfidenceDetail(score=0.80, reasoning="Observed behavior matched"),
-            security=ConfidenceDetail(score=0.95, reasoning="Known dependencies")
+            security=ConfidenceDetail(score=0.95, reasoning="Known dependencies"),
         )
-        logger.info(f"Overall Engineering Confidence: {self.confidence_score.overall_confidence:.2f}")
+        logger.info(
+            f"Overall Engineering Confidence: {self.confidence_score.overall_confidence:.2f}"
+        )
 
         return self.graph
 

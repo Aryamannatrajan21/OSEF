@@ -3,11 +3,13 @@ from typing import Dict, Any
 
 logger = logging.getLogger(__name__)
 
+
 class CertificationEngine:
     """
-    Validates the entire OSEF platform against deterministic Engineering Assertions 
+    Validates the entire OSEF platform against deterministic Engineering Assertions
     and Golden Snapshots.
     """
+
     def __init__(self, fixtures_path: str):
         self.fixtures_path = fixtures_path
 
@@ -16,7 +18,7 @@ class CertificationEngine:
         Executes the full suite of platform validation layers.
         """
         logger.info(f"Loading fixtures from {self.fixtures_path}")
-        
+
         layers = [
             "Graph Certification",
             "Ontology Certification",
@@ -25,12 +27,12 @@ class CertificationEngine:
             "Policy Certification",
             "SDK Certification",
             "Performance Certification",
-            "Ecosystem Certification"
+            "Ecosystem Certification",
         ]
-        
+
         results = {}
         for layer in layers:
             # Here we would load specific test suites and run assertions
             results[layer] = "PASS"
-            
+
         return results

@@ -1,12 +1,13 @@
 from osef.core.ekg import Node, Edge
 from typing import Dict, Any, Optional
 
+
 class IKM:
     """
     Infrastructure Knowledge Model (IKM) definitions.
     Provides canonical types for infrastructure nodes and edges.
     """
-    
+
     # Node Types
     SERVICE = "Infrastructure.Service"
     CONTAINER = "Infrastructure.Container"
@@ -28,35 +29,32 @@ class IKM:
 
     @classmethod
     def create_node(
-        cls, 
-        node_type: str, 
-        node_id: str, 
-        name: str, 
+        cls,
+        node_type: str,
+        node_id: str,
+        name: str,
         source_adapter: str,
         source_file: str,
-        layer: str = "infrastructure", 
-        **metadata: Any
+        layer: str = "infrastructure",
+        **metadata: Any,
     ) -> Node:
         """Helper to create namespaced infrastructure nodes with provenance."""
         meta = {
             "layer": layer,
             "source_adapter": source_adapter,
             "source_file": source_file,
-            **metadata
+            **metadata,
         }
-        return Node(
-            id=node_id,
-            type=node_type,
-            name=name,
-            metadata=meta
-        )
+        return Node(id=node_id, type=node_type, name=name, metadata=meta)
 
     @classmethod
-    def create_edge(cls, source_id: str, target_id: str, relation_type: str, **metadata: Any) -> Edge:
+    def create_edge(
+        cls, source_id: str, target_id: str, relation_type: str, **metadata: Any
+    ) -> Edge:
         """Helper to create infrastructure edges."""
         return Edge(
             source_id=source_id,
             target_id=target_id,
             relation_type=relation_type,
-            metadata=metadata
+            metadata=metadata,
         )

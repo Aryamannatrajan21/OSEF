@@ -6,11 +6,13 @@ from runtime.correlations import RuntimeCorrelations
 from runtime.policies import RuntimePolicies
 from runtime.projections import RuntimeProjections
 
+
 class RuntimePlugin(Plugin):
     """
     OSEF Runtime Knowledge Domain Plugin.
     Models deterministic execution behavior independent of deployment topology.
     """
+
     def __init__(self):
         super().__init__("osef-runtime", "1.0.0")
 
@@ -22,6 +24,6 @@ class RuntimePlugin(Plugin):
             adapters=[OsefRuntimeYamlAdapter],
             correlations=RuntimeCorrelations.get_rules(),
             policies=RuntimePolicies.get_rules(),
-            projections=RuntimeProjections.get_projections()
+            projections=RuntimeProjections.get_projections(),
         )
         host.domain_registry.register(manifest)
