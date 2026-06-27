@@ -1,5 +1,4 @@
-from typing import Any
-from osef.core.ekg import GraphDelta, Edge
+from osef.core.ekg import GraphDelta
 from .skm import SKM
 
 

@@ -1,4 +1,3 @@
-from osef_visualization.cli import VisualizationCli
 from osef.sdk.reports import ReportTarget
 from typing import Dict, Any
 

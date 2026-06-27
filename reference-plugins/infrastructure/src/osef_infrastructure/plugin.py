@@ -8,7 +8,8 @@ from osef_infrastructure.adapters import (
 )
 from osef_infrastructure.policies import get_all_policies
 from osef_infrastructure.projections import get_projections
-
+from osef_infrastructure.cli import InfraCliCommand
+from osef_infrastructure.dashboards import get_dashboards
 
 class InfrastructureEnricher:
     """Provides semantic enrichment for infrastructure configuration."""
@@ -36,7 +37,6 @@ class InfrastructurePolicyPack:
         return get_all_policies()
 
 
-from osef_infrastructure.cli import InfraCliCommand
 
 
 class InfrastructureCli:
@@ -46,7 +46,6 @@ class InfrastructureCli:
         return InfraCliCommand()
 
 
-from osef_infrastructure.dashboards import get_dashboards
 
 
 class InfrastructureReports:

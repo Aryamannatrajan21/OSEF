@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from pydantic import BaseModel, Field
-from typing import Optional, List, Dict, Any
+from typing import Optional, List, Dict
 from osef.sdk.capabilities import PluginCapabilities
 from osef.sdk.context import ExtensionContext
 

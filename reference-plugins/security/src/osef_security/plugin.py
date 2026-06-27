@@ -1,14 +1,11 @@
 import yaml
 from pathlib import Path
-from typing import Any, List
+from typing import Any
 from osef.sdk.plugin import OsefPlugin, PluginManifest
 from osef.sdk.context import ExtensionContext
 from osef.core.ekg import GraphDelta
 
 from .adapters import TrivyAdapter, BanditAdapter
-from .policies import get_all_policies
-from .projections import get_projections
-from .dashboards import get_dashboards
 
 
 class SecurityEnricher(OsefPlugin):

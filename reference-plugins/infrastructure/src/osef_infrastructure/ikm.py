@@ -1,5 +1,5 @@
 from osef.core.ekg import Node, Edge
-from typing import Dict, Any, Optional
+from typing import Any
 
 
 class IKM:

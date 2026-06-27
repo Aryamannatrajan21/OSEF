@@ -6,9 +6,6 @@ from osef.sdk.context import ExtensionContext
 from osef.core.ekg import GraphDelta
 
 from .adapters import C4ModelAdapter, OsefArchitectureAdapter, ADRAdapter
-from .policies import get_all_policies
-from .projections import get_projections
-from .dashboards import get_dashboards
 from .correlations import get_correlation_rules
 
 

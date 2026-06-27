@@ -1,4 +1,3 @@
-from typing import Any
 from osef.sdk.plugin import OsefPlugin, PluginManifest
 from osef.sdk.context import ExtensionContext
 from osef.core.ekg import KnowledgeGraph, GraphDelta, Edge

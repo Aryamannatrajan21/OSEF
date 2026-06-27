@@ -10,13 +10,10 @@ from osef.core.ekg import KnowledgeGraph
 # We'll construct a mock graph just to test the visualizer if we can't easily parse the whole repo here.
 # But let's see if we can parse it.
 try:
-    from reference_plugins.documentation.src.osef_documentation.parser import (
-        parse_repository,
-    )
 
     # Actually the core parser is what we want.
     pass
-except:
+except Exception:
     pass
 
 

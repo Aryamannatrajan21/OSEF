@@ -1,6 +1,5 @@
 from osef.sdk.cli import CliCommand
 import argparse
-from typing import Any
 import json
 from osef_infrastructure.dashboards import get_dashboards
 
