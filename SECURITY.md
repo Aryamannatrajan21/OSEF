@@ -20,7 +20,7 @@ If you discover a security vulnerability in OSEF (such as an issue with how we p
 **What to include:**
 - A detailed description of the vulnerability.
 - Steps to reproduce.
-- Potential impact.
+- Potential impact (especially regarding Graph queries, Policy Engine exploits, or Runtime adapter vulnerabilities).
 
 **What to expect:**
 - We will acknowledge receipt of your vulnerability report within 48 hours.
