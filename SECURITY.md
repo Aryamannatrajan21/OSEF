@@ -2,12 +2,14 @@
 
 ## Supported Versions
 
-Currently, OSEF is in an **Alpha** pre-release state (`v0.1.x`). 
+Currently, OSEF is in a **Release Candidate** state (`v1.0.x`). 
 We do not yet recommend OSEF for production workloads. However, we take security seriously from day one.
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 0.1.x   | :white_check_mark: |
+| 1.0.x   | :white_check_mark: |
+| 0.4.x   | :x:                |
+| 0.1.x   | :x:                |
 
 *Note: As we reach `v1.0.0`, LTS policies will be introduced.*
 
