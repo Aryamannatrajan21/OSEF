@@ -1,0 +1,16 @@
+id: osef_cross_domain_intelligence
+name: OSEF Cross-Domain Intelligence
+description: Provides generic cross-domain correlation rules.
+version: 1.0.0-rc1
+author: Antigravity
+license: Apache-2.0
+sdk_version: 1.0.0-rc1
+graph_schema: 4.0.0
+policy_api: 2.0.0
+
+capabilities:
+  supports_sdk:
+    version: 1.0.0-rc1
+
+entry_points:
+  plugin: "osef_cross_domain.plugin:CrossDomainIntelligencePlugin"

@@ -1,0 +1,21 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "osef-infrastructure"
+version = "1.0.0rc1"
+description = "OSEF Infrastructure Intelligence Platform"
+requires-python = ">=3.12"
+dependencies = [
+    "osef",
+    "pydantic>=2.0.0",
+    "pyyaml"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "mypy",
+    "ruff"
+]

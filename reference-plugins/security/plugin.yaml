@@ -1,0 +1,45 @@
+id: osef_security
+name: OSEF Security Intelligence Platform
+description: Provides Security Knowledge Domain intelligence.
+version: 1.0.0-rc1
+author: Antigravity
+license: Apache-2.0
+sdk_version: 1.0.0-rc1
+graph_schema: 4.0.0
+policy_api: 2.0.0
+
+capabilities:
+  supports_sdk:
+    version: 1.0.0-rc1
+
+knowledge_domain:
+  name: "Security"
+  version: "1.0.0-rc1"
+  node_types:
+    - "Security.Asset"
+    - "Security.Boundary"
+    - "Security.Risk"
+    - "Security.Control"
+    - "Security.Finding"
+    - "Security.Policy"
+    - "Security.Vulnerability"
+    - "Security.Exposure"
+    - "Security.Identity"
+    - "Security.Secret"
+  edge_types:
+    - "MITIGATES"
+    - "EXPOSES"
+    - "AFFECTS"
+  adapters:
+    - "TrivyAdapter"
+    - "BanditAdapter"
+  projections:
+    - "SecurityBlastRadiusProjection"
+    - "AttackSurfaceProjection"
+  dashboards:
+    - "SecurityExposureDashboard"
+  policy_packs:
+    - "BaselineSecurityPolicies"
+
+entry_points:
+  plugin: "osef_security.plugin:SecurityEnricher"

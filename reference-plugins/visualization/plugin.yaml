@@ -1,0 +1,18 @@
+name: "Visualization Platform"
+version: "1.0.0-rc1"
+description: "Visualizes the Engineering Knowledge Graph using Projections and Renderers."
+author: "OSEF Maintainers"
+
+capabilities:
+  provides_cli_commands:
+    name: "osef_visualization.plugin.VisualizationCli"
+    version: "1.0.0"
+  provides_reports:
+    name: "osef_visualization.plugin.VisualizationReport"
+    version: "1.0.0"
+  supports_sdk:
+    name: "osef.sdk"
+    version: ">=1.0.0rc1"
+  supports_graph_schema:
+    name: "osef.graph"
+    version: ">=1.0.0"

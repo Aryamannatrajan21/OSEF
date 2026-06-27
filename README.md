@@ -52,14 +52,6 @@ graph TD
     D --> E[Semantic Enrichment]
     E --> F[(Engineering Knowledge Graph)]
     
-    F --> G[Engineering Policy Engine]
-    G --> H(Findings and Assessments)
-    
-    H --> I{Extension Host and EPSDK}
-    
-    I -->|Hooks| J[CLI Plugins]
-    I -->|Hooks| K[Report Plugins]
-    I -->|Hooks| L[AI Agents]
 
     class B,D,E,F,G,H,I core;
     class C,J,K,L plugin;

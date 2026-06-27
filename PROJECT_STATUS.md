@@ -13,7 +13,7 @@ Before writing a single line of production code, we have entirely specified the 
 **No.** If you `pip install osef` today, it will not analyze your codebase. The CLI and SDK do not yet exist in production form.
 
 ### Why release now?
-To build in public. By releasing the architecture before the code, we invite the community to review the design, understand the vision, and participate in Sprint 1.
+To build in public. By releasing the architecture before the code, we invite the community to review the design, understand the vision, and participate in Phase II (Ecosystem Engineering).
 
 ### When will it be usable?
-Follow the [Implementation Status](IMPLEMENTATION_STATUS.md) and the [Roadmap](ROADMAP.md). We expect the Core Runtime MVP to be operational shortly, leading to a Beta release later this year.
+Follow the [Implementation Status](IMPLEMENTATION_STATUS.md) and the [Roadmap](ROADMAP.md). We expect the Core Runtime MVP to be operational shortly, leading to a Beta release later this year. We are currently implementing Sprint 6 (Knowledge Domain Framework and Security).

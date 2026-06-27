@@ -1,0 +1,58 @@
+{
+  "metadata": {
+    "name": "Architecture View",
+    "version": "1.0",
+    "graph_schema": "osef.graph/1.0",
+    "generated_by": "osef-visualization",
+    "execution_id": null,
+    "timestamp": "2026-06-27T07:32:42.020308",
+    "filters": {},
+    "renderer_hints": {},
+    "statistics": {
+      "node_count": 3,
+      "edge_count": 2
+    }
+  },
+  "nodes": [
+    {
+      "id": "pkg1",
+      "type": "Package",
+      "label": "osef",
+      "attributes": {
+        "shape": "folder"
+      }
+    },
+    {
+      "id": "mod1",
+      "type": "Module",
+      "label": "osef.core",
+      "attributes": {
+        "shape": "box"
+      }
+    },
+    {
+      "id": "mod2",
+      "type": "Module",
+      "label": "osef.sdk",
+      "attributes": {
+        "shape": "box"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source_id": "pkg1",
+      "target_id": "mod1",
+      "type": "contains",
+      "label": "contains",
+      "attributes": {}
+    },
+    {
+      "source_id": "pkg1",
+      "target_id": "mod2",
+      "type": "contains",
+      "label": "contains",
+      "attributes": {}
+    }
+  ]
+}

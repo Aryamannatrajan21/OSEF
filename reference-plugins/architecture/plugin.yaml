@@ -1,0 +1,66 @@
+id: osef_architecture
+name: OSEF Architecture Knowledge Domain
+description: Provides semantic architecture modeling and drift detection.
+version: 1.0.0-rc1
+author: Antigravity
+license: Apache-2.0
+sdk_version: 1.0.0-rc1
+graph_schema: 4.0.0
+policy_api: 2.0.0
+
+capabilities:
+  supports_sdk:
+    version: 1.0.0-rc1
+
+knowledge_domain:
+  name: "Architecture"
+  version: "1.0.0-rc1"
+  node_types:
+    - "Architecture.Domain"
+    - "Architecture.Layer"
+    - "Architecture.Component"
+    - "Architecture.Boundary"
+    - "Architecture.Constraint"
+    - "Architecture.Interface"
+    - "Architecture.Dependency"
+    - "Architecture.Decision"
+    - "Architecture.Pattern"
+    - "Architecture.View"
+    - "Architecture.Module"
+  edge_types:
+    - "CONSTRAINS"
+  adapters:
+    - "C4ModelAdapter"
+    - "OsefArchitectureAdapter"
+    - "ADRAdapter"
+    - "StructurizrAdapter"
+    - "PlantUMLAdapter"
+    - "ArchiMateAdapter"
+  projections:
+    - "ArchitectureDriftProjection"
+    - "LayerProjection"
+    - "ComponentProjection"
+    - "BoundaryProjection"
+    - "DependencyProjection"
+    - "ContextProjection"
+    - "DeploymentAlignmentProjection"
+    - "SecurityOverlayProjection"
+  dashboards:
+    - "ArchitectureHealthDashboard"
+    - "DriftDashboard"
+    - "LayerViolationsDashboard"
+    - "BoundaryIntegrityDashboard"
+    - "DependencyHealthDashboard"
+    - "PatternComplianceDashboard"
+    - "ConstraintSummaryDashboard"
+  policy_packs:
+    - "LayeringPolicies"
+    - "DependencyRules"
+    - "BoundaryIntegrity"
+    - "ArchitecturalConstraints"
+    - "PatternConformance"
+    - "ComponentOwnership"
+    - "InterfaceCompliance"
+
+entry_points:
+  plugin: "osef_architecture.plugin:ArchitectureEnricher"

@@ -1,8 +1,19 @@
 from abc import ABC, abstractmethod
 from pydantic import BaseModel, Field
-from typing import Optional, List, Dict
+from typing import Optional, List, Dict, Any
 from osef.sdk.capabilities import PluginCapabilities
 from osef.sdk.context import ExtensionContext
+
+class KnowledgeDomainManifest(BaseModel):
+    """Manifest describing a Knowledge Domain."""
+    name: str
+    version: str
+    node_types: List[str] = Field(default_factory=list)
+    edge_types: List[str] = Field(default_factory=list)
+    adapters: List[str] = Field(default_factory=list)
+    projections: List[str] = Field(default_factory=list)
+    dashboards: List[str] = Field(default_factory=list)
+    policy_packs: List[str] = Field(default_factory=list)
 
 
 class PluginManifest(BaseModel):
@@ -23,6 +34,7 @@ class PluginManifest(BaseModel):
     keywords: List[str] = Field(default_factory=list)
     signature: Optional[str] = None
     checksum: Optional[str] = None
+    knowledge_domain: Optional[KnowledgeDomainManifest] = None
 
 
 class OsefPlugin(ABC):

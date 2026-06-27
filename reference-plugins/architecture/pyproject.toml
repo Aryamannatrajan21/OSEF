@@ -1,0 +1,10 @@
+[project]
+name = "osef-architecture"
+version = "1.0.0-rc1"
+description = "OSEF Architecture Knowledge Domain Plugin"
+authors = [
+    {name = "Antigravity", email = "antigravity@google.com"}
+]
+dependencies = [
+    "osef>=1.0.0-rc1"
+]
