@@ -1,4 +1,5 @@
 import logging
+from typing import Dict, Any
 
 logger = logging.getLogger(__name__)
 
@@ -10,7 +11,7 @@ class CertificationEngine:
     def __init__(self, fixtures_path: str):
         self.fixtures_path = fixtures_path
 
-    def run_certification(self):
+    def run_certification(self) -> Dict[str, Any]:
         """
         Executes the full suite of platform validation layers.
         """
