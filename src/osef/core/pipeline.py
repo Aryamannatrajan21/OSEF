@@ -58,7 +58,6 @@ class EngineeringConfidenceScore(BaseModel):
         return sum(scores) / len(scores)
 
 
-
 logger = logging.getLogger(__name__)
 
 
