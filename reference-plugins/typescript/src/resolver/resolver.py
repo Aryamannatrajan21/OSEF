@@ -1,25 +1,24 @@
 from typing import Sequence
 from copy import deepcopy
 from osef.sdk.language.resolver import (
-    LanguageResolver, 
-    ResolvedSymbolGraph, 
-    ResolvedRelationship
+    LanguageResolver,
+    ResolvedSymbolGraph,
+    ResolvedRelationship,
 )
 from osef.sdk.language.symbols import NormalizedSymbol
+
 
 class TypeScriptResolver(LanguageResolver):
     """
     Immutable, pass-based resolver for TypeScript.
-    Consumes NormalizedSymbol objects and produces a ResolvedSymbolGraph 
+    Consumes NormalizedSymbol objects and produces a ResolvedSymbolGraph
     with purely language-level relationships (e.g. IMPORTS, DECLARES, EXTENDS).
     """
 
     def resolve(self, symbols: Sequence[NormalizedSymbol]) -> ResolvedSymbolGraph:
         # Initialize an empty graph with nodes populated
-        initial_graph = ResolvedSymbolGraph(
-            nodes={s.symbol_id: s for s in symbols}
-        )
-        
+        initial_graph = ResolvedSymbolGraph(nodes={s.symbol_id: s for s in symbols})
+
         # Execute deterministic passes, returning a new graph each time to ensure immutability
         g1 = self._pass_declarations(initial_graph)
         g2 = self._pass_imports_exports(g1)
@@ -27,7 +26,7 @@ class TypeScriptResolver(LanguageResolver):
         g4 = self._pass_type_resolution(g3)
         g5 = self._pass_call_resolution(g4)
         g6 = self._pass_reference_linking(g5)
-        
+
         return g6
 
     def _pass_declarations(self, graph: ResolvedSymbolGraph) -> ResolvedSymbolGraph:
@@ -35,20 +34,32 @@ class TypeScriptResolver(LanguageResolver):
         new_graph = deepcopy(graph)
         # Find namespace ownership
         for symbol in new_graph.nodes.values():
-            if symbol.kind in ("class", "interface", "function", "variable", "enum", "type_alias"):
+            if symbol.kind in (
+                "class",
+                "interface",
+                "function",
+                "variable",
+                "enum",
+                "type_alias",
+            ):
                 parts = symbol.name.split(".")
                 if len(parts) > 1:
                     # It's inside a namespace (e.g. MyNamespace.MyClass)
                     namespace_name = ".".join(parts[:-1])
                     # Try to find the namespace symbol in the graph
                     for ns_symbol in new_graph.nodes.values():
-                        if ns_symbol.kind == "namespace" and ns_symbol.name == namespace_name:
-                            new_graph.edges.append(ResolvedRelationship(
-                                relationship_id=f"{ns_symbol.symbol_id}_declares_{symbol.symbol_id}",
-                                source_symbol_id=ns_symbol.symbol_id,
-                                target_symbol_id=symbol.symbol_id,
-                                relationship_type="DECLARES"
-                            ))
+                        if (
+                            ns_symbol.kind == "namespace"
+                            and ns_symbol.name == namespace_name
+                        ):
+                            new_graph.edges.append(
+                                ResolvedRelationship(
+                                    relationship_id=f"{ns_symbol.symbol_id}_declares_{symbol.symbol_id}",
+                                    source_symbol_id=ns_symbol.symbol_id,
+                                    target_symbol_id=symbol.symbol_id,
+                                    relationship_type="DECLARES",
+                                )
+                            )
                             break
         return new_graph
 
@@ -64,13 +75,18 @@ class TypeScriptResolver(LanguageResolver):
             if symbol.kind == "class" and "extends" in symbol.payload:
                 parent_name = symbol.payload["extends"]
                 for parent_symbol in new_graph.nodes.values():
-                    if parent_symbol.kind == "class" and parent_symbol.name == parent_name:
-                        new_graph.edges.append(ResolvedRelationship(
-                            relationship_id=f"{symbol.symbol_id}_extends_{parent_symbol.symbol_id}",
-                            source_symbol_id=symbol.symbol_id,
-                            target_symbol_id=parent_symbol.symbol_id,
-                            relationship_type="EXTENDS"
-                        ))
+                    if (
+                        parent_symbol.kind == "class"
+                        and parent_symbol.name == parent_name
+                    ):
+                        new_graph.edges.append(
+                            ResolvedRelationship(
+                                relationship_id=f"{symbol.symbol_id}_extends_{parent_symbol.symbol_id}",
+                                source_symbol_id=symbol.symbol_id,
+                                target_symbol_id=parent_symbol.symbol_id,
+                                relationship_type="EXTENDS",
+                            )
+                        )
         return new_graph
 
     def _pass_type_resolution(self, graph: ResolvedSymbolGraph) -> ResolvedSymbolGraph:
@@ -83,7 +99,9 @@ class TypeScriptResolver(LanguageResolver):
         new_graph = deepcopy(graph)
         return new_graph
 
-    def _pass_reference_linking(self, graph: ResolvedSymbolGraph) -> ResolvedSymbolGraph:
+    def _pass_reference_linking(
+        self, graph: ResolvedSymbolGraph
+    ) -> ResolvedSymbolGraph:
         """Pass 6: Resolve general variable/symbol references."""
         new_graph = deepcopy(graph)
         return new_graph

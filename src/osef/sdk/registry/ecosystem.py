@@ -1,6 +1,7 @@
 """
 Ecosystem Registry.
 """
+
 from typing import Dict, List, Optional
 import yaml  # type: ignore
 import os
@@ -15,12 +16,13 @@ class EcosystemRegistry:
     """
     The single source of truth for the entire OSEF ecosystem.
     """
+
     def __init__(self, manifest_path: Optional[str] = None):
         self.plugins: Dict[str, PluginManifest] = {}
         self.domains: Dict[str, KnowledgeDomainManifest] = {}
         self.profiles: Dict[str, EngineeringProfile] = get_default_profiles()
         self.compatibility = CompatibilityEngine()  # type: ignore
-        
+
         self.manifest_data = {}  # type: ignore
         if manifest_path and os.path.exists(manifest_path):
             with open(manifest_path, "r") as f:
