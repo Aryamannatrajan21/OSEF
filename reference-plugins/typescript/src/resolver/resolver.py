@@ -34,35 +34,57 @@ class TypeScriptResolver(LanguageResolver):
     def _pass_declarations(self, graph: ResolvedSymbolGraph) -> ResolvedSymbolGraph:
         """Pass 1: Resolve internal module and namespace ownership declarations."""
         new_graph = deepcopy(graph)
-        # Logic to extract DECLARES relationships goes here
+        # Find namespace ownership
+        for symbol in new_graph.nodes.values():
+            if symbol.kind in ("class", "interface", "function", "variable", "enum", "type_alias"):
+                parts = symbol.name.split(".")
+                if len(parts) > 1:
+                    # It's inside a namespace (e.g. MyNamespace.MyClass)
+                    namespace_name = ".".join(parts[:-1])
+                    # Try to find the namespace symbol in the graph
+                    for ns_symbol in new_graph.nodes.values():
+                        if ns_symbol.kind == "namespace" and ns_symbol.name == namespace_name:
+                            new_graph.edges.append(ResolvedRelationship(
+                                relationship_id=f"{ns_symbol.symbol_id}_declares_{symbol.symbol_id}",
+                                source_symbol_id=ns_symbol.symbol_id,
+                                target_symbol_id=symbol.symbol_id,
+                                relationship_type="DECLARES"
+                            ))
+                            break
         return new_graph
 
     def _pass_imports_exports(self, graph: ResolvedSymbolGraph) -> ResolvedSymbolGraph:
         """Pass 2: Resolve cross-module import and export linkages."""
         new_graph = deepcopy(graph)
-        # Logic to extract IMPORTS / EXPORTS relationships goes here
         return new_graph
 
     def _pass_inheritance(self, graph: ResolvedSymbolGraph) -> ResolvedSymbolGraph:
         """Pass 3: Resolve class/interface hierarchy."""
         new_graph = deepcopy(graph)
-        # Logic to extract EXTENDS / IMPLEMENTS relationships goes here
+        for symbol in new_graph.nodes.values():
+            if symbol.kind == "class" and "extends" in symbol.payload:
+                parent_name = symbol.payload["extends"]
+                for parent_symbol in new_graph.nodes.values():
+                    if parent_symbol.kind == "class" and parent_symbol.name == parent_name:
+                        new_graph.edges.append(ResolvedRelationship(
+                            relationship_id=f"{symbol.symbol_id}_extends_{parent_symbol.symbol_id}",
+                            source_symbol_id=symbol.symbol_id,
+                            target_symbol_id=parent_symbol.symbol_id,
+                            relationship_type="EXTENDS"
+                        ))
         return new_graph
 
     def _pass_type_resolution(self, graph: ResolvedSymbolGraph) -> ResolvedSymbolGraph:
         """Pass 4: Resolve generic bounds and type usages."""
         new_graph = deepcopy(graph)
-        # Logic to extract USES_TYPE relationships goes here
         return new_graph
 
     def _pass_call_resolution(self, graph: ResolvedSymbolGraph) -> ResolvedSymbolGraph:
         """Pass 5: Resolve function/method invocations."""
         new_graph = deepcopy(graph)
-        # Logic to extract CALLS / RETURNS relationships goes here
         return new_graph
 
     def _pass_reference_linking(self, graph: ResolvedSymbolGraph) -> ResolvedSymbolGraph:
         """Pass 6: Resolve general variable/symbol references."""
         new_graph = deepcopy(graph)
-        # Logic to extract REFERENCES relationships goes here
         return new_graph

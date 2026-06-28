@@ -24,7 +24,8 @@ class ResolverDiagnostics(BaseModel):
 
 class ResolvedSymbolGraph(BaseModel):
     """An immutable container representing a resolved language graph."""
-    nodes: Dict[str, NormalizedSymbol] = Field(default_factory=dict)
+    schema_version: str = "1.0"
+    nodes: Dict[str, Any] = Field(default_factory=dict)
     edges: List[ResolvedRelationship] = Field(default_factory=list)
     diagnostics: ResolverDiagnostics = Field(default_factory=ResolverDiagnostics)
 
