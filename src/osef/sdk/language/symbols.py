@@ -25,7 +25,8 @@ class NormalizedSymbol(BaseModel):
     symbol_id: str
     name: str
     kind: str
-    provenance: ParsingProvenance
+    parsing_provenance: ParsingProvenance
+    semantic_provenance: SemanticProvenance
     modifiers: List[str] = Field(default_factory=list)
     type_hint: Optional[str] = None
     docstring: Optional[str] = None
