@@ -12,7 +12,7 @@
     "dependencies": null,
     "commit": null,
     "branch": null,
-    "analysis_date": "2026-06-28T20:31:22.593138"
+    "analysis_date": "2026-06-28T20:27:24.697194"
   },
   "profile": "core",
   "plugin_matrix": {},
@@ -28,7 +28,7 @@
   "policy_statistics": {},
   "certification": {},
   "performance": {
-    "build_time_seconds": 59.46553683280945
+    "build_time_seconds": 59.97052717208862
   },
   "sdk_compatibility": {},
   "engineering_confidence": {
