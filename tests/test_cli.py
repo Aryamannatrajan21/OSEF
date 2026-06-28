@@ -36,9 +36,9 @@ def test_cli_init(tmp_path, monkeypatch):
 
 
 def test_cli_validate():
-    result = runner.invoke(app, ["validate"])
+    result = runner.invoke(app, ["validate", "workspace", "."])
     assert result.exit_code == 0
-    assert "Validation passed" in result.stdout
+    assert "Validation completed successfully" in result.stdout
 
 
 def test_cli_config():

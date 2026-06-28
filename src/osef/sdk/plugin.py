@@ -1,8 +1,16 @@
 from abc import ABC, abstractmethod
+from enum import Enum
 from pydantic import BaseModel, Field
 from typing import Optional, List, Dict
 from osef.sdk.capabilities import PluginCapabilities
 from osef.sdk.context import ExtensionContext
+
+
+class PluginQualityTier(str, Enum):
+    TIER_1_OFFICIAL = "tier_1_official"
+    TIER_2_CERTIFIED = "tier_2_certified"
+    TIER_3_COMMUNITY = "tier_3_community"
+    EXPERIMENTAL = "experimental"
 
 
 class KnowledgeDomainManifest(BaseModel):
@@ -37,6 +45,8 @@ class PluginManifest(BaseModel):
     signature: Optional[str] = None
     checksum: Optional[str] = None
     knowledge_domain: Optional[KnowledgeDomainManifest] = None
+    quality_tier: PluginQualityTier = PluginQualityTier.EXPERIMENTAL
+    supported_profiles: List[str] = Field(default_factory=list)
 
 
 class OsefPlugin(ABC):
