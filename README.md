@@ -94,14 +94,15 @@ graph TD
 - ✅ **Capability-Driven Runtime**
 - ✅ **Engineering Confidence Score** (Deterministic Pipeline Validity)
 - ✅ **Knowledge Domains**: Software, Documentation, Infrastructure, Security, Architecture, Runtime.
-- 🚧 **TypeScript, Java, Go, Rust Parsers** *(In Progress)*
+- ✅ **TypeScript, Java, Python Parsers**
+- 🚧 **Go, Rust Parsers** *(In Progress)*
 
 ---
 
 ## 🔌 Plugin Ecosystem
 
 **Current Knowledge Domains (Reference Plugins)**
-- ✅ **Software Intelligence** (Python Parser)
+- ✅ **Software Intelligence** (Python, TypeScript, Java Parsers)
 - ✅ **Documentation Intelligence**
 - ✅ **Infrastructure Intelligence** (Docker, Kubernetes)
 - ✅ **Security Intelligence**
@@ -113,7 +114,7 @@ graph TD
 - 🚧 Enterprise Knowledge Domain
 - 🚧 Plugin Marketplace
 - 🚧 AI Engineering Intelligence Agents
-- 🚧 Language Packs (Java, Go, Rust, TypeScript, C#, Kotlin)
+- 🚧 Language Packs (Go, Rust, C#, Kotlin)
 
 ---
 
