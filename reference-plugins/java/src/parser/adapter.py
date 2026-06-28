@@ -1,9 +1,8 @@
 import tree_sitter
 import tree_sitter_java
-from typing import List, Protocol, Optional
+from typing import List
 from pydantic import BaseModel, Field
 import hashlib
-import json
 
 class ParsingProvenance(BaseModel):
     source_file: str

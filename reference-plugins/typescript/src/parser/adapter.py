@@ -1,4 +1,4 @@
-from typing import Protocol, List, Optional
+from typing import Protocol, List
 from pydantic import BaseModel, Field
 
 class NormalizedASTNode(BaseModel):

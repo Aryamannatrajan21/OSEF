@@ -2,26 +2,7 @@ from typing import List, Optional
 from .symbols import (
     NormalizedSymbol,
     ParsingProvenance,
-    SemanticProvenance,
-    NormalizedClass,
-    NormalizedInterface,
-    NormalizedEnum,
-    NormalizedTypeAlias,
-    NormalizedFunction,
-    NormalizedMethod,
-    NormalizedProperty,
-    NormalizedVariable,
-    NormalizedNamespace,
-    NormalizedModule,
-    NormalizedImport,
-    NormalizedExport,
-    NormalizedGeneric,
-    NormalizedDecorator,
-    NormalizedConstructor,
-    NormalizedConstant,
-    NormalizedAnnotation,
-    NormalizedTrait,
-    NormalizedStruct
+    SemanticProvenance
 )
 
 

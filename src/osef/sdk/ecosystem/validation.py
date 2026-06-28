@@ -1,5 +1,5 @@
 import os
-from typing import List, Dict
+from typing import List
 from osef.sdk.ecosystem.registry import EcosystemRegistry
 
 class PlatformValidationEngine:

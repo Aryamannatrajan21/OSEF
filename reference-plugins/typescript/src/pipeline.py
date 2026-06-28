@@ -1,6 +1,5 @@
-import hashlib
 from typing import Sequence
-from osef.sdk.language.pipeline import LanguagePipeline, StageResult
+from osef.sdk.language.pipeline import LanguagePipeline
 from osef.sdk.language.symbols import NormalizedSymbol
 from osef.sdk.language.resolver import ResolvedSymbolGraph
 from osef.sdk.language.facts import SemanticFact

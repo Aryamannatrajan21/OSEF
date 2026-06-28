@@ -1,9 +1,8 @@
-from typing import Sequence, List
+from typing import Sequence
 from copy import deepcopy
 from osef.sdk.language.resolver import (
     LanguageResolver, 
     ResolvedSymbolGraph, 
-    ResolverDiagnostics, 
     ResolvedRelationship
 )
 from osef.sdk.language.symbols import NormalizedSymbol
