@@ -1,7 +1,7 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath("reference-plugins/typescript"))
-from src.osef.sdk.language.symbols import (
+from osef.sdk.language.symbols import (
     NormalizedSymbol, NormalizedClass, NormalizedNamespace, ParsingProvenance, SemanticProvenance
 )
 from src.resolver.resolver import TypeScriptResolver

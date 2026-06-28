@@ -1,6 +1,6 @@
 from typing import Sequence, List
-from src.osef.sdk.language.resolver import ResolvedSymbolGraph
-from src.osef.sdk.language.facts import SemanticFact
+from osef.sdk.language.resolver import ResolvedSymbolGraph
+from osef.sdk.language.facts import SemanticFact
 
 class StructuralAnalyzer:
     def analyze(self, graph: ResolvedSymbolGraph, facts: List[SemanticFact]):

@@ -1,6 +1,6 @@
 from typing import Sequence, List
 from pydantic import BaseModel, Field
-from src.osef.sdk.language.facts import SemanticFact
+from osef.sdk.language.facts import SemanticFact
 
 # Basic Graph schema objects
 class GraphNode(BaseModel):

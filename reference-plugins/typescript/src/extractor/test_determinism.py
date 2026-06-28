@@ -2,7 +2,7 @@ import os
 import sys
 import hashlib
 sys.path.insert(0, os.path.abspath("reference-plugins/typescript"))
-from src.osef.sdk.language.builder import NormalizedSymbolBuilder
+from osef.sdk.language.builder import NormalizedSymbolBuilder
 from src.parser.tree_sitter_adapter import TreeSitterTypeScriptAdapter
 from src.extractor.extractor import TypeScriptSymbolExtractor
 

@@ -1,10 +1,10 @@
 import hashlib
 from typing import Sequence
-from src.osef.sdk.language.pipeline import LanguagePipeline, StageResult
-from src.osef.sdk.language.symbols import NormalizedSymbol
-from src.osef.sdk.language.resolver import ResolvedSymbolGraph
-from src.osef.sdk.language.facts import SemanticFact
-from src.osef.sdk.language.builder import NormalizedSymbolBuilder
+from osef.sdk.language.pipeline import LanguagePipeline, StageResult
+from osef.sdk.language.symbols import NormalizedSymbol
+from osef.sdk.language.resolver import ResolvedSymbolGraph
+from osef.sdk.language.facts import SemanticFact
+from osef.sdk.language.builder import NormalizedSymbolBuilder
 from src.parser.tree_sitter_adapter import TreeSitterTypeScriptAdapter
 from src.extractor.extractor import TypeScriptSymbolExtractor
 from src.resolver.resolver import TypeScriptResolver
