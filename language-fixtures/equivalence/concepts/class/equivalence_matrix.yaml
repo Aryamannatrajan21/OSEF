@@ -1,0 +1,20 @@
+concept: class
+
+languages:
+  - typescript
+  - java
+  - go
+  - rust
+  - kotlin
+  - csharp
+
+expected:
+  normalized_symbols:
+    - NormalizedClass
+  semantic_facts:
+    - DECLARES_CLASS
+    - HAS_VISIBILITY
+  graph_nodes:
+    - Software.Class
+  graph_edges:
+    - CONTAINS

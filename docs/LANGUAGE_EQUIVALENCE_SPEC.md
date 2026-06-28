@@ -1,37 +1,41 @@
 # Language Equivalence Specification
 
-This document defines the canonical engineering mappings for the OSEF Language Processing Platform v1. 
+This document defines the strict mapping of programming language constructs to OSEF Engineering Concepts. It is structured into 12 definitive layers.
 
-It is the absolute certification contract for every future language pack. If a concept exists in this table, the language plugin **must** map it to the specified OSEF `SemanticFact` and resulting `GraphDelta` ontology, regardless of the underlying syntax.
+## 1. Structural Equivalence
+- **Class**: TS `class` -> `Software.Class`
+- **Interface**: TS `interface` -> `Software.Interface`
+- **Enum**: TS `enum` -> `Software.Enum`
 
-## Structural Mappings
+## 2. Type System Equivalence
+- Maps primitives, arrays, tuples, and structural types to canonical representations.
 
-| Concept | TypeScript | Java | Go | Rust | OSEF Canonical Output |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Class** | `class` | `class` | `struct` | `struct` | `Software.Class` |
-| **Interface** | `interface` | `interface` | `interface` | `trait` | `Software.Interface` |
-| **Enumeration** | `enum` | `enum` | `const + iota` | `enum` | `Software.Enum` |
-| **Namespace** | `namespace`/`module` | `package` | `package` | `module` | `Software.Namespace` |
-| **Generic** | `<T>` | `<T>` | `[T any]` | `<T>` | `Software.GenericParameter` |
-| **Method** | `method` | `method` | `func (recv)` | `fn (self)` | `Software.Method` |
+## 3. Dependency Equivalence
+- **Import/Require**: Maps to `DEPENDS_ON` relationships.
 
-## Relational Mappings (SemanticFacts)
+## 4. Visibility Equivalence
+- Maps `public`, `private`, `protected`, and internal access modifiers to canonical visibility facts.
 
-| Language Relationship | TypeScript Example | Java Example | Go Example | OSEF SemanticFact |
-| :--- | :--- | :--- | :--- | :--- |
-| **Inheritance** | `extends Base` | `extends Base` | *Composition* | `INHERITS` |
-| **Implementation**| `implements IFace` | `implements IFace` | *Implicit* | `IMPLEMENTS` |
-| **Importing** | `import {X}` | `import X;` | `import "X"` | `DEPENDS_ON` |
-| **Ownership** | nested classes | nested classes | struct methods | `OWNS` |
-| **Execution** | `func()` | `func()` | `func()` | `EXECUTES` |
-| **Type Usage** | `x: Type` | `Type x` | `x Type` | `HAS_TYPE` |
+## 5. Module Equivalence
+- Maps namespaces, packages, and modules to `Software.Namespace`.
 
-## Metadata Mappings
+## 6. Execution Equivalence
+- Maps functions and methods to `Software.Function` and `Software.Method`.
 
-| Concept | TypeScript | Java | Go | Rust | OSEF Property |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Visibility** | `public`/`private` | `public`/`private` | Upper/Lower case | `pub` | `is_public` |
-| **Annotation** | `@Decorator` | `@Annotation` | Struct Tags | `#[macro]` | `has_annotation` |
-| **Constant** | `const` | `final` | `const` | `const` | `is_constant` |
+## 7. Annotation/Decorator Equivalence
+- Maps TS Decorators, Java Annotations, and Rust Attributes to canonical metadata tags.
 
-> **Certification Rule:** Any language pack that requires an alteration to this spec to function has failed the abstraction proof. SDK extensions are forbidden for language-specific idiosyncrasies.
+## 8. Generic Equivalence
+- Maps type parameters (`<T>`) to `Software.GenericParameter`.
+
+## 9. Error Handling Equivalence
+- Maps throws, try/catch, and Result patterns to `Software.Exception`.
+
+## 10. Async / Concurrency Equivalence
+- Maps async/await, goroutines, and Futures to `Software.AsyncExecution`.
+
+## 11. Runtime Equivalence
+- Maps runtime-specific constructs (e.g., reflection bounds).
+
+## 12. Engineering Mapping Rules
+- No language may introduce a new SemanticFact without proving it applies to all Tier 1 languages.
