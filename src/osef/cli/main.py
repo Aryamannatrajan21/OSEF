@@ -15,6 +15,7 @@ from osef.contracts.exceptions import OSEFError
 from osef.core.pipeline import PipelineEngine
 from osef.intelligence.layer import IntelligenceLayer
 from osef.core.certification_engine import CertificationEngine
+from osef.sdk.validation.engine import PlatformValidationEngine
 
 app = typer.Typer(
     help="Open Source Engineering Framework",
@@ -63,10 +64,39 @@ def doctor() -> None:
 
 
 @app.command()
-def validate() -> None:
+def validate(
+    target_type: str = typer.Argument(
+        ..., help="Type of target: repository, workspace, fixture, plugin, sdk, profile"
+    ),
+    target: str = typer.Argument(
+        ..., help="Target identifier (e.g. path, plugin name)"
+    ),
+    profile: str = typer.Option(
+        "core", "--profile", "-p", help="Engineering profile to use"
+    ),
+) -> None:
     """Validate project structure and Engineering Knowledge Graph."""
-    console.print("Validating project artifacts...")
-    console.print("[green]✔[/green] Validation passed.")
+    console.print(
+        f"[bold blue]Validating {target_type} '{target}' using profile '{profile}'...[/bold blue]"
+    )
+    try:
+        engine = PlatformValidationEngine(profile_name=profile)
+        report = engine.validate(target_type, target)
+
+        console.print("[green]✔[/green] Validation completed successfully.")
+
+        if report.graph_statistics.node_count > 0:
+            console.print(
+                f"Discovered {report.graph_statistics.node_count} nodes and {report.graph_statistics.edge_count} edges."
+            )
+
+        if report.certification_results:
+            for layer, status in report.certification_results.items():
+                console.print(f"[green]✔[/green] {layer} Passed")
+
+    except Exception as e:
+        console.print(f"[bold red]Validation failed:[/bold red] {e}")
+        raise typer.Exit(code=1)
 
 
 @app.command()
@@ -81,9 +111,16 @@ def docs() -> None:
 
 
 @app.command()
-def analyze(path: str = typer.Argument(".", help="Path to repository")) -> None:
+def analyze(
+    path: str = typer.Argument(".", help="Path to repository"),
+    profile: str = typer.Option(
+        "core", "--profile", "-p", help="Engineering profile to use"
+    ),
+) -> None:
     """Analyze a repository and build its Knowledge Graph."""
-    console.print(f"[bold blue]Analyzing repository at {path}...[/bold blue]")
+    console.print(
+        f"[bold blue]Analyzing repository at {path} with profile '{profile}'...[/bold blue]"
+    )
     try:
         builder = PipelineEngine(path)
         graph = builder.build()
