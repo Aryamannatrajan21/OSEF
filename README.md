@@ -225,9 +225,9 @@ Please read our [Contributing Guidelines](CONTRIBUTING.md) to get started.
 
 ## 💬 Community
 
-- **Discussions**: [GitHub Discussions](#)
+- **Discussions**: [GitHub Discussions](https://github.com/Aryamannatrajan21/OSEF/discussions)
 - **Issues**: [GitHub Issues](https://github.com/Aryamannatrajan21/OSEF/issues)
-- **Wiki**: [GitHub Wiki](#)
+- **Wiki**: [GitHub Wiki](https://github.com/Aryamannatrajan21/OSEF/wiki)
 
 ---
 

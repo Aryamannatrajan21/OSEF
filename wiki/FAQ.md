@@ -17,4 +17,4 @@ We believe in the Transformation Engine. AI agents should propose changes as a s
 - **ADR (Architecture Decision Record):** The final, immutable record of an architectural decision made after the RFC process concludes.
 
 ---
-*Last Updated: Phase II | Maintainer: @Aryamannatrajan21*
+*Last Updated: v1.0.0-LTS | Maintainer: @Aryamannatrajan21*

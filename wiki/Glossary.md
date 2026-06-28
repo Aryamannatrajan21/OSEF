@@ -17,4 +17,4 @@ Common acronyms and terminology used in the OSEF ecosystem.
 - **Sprint:** A focused development phase (e.g., Phase I: Platform Engineering).
 
 ---
-*Last Updated: Phase II | Maintainer: @Aryamannatrajan21*
+*Last Updated: v1.0.0-LTS | Maintainer: @Aryamannatrajan21*

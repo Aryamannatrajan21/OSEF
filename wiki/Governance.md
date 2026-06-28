@@ -22,4 +22,4 @@ Maintainers are added based on sustained, high-quality contributions and alignme
 - **Respect**: We adhere strictly to our Code of Conduct.
 
 ---
-*Last Updated: Phase II | Related Docs: [GOVERNANCE.md](../GOVERNANCE.md)*
+*Last Updated: v1.0.0-LTS | Related Docs: [GOVERNANCE.md](../GOVERNANCE.md)*

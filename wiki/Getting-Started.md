@@ -63,4 +63,4 @@ mkdocs serve
 - `architectures/`: All canonical RFCs and ADRs.
 
 ---
-*Last Updated: Phase II | Related Docs: [CONTRIBUTING.md](../CONTRIBUTING.md)*
+*Last Updated: v1.0.0-LTS | Related Docs: [CONTRIBUTING.md](../CONTRIBUTING.md)*
