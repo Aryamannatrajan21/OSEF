@@ -5,6 +5,7 @@ from .symbols import NormalizedSymbol
 
 class ResolvedRelationship(BaseModel):
     """A canonical language-level relationship between two symbols."""
+
     relationship_id: str
     source_symbol_id: str
     target_symbol_id: str
@@ -14,6 +15,7 @@ class ResolvedRelationship(BaseModel):
 
 class ResolverDiagnostics(BaseModel):
     """Metadata regarding the resolution pass."""
+
     unresolved_imports: List[str] = Field(default_factory=list)
     duplicate_symbols: List[str] = Field(default_factory=list)
     circular_references: List[str] = Field(default_factory=list)
@@ -24,6 +26,7 @@ class ResolverDiagnostics(BaseModel):
 
 class ResolvedSymbolGraph(BaseModel):
     """An immutable container representing a resolved language graph."""
+
     schema_version: str = "1.0"
     nodes: Dict[str, Any] = Field(default_factory=dict)
     edges: List[ResolvedRelationship] = Field(default_factory=list)
@@ -36,5 +39,5 @@ class LanguageResolver(Protocol):
     The resolver must consume a sequence of NormalizedSymbols and produce
     an immutable ResolvedSymbolGraph via deterministic, semantic passes.
     """
-    def resolve(self, symbols: Sequence[NormalizedSymbol]) -> ResolvedSymbolGraph:
-        ...
+
+    def resolve(self, symbols: Sequence[NormalizedSymbol]) -> ResolvedSymbolGraph: ...

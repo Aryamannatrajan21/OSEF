@@ -34,38 +34,49 @@ class PerformanceMetrics(BaseModel):
 
 
 class ParserCertificationReport(BaseModel):
-    metrics: StageCertificationMetrics = Field(default_factory=StageCertificationMetrics)  # type: ignore
+    metrics: StageCertificationMetrics = Field(
+        default_factory=StageCertificationMetrics
+    )  # type: ignore
 
 
 class SymbolCertificationReport(BaseModel):
-    metrics: StageCertificationMetrics = Field(default_factory=StageCertificationMetrics)  # type: ignore
+    metrics: StageCertificationMetrics = Field(
+        default_factory=StageCertificationMetrics
+    )  # type: ignore
     stable_ids_verified: bool = False
     provenance_verified: bool = False
 
 
 class ResolverCertificationReport(BaseModel):
-    metrics: StageCertificationMetrics = Field(default_factory=StageCertificationMetrics)  # type: ignore
+    metrics: StageCertificationMetrics = Field(
+        default_factory=StageCertificationMetrics
+    )  # type: ignore
 
 
 class StructuralSemanticReport(BaseModel):
     is_deterministic: bool
     fact_count: int
 
+
 class DependencySemanticReport(BaseModel):
     is_deterministic: bool
     fact_count: int
+
 
 class TypeSemanticReport(BaseModel):
     is_deterministic: bool
     fact_count: int
 
+
 class VisibilitySemanticReport(BaseModel):
     is_deterministic: bool
     fact_count: int
 
+
 class ExecutionSemanticReport(BaseModel):
     is_deterministic: bool
     fact_count: int
+
 
 class SemanticCertificationReport(BaseModel):
     metrics: StageCertificationMetrics
@@ -78,7 +89,9 @@ class SemanticCertificationReport(BaseModel):
 
 
 class GraphCertificationReport(BaseModel):
-    metrics: StageCertificationMetrics = Field(default_factory=StageCertificationMetrics)  # type: ignore
+    metrics: StageCertificationMetrics = Field(
+        default_factory=StageCertificationMetrics
+    )  # type: ignore
     graph_stability_verified: bool = False
 
 
@@ -87,28 +100,41 @@ class LanguageCertificationReport(BaseModel):
     Canonical SDK artifact defining the certification status of a language processing pipeline.
     This replaces scattered markdown files with a highly structured, machine-readable validation object.
     """
+
     # Metadata
     language: str
     plugin_version: str
     sdk_version: str
-    
+
     # Composable Certification Reports
-    parser_report: ParserCertificationReport = Field(default_factory=ParserCertificationReport)
-    symbol_report: SymbolCertificationReport = Field(default_factory=SymbolCertificationReport)
-    resolver_report: ResolverCertificationReport = Field(default_factory=ResolverCertificationReport)
-    semantic_report: SemanticCertificationReport = Field(default_factory=SemanticCertificationReport)  # type: ignore
-    graph_report: GraphCertificationReport = Field(default_factory=GraphCertificationReport)
-    
+    parser_report: ParserCertificationReport = Field(
+        default_factory=ParserCertificationReport
+    )
+    symbol_report: SymbolCertificationReport = Field(
+        default_factory=SymbolCertificationReport
+    )
+    resolver_report: ResolverCertificationReport = Field(
+        default_factory=ResolverCertificationReport
+    )
+    semantic_report: SemanticCertificationReport = Field(
+        default_factory=SemanticCertificationReport
+    )  # type: ignore
+    graph_report: GraphCertificationReport = Field(
+        default_factory=GraphCertificationReport
+    )
+
     # Determinism
-    determinism_certification: StageCertificationMetrics = Field(default_factory=StageCertificationMetrics)  # type: ignore
-    
+    determinism_certification: StageCertificationMetrics = Field(
+        default_factory=StageCertificationMetrics
+    )  # type: ignore
+
     # Analytics
     coverage: CoverageMetrics = Field(default_factory=CoverageMetrics)
     performance: PerformanceMetrics = Field(default_factory=PerformanceMetrics)
-    
+
     # Integration
     benchmarks: List[str] = Field(default_factory=list)
-    
+
     # Final Outcome
     certification_decision: str = "PENDING"  # e.g., "PENDING", "FAILED", "CERTIFIED"
     recommendations: List[str] = Field(default_factory=list)

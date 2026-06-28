@@ -73,7 +73,7 @@ class PluginManifest(BaseModel):
     quality_tier: PluginQualityTier = PluginQualityTier.EXPERIMENTAL
     supported_profiles: List[str] = Field(default_factory=list)
     certification: PluginCertification = Field(default_factory=PluginCertification)
-    
+
     # Marketplace Metadata
     publisher: Optional[str] = None
     license: Optional[str] = None  # type: ignore

@@ -7,6 +7,7 @@ class SemanticFact(BaseModel):
     Language-independent engineering facts extracted by a Semantic Engine.
     These are consumed by the GraphMapper to produce GraphDeltas.
     """
+
     schema_version: str = "1.0"
     subject_symbol_id: str
     fact_type: str
@@ -16,6 +17,7 @@ class SemanticFact(BaseModel):
 # ==========================================
 # Structural Facts
 # ==========================================
+
 
 class ContainsFact(SemanticFact):
     fact_type: str = "contains"
@@ -35,6 +37,7 @@ class ModuleFact(SemanticFact):
 # ==========================================
 # Type System Facts
 # ==========================================
+
 
 class InheritanceFact(SemanticFact):
     fact_type: str = "inheritance"
@@ -65,6 +68,7 @@ class TypeUsageFact(SemanticFact):
 # Dependencies Facts
 # ==========================================
 
+
 class ImportFact(SemanticFact):
     fact_type: str = "import"
     imported_symbol_id: str
@@ -84,6 +88,7 @@ class DependencyFact(SemanticFact):
 # Execution Facts
 # ==========================================
 
+
 class CallFact(SemanticFact):
     fact_type: str = "call"
     target_symbol_id: str
@@ -102,6 +107,7 @@ class VisibilityFact(SemanticFact):
 # ==========================================
 # Ownership & Metadata Facts
 # ==========================================
+
 
 class OwnershipFact(SemanticFact):
     fact_type: str = "ownership"

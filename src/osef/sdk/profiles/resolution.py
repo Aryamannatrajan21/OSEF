@@ -13,25 +13,33 @@ class ProfileResolutionEngine:
     Resolves composed and inherited profiles into a final unified configuration.
     """
 
-    def __init__(self, registry: Optional[Dict[str, EngineeringProfile]] = None, disable: Optional[List[str]] = None):
+    def __init__(
+        self,
+        registry: Optional[Dict[str, EngineeringProfile]] = None,
+        disable: Optional[List[str]] = None,
+    ):
         self.registry = registry or get_default_profiles()
         self.disable_plugins = set(disable or [])
 
     def resolve(self, profile_name: str) -> EngineeringProfile:
         """
-        Resolves a profile by name, including its inheritance chain, 
+        Resolves a profile by name, including its inheritance chain,
         and applies any plugin exclusions.
         """
         if profile_name not in self.registry:
             raise ValueError(f"Unknown profile: {profile_name}")
 
         resolved = self._resolve_recursive(self.registry[profile_name], {profile_name})
-        
+
         # Apply exclusions
         if self.disable_plugins:
-            resolved.plugins = [p for p in resolved.plugins if p not in self.disable_plugins]
-            resolved.capabilities = [c for c in resolved.capabilities if c not in self.disable_plugins]
-            
+            resolved.plugins = [
+                p for p in resolved.plugins if p not in self.disable_plugins
+            ]
+            resolved.capabilities = [
+                c for c in resolved.capabilities if c not in self.disable_plugins
+            ]
+
         return resolved
 
     def _resolve_recursive(
@@ -54,9 +62,7 @@ class ProfileResolutionEngine:
             if parent_name not in self.registry:
                 raise OSEFError(f"Parent profile '{parent_name}' is not registered.")
 
-            parent_resolved = self._resolve_recursive(
-                self.registry[parent_name], seen
-            )
+            parent_resolved = self._resolve_recursive(self.registry[parent_name], seen)
 
             plugins.update(parent_resolved.plugins)
             policy_packs.update(parent_resolved.policy_packs)

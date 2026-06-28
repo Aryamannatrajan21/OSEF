@@ -69,21 +69,33 @@ def doctor() -> None:
 
 @app.command()
 def validate(
-    target_type: str = typer.Argument(..., help="Type of target: repository, workspace, fixture, plugin, sdk, profile"),
-    target: str = typer.Argument(..., help="Target identifier (e.g. path, plugin name)"),
-    profile: List[str] = typer.Option(["core"], "--profile", "-p", help="Engineering profile to use"),
-    disable: List[str] = typer.Option([], "--disable", help="Disable specific plugins or profiles")
+    target_type: str = typer.Argument(
+        ..., help="Type of target: repository, workspace, fixture, plugin, sdk, profile"
+    ),
+    target: str = typer.Argument(
+        ..., help="Target identifier (e.g. path, plugin name)"
+    ),
+    profile: List[str] = typer.Option(
+        ["core"], "--profile", "-p", help="Engineering profile to use"
+    ),
+    disable: List[str] = typer.Option(
+        [], "--disable", help="Disable specific plugins or profiles"
+    ),
 ) -> None:
     """Validate project structure and Engineering Knowledge Graph."""
-    console.print(f"[bold blue]Validating {target_type} '{target}' using profiles '{profile}'...[/bold blue]")
+    console.print(
+        f"[bold blue]Validating {target_type} '{target}' using profiles '{profile}'...[/bold blue]"
+    )
     try:
         # Pass first profile for now, full composition handled in engine
-        engine = PlatformValidationEngine(profile_name=profile[0] if profile else "core")
+        engine = PlatformValidationEngine(
+            profile_name=profile[0] if profile else "core"
+        )
         report = engine.validate(target_type, target)
 
         console.print("[green]✔[/green] Validation completed successfully.")
 
-        if report.graph_statistics.node_count > 0:  # type: ignore
+        if report.graph_statistics and report.graph_statistics.node_count > 0:  # type: ignore
             console.print(
                 f"Discovered {report.graph_statistics.node_count} nodes and {report.graph_statistics.edge_count} edges."  # type: ignore
             )
@@ -111,11 +123,17 @@ def docs() -> None:
 @app.command()
 def analyze(
     path: str = typer.Argument(".", help="Path to repository"),
-    profile: List[str] = typer.Option(["core"], "--profile", "-p", help="Engineering profile to use"),
-    disable: List[str] = typer.Option([], "--disable", help="Disable specific plugins or profiles")
+    profile: List[str] = typer.Option(
+        ["core"], "--profile", "-p", help="Engineering profile to use"
+    ),
+    disable: List[str] = typer.Option(
+        [], "--disable", help="Disable specific plugins or profiles"
+    ),
 ) -> None:
     """Analyze a repository and build its Knowledge Graph."""
-    console.print(f"[bold blue]Analyzing repository at {path} with profiles '{profile}'...[/bold blue]")
+    console.print(
+        f"[bold blue]Analyzing repository at {path} with profiles '{profile}'...[/bold blue]"
+    )
     try:
         builder = PipelineEngine(path)
         graph = builder.build()
@@ -264,25 +282,30 @@ def ecosystem_list() -> None:
     """List all ecosystem elements."""
     console.print("Listing entire ecosystem...")
 
+
 @ecosystem_app.command("plugins")
 def ecosystem_plugins() -> None:
     """List registered plugins."""
     console.print("Listing plugins...")
+
 
 @ecosystem_app.command("domains")
 def ecosystem_domains() -> None:
     """List registered knowledge domains."""
     console.print("Listing domains...")
 
+
 @ecosystem_app.command("profiles")
 def ecosystem_profiles() -> None:
     """List registered profiles."""
     console.print("Listing profiles...")
 
+
 @ecosystem_app.command("capabilities")
 def ecosystem_capabilities() -> None:
     """List exposed capabilities."""
     console.print("Listing capabilities...")
+
 
 @ecosystem_app.command("certification")
 def ecosystem_certification() -> None:

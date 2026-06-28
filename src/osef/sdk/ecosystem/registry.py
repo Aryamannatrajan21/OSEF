@@ -2,6 +2,7 @@ import json
 from typing import Dict, Any, List
 from osef.sdk.language.pipeline import LanguagePipeline
 
+
 class PluginManifest:
     def __init__(self, data: Dict[str, Any]):
         self.language = data.get("language")
@@ -9,22 +10,24 @@ class PluginManifest:
         self.supported_extensions = data.get("supported_file_extensions", [])
         self.supported_profiles = data.get("supported_profiles", [])
 
+
 class EcosystemRegistry:
     """
     Central registry for OSEF Language Packs.
     No hardcoded logic for specific languages.
     """
+
     def __init__(self):  # type: ignore
         self.plugins: Dict[str, PluginManifest] = {}
         self.pipelines: Dict[str, LanguagePipeline] = {}
-        
+
     def register_plugin(self, manifest_path: str, pipeline: LanguagePipeline):  # type: ignore
         with open(manifest_path, "r") as f:
             data = json.load(f)
         manifest = PluginManifest(data)
         self.plugins[manifest.language] = manifest  # type: ignore
         self.pipelines[manifest.language] = pipeline  # type: ignore
-        
+
     def get_pipeline_for_file(self, filepath: str) -> LanguagePipeline:
         for lang, manifest in self.plugins.items():
             for ext in manifest.supported_extensions:

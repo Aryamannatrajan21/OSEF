@@ -36,7 +36,7 @@ class PlatformValidationEngine:
             raise OSEFError(
                 f"Validation for target type '{target_type}' is not yet implemented."
             )
-        
+
         self._write_history(report)
         return report
 
@@ -45,23 +45,29 @@ class PlatformValidationEngine:
         base_dir = ".osef/validation"
         history_dir = f"{base_dir}/history"
         os.makedirs(history_dir, exist_ok=True)
-        
+
         timestamp = datetime.now().strftime("%Y-%m-%dT%H-%M-%S")
         report_json = report.model_dump_json(indent=2)
-        
+
         # Write latest
         with open(f"{base_dir}/latest.json", "w") as f:
             f.write(report_json)
         with open(f"{base_dir}/latest.md", "w") as f:
-            f.write(f"# Platform Validation Report\\n\\nProfile: {report.profile}\\nDate: {timestamp}\\n```json\\n{report_json}\\n```")
+            f.write(
+                f"# Platform Validation Report\\n\\nProfile: {report.profile}\\nDate: {timestamp}\\n```json\\n{report_json}\\n```"
+            )
         with open(f"{base_dir}/latest.html", "w") as f:
-            f.write(f"<html><body><h1>Platform Validation Report</h1><pre>{report_json}</pre></body></html>")
-            
+            f.write(
+                f"<html><body><h1>Platform Validation Report</h1><pre>{report_json}</pre></body></html>"
+            )
+
         # Write history
         with open(f"{history_dir}/{timestamp}.json", "w") as f:
             f.write(report_json)
         with open(f"{history_dir}/{timestamp}.md", "w") as f:
-            f.write(f"# Platform Validation Report\\n\\nProfile: {report.profile}\\nDate: {timestamp}\\n```json\\n{report_json}\\n```")
+            f.write(
+                f"# Platform Validation Report\\n\\nProfile: {report.profile}\\nDate: {timestamp}\\n```json\\n{report_json}\\n```"
+            )
 
     def _validate_workspace(self, path: str) -> PlatformValidationReport:
         start_time = time.time()
