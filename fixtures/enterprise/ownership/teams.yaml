@@ -1,0 +1,8 @@
+teams:
+  platform:
+    members:
+      - alice
+      - bob
+  backend:
+    members:
+      - carol

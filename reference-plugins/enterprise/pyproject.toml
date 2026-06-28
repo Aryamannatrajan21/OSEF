@@ -1,0 +1,9 @@
+[project]
+name = "osef-enterprise"
+version = "0.1.0"
+description = "Enterprise Knowledge Domain for OSEF"
+authors = [{name = "OSEF Contributors"}]
+dependencies = [
+    "osef-core",
+    "pyyaml>=6.0.1"
+]
