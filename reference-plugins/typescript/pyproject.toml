@@ -1,0 +1,14 @@
+[project]
+name = "osef-typescript"
+version = "0.1.0"
+description = "Official TypeScript Language Pack for OSEF"
+dependencies = [
+    "pydantic>=2.0.0",
+    "tree-sitter>=0.21.0",
+    "tree-sitter-typescript>=0.21.0"
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=8.0.0"
+]
