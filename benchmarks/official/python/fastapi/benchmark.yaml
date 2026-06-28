@@ -4,6 +4,12 @@ framework: fastapi
 expected_profiles:
   - backend
   - runtime
-minimum_graph_nodes: 1000
+expected_plugins:
+  - osef-python
+  - osef-backend
+minimum_nodes: 1000
+minimum_edges: 1500
 minimum_correlations: 100
+expected_findings: 10
+expected_runtime: 30
 known_limitations: []

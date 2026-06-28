@@ -30,6 +30,13 @@ class PluginCertification(BaseModel):
     certification_version: Optional[str] = None
 
 
+class LanguageCapability(BaseModel):
+    language: str
+    version: str
+    parser: str
+    features: List[str] = Field(default_factory=list)
+
+
 class KnowledgeDomainManifest(BaseModel):
     """Manifest describing a Knowledge Domain."""
 
@@ -61,6 +68,7 @@ class PluginManifest(BaseModel):
     keywords: List[str] = Field(default_factory=list)
     signature: Optional[str] = None
     checksum: Optional[str] = None
+    language_capability: Optional[LanguageCapability] = None
     knowledge_domain: Optional[KnowledgeDomainManifest] = None
     quality_tier: PluginQualityTier = PluginQualityTier.EXPERIMENTAL
     supported_profiles: List[str] = Field(default_factory=list)
