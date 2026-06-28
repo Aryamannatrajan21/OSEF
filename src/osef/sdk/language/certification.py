@@ -47,8 +47,33 @@ class ResolverCertificationReport(BaseModel):
     metrics: StageCertificationMetrics = Field(default_factory=StageCertificationMetrics)
 
 
+class StructuralSemanticReport(BaseModel):
+    is_deterministic: bool
+    fact_count: int
+
+class DependencySemanticReport(BaseModel):
+    is_deterministic: bool
+    fact_count: int
+
+class TypeSemanticReport(BaseModel):
+    is_deterministic: bool
+    fact_count: int
+
+class VisibilitySemanticReport(BaseModel):
+    is_deterministic: bool
+    fact_count: int
+
+class ExecutionSemanticReport(BaseModel):
+    is_deterministic: bool
+    fact_count: int
+
 class SemanticCertificationReport(BaseModel):
-    metrics: StageCertificationMetrics = Field(default_factory=StageCertificationMetrics)
+    metrics: StageCertificationMetrics
+    structural_report: StructuralSemanticReport
+    dependency_report: DependencySemanticReport
+    type_report: TypeSemanticReport
+    visibility_report: VisibilitySemanticReport
+    execution_report: ExecutionSemanticReport
     semantic_stability_verified: bool = False
 
 
