@@ -7,6 +7,7 @@ class SemanticFact(BaseModel):
     Language-independent engineering facts extracted by a Semantic Engine.
     These are consumed by the GraphMapper to produce GraphDeltas.
     """
+    schema_version: str = "1.0"
     subject_symbol_id: str
     fact_type: str
     attributes: Dict[str, Any] = Field(default_factory=dict)

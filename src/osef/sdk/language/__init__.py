@@ -65,6 +65,12 @@ from .certification import (
     GraphCertificationReport,
 )
 
+from .pipeline import (
+    LanguagePipeline,
+    StageResult,
+    Diagnostic,
+)
+
 from .builder import (
     StableSymbolIdGenerator,
     NormalizedSymbolBuilder,
@@ -129,4 +135,7 @@ __all__ = [
     "GraphCertificationReport",
     "StableSymbolIdGenerator",
     "NormalizedSymbolBuilder",
+    "LanguagePipeline",
+    "StageResult",
+    "Diagnostic",
 ]

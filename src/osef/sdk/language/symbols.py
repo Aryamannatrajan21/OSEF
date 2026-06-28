@@ -22,6 +22,7 @@ class SemanticProvenance(BaseModel):
 
 
 class NormalizedSymbol(BaseModel):
+    schema_version: str = "1.0"
     symbol_id: str
     name: str
     kind: str
@@ -30,6 +31,7 @@ class NormalizedSymbol(BaseModel):
     modifiers: List[str] = Field(default_factory=list)
     type_hint: Optional[str] = None
     docstring: Optional[str] = None
+    payload: dict = Field(default_factory=dict)
 
 
 class NormalizedPackage(NormalizedSymbol):
