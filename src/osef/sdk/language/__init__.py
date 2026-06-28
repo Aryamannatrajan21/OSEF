@@ -35,6 +35,13 @@ from .facts import (
     TypeUsageFact,
 )
 
+from .resolver import (
+    ResolvedRelationship,
+    ResolverDiagnostics,
+    ResolvedSymbolGraph,
+    LanguageResolver,
+)
+
 __all__ = [
     "ParsingProvenance",
     "SemanticProvenance",
@@ -67,4 +74,8 @@ __all__ = [
     "OwnershipFact",
     "VisibilityFact",
     "TypeUsageFact",
+    "ResolvedRelationship",
+    "ResolverDiagnostics",
+    "ResolvedSymbolGraph",
+    "LanguageResolver",
 ]
