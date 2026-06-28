@@ -45,7 +45,7 @@ def apply_ignores(output):
             with open(filepath, 'w') as f:
                 f.writelines(content)
             print(f"Applied ignores to {filepath}")
-        except Exception as e:
+        except Exception:
             pass
 
 if __name__ == '__main__':

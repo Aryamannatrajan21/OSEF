@@ -1,7 +1,5 @@
 import time
-import os
 from pydantic import BaseModel
-from typing import List
 
 class BenchmarkResult(BaseModel):
     benchmark_name: str

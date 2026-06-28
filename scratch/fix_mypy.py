@@ -1,5 +1,3 @@
-import os
-import re
 
 def replace_in_file(filepath, replacements):
     with open(filepath, 'r') as f:

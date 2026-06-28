@@ -1,4 +1,3 @@
-import hashlib
 from typing import List, Sequence, Optional
 from osef.sdk.language.symbols import (
     NormalizedSymbol, NormalizedClass, NormalizedInterface, 
