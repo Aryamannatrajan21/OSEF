@@ -26,13 +26,24 @@ from .symbols import (
 
 from .facts import (
     SemanticFact,
+    ContainsFact,
+    NamespaceFact,
+    ModuleFact,
     InheritanceFact,
     ImplementationFact,
-    ImportFact,
-    CallFact,
-    OwnershipFact,
-    VisibilityFact,
+    GenericConstraintFact,
+    TypeAliasFact,
     TypeUsageFact,
+    ImportFact,
+    ExportFact,
+    DependencyFact,
+    CallFact,
+    OverrideFact,
+    VisibilityFact,
+    OwnershipFact,
+    DocumentationFact,
+    AnnotationFact,
+    DecoratorFact,
 )
 
 from .resolver import (
@@ -40,6 +51,13 @@ from .resolver import (
     ResolverDiagnostics,
     ResolvedSymbolGraph,
     LanguageResolver,
+)
+
+from .certification import (
+    StageCertificationMetrics,
+    CoverageMetrics,
+    PerformanceMetrics,
+    LanguageCertificationReport,
 )
 
 __all__ = [
@@ -67,15 +85,30 @@ __all__ = [
     "NormalizedDecorator",
     "NormalizedAnnotation",
     "SemanticFact",
+    "ContainsFact",
+    "NamespaceFact",
+    "ModuleFact",
     "InheritanceFact",
     "ImplementationFact",
-    "ImportFact",
-    "CallFact",
-    "OwnershipFact",
-    "VisibilityFact",
+    "GenericConstraintFact",
+    "TypeAliasFact",
     "TypeUsageFact",
+    "ImportFact",
+    "ExportFact",
+    "DependencyFact",
+    "CallFact",
+    "OverrideFact",
+    "VisibilityFact",
+    "OwnershipFact",
+    "DocumentationFact",
+    "AnnotationFact",
+    "DecoratorFact",
     "ResolvedRelationship",
     "ResolverDiagnostics",
     "ResolvedSymbolGraph",
     "LanguageResolver",
+    "StageCertificationMetrics",
+    "CoverageMetrics",
+    "PerformanceMetrics",
+    "LanguageCertificationReport",
 ]
