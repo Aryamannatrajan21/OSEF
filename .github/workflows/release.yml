@@ -17,11 +17,28 @@ jobs:
           fetch-depth: 0
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          generate_release_notes: true
-          append_body: true
-          body: |
-            
-            ---
-            👑 **Author & Creator:** This entire project and repository is solely built and maintained by [@Aryamannatrajan21](https://github.com/Aryamannatrajan21).
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # 1. Generate the automated release notes via GitHub API
+          gh api -X POST /repos/${{ github.repository }}/releases/generate-notes \
+            -F tag_name=${{ github.ref_name }} > notes.json
+          
+          # 2. Extract the body
+          BODY=$(jq -r '.body' notes.json)
+          
+          # 3. Strip out the "New Contributors" section and everything after it
+          # GitHub uses '## New Contributors' as the heading
+          CLEAN_BODY=$(echo "$BODY" | sed '/## New Contributors/,$d')
+          
+          # 4. Append our custom ownership footer directly
+          echo "$CLEAN_BODY" > final_body.md
+          echo "" >> final_body.md
+          echo "---" >> final_body.md
+          echo "👑 **Author & Creator:** This entire project and repository is solely built and maintained by [@Aryamannatrajan21](https://github.com/Aryamannatrajan21)." >> final_body.md
+          
+          # 5. Check if release already exists and delete it (so we can recreate it cleanly)
+          gh release delete ${{ github.ref_name }} -y || true
+          
+          # 6. Create the formal release
+          gh release create ${{ github.ref_name }} --title "${{ github.ref_name }}" --notes-file final_body.md
