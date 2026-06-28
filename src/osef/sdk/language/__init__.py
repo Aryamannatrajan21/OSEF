@@ -60,6 +60,11 @@ from .certification import (
     LanguageCertificationReport,
 )
 
+from .builder import (
+    StableSymbolIdGenerator,
+    NormalizedSymbolBuilder,
+)
+
 __all__ = [
     "ParsingProvenance",
     "SemanticProvenance",
@@ -111,4 +116,6 @@ __all__ = [
     "CoverageMetrics",
     "PerformanceMetrics",
     "LanguageCertificationReport",
+    "StableSymbolIdGenerator",
+    "NormalizedSymbolBuilder",
 ]
