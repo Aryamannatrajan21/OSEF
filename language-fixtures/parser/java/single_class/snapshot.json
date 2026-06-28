@@ -1,0 +1,413 @@
+{
+  "kind": "program",
+  "text": "public class HelloWorld {\n    public static void main(String[] args) {\n        System.out.println(\"Hello, World!\");\n    }\n}\n",
+  "start_line": 1,
+  "start_column": 1,
+  "end_line": 6,
+  "end_column": 1,
+  "provenance": {
+    "source_file": "language-fixtures/parser/java/single_class/source.java",
+    "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
+    "parser": "tree-sitter-java",
+    "parser_version": "0.23.5",
+    "language": "java"
+  },
+  "children": [
+    {
+      "kind": "class_declaration",
+      "text": "public class HelloWorld {\n    public static void main(String[] args) {\n        System.out.println(\"Hello, World!\");\n    }\n}",
+      "start_line": 1,
+      "start_column": 1,
+      "end_line": 5,
+      "end_column": 2,
+      "provenance": {
+        "source_file": "language-fixtures/parser/java/single_class/source.java",
+        "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
+        "parser": "tree-sitter-java",
+        "parser_version": "0.23.5",
+        "language": "java"
+      },
+      "children": [
+        {
+          "kind": "modifiers",
+          "text": "public",
+          "start_line": 1,
+          "start_column": 1,
+          "end_line": 1,
+          "end_column": 7,
+          "provenance": {
+            "source_file": "language-fixtures/parser/java/single_class/source.java",
+            "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
+            "parser": "tree-sitter-java",
+            "parser_version": "0.23.5",
+            "language": "java"
+          },
+          "children": []
+        },
+        {
+          "kind": "identifier",
+          "text": "HelloWorld",
+          "start_line": 1,
+          "start_column": 14,
+          "end_line": 1,
+          "end_column": 24,
+          "provenance": {
+            "source_file": "language-fixtures/parser/java/single_class/source.java",
+            "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
+            "parser": "tree-sitter-java",
+            "parser_version": "0.23.5",
+            "language": "java"
+          },
+          "children": []
+        },
+        {
+          "kind": "class_body",
+          "text": "{\n    public static void main(String[] args) {\n        System.out.println(\"Hello, World!\");\n    }\n}",
+          "start_line": 1,
+          "start_column": 25,
+          "end_line": 5,
+          "end_column": 2,
+          "provenance": {
+            "source_file": "language-fixtures/parser/java/single_class/source.java",
+            "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
+            "parser": "tree-sitter-java",
+            "parser_version": "0.23.5",
+            "language": "java"
+          },
+          "children": [
+            {
+              "kind": "method_declaration",
+              "text": "public static void main(String[] args) {\n        System.out.println(\"Hello, World!\");\n    }",
+              "start_line": 2,
+              "start_column": 5,
+              "end_line": 4,
+              "end_column": 6,
+              "provenance": {
+                "source_file": "language-fixtures/parser/java/single_class/source.java",
+                "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
+                "parser": "tree-sitter-java",
+                "parser_version": "0.23.5",
+                "language": "java"
+              },
+              "children": [
+                {
+                  "kind": "modifiers",
+                  "text": "public static",
+                  "start_line": 2,
+                  "start_column": 5,
+                  "end_line": 2,
+                  "end_column": 18,
+                  "provenance": {
+                    "source_file": "language-fixtures/parser/java/single_class/source.java",
+                    "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
+                    "parser": "tree-sitter-java",
+                    "parser_version": "0.23.5",
+                    "language": "java"
+                  },
+                  "children": []
+                },
+                {
+                  "kind": "void_type",
+                  "text": "void",
+                  "start_line": 2,
+                  "start_column": 19,
+                  "end_line": 2,
+                  "end_column": 23,
+                  "provenance": {
+                    "source_file": "language-fixtures/parser/java/single_class/source.java",
+                    "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
+                    "parser": "tree-sitter-java",
+                    "parser_version": "0.23.5",
+                    "language": "java"
+                  },
+                  "children": []
+                },
+                {
+                  "kind": "identifier",
+                  "text": "main",
+                  "start_line": 2,
+                  "start_column": 24,
+                  "end_line": 2,
+                  "end_column": 28,
+                  "provenance": {
+                    "source_file": "language-fixtures/parser/java/single_class/source.java",
+                    "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
+                    "parser": "tree-sitter-java",
+                    "parser_version": "0.23.5",
+                    "language": "java"
+                  },
+                  "children": []
+                },
+                {
+                  "kind": "formal_parameters",
+                  "text": "(String[] args)",
+                  "start_line": 2,
+                  "start_column": 28,
+                  "end_line": 2,
+                  "end_column": 43,
+                  "provenance": {
+                    "source_file": "language-fixtures/parser/java/single_class/source.java",
+                    "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
+                    "parser": "tree-sitter-java",
+                    "parser_version": "0.23.5",
+                    "language": "java"
+                  },
+                  "children": [
+                    {
+                      "kind": "formal_parameter",
+                      "text": "String[] args",
+                      "start_line": 2,
+                      "start_column": 29,
+                      "end_line": 2,
+                      "end_column": 42,
+                      "provenance": {
+                        "source_file": "language-fixtures/parser/java/single_class/source.java",
+                        "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
+                        "parser": "tree-sitter-java",
+                        "parser_version": "0.23.5",
+                        "language": "java"
+                      },
+                      "children": [
+                        {
+                          "kind": "array_type",
+                          "text": "String[]",
+                          "start_line": 2,
+                          "start_column": 29,
+                          "end_line": 2,
+                          "end_column": 37,
+                          "provenance": {
+                            "source_file": "language-fixtures/parser/java/single_class/source.java",
+                            "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
+                            "parser": "tree-sitter-java",
+                            "parser_version": "0.23.5",
+                            "language": "java"
+                          },
+                          "children": [
+                            {
+                              "kind": "type_identifier",
+                              "text": "String",
+                              "start_line": 2,
+                              "start_column": 29,
+                              "end_line": 2,
+                              "end_column": 35,
+                              "provenance": {
+                                "source_file": "language-fixtures/parser/java/single_class/source.java",
+                                "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
+                                "parser": "tree-sitter-java",
+                                "parser_version": "0.23.5",
+                                "language": "java"
+                              },
+                              "children": []
+                            },
+                            {
+                              "kind": "dimensions",
+                              "text": "[]",
+                              "start_line": 2,
+                              "start_column": 35,
+                              "end_line": 2,
+                              "end_column": 37,
+                              "provenance": {
+                                "source_file": "language-fixtures/parser/java/single_class/source.java",
+                                "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
+                                "parser": "tree-sitter-java",
+                                "parser_version": "0.23.5",
+                                "language": "java"
+                              },
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "kind": "identifier",
+                          "text": "args",
+                          "start_line": 2,
+                          "start_column": 38,
+                          "end_line": 2,
+                          "end_column": 42,
+                          "provenance": {
+                            "source_file": "language-fixtures/parser/java/single_class/source.java",
+                            "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
+                            "parser": "tree-sitter-java",
+                            "parser_version": "0.23.5",
+                            "language": "java"
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "kind": "block",
+                  "text": "{\n        System.out.println(\"Hello, World!\");\n    }",
+                  "start_line": 2,
+                  "start_column": 44,
+                  "end_line": 4,
+                  "end_column": 6,
+                  "provenance": {
+                    "source_file": "language-fixtures/parser/java/single_class/source.java",
+                    "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
+                    "parser": "tree-sitter-java",
+                    "parser_version": "0.23.5",
+                    "language": "java"
+                  },
+                  "children": [
+                    {
+                      "kind": "expression_statement",
+                      "text": "System.out.println(\"Hello, World!\");",
+                      "start_line": 3,
+                      "start_column": 9,
+                      "end_line": 3,
+                      "end_column": 45,
+                      "provenance": {
+                        "source_file": "language-fixtures/parser/java/single_class/source.java",
+                        "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
+                        "parser": "tree-sitter-java",
+                        "parser_version": "0.23.5",
+                        "language": "java"
+                      },
+                      "children": [
+                        {
+                          "kind": "method_invocation",
+                          "text": "System.out.println(\"Hello, World!\")",
+                          "start_line": 3,
+                          "start_column": 9,
+                          "end_line": 3,
+                          "end_column": 44,
+                          "provenance": {
+                            "source_file": "language-fixtures/parser/java/single_class/source.java",
+                            "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
+                            "parser": "tree-sitter-java",
+                            "parser_version": "0.23.5",
+                            "language": "java"
+                          },
+                          "children": [
+                            {
+                              "kind": "field_access",
+                              "text": "System.out",
+                              "start_line": 3,
+                              "start_column": 9,
+                              "end_line": 3,
+                              "end_column": 19,
+                              "provenance": {
+                                "source_file": "language-fixtures/parser/java/single_class/source.java",
+                                "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
+                                "parser": "tree-sitter-java",
+                                "parser_version": "0.23.5",
+                                "language": "java"
+                              },
+                              "children": [
+                                {
+                                  "kind": "identifier",
+                                  "text": "System",
+                                  "start_line": 3,
+                                  "start_column": 9,
+                                  "end_line": 3,
+                                  "end_column": 15,
+                                  "provenance": {
+                                    "source_file": "language-fixtures/parser/java/single_class/source.java",
+                                    "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
+                                    "parser": "tree-sitter-java",
+                                    "parser_version": "0.23.5",
+                                    "language": "java"
+                                  },
+                                  "children": []
+                                },
+                                {
+                                  "kind": "identifier",
+                                  "text": "out",
+                                  "start_line": 3,
+                                  "start_column": 16,
+                                  "end_line": 3,
+                                  "end_column": 19,
+                                  "provenance": {
+                                    "source_file": "language-fixtures/parser/java/single_class/source.java",
+                                    "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
+                                    "parser": "tree-sitter-java",
+                                    "parser_version": "0.23.5",
+                                    "language": "java"
+                                  },
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "kind": "identifier",
+                              "text": "println",
+                              "start_line": 3,
+                              "start_column": 20,
+                              "end_line": 3,
+                              "end_column": 27,
+                              "provenance": {
+                                "source_file": "language-fixtures/parser/java/single_class/source.java",
+                                "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
+                                "parser": "tree-sitter-java",
+                                "parser_version": "0.23.5",
+                                "language": "java"
+                              },
+                              "children": []
+                            },
+                            {
+                              "kind": "argument_list",
+                              "text": "(\"Hello, World!\")",
+                              "start_line": 3,
+                              "start_column": 27,
+                              "end_line": 3,
+                              "end_column": 44,
+                              "provenance": {
+                                "source_file": "language-fixtures/parser/java/single_class/source.java",
+                                "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
+                                "parser": "tree-sitter-java",
+                                "parser_version": "0.23.5",
+                                "language": "java"
+                              },
+                              "children": [
+                                {
+                                  "kind": "string_literal",
+                                  "text": "\"Hello, World!\"",
+                                  "start_line": 3,
+                                  "start_column": 28,
+                                  "end_line": 3,
+                                  "end_column": 43,
+                                  "provenance": {
+                                    "source_file": "language-fixtures/parser/java/single_class/source.java",
+                                    "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
+                                    "parser": "tree-sitter-java",
+                                    "parser_version": "0.23.5",
+                                    "language": "java"
+                                  },
+                                  "children": [
+                                    {
+                                      "kind": "string_fragment",
+                                      "text": "Hello, World!",
+                                      "start_line": 3,
+                                      "start_column": 29,
+                                      "end_line": 3,
+                                      "end_column": 42,
+                                      "provenance": {
+                                        "source_file": "language-fixtures/parser/java/single_class/source.java",
+                                        "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
+                                        "parser": "tree-sitter-java",
+                                        "parser_version": "0.23.5",
+                                        "language": "java"
+                                      },
+                                      "children": []
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
