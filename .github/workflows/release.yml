@@ -20,3 +20,8 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true
+          append_body: true
+          body: |
+            
+            ---
+            👑 **Author & Creator:** This entire project and repository is solely built and maintained by [@Aryamannatrajan21](https://github.com/Aryamannatrajan21).
