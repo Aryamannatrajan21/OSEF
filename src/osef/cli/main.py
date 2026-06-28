@@ -95,9 +95,9 @@ def validate(
 
         console.print("[green]✔[/green] Validation completed successfully.")
 
-        if report.graph_statistics and report.graph_statistics.node_count > 0:  # type: ignore
+        if report.graph_statistics and report.graph_statistics.node_count > 0:
             console.print(
-                f"Discovered {report.graph_statistics.node_count} nodes and {report.graph_statistics.edge_count} edges."  # type: ignore
+                f"Discovered {report.graph_statistics.node_count} nodes and {report.graph_statistics.edge_count} edges."
             )
 
         if report.certification:

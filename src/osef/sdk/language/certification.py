@@ -35,22 +35,22 @@ class PerformanceMetrics(BaseModel):
 
 class ParserCertificationReport(BaseModel):
     metrics: StageCertificationMetrics = Field(
-        default_factory=StageCertificationMetrics
-    )  # type: ignore
+        default_factory=StageCertificationMetrics,  # type: ignore
+    )
 
 
 class SymbolCertificationReport(BaseModel):
     metrics: StageCertificationMetrics = Field(
-        default_factory=StageCertificationMetrics
-    )  # type: ignore
+        default_factory=StageCertificationMetrics,  # type: ignore
+    )
     stable_ids_verified: bool = False
     provenance_verified: bool = False
 
 
 class ResolverCertificationReport(BaseModel):
     metrics: StageCertificationMetrics = Field(
-        default_factory=StageCertificationMetrics
-    )  # type: ignore
+        default_factory=StageCertificationMetrics,  # type: ignore
+    )
 
 
 class StructuralSemanticReport(BaseModel):
@@ -90,8 +90,8 @@ class SemanticCertificationReport(BaseModel):
 
 class GraphCertificationReport(BaseModel):
     metrics: StageCertificationMetrics = Field(
-        default_factory=StageCertificationMetrics
-    )  # type: ignore
+        default_factory=StageCertificationMetrics,  # type: ignore
+    )
     graph_stability_verified: bool = False
 
 
@@ -117,16 +117,16 @@ class LanguageCertificationReport(BaseModel):
         default_factory=ResolverCertificationReport
     )
     semantic_report: SemanticCertificationReport = Field(
-        default_factory=SemanticCertificationReport
-    )  # type: ignore
+        default_factory=SemanticCertificationReport,  # type: ignore
+    )
     graph_report: GraphCertificationReport = Field(
         default_factory=GraphCertificationReport
     )
 
     # Determinism
     determinism_certification: StageCertificationMetrics = Field(
-        default_factory=StageCertificationMetrics
-    )  # type: ignore
+        default_factory=StageCertificationMetrics,  # type: ignore
+    )
 
     # Analytics
     coverage: CoverageMetrics = Field(default_factory=CoverageMetrics)
