@@ -1,0 +1,9 @@
+name: FastAPI
+language: python
+framework: fastapi
+expected_profiles:
+  - backend
+  - runtime
+minimum_graph_nodes: 1000
+minimum_correlations: 100
+known_limitations: []

@@ -6,6 +6,7 @@ import os
 import sys
 import subprocess
 from importlib.metadata import version as get_version, PackageNotFoundError
+from typing import List
 
 import typer
 from rich.console import Console
@@ -24,6 +25,9 @@ app = typer.Typer(
 )
 graph_app = typer.Typer(help="Engineering Knowledge Graph operations.")
 app.add_typer(graph_app, name="graph")
+
+ecosystem_app = typer.Typer(help="Ecosystem Catalog operations.")
+app.add_typer(ecosystem_app, name="ecosystem")
 
 console = Console()
 
@@ -65,22 +69,16 @@ def doctor() -> None:
 
 @app.command()
 def validate(
-    target_type: str = typer.Argument(
-        ..., help="Type of target: repository, workspace, fixture, plugin, sdk, profile"
-    ),
-    target: str = typer.Argument(
-        ..., help="Target identifier (e.g. path, plugin name)"
-    ),
-    profile: str = typer.Option(
-        "core", "--profile", "-p", help="Engineering profile to use"
-    ),
+    target_type: str = typer.Argument(..., help="Type of target: repository, workspace, fixture, plugin, sdk, profile"),
+    target: str = typer.Argument(..., help="Target identifier (e.g. path, plugin name)"),
+    profile: List[str] = typer.Option(["core"], "--profile", "-p", help="Engineering profile to use"),
+    disable: List[str] = typer.Option([], "--disable", help="Disable specific plugins or profiles")
 ) -> None:
     """Validate project structure and Engineering Knowledge Graph."""
-    console.print(
-        f"[bold blue]Validating {target_type} '{target}' using profile '{profile}'...[/bold blue]"
-    )
+    console.print(f"[bold blue]Validating {target_type} '{target}' using profiles '{profile}'...[/bold blue]")
     try:
-        engine = PlatformValidationEngine(profile_name=profile)
+        # Pass first profile for now, full composition handled in engine
+        engine = PlatformValidationEngine(profile_name=profile[0] if profile else "core")
         report = engine.validate(target_type, target)
 
         console.print("[green]✔[/green] Validation completed successfully.")
@@ -90,8 +88,8 @@ def validate(
                 f"Discovered {report.graph_statistics.node_count} nodes and {report.graph_statistics.edge_count} edges."
             )
 
-        if report.certification_results:
-            for layer, status in report.certification_results.items():
+        if report.certification:
+            for layer, status in report.certification.items():
                 console.print(f"[green]✔[/green] {layer} Passed")
 
     except Exception as e:
@@ -113,14 +111,11 @@ def docs() -> None:
 @app.command()
 def analyze(
     path: str = typer.Argument(".", help="Path to repository"),
-    profile: str = typer.Option(
-        "core", "--profile", "-p", help="Engineering profile to use"
-    ),
+    profile: List[str] = typer.Option(["core"], "--profile", "-p", help="Engineering profile to use"),
+    disable: List[str] = typer.Option([], "--disable", help="Disable specific plugins or profiles")
 ) -> None:
     """Analyze a repository and build its Knowledge Graph."""
-    console.print(
-        f"[bold blue]Analyzing repository at {path} with profile '{profile}'...[/bold blue]"
-    )
+    console.print(f"[bold blue]Analyzing repository at {path} with profiles '{profile}'...[/bold blue]")
     try:
         builder = PipelineEngine(path)
         graph = builder.build()
@@ -262,6 +257,37 @@ def info() -> None:
 def version() -> None:
     """Print the CLI version."""
     console.print(f"osef version {get_osef_version()}")
+
+
+@ecosystem_app.command("list")
+def ecosystem_list() -> None:
+    """List all ecosystem elements."""
+    console.print("Listing entire ecosystem...")
+
+@ecosystem_app.command("plugins")
+def ecosystem_plugins() -> None:
+    """List registered plugins."""
+    console.print("Listing plugins...")
+
+@ecosystem_app.command("domains")
+def ecosystem_domains() -> None:
+    """List registered knowledge domains."""
+    console.print("Listing domains...")
+
+@ecosystem_app.command("profiles")
+def ecosystem_profiles() -> None:
+    """List registered profiles."""
+    console.print("Listing profiles...")
+
+@ecosystem_app.command("capabilities")
+def ecosystem_capabilities() -> None:
+    """List exposed capabilities."""
+    console.print("Listing capabilities...")
+
+@ecosystem_app.command("certification")
+def ecosystem_certification() -> None:
+    """List certification statuses."""
+    console.print("Listing certification statuses...")
 
 
 if __name__ == "__main__":

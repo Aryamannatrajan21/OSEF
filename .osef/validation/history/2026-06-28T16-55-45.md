@@ -1,0 +1,38 @@
+# Platform Validation Report\n\nProfile: core\nDate: 2026-06-28T16-55-45\n```json\n{
+  "metadata": {
+    "target": ".",
+    "type": "Workspace"
+  },
+  "repository": {
+    "language": null,
+    "framework": null,
+    "repo_size": null,
+    "loc": null,
+    "packages": null,
+    "dependencies": null,
+    "commit": null,
+    "branch": null,
+    "analysis_date": "2026-06-28T16:55:45.102593"
+  },
+  "profile": "core",
+  "plugin_matrix": {},
+  "domain_coverage": [],
+  "graph_statistics": {
+    "node_count": 17378,
+    "edge_count": 29566,
+    "components": 0,
+    "services": 0
+  },
+  "correlation_statistics": {},
+  "reasoning_statistics": {},
+  "policy_statistics": {},
+  "certification": {},
+  "performance": {
+    "build_time_seconds": 58.617045164108276
+  },
+  "sdk_compatibility": {},
+  "engineering_confidence": {
+    "overall": "HIGH"
+  },
+  "recommendations": []
+}\n```

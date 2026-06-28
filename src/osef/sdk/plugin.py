@@ -13,6 +13,23 @@ class PluginQualityTier(str, Enum):
     EXPERIMENTAL = "experimental"
 
 
+class PluginCertificationStatus(str, Enum):
+    NOT_TESTED = "not_tested"
+    VALIDATED = "validated"
+    CERTIFIED = "certified"
+    REFERENCE = "reference"
+    DEPRECATED = "deprecated"
+
+
+class PluginCertification(BaseModel):
+    status: PluginCertificationStatus = PluginCertificationStatus.NOT_TESTED
+    certified_against_sdk: Optional[str] = None
+    certified_graph_schema: Optional[str] = None
+    certified_profiles: List[str] = Field(default_factory=list)
+    certification_date: Optional[str] = None
+    certification_version: Optional[str] = None
+
+
 class KnowledgeDomainManifest(BaseModel):
     """Manifest describing a Knowledge Domain."""
 
@@ -47,6 +64,7 @@ class PluginManifest(BaseModel):
     knowledge_domain: Optional[KnowledgeDomainManifest] = None
     quality_tier: PluginQualityTier = PluginQualityTier.EXPERIMENTAL
     supported_profiles: List[str] = Field(default_factory=list)
+    certification: PluginCertification = Field(default_factory=PluginCertification)
 
 
 class OsefPlugin(ABC):

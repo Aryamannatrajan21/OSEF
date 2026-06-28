@@ -2,8 +2,9 @@
 Profile Resolution Engine.
 """
 
-from typing import Dict, Set
+from typing import Dict, Set, List, Optional
 from osef.sdk.profiles.profile import EngineeringProfile
+from osef.sdk.profiles.registry import get_default_profiles
 from osef.contracts.exceptions import OSEFError
 
 
@@ -12,21 +13,26 @@ class ProfileResolutionEngine:
     Resolves composed and inherited profiles into a final unified configuration.
     """
 
-    def __init__(self, registered_profiles: Dict[str, EngineeringProfile]):
-        self.registered_profiles = registered_profiles
+    def __init__(self, registry: Optional[Dict[str, EngineeringProfile]] = None, disable: Optional[List[str]] = None):
+        self.registry = registry or get_default_profiles()
+        self.disable_plugins = set(disable or [])
 
     def resolve(self, profile_name: str) -> EngineeringProfile:
         """
-        Recursively resolves a profile by name.
+        Resolves a profile by name, including its inheritance chain, 
+        and applies any plugin exclusions.
         """
-        if profile_name not in self.registered_profiles:
-            raise OSEFError(f"Profile '{profile_name}' is not registered.")
+        if profile_name not in self.registry:
+            raise ValueError(f"Unknown profile: {profile_name}")
 
-        base_profile = self.registered_profiles[profile_name]
-
-        # Track seen to prevent circular inheritance
-        seen = {profile_name}
-        return self._resolve_recursive(base_profile, seen)
+        resolved = self._resolve_recursive(self.registry[profile_name], {profile_name})
+        
+        # Apply exclusions
+        if self.disable_plugins:
+            resolved.plugins = [p for p in resolved.plugins if p not in self.disable_plugins]
+            resolved.capabilities = [c for c in resolved.capabilities if c not in self.disable_plugins]
+            
+        return resolved
 
     def _resolve_recursive(
         self, profile: EngineeringProfile, seen: Set[str]
@@ -45,11 +51,11 @@ class ProfileResolutionEngine:
                 )
             seen.add(parent_name)
 
-            if parent_name not in self.registered_profiles:
+            if parent_name not in self.registry:
                 raise OSEFError(f"Parent profile '{parent_name}' is not registered.")
 
             parent_resolved = self._resolve_recursive(
-                self.registered_profiles[parent_name], seen
+                self.registry[parent_name], seen
             )
 
             plugins.update(parent_resolved.plugins)
