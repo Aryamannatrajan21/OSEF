@@ -1,0 +1,33 @@
+sdk:
+  version: 1.0.0
+  graph_schema: 5.0
+
+profiles:
+  - core
+  - backend
+  - frontend
+  - cloud
+  - enterprise
+  - runtime
+  - security
+  - compliance
+  - ai
+
+domains:
+  - software
+  - documentation
+  - infrastructure
+  - security
+  - architecture
+  - runtime
+  - organizational
+
+plugins:
+  - osef-python
+  - osef-documentation
+  - osef-visualization
+  - osef-infrastructure
+  - osef-security
+  - osef-architecture
+  - osef-runtime
+  - osef-enterprise
