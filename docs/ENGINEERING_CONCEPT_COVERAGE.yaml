@@ -1,0 +1,18 @@
+concept: Annotation
+
+languages:
+  typescript:
+    equivalent: decorator
+    level: L2
+
+  java:
+    equivalent: annotation
+    level: L1
+
+  rust:
+    equivalent: attribute
+    level: L2
+
+  go:
+    equivalent: none
+    level: L4
