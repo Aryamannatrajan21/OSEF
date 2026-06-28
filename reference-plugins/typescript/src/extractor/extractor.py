@@ -1,10 +1,10 @@
 import hashlib
 from typing import List, Sequence, Optional
-from src.osef.sdk.language.symbols import (
+from osef.sdk.language.symbols import (
     NormalizedSymbol, NormalizedClass, NormalizedInterface, 
     NormalizedEnum, NormalizedTypeAlias, NormalizedNamespace
 )
-from src.osef.sdk.language.builder import NormalizedSymbolBuilder
+from osef.sdk.language.builder import NormalizedSymbolBuilder
 from src.parser.adapter import NormalizedASTNode
 
 class TypeScriptSymbolExtractor:

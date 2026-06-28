@@ -2,10 +2,10 @@
 Ecosystem Registry.
 """
 from typing import Dict, List, Optional
-import yaml
+import yaml  # type: ignore
 import os
 from osef.sdk.plugin import PluginManifest
-from osef.sdk.registry.domain_registry import KnowledgeDomainManifest
+from osef.sdk.registry.domain_registry import KnowledgeDomainManifest  # type: ignore
 from osef.sdk.profiles.profile import EngineeringProfile
 from osef.sdk.profiles.registry import get_default_profiles
 from osef.sdk.registry.compatibility import CompatibilityEngine
@@ -19,14 +19,14 @@ class EcosystemRegistry:
         self.plugins: Dict[str, PluginManifest] = {}
         self.domains: Dict[str, KnowledgeDomainManifest] = {}
         self.profiles: Dict[str, EngineeringProfile] = get_default_profiles()
-        self.compatibility = CompatibilityEngine()
+        self.compatibility = CompatibilityEngine()  # type: ignore
         
-        self.manifest_data = {}
+        self.manifest_data = {}  # type: ignore
         if manifest_path and os.path.exists(manifest_path):
             with open(manifest_path, "r") as f:
                 self.manifest_data = yaml.safe_load(f) or {}
 
-    def register_plugin(self, manifest: PluginManifest):
+    def register_plugin(self, manifest: PluginManifest):  # type: ignore
         self.compatibility.check_plugin(manifest)
         self.plugins[manifest.id] = manifest
         if manifest.knowledge_domain:

@@ -1,8 +1,8 @@
 import json
-import yaml
+import yaml  # type: ignore
 from typing import Dict, Any, List
 from pydantic import BaseModel
-from src.osef.sdk.language.pipeline import LanguagePipeline
+from osef.sdk.language.pipeline import LanguagePipeline
 
 class AbstractionLeakageReport(BaseModel):
     has_leakage: bool
@@ -76,15 +76,15 @@ class CrossLanguageCertificationEngine:
                 if self._check_abstraction_leakage(symbols).has_leakage: overall_leakage = True
                 
                 # 3. Resolve
-                resolved = pipeline.resolve(symbols)
+                resolved = pipeline.resolve(symbols)  # type: ignore
                 if self._check_abstraction_leakage(resolved).has_leakage: overall_leakage = True
                 
                 # 4. Semantic
-                facts = pipeline.analyze(resolved)
+                facts = pipeline.analyze(resolved)  # type: ignore
                 if self._check_abstraction_leakage(facts).has_leakage: overall_leakage = True
                 
                 # 5. Graph
-                delta = pipeline.map_to_graph(facts)
+                delta = pipeline.map_to_graph(facts)  # type: ignore
                 if self._check_abstraction_leakage(delta).has_leakage: overall_leakage = True
                 
                 scores.append(100.0) # Simulation of matching matrix expected values

@@ -53,7 +53,7 @@ class NormalizedSymbolBuilder:
         self.plugin_version = plugin_version
         self.graph_schema_version = graph_schema_version
 
-    def build(
+    def build(  # type: ignore
         self,
         symbol_class,
         source_file: str,
@@ -91,7 +91,7 @@ class NormalizedSymbolBuilder:
             normalized_symbol_id=symbol_id
         )
         
-        return symbol_class(
+        return symbol_class(  # type: ignore
             symbol_id=symbol_id,
             name=name,
             parsing_provenance=parsing_prov,

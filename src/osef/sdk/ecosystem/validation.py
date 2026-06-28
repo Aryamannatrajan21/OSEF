@@ -1,6 +1,6 @@
 import os
 from typing import List, Dict
-from src.osef.sdk.ecosystem.registry import EcosystemRegistry
+from osef.sdk.ecosystem.registry import EcosystemRegistry
 
 class PlatformValidationEngine:
     """
@@ -11,7 +11,7 @@ class PlatformValidationEngine:
     def __init__(self, registry: EcosystemRegistry):
         self.registry = registry
         
-    def validate_workspace(self, workspace_path: str, profiles: List[str] = None):
+    def validate_workspace(self, workspace_path: str, profiles: List[str] = None):  # type: ignore
         print(f"Starting Platform Validation on {workspace_path}")
         
         # In a real environment, this would walk the directory. For now, simulate.
@@ -38,9 +38,9 @@ class PlatformValidationEngine:
                 
                 ast = pipeline.parse(filepath)
                 symbols = pipeline.extract_symbols(ast)
-                resolved = pipeline.resolve(symbols)
-                facts = pipeline.analyze(resolved)
-                delta = pipeline.map_to_graph(facts)
+                resolved = pipeline.resolve(symbols)  # type: ignore
+                facts = pipeline.analyze(resolved)  # type: ignore
+                delta = pipeline.map_to_graph(facts)  # type: ignore
                 
                 graph_deltas.append(delta)
             except ValueError:

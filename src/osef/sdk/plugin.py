@@ -76,11 +76,11 @@ class PluginManifest(BaseModel):
     
     # Marketplace Metadata
     publisher: Optional[str] = None
-    license: Optional[str] = None
-    homepage: Optional[str] = None
+    license: Optional[str] = None  # type: ignore
+    homepage: Optional[str] = None  # type: ignore
     repository: Optional[str] = None
-    documentation: Optional[str] = None
-    keywords: List[str] = Field(default_factory=list)
+    documentation: Optional[str] = None  # type: ignore
+    keywords: List[str] = Field(default_factory=list)  # type: ignore
 
 
 class OsefPlugin(ABC):

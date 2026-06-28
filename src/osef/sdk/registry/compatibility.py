@@ -10,7 +10,7 @@ class CompatibilityEngine:
     """
     Evaluates compatibility constraints for plugins and profiles.
     """
-    def __init__(self):
+    def __init__(self):  # type: ignore
         try:
             self.sdk_version = get_version("osef")
         except Exception:

@@ -5,7 +5,7 @@ import sys
 sys.path.insert(0, os.path.abspath("."))
 sys.path.insert(0, os.path.abspath("reference-plugins/typescript"))
 
-from src.osef.sdk.language.cross_certification import CrossLanguageCertificationEngine
+from osef.sdk.language.cross_certification import CrossLanguageCertificationEngine
 from src.pipeline import TypeScriptPipeline
 
 def test_cross_certification():

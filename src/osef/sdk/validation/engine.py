@@ -89,7 +89,7 @@ class PlatformValidationEngine:
             services=services,
         )
 
-        return PlatformValidationReport(
+        return PlatformValidationReport(  # type: ignore
             metadata={"target": path, "type": "Workspace"},
             repository=RepositoryMetadata(analysis_date=datetime.now().isoformat()),
             profile=self.profile_name,

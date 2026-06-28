@@ -1,8 +1,8 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath("."))
-from src.osef.sdk.ecosystem.registry import EcosystemRegistry
-from src.osef.sdk.ecosystem.validation import PlatformValidationEngine
+from osef.sdk.ecosystem.registry import EcosystemRegistry
+from osef.sdk.ecosystem.validation import PlatformValidationEngine
 sys.path.insert(0, os.path.abspath("reference-plugins/typescript"))
 from src.pipeline import TypeScriptPipeline
 

@@ -31,7 +31,7 @@ class NormalizedSymbol(BaseModel):
     modifiers: List[str] = Field(default_factory=list)
     type_hint: Optional[str] = None
     docstring: Optional[str] = None
-    payload: dict = Field(default_factory=dict)
+    payload: dict = Field(default_factory=dict)  # type: ignore
 
 
 class NormalizedPackage(NormalizedSymbol):

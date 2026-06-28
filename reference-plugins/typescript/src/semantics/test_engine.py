@@ -1,8 +1,8 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath("reference-plugins/typescript"))
-from src.osef.sdk.language.resolver import ResolvedSymbolGraph, ResolvedRelationship
-from src.osef.sdk.language.symbols import NormalizedClass, ParsingProvenance, SemanticProvenance
+from osef.sdk.language.resolver import ResolvedSymbolGraph, ResolvedRelationship
+from osef.sdk.language.symbols import NormalizedClass, ParsingProvenance, SemanticProvenance
 from src.semantics.engine import TypeScriptSemanticEngine
 
 def test_semantic_engine():

@@ -1,7 +1,7 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath("reference-plugins/typescript"))
-from src.osef.sdk.language.facts import SemanticFact
+from osef.sdk.language.facts import SemanticFact
 from src.projections.mapper import GraphMapper
 
 def test_graph_mapper():
