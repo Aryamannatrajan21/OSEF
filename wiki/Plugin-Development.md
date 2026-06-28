@@ -26,4 +26,4 @@ Every plugin must define a `manifest.json` (or entry in `pyproject.toml`):
 Use the `osef.testing.PluginTestCase` to write unit tests for your plugins.
 
 ---
-*Last Updated: Phase II | Maintainer: @Aryamannatrajan21*
+*Last Updated: v1.0.0-LTS | Maintainer: @Aryamannatrajan21*

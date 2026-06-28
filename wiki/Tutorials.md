@@ -28,4 +28,4 @@ How to finalize an accepted RFC into an Architecture Decision Record (ADR).
 How to build and preview the MkDocs material site locally before submitting a PR.
 
 ---
-*Last Updated: Phase II | Related Docs: [CONTRIBUTING.md](../CONTRIBUTING.md)*
+*Last Updated: v1.0.0-LTS | Related Docs: [CONTRIBUTING.md](../CONTRIBUTING.md)*

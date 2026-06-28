@@ -24,4 +24,4 @@ We follow Semantic Versioning.
 We actively encourage senior engineers to mentor newcomers. If you see a `help wanted` issue, consider guiding a new contributor through the process in the Discussions tab.
 
 ---
-*Last Updated: Phase II | Related Docs: [COMMUNITY.md](../COMMUNITY.md)*
+*Last Updated: v1.0.0-LTS | Related Docs: [COMMUNITY.md](../COMMUNITY.md)*

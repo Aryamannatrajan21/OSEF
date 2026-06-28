@@ -2,7 +2,7 @@
 
 A summary of every major OSEF release. For exhaustive details, see the official release notes in the repository.
 
-## `v1.0.0-rc1` (Current Release)
+## `v1.0.0-LTS` (Current Release)
 - **Codename**: Transformation Engine (OSTE)
 - **Focus**: Safely applying LLM patches validated by the EKG.
 - **Official Notes**: [RELEASE_NOTES_v0.2.0-alpha.md](../RELEASE_NOTES_v0.2.0-alpha.md)
@@ -13,4 +13,4 @@ A summary of every major OSEF release. For exhaustive details, see the official 
 - **Official Notes**: [RELEASE_NOTES_v0.1.0-alpha.md](../RELEASE_NOTES_v0.1.0-alpha.md)
 
 ---
-*Last Updated: Phase II | Related Docs: [CHANGELOG.md](../CHANGELOG.md)*
+*Last Updated: v1.0.0-LTS | Related Docs: [CHANGELOG.md](../CHANGELOG.md)*

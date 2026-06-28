@@ -16,7 +16,7 @@ OSEF treats codebases not as raw strings of text, but as a semantically connecte
 - **[Engineering Philosophy](Engineering-Philosophy)**: Dive into the principles that shape OSEF.
 
 ## 🚀 Status
-- **Latest Release:** `v1.0.0-rc1`
+- **Latest Release:** `v1.0.0-LTS`
 - **Current Phase:** Phase II (Ecosystem Engineering)
 - **Roadmap Summary:** Building out the Ecosystem (Enterprise Knowledge Domain, Language Packs, Marketplace) atop the now-frozen and certified Engineering Intelligence Stack.
 
@@ -36,4 +36,4 @@ This Wiki is a supplementary guide. The repository itself contains the canonical
 - **[Issues](https://github.com/Aryamannatrajan21/OSEF/issues)**: Report bugs, propose features, and submit Security Reports.
 
 ---
-*Last Updated: Phase II | Maintainer: @Aryamannatrajan21*
+*Last Updated: v1.0.0-LTS | Maintainer: @Aryamannatrajan21*

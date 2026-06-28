@@ -20,4 +20,4 @@ Our PED outlines our sprint cadence. We do not build features in a vacuum. Every
 - **Fail Fast, Fail Loud**: We prefer a hard crash over a silent failure.
 
 ---
-*Last Updated: Phase II | Related Docs: [CONSTITUTION.md](../governance/CONSTITUTION.md)*
+*Last Updated: v1.0.0-LTS | Related Docs: [CONSTITUTION.md](../governance/CONSTITUTION.md)*
