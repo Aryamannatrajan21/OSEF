@@ -58,6 +58,11 @@ from .certification import (
     CoverageMetrics,
     PerformanceMetrics,
     LanguageCertificationReport,
+    ParserCertificationReport,
+    SymbolCertificationReport,
+    ResolverCertificationReport,
+    SemanticCertificationReport,
+    GraphCertificationReport,
 )
 
 from .builder import (
@@ -113,9 +118,15 @@ __all__ = [
     "ResolvedSymbolGraph",
     "LanguageResolver",
     "StageCertificationMetrics",
+    "StageCertificationMetrics",
     "CoverageMetrics",
     "PerformanceMetrics",
     "LanguageCertificationReport",
+    "ParserCertificationReport",
+    "SymbolCertificationReport",
+    "ResolverCertificationReport",
+    "SemanticCertificationReport",
+    "GraphCertificationReport",
     "StableSymbolIdGenerator",
     "NormalizedSymbolBuilder",
 ]

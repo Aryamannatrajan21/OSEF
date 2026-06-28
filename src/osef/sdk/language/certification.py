@@ -9,9 +9,16 @@ class StageCertificationMetrics(BaseModel):
 
 
 class CoverageMetrics(BaseModel):
-    total_symbols: int = 0
-    resolved_symbols: int = 0
-    coverage_percentage: float = 0.0
+    structural_coverage: float = 0.0
+    inheritance_coverage: float = 0.0
+    generics_coverage: float = 0.0
+    decorators_coverage: float = 0.0
+    imports_coverage: float = 0.0
+    exports_coverage: float = 0.0
+    visibility_coverage: float = 0.0
+    call_graph_coverage: float = 0.0
+    type_system_coverage: float = 0.0
+    namespace_coverage: float = 0.0
     category_breakdown: Dict[str, float] = Field(default_factory=dict)
 
 
@@ -26,6 +33,30 @@ class PerformanceMetrics(BaseModel):
     throughput_edges_per_sec: float = 0.0
 
 
+class ParserCertificationReport(BaseModel):
+    metrics: StageCertificationMetrics = Field(default_factory=StageCertificationMetrics)
+
+
+class SymbolCertificationReport(BaseModel):
+    metrics: StageCertificationMetrics = Field(default_factory=StageCertificationMetrics)
+    stable_ids_verified: bool = False
+    provenance_verified: bool = False
+
+
+class ResolverCertificationReport(BaseModel):
+    metrics: StageCertificationMetrics = Field(default_factory=StageCertificationMetrics)
+
+
+class SemanticCertificationReport(BaseModel):
+    metrics: StageCertificationMetrics = Field(default_factory=StageCertificationMetrics)
+    semantic_stability_verified: bool = False
+
+
+class GraphCertificationReport(BaseModel):
+    metrics: StageCertificationMetrics = Field(default_factory=StageCertificationMetrics)
+    graph_stability_verified: bool = False
+
+
 class LanguageCertificationReport(BaseModel):
     """
     Canonical SDK artifact defining the certification status of a language processing pipeline.
@@ -36,16 +67,15 @@ class LanguageCertificationReport(BaseModel):
     plugin_version: str
     sdk_version: str
     
-    # Certification Stages (Language Processing Certification)
-    parser_certification: StageCertificationMetrics = Field(default_factory=StageCertificationMetrics)
-    symbol_extraction_certification: StageCertificationMetrics = Field(default_factory=StageCertificationMetrics)
-    resolver_certification: StageCertificationMetrics = Field(default_factory=StageCertificationMetrics)
-    semantic_certification: StageCertificationMetrics = Field(default_factory=StageCertificationMetrics)
-    graph_mapping_certification: StageCertificationMetrics = Field(default_factory=StageCertificationMetrics)
+    # Composable Certification Reports
+    parser_report: ParserCertificationReport = Field(default_factory=ParserCertificationReport)
+    symbol_report: SymbolCertificationReport = Field(default_factory=SymbolCertificationReport)
+    resolver_report: ResolverCertificationReport = Field(default_factory=ResolverCertificationReport)
+    semantic_report: SemanticCertificationReport = Field(default_factory=SemanticCertificationReport)
+    graph_report: GraphCertificationReport = Field(default_factory=GraphCertificationReport)
     
-    # Stability and Idempotence
+    # Determinism
     determinism_certification: StageCertificationMetrics = Field(default_factory=StageCertificationMetrics)
-    semantic_stability_certification: StageCertificationMetrics = Field(default_factory=StageCertificationMetrics)
     
     # Analytics
     coverage: CoverageMetrics = Field(default_factory=CoverageMetrics)
