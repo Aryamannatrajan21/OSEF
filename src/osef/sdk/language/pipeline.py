@@ -26,8 +26,8 @@ class StageResult(BaseModel, Generic[T]):
     data: T
     diagnostics: List[Diagnostic] = Field(default_factory=list)
     metrics: StageCertificationMetrics = Field(
-        default_factory=StageCertificationMetrics
-    )  # type: ignore
+        default_factory=StageCertificationMetrics,  # type: ignore
+    )
 
 
 class LanguagePipeline(Protocol):
