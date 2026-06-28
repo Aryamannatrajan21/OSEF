@@ -1,5 +1,17 @@
 # OSEF Ecosystem State
 
+| Metric | Value |
+| --- | ---: |
+| SDK Version | 1.0.0 |
+| Graph Schema | 5.0 |
+| Official Plugins | 8 |
+| Knowledge Domains | 7 |
+| Profiles | 9 |
+| Capabilities | 12 |
+| Benchmarks | 1 |
+| Certified Plugins | 8 |
+| Reference Plugins | 8 |
+
 ## Plugins
 The ecosystem supports a robust set of tier-categorized plugins (Tier 1 Official, Tier 2 Certified, Tier 3 Community, Experimental). Each plugin now features a rigorous `PluginCertification` status.
 

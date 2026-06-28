@@ -65,6 +65,14 @@ class PluginManifest(BaseModel):
     quality_tier: PluginQualityTier = PluginQualityTier.EXPERIMENTAL
     supported_profiles: List[str] = Field(default_factory=list)
     certification: PluginCertification = Field(default_factory=PluginCertification)
+    
+    # Marketplace Metadata
+    publisher: Optional[str] = None
+    license: Optional[str] = None
+    homepage: Optional[str] = None
+    repository: Optional[str] = None
+    documentation: Optional[str] = None
+    keywords: List[str] = Field(default_factory=list)
 
 
 class OsefPlugin(ABC):
