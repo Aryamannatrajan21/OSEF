@@ -8,11 +8,11 @@ from .dashboard import BenchmarkDashboard
 from .history import BenchmarkHistory
 
 __all__ = [
-    'BenchmarkManifest',
-    'BenchmarkRegistry',
-    'BenchmarkRunner',
-    'BenchmarkCertificationEngine',
-    'BenchmarkReport',
-    'BenchmarkDashboard',
-    'BenchmarkHistory'
+    "BenchmarkManifest",
+    "BenchmarkRegistry",
+    "BenchmarkRunner",
+    "BenchmarkCertificationEngine",
+    "BenchmarkReport",
+    "BenchmarkDashboard",
+    "BenchmarkHistory",
 ]

@@ -2,6 +2,7 @@ import yaml  # type: ignore
 from dataclasses import dataclass
 from typing import List, Dict, Any
 
+
 @dataclass
 class BenchmarkManifest:
     name: str
@@ -14,7 +15,7 @@ class BenchmarkManifest:
     certification: Dict[str, bool]
 
     @classmethod
-    def from_yaml(cls, path: str) -> 'BenchmarkManifest':
-        with open(path, 'r') as f:
+    def from_yaml(cls, path: str) -> "BenchmarkManifest":
+        with open(path, "r") as f:
             data = yaml.safe_load(f)
         return cls(**data)

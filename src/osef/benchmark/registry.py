@@ -2,6 +2,7 @@ import os
 from typing import List, Optional
 from .manifest import BenchmarkManifest
 
+
 class BenchmarkRegistry:
     def __init__(self, base_dir: str = "benchmarks/official"):
         self.base_dir = base_dir
@@ -14,7 +15,9 @@ class BenchmarkRegistry:
                 continue
             for file in os.listdir(tier_dir):
                 if file.endswith(".yaml"):
-                    self.manifests.append(BenchmarkManifest.from_yaml(os.path.join(tier_dir, file)))
+                    self.manifests.append(
+                        BenchmarkManifest.from_yaml(os.path.join(tier_dir, file))
+                    )
 
     def get_by_name(self, name: str) -> Optional[BenchmarkManifest]:
         for manifest in self.manifests:

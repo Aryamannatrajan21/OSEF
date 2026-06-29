@@ -18,6 +18,7 @@ from osef.intelligence.layer import IntelligenceLayer
 from osef.core.certification_engine import CertificationEngine
 from osef.sdk.validation.engine import PlatformValidationEngine
 from osef.cli.benchmark import app as benchmark_app
+
 app = typer.Typer(
     help="Open Source Engineering Framework",
     no_args_is_help=True,

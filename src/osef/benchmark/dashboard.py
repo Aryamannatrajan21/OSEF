@@ -1,5 +1,6 @@
 from typing import Dict, Any
 
+
 class BenchmarkDashboard:
     def __init__(self, history_dir: str = "benchmarks/history"):
         self.history_dir = history_dir
