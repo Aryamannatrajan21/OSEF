@@ -129,7 +129,7 @@ def get_policies() -> dict[str, Any]:
             outgoing_counts[e.source_id] += 1
 
         for n in graph.nodes.values():
-            if outgoing_counts[n.id] > 15:
+            if outgoing_counts[n.id] > 30:
                 violations.append(
                     {
                         "id": "Architecture.HighCoupling",
