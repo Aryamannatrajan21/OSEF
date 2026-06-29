@@ -17,17 +17,17 @@ class BenchmarkReport:
             "success": self.certification.get("success", False)
         }
 
-    def generate_all(self):
+    def generate_all(self) -> None:
         self._write_json("report.json", self.get_summary())
         self._write_json("metrics.json", self.metrics)
         self._write_json("validation.json", self.certification)
         self._write_json("dashboard.json", {**self.get_summary(), **self.metrics})
         self._write_md("report.md", f"# Benchmark Report: {self.manifest.name}\n\nSuccess: {self.certification.get('success', False)}")
 
-    def _write_json(self, filename: str, data: Dict[str, Any]):
+    def _write_json(self, filename: str, data: Dict[str, Any]) -> None:
         with open(os.path.join(self.output_dir, filename), "w") as f:
             json.dump(data, f, indent=2)
 
-    def _write_md(self, filename: str, content: str):
+    def _write_md(self, filename: str, content: str) -> None:
         with open(os.path.join(self.output_dir, filename), "w") as f:
             f.write(content)

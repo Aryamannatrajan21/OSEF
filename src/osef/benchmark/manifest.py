@@ -1,4 +1,4 @@
-import yaml
+import yaml  # type: ignore
 from dataclasses import dataclass
 from typing import List, Dict, Any
 

@@ -7,7 +7,7 @@ class BenchmarkRegistry:
         self.base_dir = base_dir
         self.manifests: List[BenchmarkManifest] = []
 
-    def load_all(self):
+    def load_all(self) -> None:
         for tier in ["tier1", "tier2", "tier3", "tier4"]:
             tier_dir = os.path.join(self.base_dir, tier)
             if not os.path.exists(tier_dir):

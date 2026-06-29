@@ -17,7 +17,7 @@ from osef.core.pipeline import PipelineEngine
 from osef.intelligence.layer import IntelligenceLayer
 from osef.core.certification_engine import CertificationEngine
 from osef.sdk.validation.engine import PlatformValidationEngine
-
+from osef.cli.benchmark import app as benchmark_app
 app = typer.Typer(
     help="Open Source Engineering Framework",
     no_args_is_help=True,
@@ -29,7 +29,6 @@ app.add_typer(graph_app, name="graph")
 ecosystem_app = typer.Typer(help="Ecosystem Catalog operations.")
 app.add_typer(ecosystem_app, name="ecosystem")
 
-from osef.cli.benchmark import app as benchmark_app
 app.add_typer(benchmark_app, name="benchmark")
 
 console = Console()
