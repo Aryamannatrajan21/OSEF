@@ -119,14 +119,19 @@ def get_policies(path: str = ".") -> dict[str, Any]:
             )
 
         # Rule 2: High Coupling
+        from collections import defaultdict
+
+        outgoing_counts = defaultdict(int)
+        for e in graph.edges:
+            outgoing_counts[e.source_id] += 1
+
         for n in graph.nodes.values():
-            deps = [e for e in graph.edges if e.source_id == n.id]
-            if len(deps) > 15:
+            if outgoing_counts[n.id] > 15:
                 violations.append(
                     {
                         "id": "Architecture.HighCoupling",
                         "severity": "error",
-                        "message": f"Node {n.name} has extremely high coupling ({len(deps)} outgoing dependencies)",
+                        "message": f"Node {n.name} has extremely high coupling ({outgoing_counts[n.id]} outgoing dependencies)",
                     }
                 )
 
