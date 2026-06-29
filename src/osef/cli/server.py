@@ -121,7 +121,7 @@ def get_policies(path: str = ".") -> dict[str, Any]:
         # Rule 2: High Coupling
         from collections import defaultdict
 
-        outgoing_counts = defaultdict(int)
+        outgoing_counts: dict[str, int] = defaultdict(int)
         for e in graph.edges:
             outgoing_counts[e.source_id] += 1
 
