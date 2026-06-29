@@ -46,6 +46,7 @@ class SymbolTable:
 
     def __init__(self) -> None:
         self.symbols: Dict[str, Symbol] = {}
+        self._type_index: Dict[str, List[Symbol]] = {}
 
     def generate_id(self, *parts: str) -> str:
         """Generate a deterministic ID based on parts."""
@@ -54,6 +55,11 @@ class SymbolTable:
     def add_symbol(self, symbol: Symbol) -> None:
         """Register a symbol in the table."""
         self.symbols[symbol.id] = symbol
+        
+        if symbol.type not in self._type_index:
+            self._type_index[symbol.type] = []
+        self._type_index[symbol.type].append(symbol)
+
         if symbol.parent_id and symbol.parent_id in self.symbols:
             parent = self.symbols[symbol.parent_id]
             if symbol.id not in parent.children_ids:
@@ -65,7 +71,7 @@ class SymbolTable:
 
     def find_by_type(self, symbol_type: str) -> List[Symbol]:
         """Find all symbols of a specific type."""
-        return [s for s in self.symbols.values() if s.type == symbol_type]
+        return self._type_index.get(symbol_type, [])
 
     def get_children(self, symbol_id: str) -> List[Symbol]:
         """Get all children of a specific symbol."""

@@ -18,6 +18,7 @@ class ImportResolver:
         Attempt to resolve all imports.
         """
         imports = self.symbol_table.find_by_type("import")
+        modules = self.symbol_table.find_by_type("module")
 
         for imp in imports:
             # Mark as unresolved by default
@@ -27,9 +28,10 @@ class ImportResolver:
             target = imp.metadata.get("module") or imp.name
 
             # Search for matching module
-            for mod in self.symbol_table.find_by_type("module"):
+            target_path = target.replace(".", "/")
+            for mod in modules:
                 # If the module's file path loosely matches the import target
-                if target.replace(".", "/") in mod.file_path:
+                if target_path in mod.file_path:
                     imp.metadata["resolved"] = "true"
                     imp.metadata["resolved_to"] = mod.id
                     break

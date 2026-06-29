@@ -45,3 +45,9 @@ Thumbs.db
 # Environment
 .env
 .env.*
+
+# UI
+node_modules/
+.next/
+osef-studio/node_modules/
+osef-studio/.next/

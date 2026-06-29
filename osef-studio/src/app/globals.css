@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --panel-bg: rgba(20, 20, 20, 0.6);
+  --panel-border: rgba(255, 255, 255, 0.1);
+  --accent: #3b82f6;
+  --hover-bg: rgba(255, 255, 255, 0.05);
+  
+  /* Domain Colors */
+  --color-software: #3b82f6;      /* Blue */
+  --color-architecture: #a855f7;  /* Purple */
+  --color-infrastructure: #f97316;/* Orange */
+  --color-security: #ef4444;      /* Red */
+  --color-runtime: #22c55e;       /* Green */
+  --color-enterprise: #06b6d4;    /* Cyan */
+  --color-documentation: #eab308; /* Yellow */
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), sans-serif;
+  margin: 0;
+  overflow: hidden; /* We want a full-screen app */
+}
+
+/* Utilities */
+.glass-panel {
+  background: var(--panel-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--panel-border);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
