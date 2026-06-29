@@ -101,6 +101,27 @@ graph TD
 
 ---
 
+## 🖥️ OSEF Studio
+
+OSEF ships with a stunning Next.js dashboard that visualizes your codebase architecture and policies in real-time. Simply run `osef ui` to launch it locally!
+
+### Interactive Graph Visualization
+![Graph View](docs/assets/studio_graph.png)
+
+### Architectural Metrics
+![Architecture View](docs/assets/studio_architecture.png)
+
+### Dynamic Confidence Scores
+![Reasoning View](docs/assets/studio_reasoning.png)
+
+### Real-time Policy Enforcement
+![Policies View](docs/assets/studio_policies.png)
+
+### Benchmark Integration
+![Benchmarks View](docs/assets/studio_benchmarks.png)
+
+---
+
 ## 🔌 Plugin Ecosystem
 
 **Current Knowledge Domains (Reference Plugins)**
