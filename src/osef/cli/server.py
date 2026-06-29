@@ -29,11 +29,14 @@ _graph_cache = None
 _benchmark_metrics: dict[str, Any] | None = None
 
 
-def get_engine(path: str = ".") -> tuple[Any, Any]:
+TARGET_DIR = os.environ.get("OSEF_TARGET_DIR", ".")
+
+
+def get_engine() -> tuple[Any, Any]:
     global _engine_cache, _graph_cache, _benchmark_metrics
     if _engine_cache is None:
         start_time = time.perf_counter()
-        _engine_cache = PipelineEngine(path)
+        _engine_cache = PipelineEngine(TARGET_DIR)
         _graph_cache = _engine_cache.build()
         end_time = time.perf_counter()
         duration = end_time - start_time
@@ -50,9 +53,9 @@ def get_engine(path: str = ".") -> tuple[Any, Any]:
 
 
 @app.get("/api/graph")
-def get_graph(path: str = ".") -> dict[str, Any]:
+def get_graph() -> dict[str, Any]:
     try:
-        _, graph = get_engine(path)
+        _, graph = get_engine()
 
         # Format the graph nodes/edges exactly like test_ekg.json
         return {
@@ -64,18 +67,18 @@ def get_graph(path: str = ".") -> dict[str, Any]:
 
 
 @app.get("/api/reasoning")
-def get_reasoning(path: str = ".") -> dict[str, Any]:
+def get_reasoning() -> dict[str, Any]:
     try:
-        engine, _ = get_engine(path)
+        engine, _ = get_engine()
         return dict(engine.confidence_score.dict())
     except Exception as e:
         return {"error": str(e)}
 
 
 @app.get("/api/stats")
-def get_stats(path: str = ".") -> dict[str, Any]:
+def get_stats() -> dict[str, Any]:
     try:
-        engine, graph = get_engine(path)
+        engine, graph = get_engine()
         return {
             "node_count": len(graph.nodes),
             "edge_count": len(graph.edges),
@@ -86,9 +89,9 @@ def get_stats(path: str = ".") -> dict[str, Any]:
 
 
 @app.get("/api/benchmark")
-def run_benchmark(path: str = ".") -> dict[str, Any]:
+def run_benchmark() -> dict[str, Any]:
     try:
-        get_engine(path)
+        get_engine()
         return {
             "status": "success",
             "metrics": _benchmark_metrics or {},
@@ -98,9 +101,9 @@ def run_benchmark(path: str = ".") -> dict[str, Any]:
 
 
 @app.get("/api/policies")
-def get_policies(path: str = ".") -> dict[str, Any]:
+def get_policies() -> dict[str, Any]:
     try:
-        engine, graph = get_engine(path)
+        engine, graph = get_engine()
         violations = []
 
         # Rule 1: Missing Docstrings
