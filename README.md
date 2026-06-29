@@ -164,6 +164,77 @@ osef report --format markdown
 
 ---
 
+## 🧪 The OSEF Benchmark Validation Suite
+
+To guarantee deterministic parsing, reasoning, and graph generation, **OSEF v1.0.0 LTS** ships with a built-in validation platform. The benchmark corpus tests the engine against a massive suite of real-world codebases spanning 4 tiers of architectural complexity.
+
+| Complexity | Scale | Target Codebases | Goal |
+| :--- | :--- | :--- | :--- |
+| **Tier 1** | Small | FastAPI, Flask, Express, Koa | Validate base parsing, graph generation, & language compliance |
+| **Tier 2** | Medium | NestJS, React, Spring PetClinic | Cross-module reasoning, dependency graphs, policy execution |
+| **Tier 3** | Large | Kubernetes, Kafka, Prometheus | Graph scalability, correlation engine, infrastructure semantics |
+| **Tier 4** | Massive | Linux Kernel, Chromium, VSCode | Absolute stress-testing, ecosystem scale |
+
+<br/>
+
+### 🛠️ Interactive CLI
+
+You can interact with the corpus directly through the `osef` CLI to run validations or inspect test parameters.
+
+<details>
+<summary><b><code>$ osef benchmark list</code></b> — <i>View the entire benchmark corpus</i></summary>
+<br/>
+
+```console
+Available Benchmarks:
+- picocli (tier1): https://github.com/remkop/picocli
+- gin (tier1): https://github.com/gin-gonic/gin
+- flask (tier1): https://github.com/pallets/flask
+- cobra (tier1): https://github.com/spf13/cobra
+- express (tier1): https://github.com/expressjs/express
+- fastapi (tier1): https://github.com/fastapi/fastapi
+- koa (tier1): https://github.com/koajs/koa
+- nextjs (tier2): https://github.com/vercel/next.js
+...
+- kubernetes (tier3): https://github.com/kubernetes/kubernetes
+- linux (tier4): https://github.com/torvalds/linux
+```
+</details>
+
+<details>
+<summary><b><code>$ osef benchmark info fastapi</code></b> — <i>Inspect passing criteria for a specific project</i></summary>
+<br/>
+
+```console
+Benchmark: fastapi
+  Repository: https://github.com/fastapi/fastapi
+  Tier: tier1
+  Languages: python
+  Expected Nodes: 1000
+  Expected Edges: 5000
+  Expected Confidence: 95
+```
+</details>
+
+<details>
+<summary><b><code>$ osef benchmark tier1</code></b> — <i>Execute a full suite run</i></summary>
+<br/>
+
+```console
+Running all tier1 benchmarks...
+
+Executing: picocli
+  ✔ Passed
+Executing: flask
+  ✔ Passed
+Executing: fastapi
+  ✔ Passed
+...
+```
+</details>
+
+---
+
 ## 📁 Repository Structure
 
 ```text
