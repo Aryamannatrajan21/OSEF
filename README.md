@@ -137,6 +137,20 @@ source .venv/bin/activate
 pip install -e .
 ```
 
+### Updating OSEF
+
+To update your OSEF installation to the latest version, simply pull the latest changes from the repository and re-install:
+
+```bash
+# If you cloned the repository locally:
+cd path/to/OSEF
+git pull
+pip install -e ".[ui]"
+
+# If you installed directly via pip from another project:
+pip install --upgrade "osef[ui] @ git+https://github.com/Aryamannatrajan21/OSEF.git"
+```
+
 ### Basic Usage
 
 ```bash
