@@ -2,6 +2,7 @@
 OSEF Studio FastAPI Server.
 """
 
+from typing import Any
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from osef.core.pipeline import PipelineEngine
@@ -22,7 +23,7 @@ _engine_cache = None
 _graph_cache = None
 
 
-def get_engine(path: str = ".") -> tuple:
+def get_engine(path: str = ".") -> tuple[Any, Any]:
     global _engine_cache, _graph_cache
     if _engine_cache is None:
         _engine_cache = PipelineEngine(path)
@@ -31,7 +32,7 @@ def get_engine(path: str = ".") -> tuple:
 
 
 @app.get("/api/graph")
-def get_graph(path: str = ".") -> dict:
+def get_graph(path: str = ".") -> dict[str, Any]:
     try:
         _, graph = get_engine(path)
 
@@ -45,16 +46,16 @@ def get_graph(path: str = ".") -> dict:
 
 
 @app.get("/api/reasoning")
-def get_reasoning(path: str = ".") -> dict:
+def get_reasoning(path: str = ".") -> dict[str, Any]:
     try:
         engine, _ = get_engine(path)
-        return engine.confidence_score.dict()
+        return dict(engine.confidence_score.dict())
     except Exception as e:
         return {"error": str(e)}
 
 
 @app.get("/api/stats")
-def get_stats(path: str = ".") -> dict:
+def get_stats(path: str = ".") -> dict[str, Any]:
     try:
         engine, graph = get_engine(path)
         return {
@@ -67,7 +68,7 @@ def get_stats(path: str = ".") -> dict:
 
 
 @app.get("/api/benchmark")
-def run_benchmark(path: str = ".") -> dict:
+def run_benchmark(path: str = ".") -> dict[str, Any]:
     # Simulate a benchmark run by returning latest optimized metrics
     import time
 
@@ -89,5 +90,5 @@ def run_benchmark(path: str = ".") -> dict:
 
 
 @app.get("/api/health")
-def health() -> dict:
+def health() -> dict[str, Any]:
     return {"status": "ok"}
