@@ -5,7 +5,7 @@ from .history import BenchmarkHistory
 from typing import Dict, Any
 
 class BenchmarkRunner:
-    def __init__(self):
+    def __init__(self) -> None:
         self.certification_engine = BenchmarkCertificationEngine()
         self.history = BenchmarkHistory()
 

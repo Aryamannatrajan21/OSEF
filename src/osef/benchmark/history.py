@@ -7,7 +7,7 @@ class BenchmarkHistory:
         self.history_dir = history_dir
         self.current_version = current_version
 
-    def archive(self, benchmark_name: str, report: BenchmarkReport):
+    def archive(self, benchmark_name: str, report: BenchmarkReport) -> None:
         target_dir = os.path.join(self.history_dir, self.current_version, benchmark_name)
         os.makedirs(target_dir, exist_ok=True)
         
