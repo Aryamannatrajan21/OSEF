@@ -55,7 +55,7 @@ class SymbolTable:
     def add_symbol(self, symbol: Symbol) -> None:
         """Register a symbol in the table."""
         self.symbols[symbol.id] = symbol
-        
+
         if symbol.type not in self._type_index:
             self._type_index[symbol.type] = []
         self._type_index[symbol.type].append(symbol)

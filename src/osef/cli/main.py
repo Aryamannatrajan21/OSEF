@@ -126,12 +126,17 @@ def docs() -> None:
 @app.command()
 def ui(port: int = 8000, host: str = "127.0.0.1") -> None:
     """Launch OSEF Studio (Engineering Intelligence Console)."""
-    console.print(f"[bold blue]Starting OSEF Studio API on http://{host}:{port}...[/bold blue]")
+    console.print(
+        f"[bold blue]Starting OSEF Studio API on http://{host}:{port}...[/bold blue]"
+    )
     try:
         import uvicorn
+
         uvicorn.run("osef.cli.server:app", host=host, port=port, reload=True)
     except ImportError:
-        console.print("[bold red]FastAPI/Uvicorn are required for the UI. Install with: pip install 'osef[ui]'[/bold red]")
+        console.print(
+            "[bold red]FastAPI/Uvicorn are required for the UI. Install with: pip install 'osef[ui]'[/bold red]"
+        )
         raise typer.Exit(code=1)
 
 

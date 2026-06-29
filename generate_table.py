@@ -1,6 +1,5 @@
 import json
 import os
-import glob
 
 results_dir = "benchmarks/results/latest"
 projects = sorted(os.listdir(results_dir))
@@ -25,13 +24,15 @@ for p in projects:
             nodes = data.get("nodes", "N/A")
             edges = data.get("edges", "N/A")
             conf = data.get("engineering_confidence", "N/A")
-            
+
             # Format numbers nicely
-            runtime_fmt = f"{runtime:,}" if isinstance(runtime, (int, float)) else runtime
+            runtime_fmt = (
+                f"{runtime:,}" if isinstance(runtime, (int, float)) else runtime
+            )
             memory_fmt = f"{memory:,}" if isinstance(memory, (int, float)) else memory
             nodes_fmt = f"{nodes:,}" if isinstance(nodes, (int, float)) else nodes
             edges_fmt = f"{edges:,}" if isinstance(edges, (int, float)) else edges
-            
+
             markdown += f"| **{p}** | {runtime_fmt} | {memory_fmt} | {nodes_fmt} | {edges_fmt} | {conf}% |\n"
 
 markdown += """
@@ -50,4 +51,3 @@ if target in content:
     print("Updated README.md successfully.")
 else:
     print("Could not find the target location in README.md")
-

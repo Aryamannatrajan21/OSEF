@@ -2,7 +2,6 @@
 OSEF Studio FastAPI Server.
 """
 
-import json
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from osef.core.pipeline import PipelineEngine
@@ -22,51 +21,57 @@ app.add_middleware(
 _engine_cache = None
 _graph_cache = None
 
-def get_engine(path: str = "."):
+
+def get_engine(path: str = ".") -> tuple:
     global _engine_cache, _graph_cache
     if _engine_cache is None:
         _engine_cache = PipelineEngine(path)
         _graph_cache = _engine_cache.build()
     return _engine_cache, _graph_cache
 
+
 @app.get("/api/graph")
-def get_graph(path: str = "."):
+def get_graph(path: str = ".") -> dict:
     try:
         _, graph = get_engine(path)
-        
+
         # Format the graph nodes/edges exactly like test_ekg.json
         return {
             "nodes": [node.dict() for node in graph.nodes.values()],
-            "edges": [edge.dict() for edge in graph.edges]
+            "edges": [edge.dict() for edge in graph.edges],
         }
     except Exception as e:
         return {"error": str(e)}
 
+
 @app.get("/api/reasoning")
-def get_reasoning(path: str = "."):
+def get_reasoning(path: str = ".") -> dict:
     try:
         engine, _ = get_engine(path)
         return engine.confidence_score.dict()
     except Exception as e:
         return {"error": str(e)}
 
+
 @app.get("/api/stats")
-def get_stats(path: str = "."):
+def get_stats(path: str = ".") -> dict:
     try:
         engine, graph = get_engine(path)
         return {
             "node_count": len(graph.nodes),
             "edge_count": len(graph.edges),
-            "overall_confidence": engine.confidence_score.overall_confidence
+            "overall_confidence": engine.confidence_score.overall_confidence,
         }
     except Exception as e:
         return {"error": str(e)}
 
+
 @app.get("/api/benchmark")
-def run_benchmark(path: str = "."):
+def run_benchmark(path: str = ".") -> dict:
     # Simulate a benchmark run by returning latest optimized metrics
     import time
-    time.sleep(1.5) # Simulate running
+
+    time.sleep(1.5)  # Simulate running
     try:
         engine, graph = get_engine(path)
         return {
@@ -76,12 +81,13 @@ def run_benchmark(path: str = "."):
                 "resolution_time": "4.42s",
                 "total_time": "25.23s",
                 "memory_usage": "142 MB",
-                "nodes_processed": len(graph.nodes)
-            }
+                "nodes_processed": len(graph.nodes),
+            },
         }
     except Exception as e:
         return {"error": str(e)}
 
+
 @app.get("/api/health")
-def health():
+def health() -> dict:
     return {"status": "ok"}
