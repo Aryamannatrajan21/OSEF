@@ -120,6 +120,9 @@ OSEF ships with a stunning Next.js dashboard that visualizes your codebase archi
 ### Benchmark Integration
 ![Benchmarks View](docs/assets/studio_benchmarks.png)
 
+### Live Terminal Benchmark Execution
+![Live Benchmark Execution](docs/assets/studio_benchmarks_run.png)
+
 ---
 
 ## 🔌 Plugin Ecosystem
