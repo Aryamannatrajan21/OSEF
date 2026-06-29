@@ -52,22 +52,92 @@ The OSEF pipeline is a unidirectional, deterministic data flow:
 
 Each boundary exists to strictly decouple parsing (syntax) from reasoning (semantics).
 
-## 4. Language SDK
-The frozen Language SDK dictates how plugins communicate with OSEF.
+## 4. Frozen SDK Contracts (The Source of Truth)
+Autonomous agents building on OSEF must perfectly implement the following Frozen SDK interfaces (`src/osef/sdk/language/*`). DO NOT modify these.
 
-- **LanguagePipeline**: The orchestrator interface every language plugin must implement.
-- **LanguageParserAdapter**: Wraps underlying parsers (like tree-sitter) to produce `NormalizedAST`.
-- **NormalizedAST**: A uniform wrapper around syntax trees, stripping away parser-specific APIs.
-- **NormalizedSymbolModel**: Pre-defined Pydantic models (e.g., `NormalizedClass`, `NormalizedFunction`) that all languages must extract into.
-- **ResolvedSymbolGraph**: A graph of `NormalizedSymbol` nodes and `ResolvedRelationship` edges (e.g. `EXTENDS`, `IMPLEMENTS`, `IMPORTS`).
-- **SemanticFacts**: Triples (Subject, Fact, Attributes) emitted by the Semantic Engine representing architectural truths.
-- **GraphMapper**: Converts Semantic Facts into `GraphDelta`.
-- **GraphDelta**: The standardized payload of generic `Nodes` and `Edges` to be ingested by the EKG.
+### A. Normalized Symbol Models
+Extracted by the Plugin `Extractor`, representing agnostic code structures.
+```python
+class ParsingProvenance(BaseModel):
+    language: str
+    parser: str
+    parser_version: str
+    source_file: str
+    source_hash: str
+    ast_node_kind: str
+    source_range: List[int]  # [start_line, start_col, end_line, end_col]
 
-**Key Traits**: Immutability (objects cannot change once built), Determinism, Serialization (all models are JSON-serializable), Provenance (every node tracks its source file/line), Stable IDs (content-based hashing), and strict Language Neutrality.
+class SemanticProvenance(BaseModel):
+    semantic_stage: str
+    resolver_version: str
+    plugin_version: str
+    sdk_version: str
+    graph_schema_version: str
+    normalized_symbol_id: str
+
+class NormalizedSymbol(BaseModel):
+    schema_version: str = "1.0"
+    symbol_id: str
+    name: str
+    kind: str  # e.g., 'class', 'interface', 'function', 'package', 'module'
+    parsing_provenance: ParsingProvenance
+    semantic_provenance: SemanticProvenance
+    modifiers: List[str] = Field(default_factory=list)
+    type_hint: Optional[str] = None
+    docstring: Optional[str] = None
+    payload: dict = Field(default_factory=dict)
+```
+
+**Supported Kinds**: `NormalizedPackage`, `NormalizedModule`, `NormalizedNamespace`, `NormalizedImport`, `NormalizedExport`, `NormalizedClass`, `NormalizedInterface`, `NormalizedTrait`, `NormalizedStruct`, `NormalizedEnum`, `NormalizedTypeAlias`, `NormalizedFunction`, `NormalizedMethod`, `NormalizedConstructor`, `NormalizedProperty`, `NormalizedVariable`, `NormalizedConstant`, `NormalizedGeneric`, `NormalizedDecorator`, `NormalizedAnnotation`.
+
+### B. Resolved Relationships
+Emitted by the Plugin `Resolver`.
+```python
+class ResolvedRelationship(BaseModel):
+    relationship_id: str
+    source_symbol_id: str
+    target_symbol_id: str
+    relationship_type: str # DECLARES, EXTENDS, IMPLEMENTS, IMPORTS, CALLS
+```
+
+### C. Semantic Facts
+Emitted by the Plugin `SemanticEngine` to declare universal engineering truths. Kinds include:
+```python
+class SemanticFact(BaseModel):
+    schema_version: str = "1.0"
+    subject_symbol_id: str
+    fact_type: str
+    attributes: Dict[str, Any] = Field(default_factory=dict)
+
+# Specific Facts (Derived from SemanticFact):
+# ContainsFact, NamespaceFact, ModuleFact, InheritanceFact, ImplementationFact
+# GenericConstraintFact, TypeAliasFact, TypeUsageFact, ImportFact, ExportFact
+# DependencyFact, CallFact, OverrideFact, VisibilityFact, OwnershipFact
+# DocumentationFact, AnnotationFact, DecoratorFact
+```
+
+### D. Graph Delta
+Emitted by the Plugin `GraphMapper`, consumed by the EKG.
+```python
+class NodeDelta(BaseModel):
+    id: str
+    type: str # Graph Ontology Node Type
+    properties: dict[str, Any]
+
+class EdgeDelta(BaseModel):
+    source_id: str
+    target_id: str
+    relationship: str # Graph Ontology Edge Type
+    properties: dict[str, Any]
+
+class GraphDelta(BaseModel):
+    schema_version: str = "1.0"
+    nodes: List[NodeDelta]
+    edges: List[EdgeDelta]
+```
 
 ## 5. Engineering Ontology
-OSEF models the world via Engineering Domains, not code domains:
+OSEF models the world via Engineering Domains, not code domains. Nodes map to engineering concepts.
 - **Software**: Classes, Interfaces, Functions, Modules.
 - **Architecture**: Microservices, Gateways, Data Stores, Message Brokers.
 - **Infrastructure**: Containers, Pods, Deployments.
