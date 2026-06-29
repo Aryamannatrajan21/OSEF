@@ -3,7 +3,9 @@ OSEF Studio FastAPI Server.
 """
 
 from typing import Any
+import os
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from osef.core.pipeline import PipelineEngine
 
@@ -92,3 +94,15 @@ def run_benchmark(path: str = ".") -> dict[str, Any]:
 @app.get("/api/health")
 def health() -> dict[str, Any]:
     return {"status": "ok"}
+
+ui_dir = os.path.join(os.path.dirname(__file__), "ui")
+if not os.path.exists(ui_dir):
+    # Fallback for local editable install (pip install -e .)
+    ui_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../osef-studio/out"))
+
+if os.path.exists(ui_dir):
+    app.mount("/", StaticFiles(directory=ui_dir, html=True), name="ui")
+else:
+    @app.get("/")
+    def root_fallback():
+        return {"detail": "OSEF Studio UI not bundled. Build the UI first."}
