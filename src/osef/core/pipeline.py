@@ -121,6 +121,132 @@ class PipelineEngine:
                 abs_path = self.root_path / python_file
                 parser.parse_file(str(abs_path))
 
+        # Parse typescript files if any
+        if manifest.typescript_files:
+            try:
+                import sys
+                import importlib.util
+                from pathlib import Path
+
+                # Use current working directory or predefined path since root_path is the project being analyzed
+                project_root = Path(__file__).parent.parent.parent.parent
+                ts_plugin_path = (
+                    project_root
+                    / "reference-plugins"
+                    / "typescript"
+                    / "src"
+                    / "pipeline.py"
+                )
+                if ts_plugin_path.exists():
+                    # Temporarily append to path to allow relative imports inside the plugin
+                    plugin_src_dir = str(
+                        project_root / "reference-plugins" / "typescript"
+                    )
+                    sys.path.insert(0, plugin_src_dir)
+
+                    spec = importlib.util.spec_from_file_location(
+                        "ts_pipeline_module", ts_plugin_path
+                    )
+                    if spec and spec.loader:
+                        ts_module = importlib.util.module_from_spec(spec)
+                        # We must manually load the module
+                        spec.loader.exec_module(ts_module)
+                        ts_pipeline = ts_module.TypeScriptPipeline()
+
+                        for ts_file in manifest.typescript_files:
+                            abs_path = self.root_path / ts_file
+                            logger.info(f"Parsing typescript file: {ts_file}")
+                            ast = ts_pipeline.parse(str(abs_path))
+                            symbols = ts_pipeline.extract_symbols(ast)
+                            graph = ts_pipeline.resolve(symbols)
+                            facts = ts_pipeline.analyze(graph)
+                            delta = ts_pipeline.map_to_graph(facts)
+                            # Create Node from each symbol directly
+                            from osef.core.ekg import Node as EKGNode, Edge as EKGEdge
+
+                            for sym in symbols:
+                                n = EKGNode(
+                                    id=sym.symbol_id,
+                                    type=sym.kind,
+                                    name=sym.name,
+                                    description="",
+                                    metadata={
+                                        "source_file": sym.parsing_provenance.source_file
+                                    },
+                                )
+                                self.graph.add_node(n)
+
+                            for edge in delta.edges:
+                                e = EKGEdge(
+                                    source_id=edge.source_id,
+                                    target_id=edge.target_id,
+                                    relation_type=edge.relationship,
+                                )
+                                self.graph.add_edge(e)
+
+                    sys.path.pop(0)
+            except Exception as e:
+                print(f"Could not load TypeScript plugin: {e}")
+
+        # Parse java files if any
+        if getattr(manifest, "java_files", None):
+            try:
+                import sys
+                import importlib.util
+                from pathlib import Path
+
+                project_root = Path(__file__).parent.parent.parent.parent
+                java_plugin_path = (
+                    project_root / "reference-plugins" / "java" / "src" / "pipeline.py"
+                )
+                if java_plugin_path.exists():
+                    plugin_src_dir = str(project_root / "reference-plugins" / "java")
+                    sys.path.insert(0, plugin_src_dir)
+
+                    spec = importlib.util.spec_from_file_location(
+                        "java_pipeline_module", java_plugin_path
+                    )
+                    if spec and spec.loader:
+                        java_module = importlib.util.module_from_spec(spec)
+                        spec.loader.exec_module(java_module)
+                        java_pipeline = java_module.JavaPipeline()
+
+                        for java_file in manifest.java_files:
+                            abs_path = self.root_path / java_file
+                            logger.info(f"Parsing java file: {java_file}")
+                            ast = java_pipeline.parse(str(abs_path))
+                            symbols = java_pipeline.extract_symbols(ast)
+                            graph = java_pipeline.resolve(symbols)
+                            facts = java_pipeline.analyze(graph)
+                            delta = java_pipeline.map_to_graph(facts)
+
+                            from osef.core.ekg import Node as EKGNode, Edge as EKGEdge
+
+                            for sym in symbols:
+                                n = EKGNode(
+                                    id=sym.symbol_id,
+                                    type=sym.kind,
+                                    name=sym.name,
+                                    description="",
+                                    metadata={
+                                        "source_file": sym.parsing_provenance.source_file
+                                    },
+                                )
+                                self.graph.add_node(n)
+
+                            for edge in delta.edges:
+                                ekg_edge = EKGEdge(
+                                    source_id=edge.source_id,
+                                    target_id=edge.target_id,
+                                    relation_type=edge.relationship,
+                                    metadata={},
+                                )
+                                self.graph.add_edge(ekg_edge)
+
+                    sys.path.pop(0)
+            except Exception as err:
+                print(f"Could not load Java plugin: {err}")
+
         # Parse configs (still legacy for now)
         config_parser = ConfigParser(self.root_path, symbol_table)
         config_parser.parse_all()

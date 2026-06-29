@@ -14,6 +14,8 @@ class RepositoryManifest(BaseModel):
     root_path: str
     project_name: Optional[str] = None
     python_files: List[str] = Field(default_factory=list)
+    typescript_files: List[str] = Field(default_factory=list)
+    java_files: List[str] = Field(default_factory=list)
     has_pyproject: bool = False
     has_requirements: bool = False
     package_manager: Optional[str] = None

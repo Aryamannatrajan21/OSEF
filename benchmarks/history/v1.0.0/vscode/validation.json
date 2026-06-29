@@ -1,0 +1,13 @@
+{
+  "success": false,
+  "parser_certified": true,
+  "graph_certified": false,
+  "reasoning_certified": false,
+  "metrics": {
+    "runtime_ms": 1500,
+    "memory_mb": 250,
+    "nodes": 1200,
+    "edges": 5500,
+    "engineering_confidence": 98
+  }
+}

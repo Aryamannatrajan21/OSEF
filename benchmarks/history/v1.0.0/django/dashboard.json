@@ -1,0 +1,9 @@
+{
+  "name": "django",
+  "success": true,
+  "runtime_ms": 1500,
+  "memory_mb": 250,
+  "nodes": 1200,
+  "edges": 5500,
+  "engineering_confidence": 98
+}
