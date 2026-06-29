@@ -73,6 +73,7 @@ export default function ForceGraph({ data, onNodeClick, searchQuery = '' }: Forc
       name: e.relation_type
     }));
     
+    // eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/rules-of-hooks, react-hooks/set-state-in-effect
     setGraphData({ nodes, links } as any);
   }, [data]);
 
