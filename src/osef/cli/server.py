@@ -104,5 +104,5 @@ if os.path.exists(ui_dir):
     app.mount("/", StaticFiles(directory=ui_dir, html=True), name="ui")
 else:
     @app.get("/")
-    def root_fallback():
+    def root_fallback() -> dict[str, str]:
         return {"detail": "OSEF Studio UI not bundled. Build the UI first."}
