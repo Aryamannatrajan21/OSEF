@@ -1,0 +1,25 @@
+name: fastapi
+repository: https://github.com/fastapi/fastapi
+
+tier: tier1
+
+languages:
+  - python
+
+profiles:
+  - backend
+
+plugins:
+  - python
+  - architecture
+  - security
+
+expected:
+  minimum_nodes: 1000
+  minimum_edges: 5000
+  engineering_confidence: 95
+
+certification:
+  parser: true
+  graph: true
+  reasoning: true

@@ -1,0 +1,25 @@
+name: prometheus
+repository: https://github.com/prometheus/prometheus
+
+tier: tier3
+
+languages:
+  - go
+
+profiles:
+  - infrastructure
+
+plugins:
+  - go
+  - architecture
+  - security
+
+expected:
+  minimum_nodes: 10000
+  minimum_edges: 50000
+  engineering_confidence: 80
+
+certification:
+  parser: true
+  graph: true
+  reasoning: true
