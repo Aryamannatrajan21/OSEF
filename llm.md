@@ -208,6 +208,7 @@ The Benchmark Runner evaluates Graph Nodes, Edges, Runtime, Memory, and computes
 - `osef benchmark`: Execute the Benchmark Corpus.
 - `osef doctor`: Validate environment and active plugins.
 - `osef graph`: Export the EKG for visualization.
+- `osef ui`: Launch the interactive OSEF Studio dashboard locally.
 
 ## 14. Constitutional Rules
 **IMMUTABLE LAWS OF OSEF**:
@@ -239,6 +240,7 @@ Do not continue implementation until user approval.
 - `src/osef/sdk/`: The frozen boundaries, models, and Plugin SDK.
 - `src/osef/cli/`: Typer-based command-line interface.
 - `src/osef/epe/`: Engineering Policy Engine.
+- `osef-studio/`: Next.js web application for the OSEF Studio dashboard.
 - `reference-plugins/`: Official language implementations (`java`, `typescript`, `python`).
 - `tests/`: End-to-end certification and unit tests.
 - `benchmarks/`: The performance and scaling validation corpus.
