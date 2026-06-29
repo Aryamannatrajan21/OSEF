@@ -29,6 +29,9 @@ app.add_typer(graph_app, name="graph")
 ecosystem_app = typer.Typer(help="Ecosystem Catalog operations.")
 app.add_typer(ecosystem_app, name="ecosystem")
 
+from osef.cli.benchmark import app as benchmark_app
+app.add_typer(benchmark_app, name="benchmark")
+
 console = Console()
 
 

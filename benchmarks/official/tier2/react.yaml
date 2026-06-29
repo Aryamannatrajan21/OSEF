@@ -1,0 +1,25 @@
+name: react
+repository: https://github.com/facebook/react
+
+tier: tier2
+
+languages:
+  - javascript
+
+profiles:
+  - frontend
+
+plugins:
+  - javascript
+  - architecture
+  - security
+
+expected:
+  minimum_nodes: 1000
+  minimum_edges: 5000
+  engineering_confidence: 95
+
+certification:
+  parser: true
+  graph: true
+  reasoning: true

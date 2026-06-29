@@ -1,0 +1,25 @@
+name: quarkus-quickstarts
+repository: https://github.com/quarkusio/quarkus-quickstarts
+
+tier: tier2
+
+languages:
+  - java
+
+profiles:
+  - backend
+
+plugins:
+  - java
+  - architecture
+  - security
+
+expected:
+  minimum_nodes: 1000
+  minimum_edges: 5000
+  engineering_confidence: 95
+
+certification:
+  parser: true
+  graph: true
+  reasoning: true

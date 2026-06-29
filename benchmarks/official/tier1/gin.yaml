@@ -1,0 +1,25 @@
+name: gin
+repository: https://github.com/gin-gonic/gin
+
+tier: tier1
+
+languages:
+  - go
+
+profiles:
+  - backend
+
+plugins:
+  - go
+  - architecture
+  - security
+
+expected:
+  minimum_nodes: 1000
+  minimum_edges: 5000
+  engineering_confidence: 95
+
+certification:
+  parser: true
+  graph: true
+  reasoning: true
