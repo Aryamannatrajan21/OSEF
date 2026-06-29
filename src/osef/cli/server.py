@@ -3,6 +3,7 @@ OSEF Studio FastAPI Server.
 """
 
 import time
+import logging
 from typing import Any
 import os
 from fastapi import FastAPI
@@ -11,6 +12,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from osef.core.pipeline import PipelineEngine
 
 app = FastAPI(title="OSEF Studio API", version="1.0.0")
+
+logger = logging.getLogger(__name__)
 
 # Setup CORS for local dashboard development
 app.add_middleware(
@@ -63,7 +66,8 @@ def get_graph() -> dict[str, Any]:
             "edges": [edge.dict() for edge in graph.edges],
         }
     except Exception as e:
-        return {"error": str(e)}
+        logger.error(f"Error fetching graph: {e}")
+        return {"error": "Internal server error while fetching graph."}
 
 
 @app.get("/api/reasoning")
@@ -72,7 +76,8 @@ def get_reasoning() -> dict[str, Any]:
         engine, _ = get_engine()
         return dict(engine.confidence_score.dict())
     except Exception as e:
-        return {"error": str(e)}
+        logger.error(f"Error fetching reasoning: {e}")
+        return {"error": "Internal server error while fetching reasoning."}
 
 
 @app.get("/api/stats")
@@ -85,7 +90,8 @@ def get_stats() -> dict[str, Any]:
             "overall_confidence": engine.confidence_score.overall_confidence,
         }
     except Exception as e:
-        return {"error": str(e)}
+        logger.error(f"Error fetching stats: {e}")
+        return {"error": "Internal server error while fetching stats."}
 
 
 @app.get("/api/benchmark")
@@ -97,7 +103,8 @@ def run_benchmark() -> dict[str, Any]:
             "metrics": _benchmark_metrics or {},
         }
     except Exception as e:
-        return {"error": str(e)}
+        logger.error(f"Error running benchmark: {e}")
+        return {"error": "Internal server error while running benchmark."}
 
 
 @app.get("/api/policies")
@@ -140,7 +147,8 @@ def get_policies() -> dict[str, Any]:
 
         return {"violations": violations}
     except Exception as e:
-        return {"error": str(e)}
+        logger.error(f"Error fetching policies: {e}")
+        return {"error": "Internal server error while fetching policies."}
 
 
 @app.get("/api/health")
