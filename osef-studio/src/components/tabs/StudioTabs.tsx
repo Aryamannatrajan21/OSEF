@@ -7,7 +7,7 @@ export function ArchitectureTab() {
   const [stats, setStats] = useState<any>(null);
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/stats')
+    fetch('/api/stats')
       .then(res => res.json())
       .then(data => setStats(data));
   }, []);
@@ -46,7 +46,7 @@ export function ReasoningTab() {
   const [reasoning, setReasoning] = useState<any>(null);
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/reasoning')
+    fetch('/api/reasoning')
       .then(res => res.json())
       .then(data => setReasoning(data));
   }, []);
@@ -84,23 +84,37 @@ export function ReasoningTab() {
 }
 
 export function PoliciesTab() {
+  const [violations, setViolations] = useState<any>(null);
+
+  useEffect(() => {
+    fetch('/api/policies')
+      .then(res => res.json())
+      .then(data => setViolations(data.violations || []));
+  }, []);
+
+  if (!violations) return <div className="p-8 text-white">Evaluating policies...</div>;
+
   return (
     <div className="flex-1 flex flex-col p-8 overflow-y-auto">
       <h2 className="text-2xl font-bold text-white mb-6 flex items-center"><ShieldCheck className="mr-3 text-red-400" /> Policy Enforcement</h2>
       <div className="glass-panel p-6 rounded-lg border border-[var(--panel-border)] max-w-2xl">
         <div className="flex items-center mb-4">
           <ShieldAlert className="text-yellow-500 mr-3" size={24} />
-          <h3 className="text-white text-lg">2 Policy Violations Detected</h3>
+          <h3 className="text-white text-lg">{violations.length} Policy Violations Detected</h3>
         </div>
         <ul className="space-y-4">
-          <li className="bg-black/40 p-4 rounded-md border border-red-500/30">
-            <p className="text-red-400 font-medium">Architecture.Dependency.Cycle</p>
-            <p className="text-gray-400 text-sm mt-1">Circular dependency found between `src.osef.core.pipeline` and `src.osef.scanner`</p>
-          </li>
-          <li className="bg-black/40 p-4 rounded-md border border-yellow-500/30">
-            <p className="text-yellow-400 font-medium">Security.Auth.MissingToken</p>
-            <p className="text-gray-400 text-sm mt-1">FastAPI endpoint `/api/graph` does not have authentication required.</p>
-          </li>
+          {violations.map((v: any, idx: number) => (
+            <li key={idx} className={`bg-black/40 p-4 rounded-md border ${v.severity === 'error' ? 'border-red-500/30' : 'border-yellow-500/30'}`}>
+              <p className={`${v.severity === 'error' ? 'text-red-400' : 'text-yellow-400'} font-medium`}>{v.id}</p>
+              <p className="text-gray-400 text-sm mt-1">{v.message}</p>
+            </li>
+          ))}
+          {violations.length === 0 && (
+            <li className="bg-black/40 p-4 rounded-md border border-green-500/30">
+              <p className="text-green-400 font-medium">All Clear!</p>
+              <p className="text-gray-400 text-sm mt-1">No violations found in the engineering baseline.</p>
+            </li>
+          )}
         </ul>
       </div>
     </div>
@@ -113,7 +127,7 @@ export function BenchmarksTab() {
 
   const runBenchmarks = () => {
     setLoading(true);
-    fetch('http://localhost:8000/api/benchmark')
+    fetch('/api/benchmark')
       .then(res => res.json())
       .then(data => {
         setResults(data.metrics);
