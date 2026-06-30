@@ -206,6 +206,9 @@ osef --version
 # Analyze the current repository
 osef scan .
 
+# Run in CI mode to enforce Quality Gates (blocks on failure)
+osef scan . --ci
+
 # Generate an architectural report
 osef report --format markdown
 ```
@@ -217,6 +220,7 @@ osef report --format markdown
 | Command | Description |
 | :--- | :--- |
 | `osef scan <path>` | Scans the repository and executes enabled Policy Packs. |
+| `osef scan <path> --ci` | Scans in CI mode, enforcing Quality Gates (`pyproject.toml`). |
 | `osef ui` | Launches OSEF Studio (Engineering Intelligence Console). |
 | `osef report` | Outputs findings into Markdown, JSON, or HTML. |
 | `osef certify` | Runs the Certification Engine against canonical fixtures. |
