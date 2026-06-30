@@ -141,7 +141,7 @@ def ui(port: int = 8000, host: str = "127.0.0.1") -> None:
 
 
 @app.command()
-def analyze(
+def scan(
     path: str = typer.Argument(".", help="Path to repository"),
     profile: List[str] = typer.Option(
         ["core"], "--profile", "-p", help="Engineering profile to use"

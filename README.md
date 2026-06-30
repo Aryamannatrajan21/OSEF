@@ -204,7 +204,7 @@ pip install --upgrade "osef[ui] @ git+https://github.com/Aryamannatrajan21/OSEF.
 osef --version
 
 # Analyze the current repository
-osef analyze .
+osef scan .
 
 # Generate an architectural report
 osef report --format markdown
@@ -216,7 +216,7 @@ osef report --format markdown
 
 | Command | Description |
 | :--- | :--- |
-| `osef analyze <path>` | Scans the repository and executes enabled Policy Packs. |
+| `osef scan <path>` | Scans the repository and executes enabled Policy Packs. |
 | `osef ui` | Launches OSEF Studio (Engineering Intelligence Console). |
 | `osef report` | Outputs findings into Markdown, JSON, or HTML. |
 | `osef certify` | Runs the Certification Engine against canonical fixtures. |
