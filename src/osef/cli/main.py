@@ -215,9 +215,10 @@ def scan(
                 has_tomllib = False
 
             gates: dict[str, Any] = {}
-            if has_tomllib and os.path.exists("pyproject.toml"):
+            toml_path = os.path.join(path, "pyproject.toml")
+            if has_tomllib and os.path.exists(toml_path):
                 try:
-                    with open("pyproject.toml", "rb") as f:
+                    with open(toml_path, "rb") as f:
                         pyproj = tomllib.load(f)
                     gates = (
                         pyproj.get("tool", {}).get("osef", {}).get("quality_gates", {})
