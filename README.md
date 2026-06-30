@@ -117,7 +117,9 @@ OSEF ships with a stunning Next.js dashboard that visualizes your codebase archi
 </div>
 
 ### AI Architecture Assistant
-Ask complex questions about your architecture natively within the studio. The assistant provides tailored insights restricted specifically to the codebase currently being analyzed.
+Ask complex questions about your architecture natively within the studio. The assistant provides tailored insights restricted specifically to the codebase currently being analyzed. 
+
+**Custom LLM Endpoints:** OSEF Studio natively supports standard OpenAI-compatible endpoints. Configure your custom Base URL, API Key, and Model (e.g. Anthropic, Groq, Ollama, Nvidia Nemotron) securely in the UI Settings without hardcoding secrets.
 
 <img src="docs/ai-assistant-screenshot.png" alt="AI Architecture Assistant" width="100%">
 
