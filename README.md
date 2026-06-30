@@ -117,7 +117,11 @@ OSEF ships with a stunning Next.js dashboard that visualizes your codebase archi
 ### AI Architecture Assistant
 Ask complex questions about your architecture natively within the studio. The assistant provides tailored insights restricted specifically to the codebase currently being analyzed. 
 
-**Custom LLM Endpoints:** OSEF Studio natively supports standard OpenAI-compatible endpoints. Configure your custom Base URL, API Key, and Model (e.g. Anthropic, Groq, Ollama, Nvidia Nemotron) securely in the UI Settings without hardcoding secrets.
+**Universal LLM Support (Powered by LiteLLM):** OSEF Studio seamlessly supports over 100+ AI providers natively (OpenAI, Anthropic, Google Gemini, AWS Bedrock, Cohere, Ollama, etc.).
+
+Configure your custom Base URL, API Key, and Model securely in the UI Settings without hardcoding secrets. 
+- For standard providers (e.g., Anthropic, Gemini), simply enter your model name (e.g., `anthropic/claude-3-opus-20240229`) and API Key in the UI. 
+- **AWS Bedrock Integration**: Because AWS uses custom SigV4 authentication, leave the "API Key" and "Base URL" fields blank in the UI. Simply configure your AWS credentials locally (`export AWS_ACCESS_KEY_ID=...` and `export AWS_SECRET_ACCESS_KEY=...`) and enter your Bedrock model in the UI (e.g., `bedrock/nvidia.nemotron-super-3-120b-instruct-v1:0`). OSEF will automatically authenticate using your environment variables!
 
 <img src="docs/ai-assistant-screenshot.png" alt="AI Architecture Assistant" width="100%">
 
