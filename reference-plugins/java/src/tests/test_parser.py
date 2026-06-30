@@ -7,7 +7,25 @@ import sys
 sys.path.append(os.path.abspath("reference-plugins/java"))
 from src.parser.adapter import TreeSitterJavaAdapter, NormalizedASTNode
 
-FIXTURE_PATH = "language-fixtures/parser/java/single_class/source.java"
+import pathlib
+
+PROJECT_ROOT = pathlib.Path(__file__).parent.parent.parent.parent.parent
+FIXTURE_PATH = str(
+    PROJECT_ROOT
+    / "language-fixtures"
+    / "parser"
+    / "java"
+    / "single_class"
+    / "source.java"
+)
+SNAPSHOT_PATH = str(
+    PROJECT_ROOT
+    / "language-fixtures"
+    / "parser"
+    / "java"
+    / "single_class"
+    / "snapshot.json"
+)
 
 
 @pytest.fixture
@@ -34,7 +52,7 @@ def test_snapshot_integrity(parser):
     ast = parser.parse(FIXTURE_PATH)
     ast_json = ast.model_dump_json(indent=2)
 
-    snapshot_path = "language-fixtures/parser/java/single_class/snapshot.json"
+    snapshot_path = SNAPSHOT_PATH
 
     if not os.path.exists(snapshot_path):
         with open(snapshot_path, "w") as f:

@@ -34,7 +34,7 @@ def test_java_pipeline_end_to_end(java_pipeline):
 
         # Extract Symbols
         symbols = java_pipeline.extract_symbols(ast)
-        assert len(symbols) == 3  # Namespace, Class, Interface
+        assert len(symbols) == 4  # Namespace, Class, Interface, Method
 
         class_symbol = next(s for s in symbols if s.kind == "class")
         assert class_symbol.name == "MyClass"
