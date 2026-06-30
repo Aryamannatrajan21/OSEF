@@ -176,27 +176,17 @@ def chat_with_assistant(request: ChatRequest) -> dict[str, Any]:
 
         import os
         try:
-            from openai import OpenAI
+            import litellm
         except ImportError:
-            return {"error": "The 'openai' package is required to use the AI Assistant. Please run `pip install openai` or update your `osef[ui]` installation to install it."}
+            return {"error": "The 'litellm' package is required to use the AI Assistant. Please run `pip install litellm boto3` or update your `osef[ui]` installation to install it."}
 
-        # Determine API Config
-        base_url = "https://integrate.api.nvidia.com/v1"
-        api_key = os.environ.get("NVIDIA_API_KEY", "")
-        model = "nvidia/nemotron-3-ultra-550b-a55b"
+        model = request.api_config.model if request.api_config and request.api_config.model else "nvidia/nemotron-3-ultra-550b-a55b"
+        base_url = request.api_config.base_url if request.api_config and request.api_config.base_url else None
+        api_key = request.api_config.api_key if request.api_config and request.api_config.api_key else None
 
-        if request.api_config:
-            if request.api_config.base_url:
-                base_url = request.api_config.base_url
-            if request.api_config.api_key:
-                api_key = request.api_config.api_key
-            if request.api_config.model:
-                model = request.api_config.model
-
-        if not api_key:
-            return {"error": "API Key is missing. Please configure it in Settings."}
-
-        client = OpenAI(base_url=base_url, api_key=api_key)
+        # Fallback to standard Nvidia endpoint if model is default and no URL provided
+        if not base_url and model == "nvidia/nemotron-3-ultra-550b-a55b":
+            base_url = "https://integrate.api.nvidia.com/v1"
 
         project_name = os.path.basename(os.getcwd())
 
@@ -219,20 +209,33 @@ CRITICAL INSTRUCTIONS:
 
         messages.append({"role": "user", "content": request.message})
 
-        completion = client.chat.completions.create(
-            model=model,
-            messages=messages,  # type: ignore
-            temperature=1,
-            top_p=0.95,
-            max_tokens=1024,
-            extra_body={
+        kwargs = {
+            "model": model,
+            "messages": messages,
+            "temperature": 1,
+            "top_p": 0.95,
+            "max_tokens": 1024,
+        }
+        if api_key:
+            kwargs["api_key"] = api_key
+        if base_url:
+            kwargs["api_base"] = base_url
+            
+        if model == "nvidia/nemotron-3-ultra-550b-a55b":
+            kwargs["extra_body"] = {
                 "chat_template_kwargs": {"enable_thinking": True},
                 "reasoning_budget": 1024,
-            },
-        )
+            }
 
-        reply = completion.choices[0].message.content
-        return {"reply": reply}
+        try:
+            # Tell litellm to suppress its own print statements for cleaner logs
+            litellm.suppress_debug_info = True 
+            completion = litellm.completion(**kwargs)
+            reply = completion.choices[0].message.content
+            return {"reply": reply}
+        except Exception as e:
+            logger.error(f"LiteLLM error: {e}")
+            return {"error": str(e)}
 
     except Exception as e:
         logger.error(f"Error in chat assistant: {e}")
