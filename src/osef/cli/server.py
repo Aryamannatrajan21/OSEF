@@ -228,9 +228,10 @@ CRITICAL INSTRUCTIONS:
             "model": model,
             "messages": messages,
             "temperature": 1,
-            "top_p": 0.95,
             "max_tokens": 1024,
         }
+        if not model.startswith("bedrock/"):
+            kwargs["top_p"] = 0.95
         if api_key:
             kwargs["api_key"] = api_key
         if base_url:
