@@ -76,6 +76,7 @@ export default function ForceGraph({ data, onNodeClick, searchQuery = '', is3DMo
       name: e.relation_type
     }));
     
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setGraphData({ nodes, links } as any);
   }, [data]);
 

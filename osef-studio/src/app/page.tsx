@@ -31,6 +31,32 @@ export default function OsefStudio() {
   const [is3DMode, setIs3DMode] = useState(false);
   const [autoRefresh, setAutoRefresh] = useState(true);
 
+  // API Configuration State
+  const [apiBaseUrl, setApiBaseUrl] = useState('');
+  const [apiKey, setApiKey] = useState('');
+  const [apiModel, setApiModel] = useState('');
+
+  // Load settings on mount
+  useEffect(() => {
+    const savedApiBaseUrl = localStorage.getItem('apiBaseUrl');
+    const savedApiKey = localStorage.getItem('apiKey');
+    const savedApiModel = localStorage.getItem('apiModel');
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (savedApiBaseUrl) setApiBaseUrl(savedApiBaseUrl);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (savedApiKey) setApiKey(savedApiKey);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (savedApiModel) setApiModel(savedApiModel);
+  }, []);
+
+  // Save settings
+  const savePreferences = () => {
+    localStorage.setItem('apiBaseUrl', apiBaseUrl);
+    localStorage.setItem('apiKey', apiKey);
+    localStorage.setItem('apiModel', apiModel);
+    setIsSettingsOpen(false);
+  };
+
   // Auto-refresh interval
   useEffect(() => {
     if (!autoRefresh) return;
@@ -134,7 +160,7 @@ export default function OsefStudio() {
         ) : activeTab === 'Benchmarks' ? (
           <BenchmarksTab />
         ) : activeTab === 'Assistant' ? (
-          <AssistantTab />
+          <AssistantTab apiConfig={{ base_url: apiBaseUrl, api_key: apiKey, model: apiModel }} />
         ) : (
           <div className="flex-1 flex flex-col items-center justify-center text-gray-500">
             <Layers size={48} className="mb-4 text-gray-600 opacity-50" />
@@ -197,8 +223,23 @@ export default function OsefStudio() {
                   <input type="checkbox" checked={autoRefresh} onChange={(e) => setAutoRefresh(e.target.checked)} className={`rounded w-4 h-4 ${isDarkMode ? 'border-gray-600 bg-gray-700' : 'border-gray-300 bg-white'}`} />
                 </label>
               </div>
-              <div className={`pt-4 border-t mt-2 ${isDarkMode ? 'border-[var(--panel-border)]' : 'border-gray-200'}`}>
-                <button onClick={() => setIsSettingsOpen(false)} className="w-full py-2 bg-[var(--accent)] hover:bg-blue-600 text-white rounded-md transition-colors font-medium">Save Preferences</button>
+              <div className={`pt-4 border-t mt-4 ${isDarkMode ? 'border-[var(--panel-border)]' : 'border-gray-200'} space-y-3`}>
+                <h4 className={`font-semibold ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>AI Assistant API (OpenAI Compatible)</h4>
+                <div className="space-y-2">
+                  <label className={`block text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Base URL</label>
+                  <input type="text" value={apiBaseUrl} onChange={(e) => setApiBaseUrl(e.target.value)} placeholder="https://integrate.api.nvidia.com/v1" className={`w-full px-3 py-2 rounded-md text-sm border focus:outline-none focus:ring-1 focus:ring-[var(--accent)] ${isDarkMode ? 'bg-black/50 border-[var(--panel-border)] text-white' : 'bg-white border-gray-300 text-gray-900'}`} />
+                </div>
+                <div className="space-y-2">
+                  <label className={`block text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>API Key</label>
+                  <input type="password" value={apiKey} onChange={(e) => setApiKey(e.target.value)} placeholder="nvapi-..." className={`w-full px-3 py-2 rounded-md text-sm border focus:outline-none focus:ring-1 focus:ring-[var(--accent)] ${isDarkMode ? 'bg-black/50 border-[var(--panel-border)] text-white' : 'bg-white border-gray-300 text-gray-900'}`} />
+                </div>
+                <div className="space-y-2">
+                  <label className={`block text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Model Name</label>
+                  <input type="text" value={apiModel} onChange={(e) => setApiModel(e.target.value)} placeholder="nvidia/nemotron-3-ultra-550b-a55b" className={`w-full px-3 py-2 rounded-md text-sm border focus:outline-none focus:ring-1 focus:ring-[var(--accent)] ${isDarkMode ? 'bg-black/50 border-[var(--panel-border)] text-white' : 'bg-white border-gray-300 text-gray-900'}`} />
+                </div>
+              </div>
+              <div className={`pt-4 border-t mt-4 ${isDarkMode ? 'border-[var(--panel-border)]' : 'border-gray-200'}`}>
+                <button onClick={savePreferences} className="w-full py-2 bg-[var(--accent)] hover:bg-blue-600 text-white rounded-md transition-colors font-medium">Save Preferences</button>
               </div>
             </div>
           </div>

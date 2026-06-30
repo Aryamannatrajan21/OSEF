@@ -152,9 +152,16 @@ def get_policies() -> dict[str, Any]:
 
 
 from pydantic import BaseModel
+
+class ApiConfig(BaseModel):
+    base_url: str = ""
+    api_key: str = ""
+    model: str = ""
+
 class ChatRequest(BaseModel):
     message: str
     history: list[dict[str, str]]
+    api_config: ApiConfig | None = None
 
 @app.post("/api/chat")
 def chat_with_assistant(request: ChatRequest) -> dict[str, Any]:
@@ -165,14 +172,27 @@ def chat_with_assistant(request: ChatRequest) -> dict[str, Any]:
         node_count = len(graph.nodes)
         edge_count = len(graph.edges)
         
-        # We need the OpenAI client
         import os
         from openai import OpenAI
         
+        # Determine API Config
+        base_url = "https://integrate.api.nvidia.com/v1"
         api_key = os.environ.get("NVIDIA_API_KEY", "")
+        model = "nvidia/nemotron-3-ultra-550b-a55b"
+        
+        if request.api_config:
+            if request.api_config.base_url:
+                base_url = request.api_config.base_url
+            if request.api_config.api_key:
+                api_key = request.api_config.api_key
+            if request.api_config.model:
+                model = request.api_config.model
+        
+        if not api_key:
+            return {"error": "API Key is missing. Please configure it in Settings."}
             
         client = OpenAI(
-            base_url="https://integrate.api.nvidia.com/v1",
+            base_url=base_url,
             api_key=api_key
         )
         
@@ -198,7 +218,7 @@ CRITICAL INSTRUCTIONS:
         messages.append({"role": "user", "content": request.message})
         
         completion = client.chat.completions.create(
-            model="nvidia/nemotron-3-ultra-550b-a55b",
+            model=model,
             messages=messages, # type: ignore
             temperature=1,
             top_p=0.95,

@@ -10,7 +10,13 @@ interface Message {
   content: string;
 }
 
-export function AssistantTab() {
+interface ApiConfig {
+  base_url: string;
+  api_key: string;
+  model: string;
+}
+
+export function AssistantTab({ apiConfig }: { apiConfig?: ApiConfig }) {
   const [messages, setMessages] = useState<Message[]>([
     { role: 'assistant', content: 'Hello! I am the OSEF Architecture Assistant. Ask me anything about your codebase structure, dependencies, or policy violations.' }
   ]);
@@ -37,10 +43,16 @@ export function AssistantTab() {
     setIsLoading(true);
 
     try {
+      const payload = {
+        message: userMsg,
+        history: messages,
+        api_config: apiConfig || undefined
+      };
+      
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userMsg, history: messages })
+        body: JSON.stringify(payload)
       });
       
       const data = await res.json();
