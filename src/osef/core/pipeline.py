@@ -268,7 +268,7 @@ class PipelineEngine:
                                     ekg_edge = EKGEdge(
                                         source_id=edge.source_id,
                                         target_id=edge.target_id,
-                                        relation_type="relation", # fallback to relation since relation_type might be used
+                                        relation_type="relation",  # fallback to relation since relation_type might be used
                                         metadata={},
                                     )
                                     self.graph.add_edge(ekg_edge)

@@ -6,7 +6,7 @@ import os
 import sys
 import subprocess
 from importlib.metadata import version as get_version, PackageNotFoundError
-from typing import List, Dict, Optional, Any
+from typing import List, Any
 
 import typer
 from rich.console import Console
@@ -209,10 +209,11 @@ def analyze(
 
             try:
                 import tomllib
+
                 has_tomllib = True
             except ImportError:
                 has_tomllib = False
-                
+
             gates: dict[str, Any] = {}
             if has_tomllib and os.path.exists("pyproject.toml"):
                 try:
