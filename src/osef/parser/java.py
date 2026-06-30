@@ -11,7 +11,7 @@ class JavaParser:
     def __init__(self, symbol_table: SymbolTable):
         self.symbol_table = symbol_table
 
-    def parse_file(self, file_path: str):
+    def parse_file(self, file_path: str) -> None:
         try:
             with open(file_path, "r", encoding="utf-8") as f:
                 content = f.read()
