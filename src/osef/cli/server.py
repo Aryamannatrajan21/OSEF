@@ -9,7 +9,21 @@ import os
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 from osef.core.pipeline import PipelineEngine
+
+
+class ApiConfig(BaseModel):
+    base_url: str = ""
+    api_key: str = ""
+    model: str = ""
+
+
+class ChatRequest(BaseModel):
+    message: str
+    history: list[dict[str, str]]
+    api_config: ApiConfig | None = None
+
 
 app = FastAPI(title="OSEF Studio API", version="1.0.0")
 
@@ -151,35 +165,23 @@ def get_policies() -> dict[str, Any]:
         return {"error": "Internal server error while fetching policies."}
 
 
-from pydantic import BaseModel
-
-class ApiConfig(BaseModel):
-    base_url: str = ""
-    api_key: str = ""
-    model: str = ""
-
-class ChatRequest(BaseModel):
-    message: str
-    history: list[dict[str, str]]
-    api_config: ApiConfig | None = None
-
 @app.post("/api/chat")
 def chat_with_assistant(request: ChatRequest) -> dict[str, Any]:
     try:
         engine, graph = get_engine()
-        
+
         # Build context from graph
         node_count = len(graph.nodes)
         edge_count = len(graph.edges)
-        
+
         import os
         from openai import OpenAI
-        
+
         # Determine API Config
         base_url = "https://integrate.api.nvidia.com/v1"
         api_key = os.environ.get("NVIDIA_API_KEY", "")
         model = "nvidia/nemotron-3-ultra-550b-a55b"
-        
+
         if request.api_config:
             if request.api_config.base_url:
                 base_url = request.api_config.base_url
@@ -187,17 +189,14 @@ def chat_with_assistant(request: ChatRequest) -> dict[str, Any]:
                 api_key = request.api_config.api_key
             if request.api_config.model:
                 model = request.api_config.model
-        
+
         if not api_key:
             return {"error": "API Key is missing. Please configure it in Settings."}
-            
-        client = OpenAI(
-            base_url=base_url,
-            api_key=api_key
-        )
-        
+
+        client = OpenAI(base_url=base_url, api_key=api_key)
+
         project_name = os.path.basename(os.getcwd())
-        
+
         system_prompt = f"""You are the strict, professional OSEF Architecture Assistant. 
 You are currently analyzing the project: '{project_name}'.
 Current Graph Context for '{project_name}':
@@ -214,21 +213,24 @@ CRITICAL INSTRUCTIONS:
         for msg in request.history:
             if msg.get("role") in ["user", "assistant"]:
                 messages.append({"role": msg["role"], "content": msg["content"]})
-        
+
         messages.append({"role": "user", "content": request.message})
-        
+
         completion = client.chat.completions.create(
             model=model,
-            messages=messages, # type: ignore
+            messages=messages,  # type: ignore
             temperature=1,
             top_p=0.95,
             max_tokens=1024,
-            extra_body={"chat_template_kwargs":{"enable_thinking":True},"reasoning_budget":1024},
+            extra_body={
+                "chat_template_kwargs": {"enable_thinking": True},
+                "reasoning_budget": 1024,
+            },
         )
-        
+
         reply = completion.choices[0].message.content
         return {"reply": reply}
-        
+
     except Exception as e:
         logger.error(f"Error in chat assistant: {e}")
         return {"error": str(e)}
