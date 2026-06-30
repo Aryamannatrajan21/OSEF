@@ -175,14 +175,29 @@ def chat_with_assistant(request: ChatRequest) -> dict[str, Any]:
         edge_count = len(graph.edges)
 
         import os
+
         try:
             import litellm
         except ImportError:
-            return {"error": "The 'litellm' package is required to use the AI Assistant. Please run `pip install litellm boto3` or update your `osef[ui]` installation to install it."}
+            return {
+                "error": "The 'litellm' package is required to use the AI Assistant. Please run `pip install litellm boto3` or update your `osef[ui]` installation to install it."
+            }
 
-        model = request.api_config.model if request.api_config and request.api_config.model else "nvidia/nemotron-3-ultra-550b-a55b"
-        base_url = request.api_config.base_url if request.api_config and request.api_config.base_url else None
-        api_key = request.api_config.api_key if request.api_config and request.api_config.api_key else None
+        model = (
+            request.api_config.model
+            if request.api_config and request.api_config.model
+            else "nvidia/nemotron-3-ultra-550b-a55b"
+        )
+        base_url = (
+            request.api_config.base_url
+            if request.api_config and request.api_config.base_url
+            else None
+        )
+        api_key = (
+            request.api_config.api_key
+            if request.api_config and request.api_config.api_key
+            else None
+        )
 
         # Fallback to standard Nvidia endpoint if model is default and no URL provided
         if not base_url and model == "nvidia/nemotron-3-ultra-550b-a55b":
@@ -220,7 +235,7 @@ CRITICAL INSTRUCTIONS:
             kwargs["api_key"] = api_key
         if base_url:
             kwargs["api_base"] = base_url
-            
+
         if model == "nvidia/nemotron-3-ultra-550b-a55b":
             kwargs["extra_body"] = {
                 "chat_template_kwargs": {"enable_thinking": True},
@@ -229,7 +244,7 @@ CRITICAL INSTRUCTIONS:
 
         try:
             # Tell litellm to suppress its own print statements for cleaner logs
-            litellm.suppress_debug_info = True 
+            litellm.suppress_debug_info = True
             completion = litellm.completion(**kwargs)
             reply = completion.choices[0].message.content
             return {"reply": reply}
