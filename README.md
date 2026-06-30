@@ -113,8 +113,6 @@ OSEF ships with a stunning Next.js dashboard that visualizes your codebase archi
 
 ### Dynamic Confidence Scores
 ![Reasoning View](docs/assets/studio_reasoning.png)
-<img src="docs/benchmark.png" alt="Benchmark Analytics" width="45%">
-</div>
 
 ### AI Architecture Assistant
 Ask complex questions about your architecture natively within the studio. The assistant provides tailored insights restricted specifically to the codebase currently being analyzed. 
