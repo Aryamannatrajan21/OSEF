@@ -259,7 +259,9 @@ def scan(
 @app.command()
 def report(
     path: str = typer.Argument(".", help="Path to repository"),
-    format: str = typer.Option("text", "--format", "-f", help="Output format: text, markdown, json"),
+    format: str = typer.Option(
+        "text", "--format", "-f", help="Output format: text, markdown, json"
+    ),
 ) -> None:
     """Generate a human-readable repository intelligence report."""
     if format == "text":
@@ -274,9 +276,19 @@ def report(
 
         if format == "json":
             import json
-            print(json.dumps({"nodes": len(graph.nodes), "edges": len(graph.edges), "components": counts}, indent=2))
+
+            print(
+                json.dumps(
+                    {
+                        "nodes": len(graph.nodes),
+                        "edges": len(graph.edges),
+                        "components": counts,
+                    },
+                    indent=2,
+                )
+            )
         elif format == "markdown":
-            md = f"# Repository Intelligence Report\n\n"
+            md = "# Repository Intelligence Report\n\n"
             md += f"**Total Nodes**: {len(graph.nodes)}  \n"
             md += f"**Total Edges**: {len(graph.edges)}  \n\n"
             md += "### Component Breakdown\n"
@@ -288,7 +300,9 @@ def report(
             console.print("\n[bold]Repository Intelligence Report[/bold]")
             console.print("==============================")
             for type_name, count in sorted(counts.items()):
-                console.print(f"{type_name.capitalize()}s: [bold cyan]{count}[/bold cyan]")
+                console.print(
+                    f"{type_name.capitalize()}s: [bold cyan]{count}[/bold cyan]"
+                )
 
     except Exception as e:
         console.print(f"[bold red]Report generation failed:[/bold red] {e}")
