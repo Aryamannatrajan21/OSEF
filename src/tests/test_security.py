@@ -3,13 +3,13 @@ import os
 from osef.sdk.ecosystem.security import PluginSigner
 
 
-def test_generate_keypair():
+def test_generate_keypair() -> None:
     priv, pub = PluginSigner.generate_keypair()
     assert b"PRIVATE KEY" in priv
     assert b"PUBLIC KEY" in pub
 
 
-def test_sign_and_verify_file():
+def test_sign_and_verify_file() -> None:
     priv, pub = PluginSigner.generate_keypair()
 
     with tempfile.NamedTemporaryFile(delete=False) as f:

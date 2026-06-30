@@ -1,1 +1,2 @@
-def hello(): print('Hello from the mock plugin!')
+def hello():
+    print("Hello from the mock plugin!")

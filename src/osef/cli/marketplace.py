@@ -13,7 +13,7 @@ DEFAULT_INDEX_URL = "https://raw.githubusercontent.com/Aryamannatrajan21/OSEF/ma
 
 
 @app.command("keygen")
-def keygen(out_dir: str = "."):
+def keygen(out_dir: str = ".") -> None:
     """Generate a new ed25519 keypair for signing plugins."""
     try:
         priv, pub = PluginSigner.generate_keypair()
@@ -34,7 +34,7 @@ def keygen(out_dir: str = "."):
 
 
 @app.command("sign")
-def sign(plugin_path: str, private_key_path: str):
+def sign(plugin_path: str, private_key_path: str) -> None:
     """Sign a plugin tar.gz package."""
     try:
         with open(private_key_path, "rb") as f:
@@ -50,7 +50,7 @@ def sign(plugin_path: str, private_key_path: str):
 
 
 @app.command("search")
-def search(query: str, index_url: str = DEFAULT_INDEX_URL):
+def search(query: str, index_url: str = DEFAULT_INDEX_URL) -> None:
     """Search for plugins in the marketplace."""
     try:
         client = MarketplaceClient(index_url)
@@ -81,7 +81,7 @@ def install(
     target_dir: str = "plugins",
     public_key_path: Optional[str] = None,
     index_url: str = DEFAULT_INDEX_URL,
-):
+) -> None:
     """Install a plugin from the marketplace."""
     try:
         pub_pem = None
@@ -90,7 +90,10 @@ def install(
                 pub_pem = f.read()
         else:
             from pathlib import Path
-            bundled_key_path = Path(__file__).parent.parent / "sdk" / "ecosystem" / "public_key.pem"
+
+            bundled_key_path = (
+                Path(__file__).parent.parent / "sdk" / "ecosystem" / "public_key.pem"
+            )
             if bundled_key_path.exists():
                 with open(bundled_key_path, "rb") as f:
                     pub_pem = f.read()

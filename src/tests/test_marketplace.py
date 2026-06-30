@@ -7,7 +7,7 @@ from osef.sdk.ecosystem.marketplace import MarketplaceClient
 from osef.sdk.ecosystem.security import PluginSigner
 
 
-def test_marketplace_client_search():
+def test_marketplace_client_search() -> None:
     client = MarketplaceClient("http://mock-index.json")
     client.index_data = {
         "plugins": [

@@ -25,10 +25,12 @@ class MarketplaceClient:
         if not self.index_data:
             self.fetch_index()
 
+        from typing import cast
+
         plugins = self.index_data.get("plugins", [])
         for plugin in plugins:
             if plugin.get("name") == plugin_name:
-                return plugin
+                return cast(Dict[str, Any], plugin)
         return None
 
     def search(self, query: str) -> list[Dict[str, Any]]:
