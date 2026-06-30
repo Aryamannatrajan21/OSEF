@@ -6,7 +6,7 @@
   "end_line": 6,
   "end_column": 1,
   "provenance": {
-    "source_file": "language-fixtures/parser/java/single_class/source.java",
+    "source_file": "/Users/macair/Documents/OSEF/language-fixtures/parser/java/single_class/source.java",
     "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
     "parser": "tree-sitter-java",
     "parser_version": "0.23.5",
@@ -21,7 +21,7 @@
       "end_line": 5,
       "end_column": 2,
       "provenance": {
-        "source_file": "language-fixtures/parser/java/single_class/source.java",
+        "source_file": "/Users/macair/Documents/OSEF/language-fixtures/parser/java/single_class/source.java",
         "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
         "parser": "tree-sitter-java",
         "parser_version": "0.23.5",
@@ -36,7 +36,7 @@
           "end_line": 1,
           "end_column": 7,
           "provenance": {
-            "source_file": "language-fixtures/parser/java/single_class/source.java",
+            "source_file": "/Users/macair/Documents/OSEF/language-fixtures/parser/java/single_class/source.java",
             "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
             "parser": "tree-sitter-java",
             "parser_version": "0.23.5",
@@ -52,7 +52,7 @@
           "end_line": 1,
           "end_column": 24,
           "provenance": {
-            "source_file": "language-fixtures/parser/java/single_class/source.java",
+            "source_file": "/Users/macair/Documents/OSEF/language-fixtures/parser/java/single_class/source.java",
             "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
             "parser": "tree-sitter-java",
             "parser_version": "0.23.5",
@@ -68,7 +68,7 @@
           "end_line": 5,
           "end_column": 2,
           "provenance": {
-            "source_file": "language-fixtures/parser/java/single_class/source.java",
+            "source_file": "/Users/macair/Documents/OSEF/language-fixtures/parser/java/single_class/source.java",
             "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
             "parser": "tree-sitter-java",
             "parser_version": "0.23.5",
@@ -83,7 +83,7 @@
               "end_line": 4,
               "end_column": 6,
               "provenance": {
-                "source_file": "language-fixtures/parser/java/single_class/source.java",
+                "source_file": "/Users/macair/Documents/OSEF/language-fixtures/parser/java/single_class/source.java",
                 "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
                 "parser": "tree-sitter-java",
                 "parser_version": "0.23.5",
@@ -98,7 +98,7 @@
                   "end_line": 2,
                   "end_column": 18,
                   "provenance": {
-                    "source_file": "language-fixtures/parser/java/single_class/source.java",
+                    "source_file": "/Users/macair/Documents/OSEF/language-fixtures/parser/java/single_class/source.java",
                     "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
                     "parser": "tree-sitter-java",
                     "parser_version": "0.23.5",
@@ -114,7 +114,7 @@
                   "end_line": 2,
                   "end_column": 23,
                   "provenance": {
-                    "source_file": "language-fixtures/parser/java/single_class/source.java",
+                    "source_file": "/Users/macair/Documents/OSEF/language-fixtures/parser/java/single_class/source.java",
                     "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
                     "parser": "tree-sitter-java",
                     "parser_version": "0.23.5",
@@ -130,7 +130,7 @@
                   "end_line": 2,
                   "end_column": 28,
                   "provenance": {
-                    "source_file": "language-fixtures/parser/java/single_class/source.java",
+                    "source_file": "/Users/macair/Documents/OSEF/language-fixtures/parser/java/single_class/source.java",
                     "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
                     "parser": "tree-sitter-java",
                     "parser_version": "0.23.5",
@@ -146,7 +146,7 @@
                   "end_line": 2,
                   "end_column": 43,
                   "provenance": {
-                    "source_file": "language-fixtures/parser/java/single_class/source.java",
+                    "source_file": "/Users/macair/Documents/OSEF/language-fixtures/parser/java/single_class/source.java",
                     "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
                     "parser": "tree-sitter-java",
                     "parser_version": "0.23.5",
@@ -161,7 +161,7 @@
                       "end_line": 2,
                       "end_column": 42,
                       "provenance": {
-                        "source_file": "language-fixtures/parser/java/single_class/source.java",
+                        "source_file": "/Users/macair/Documents/OSEF/language-fixtures/parser/java/single_class/source.java",
                         "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
                         "parser": "tree-sitter-java",
                         "parser_version": "0.23.5",
@@ -176,7 +176,7 @@
                           "end_line": 2,
                           "end_column": 37,
                           "provenance": {
-                            "source_file": "language-fixtures/parser/java/single_class/source.java",
+                            "source_file": "/Users/macair/Documents/OSEF/language-fixtures/parser/java/single_class/source.java",
                             "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
                             "parser": "tree-sitter-java",
                             "parser_version": "0.23.5",
@@ -191,7 +191,7 @@
                               "end_line": 2,
                               "end_column": 35,
                               "provenance": {
-                                "source_file": "language-fixtures/parser/java/single_class/source.java",
+                                "source_file": "/Users/macair/Documents/OSEF/language-fixtures/parser/java/single_class/source.java",
                                 "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
                                 "parser": "tree-sitter-java",
                                 "parser_version": "0.23.5",
@@ -207,7 +207,7 @@
                               "end_line": 2,
                               "end_column": 37,
                               "provenance": {
-                                "source_file": "language-fixtures/parser/java/single_class/source.java",
+                                "source_file": "/Users/macair/Documents/OSEF/language-fixtures/parser/java/single_class/source.java",
                                 "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
                                 "parser": "tree-sitter-java",
                                 "parser_version": "0.23.5",
@@ -225,7 +225,7 @@
                           "end_line": 2,
                           "end_column": 42,
                           "provenance": {
-                            "source_file": "language-fixtures/parser/java/single_class/source.java",
+                            "source_file": "/Users/macair/Documents/OSEF/language-fixtures/parser/java/single_class/source.java",
                             "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
                             "parser": "tree-sitter-java",
                             "parser_version": "0.23.5",
@@ -245,7 +245,7 @@
                   "end_line": 4,
                   "end_column": 6,
                   "provenance": {
-                    "source_file": "language-fixtures/parser/java/single_class/source.java",
+                    "source_file": "/Users/macair/Documents/OSEF/language-fixtures/parser/java/single_class/source.java",
                     "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
                     "parser": "tree-sitter-java",
                     "parser_version": "0.23.5",
@@ -260,7 +260,7 @@
                       "end_line": 3,
                       "end_column": 45,
                       "provenance": {
-                        "source_file": "language-fixtures/parser/java/single_class/source.java",
+                        "source_file": "/Users/macair/Documents/OSEF/language-fixtures/parser/java/single_class/source.java",
                         "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
                         "parser": "tree-sitter-java",
                         "parser_version": "0.23.5",
@@ -275,7 +275,7 @@
                           "end_line": 3,
                           "end_column": 44,
                           "provenance": {
-                            "source_file": "language-fixtures/parser/java/single_class/source.java",
+                            "source_file": "/Users/macair/Documents/OSEF/language-fixtures/parser/java/single_class/source.java",
                             "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
                             "parser": "tree-sitter-java",
                             "parser_version": "0.23.5",
@@ -290,7 +290,7 @@
                               "end_line": 3,
                               "end_column": 19,
                               "provenance": {
-                                "source_file": "language-fixtures/parser/java/single_class/source.java",
+                                "source_file": "/Users/macair/Documents/OSEF/language-fixtures/parser/java/single_class/source.java",
                                 "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
                                 "parser": "tree-sitter-java",
                                 "parser_version": "0.23.5",
@@ -305,7 +305,7 @@
                                   "end_line": 3,
                                   "end_column": 15,
                                   "provenance": {
-                                    "source_file": "language-fixtures/parser/java/single_class/source.java",
+                                    "source_file": "/Users/macair/Documents/OSEF/language-fixtures/parser/java/single_class/source.java",
                                     "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
                                     "parser": "tree-sitter-java",
                                     "parser_version": "0.23.5",
@@ -321,7 +321,7 @@
                                   "end_line": 3,
                                   "end_column": 19,
                                   "provenance": {
-                                    "source_file": "language-fixtures/parser/java/single_class/source.java",
+                                    "source_file": "/Users/macair/Documents/OSEF/language-fixtures/parser/java/single_class/source.java",
                                     "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
                                     "parser": "tree-sitter-java",
                                     "parser_version": "0.23.5",
@@ -339,7 +339,7 @@
                               "end_line": 3,
                               "end_column": 27,
                               "provenance": {
-                                "source_file": "language-fixtures/parser/java/single_class/source.java",
+                                "source_file": "/Users/macair/Documents/OSEF/language-fixtures/parser/java/single_class/source.java",
                                 "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
                                 "parser": "tree-sitter-java",
                                 "parser_version": "0.23.5",
@@ -355,7 +355,7 @@
                               "end_line": 3,
                               "end_column": 44,
                               "provenance": {
-                                "source_file": "language-fixtures/parser/java/single_class/source.java",
+                                "source_file": "/Users/macair/Documents/OSEF/language-fixtures/parser/java/single_class/source.java",
                                 "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
                                 "parser": "tree-sitter-java",
                                 "parser_version": "0.23.5",
@@ -370,7 +370,7 @@
                                   "end_line": 3,
                                   "end_column": 43,
                                   "provenance": {
-                                    "source_file": "language-fixtures/parser/java/single_class/source.java",
+                                    "source_file": "/Users/macair/Documents/OSEF/language-fixtures/parser/java/single_class/source.java",
                                     "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
                                     "parser": "tree-sitter-java",
                                     "parser_version": "0.23.5",
@@ -385,7 +385,7 @@
                                       "end_line": 3,
                                       "end_column": 42,
                                       "provenance": {
-                                        "source_file": "language-fixtures/parser/java/single_class/source.java",
+                                        "source_file": "/Users/macair/Documents/OSEF/language-fixtures/parser/java/single_class/source.java",
                                         "source_hash": "e5fb4de001c8a3299c3478929fee94c93b0a46da3e29e85cb881958d69a10ee7",
                                         "parser": "tree-sitter-java",
                                         "parser_version": "0.23.5",

@@ -1,0 +1,56 @@
+name: Publish Plugins
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'reference-plugins/**'
+      - 'scripts/publish_plugins.py'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install cryptography hatchling
+
+      - name: Build and Sign Plugins
+        env:
+          OSEF_PLUGIN_PRIVATE_KEY: ${{ secrets.OSEF_PLUGIN_PRIVATE_KEY }}
+        run: |
+          python scripts/publish_plugins.py
+
+      - name: Upload to GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Delete the old release if it exists so we can recreate it
+          gh release delete plugins-latest --yes || true
+          gh tag delete plugins-latest --yes || true
+          
+          # Create a new latest release
+          gh release create plugins-latest packages/*.tar.gz \
+            --title "Latest OSEF Plugins" \
+            --notes "Automatically packaged and signed plugins from the reference-plugins directory."
+
+      - name: Commit marketplace-index.json
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+          git add marketplace-index.json
+          git commit -m "chore(marketplace): update index [skip ci]" || echo "No changes to commit"
+          git push origin main

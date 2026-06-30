@@ -18,6 +18,7 @@ from osef.intelligence.layer import IntelligenceLayer
 from osef.core.certification_engine import CertificationEngine
 from osef.sdk.validation.engine import PlatformValidationEngine
 from osef.cli.benchmark import app as benchmark_app
+from osef.cli.marketplace import app as marketplace_app
 
 app = typer.Typer(
     help="Open Source Engineering Framework",
@@ -29,6 +30,8 @@ app.add_typer(graph_app, name="graph")
 
 ecosystem_app = typer.Typer(help="Ecosystem Catalog operations.")
 app.add_typer(ecosystem_app, name="ecosystem")
+
+app.add_typer(marketplace_app, name="plugin")
 
 app.add_typer(benchmark_app, name="benchmark")
 

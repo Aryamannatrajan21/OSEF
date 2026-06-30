@@ -265,7 +265,9 @@ CRITICAL INSTRUCTIONS:
             return {"reply": reply}
         except Exception as e:
             logger.error(f"LiteLLM error: {e}")
-            return {"error": "An internal error occurred while communicating with the AI assistant."}
+            return {
+                "error": "An internal error occurred while communicating with the AI assistant."
+            }
 
     except Exception as e:
         logger.error(f"Error in chat assistant: {e}")

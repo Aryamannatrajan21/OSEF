@@ -5,6 +5,9 @@ from osef.sdk.language.symbols import (
     NormalizedInterface,
     NormalizedEnum,
     NormalizedNamespace,
+    NormalizedMethod,
+    NormalizedVariable,
+    NormalizedImport,
 )
 from osef.sdk.language.builder import NormalizedSymbolBuilder
 from src.parser.adapter import NormalizedASTNode
@@ -54,6 +57,7 @@ class JavaSymbolExtractor:
             if name:
                 qname = f"{namespace}.{name}" if namespace else name
                 symbols.append(self._build_symbol(NormalizedClass, node, qname, name))
+                namespace = qname  # Update namespace for inner members
 
         elif node.kind == "interface_declaration":
             name = self._find_child_text(node, "identifier")
@@ -62,12 +66,37 @@ class JavaSymbolExtractor:
                 symbols.append(
                     self._build_symbol(NormalizedInterface, node, qname, name)
                 )
+                namespace = qname
 
         elif node.kind == "enum_declaration":
             name = self._find_child_text(node, "identifier")
             if name:
                 qname = f"{namespace}.{name}" if namespace else name
                 symbols.append(self._build_symbol(NormalizedEnum, node, qname, name))
+                namespace = qname
+
+        elif node.kind == "method_declaration":
+            name = self._find_child_text(node, "identifier")
+            if name:
+                qname = f"{namespace}.{name}" if namespace else name
+                symbols.append(self._build_symbol(NormalizedMethod, node, qname, name))
+
+        elif node.kind == "field_declaration":
+            # In Java, variable_declarator contains the identifier
+            for child in node.children:
+                if child.kind == "variable_declarator":
+                    name = self._find_child_text(child, "identifier")
+                    if name:
+                        qname = f"{namespace}.{name}" if namespace else name
+                        symbols.append(
+                            self._build_symbol(NormalizedVariable, node, qname, name)
+                        )
+                        break
+
+        elif node.kind == "import_declaration":
+            name = self._extract_package_name(node)
+            if name:
+                symbols.append(self._build_symbol(NormalizedImport, node, name, name))
 
         for child in node.children:
             self._walk(child, symbols, namespace)

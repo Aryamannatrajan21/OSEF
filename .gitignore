@@ -51,3 +51,4 @@ node_modules/
 .next/
 osef-studio/node_modules/
 osef-studio/.next/
+plugin_private_key*.pem

@@ -248,7 +248,10 @@ osef report --format markdown
 | `osef report` | Outputs findings into Markdown, JSON, or HTML. |
 | `osef certify` | Runs the Certification Engine against canonical fixtures. |
 | `osef doctor` | Validates environment and installed plugins. |
-| `osef plugins` | *(Plugin-injected)* Lists active extensions and capabilities. |
+| `osef plugin search <query>` | Searches the marketplace index for available plugins. |
+| `osef plugin install <name>` | Downloads, verifies, and installs a plugin. |
+| `osef plugin sign <path> <key>` | Signs a plugin package for publication. |
+| `osef plugin keygen` | Generates ed25519 keys for plugin signing. |
 
 > See the full [CLI Extension Specification](docs/architecture/CLI_EXTENSION_SPEC.md) for how to build custom commands.
 

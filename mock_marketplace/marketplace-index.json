@@ -1,0 +1,116 @@
+{
+  "plugins": [
+    {
+      "name": "visualization",
+      "version": "1.0.0",
+      "description": "visualization plugin for OSEF",
+      "download_url": "http://127.0.0.1:8000/packages/visualization-1.0.0.tar.gz",
+      "signature": "28871c440cb202b1f534dfb7ff35417e83933d389fe13c4df760faa5fca0483a003e4af055230f9ebb88050193a776612b263ca4421f95e0c20ef525b575f60e"
+    },
+    {
+      "name": "documentation",
+      "version": "1.0.0",
+      "description": "documentation plugin for OSEF",
+      "download_url": "http://127.0.0.1:8000/packages/documentation-1.0.0.tar.gz",
+      "signature": "cf11ab77498d1e7473eb77f623b52c23673764ef9443c90b5962fcd1d985665b365657145c7c3a3e61b3380e3e4e81839d6e83ceb235a1514a7ef0e4dab9a000"
+    },
+    {
+      "name": "docker",
+      "version": "1.0.0",
+      "description": "docker plugin for OSEF",
+      "download_url": "http://127.0.0.1:8000/packages/docker-1.0.0.tar.gz",
+      "signature": "b0916330b3dfffab781ad1ec66865d6c4c82080a485c531550783d0a066387a41b800b0be8b62b128ed5eea4a00b99dbf67f977e1f8a33cdf10e2fe14dc10001"
+    },
+    {
+      "name": "cross-domain-intelligence",
+      "version": "1.0.0",
+      "description": "cross-domain-intelligence plugin for OSEF",
+      "download_url": "http://127.0.0.1:8000/packages/cross-domain-intelligence-1.0.0.tar.gz",
+      "signature": "048082894c716fac9c57d94b44c326f386886d2aebc1f86fd0215441594978a5e62305cbf2e9f48d09bb2348f1d2518dc36ab3c6a28b8bc9eb304ba85765ab02"
+    },
+    {
+      "name": "enterprise",
+      "version": "1.0.0",
+      "description": "enterprise plugin for OSEF",
+      "download_url": "http://127.0.0.1:8000/packages/enterprise-1.0.0.tar.gz",
+      "signature": "529424e3d82209293bb56e11bc033c155ca8d78e4b49c72bcc9dd8cf4fcccd1c511f43020e55a47a49f1f3f17fd4de772a6149f962b77f73eaabff07c41a4607"
+    },
+    {
+      "name": "python",
+      "version": "1.0.0",
+      "description": "python plugin for OSEF",
+      "download_url": "http://127.0.0.1:8000/packages/python-1.0.0.tar.gz",
+      "signature": "af43a038a57353b5baed8e9b6e0d1c487ae8890fd0f79903bafb403c2f80c92b14da46547f2fb5dc7b71d9bca7fb5bc5ffb3e4e05941428d7ea77c3705e94a0a"
+    },
+    {
+      "name": "security",
+      "version": "1.0.0",
+      "description": "security plugin for OSEF",
+      "download_url": "http://127.0.0.1:8000/packages/security-1.0.0.tar.gz",
+      "signature": "116fb95884deefa6b9adfe20856afcf0d97ca54124c28123fe62421d7d68e4b438aa0e651a7fe655bbcfd2fc2d10623437539cd84d4df5fa46e95dd66802bb08"
+    },
+    {
+      "name": "typescript",
+      "version": "1.0.0",
+      "description": "typescript plugin for OSEF",
+      "download_url": "http://127.0.0.1:8000/packages/typescript-1.0.0.tar.gz",
+      "signature": "b20b7908bcfd256764ce9799628f0bd8a2fa6be7eb71dbb47480e60425758b2074b3518113a38380ff9842dcb3448ed8f31480a8bc77138fe6c67002e06b8008"
+    },
+    {
+      "name": "graph",
+      "version": "1.0.0",
+      "description": "graph plugin for OSEF",
+      "download_url": "http://127.0.0.1:8000/packages/graph-1.0.0.tar.gz",
+      "signature": "ace90f8e1b2f356735ded134f52e6c175a9bde25ec5c8a9de08e60a9ff16a671494ecea55f5056ce9a7a11af3490ee50c13f38cb7935828d9e2acf5723824004"
+    },
+    {
+      "name": "runtime",
+      "version": "1.0.0",
+      "description": "runtime plugin for OSEF",
+      "download_url": "http://127.0.0.1:8000/packages/runtime-1.0.0.tar.gz",
+      "signature": "928c773c235c9bdbb3e4e6b8da5eda5ca2d74f2d4e9888b93d848f6c7a73d4b24d23fe9d7f28d0b56be5ae77dad49f42bac4672968731ffccc8bd6ec92dfc90b"
+    },
+    {
+      "name": "java",
+      "version": "1.0.0",
+      "description": "java plugin for OSEF",
+      "download_url": "http://127.0.0.1:8000/packages/java-1.0.0.tar.gz",
+      "signature": "b3cd216809906d5c820b0b7f160c1853b463612c83064eb5402a9ff40e3d47cd8bccd5ccf48ee4173054aa28c840adedb18005d5f0bdf04668c621394c42ae04"
+    },
+    {
+      "name": "architecture",
+      "version": "1.0.0",
+      "description": "architecture plugin for OSEF",
+      "download_url": "http://127.0.0.1:8000/packages/architecture-1.0.0.tar.gz",
+      "signature": "e438940df3f444a7cc03f108fa93db950a3cb8fd10b43e279279b25d9ee244f8b5a9452747fb7c08c1401089768eb9e4db3694bd7c3011d42e9111bdc6664705"
+    },
+    {
+      "name": "fastapi",
+      "version": "1.0.0",
+      "description": "fastapi plugin for OSEF",
+      "download_url": "http://127.0.0.1:8000/packages/fastapi-1.0.0.tar.gz",
+      "signature": "0df9f1cea8b7d7a9cae9c02b98dbb413732dc695c214c98871067ed8d109616f6f7fec413bd67838f0b0335eec234ddf2f2b1910195a0625071df64bd5c2ed03"
+    },
+    {
+      "name": "infrastructure",
+      "version": "1.0.0",
+      "description": "infrastructure plugin for OSEF",
+      "download_url": "http://127.0.0.1:8000/packages/infrastructure-1.0.0.tar.gz",
+      "signature": "cc557f6dc89c64cede3093871c246d4bf4977add7e6abed7ec1942f7dc24c9f89d83f59c8a9c08239e4b38f706a189c78e232b12ef5683dcd28ef659ffb41700"
+    },
+    {
+      "name": "future",
+      "version": "1.0.0",
+      "description": "future plugin for OSEF",
+      "download_url": "http://127.0.0.1:8000/packages/future-1.0.0.tar.gz",
+      "signature": "37a94c9478b4047c2f568b0a69033f308d162460a53cada4562f0a88a99b76baf758c3b52d5bd9b41d8972e10cc7ebd515e614b2a3f2dbc96d5beadd2d4efd05"
+    },
+    {
+      "name": "github-actions",
+      "version": "1.0.0",
+      "description": "github-actions plugin for OSEF",
+      "download_url": "http://127.0.0.1:8000/packages/github-actions-1.0.0.tar.gz",
+      "signature": "b487134f11d7e1bb507b0f95f9e8a82598804d8c894b9584bb35d9a083f5456ba4e7bffe4bc114df7b3d83ef106beb8810146e3d82463c02c446338c84f35807"
+    }
+  ]
+}
