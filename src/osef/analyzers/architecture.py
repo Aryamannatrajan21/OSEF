@@ -22,9 +22,16 @@ class ArchitectureAnalyzer(BaseAnalyzer):
         }
 
         for node in self.graph.nodes.values():
-            if node.type == "class":
+            if node.type in ("class", "function"):
                 findings["total_components"] += 1
                 role = node.metadata.get("semantic_role", "").lower()
+
+                # Heuristic fallback for serverless/lambda
+                if not role and node.type == "function":
+                    name = node.name.lower()
+                    if name in ("lambda_handler", "handler") or "handler" in name:
+                        role = "controller"
+
                 if role == "service":
                     findings["services"] += 1
                 elif role == "controller":

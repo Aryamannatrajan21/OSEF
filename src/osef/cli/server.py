@@ -127,37 +127,51 @@ def get_policies() -> dict[str, Any]:
         engine, graph = get_engine()
         violations = []
 
+        import os
+        import tomllib
+
+        config = {}
+        if os.path.exists("pyproject.toml"):
+            try:
+                with open("pyproject.toml", "rb") as f:
+                    pyproject = tomllib.load(f)
+                config = pyproject.get("tool", {}).get("osef", {}).get("rules", {})
+            except Exception:
+                pass
+
         # Rule 1: Missing Docstrings
-        nodes_missing_docs = [
-            n
-            for n in graph.nodes.values()
-            if n.type in ["function", "class", "module"] and not n.description
-        ]
-        if nodes_missing_docs:
-            violations.append(
-                {
-                    "id": "Documentation.MissingDocstring",
-                    "severity": "warning",
-                    "message": f"Found {len(nodes_missing_docs)} entities missing docstrings (e.g., {nodes_missing_docs[0].name})",
-                }
-            )
-
-        # Rule 2: High Coupling
-        from collections import defaultdict
-
-        outgoing_counts: dict[str, int] = defaultdict(int)
-        for e in graph.edges:
-            outgoing_counts[e.source_id] += 1
-
-        for n in graph.nodes.values():
-            if outgoing_counts[n.id] > 30:
+        if config.get("Documentation.MissingDocstring", True):
+            nodes_missing_docs = [
+                n
+                for n in graph.nodes.values()
+                if n.type in ["function", "class", "module"] and not n.description
+            ]
+            if nodes_missing_docs:
                 violations.append(
                     {
-                        "id": "Architecture.HighCoupling",
-                        "severity": "error",
-                        "message": f"Node {n.name} has extremely high coupling ({outgoing_counts[n.id]} outgoing dependencies)",
+                        "id": "Documentation.MissingDocstring",
+                        "severity": "warning",
+                        "message": f"Found {len(nodes_missing_docs)} entities missing docstrings (e.g., {nodes_missing_docs[0].name})",
                     }
                 )
+
+        # Rule 2: High Coupling
+        if config.get("Architecture.HighCoupling", True):
+            from collections import defaultdict
+
+            outgoing_counts: dict[str, int] = defaultdict(int)
+            for e in graph.edges:
+                outgoing_counts[e.source_id] += 1
+
+            for n in graph.nodes.values():
+                if outgoing_counts[n.id] > 30:
+                    violations.append(
+                        {
+                            "id": "Architecture.HighCoupling",
+                            "severity": "error",
+                            "message": f"Node {n.name} has extremely high coupling ({outgoing_counts[n.id]} outgoing dependencies)",
+                        }
+                    )
 
         return {"violations": violations}
     except Exception as e:

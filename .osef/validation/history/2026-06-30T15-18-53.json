@@ -12,14 +12,14 @@
     "dependencies": null,
     "commit": null,
     "branch": null,
-    "analysis_date": "2026-06-30T16:53:08.585212"
+    "analysis_date": "2026-06-30T15:18:53.181269"
   },
   "profile": "core",
   "plugin_matrix": {},
   "domain_coverage": [],
   "graph_statistics": {
-    "node_count": 2362,
-    "edge_count": 3246,
+    "node_count": 2342,
+    "edge_count": 3215,
     "components": 0,
     "services": 0
   },
@@ -28,7 +28,7 @@
   "policy_statistics": {},
   "certification": {},
   "performance": {
-    "build_time_seconds": 1.5787649154663086
+    "build_time_seconds": 1.2663288116455078
   },
   "sdk_compatibility": {},
   "engineering_confidence": {

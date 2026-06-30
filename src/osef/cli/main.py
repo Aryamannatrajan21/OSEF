@@ -149,6 +149,9 @@ def analyze(
     disable: List[str] = typer.Option(
         [], "--disable", help="Disable specific plugins or profiles"
     ),
+    ci: bool = typer.Option(
+        False, "--ci", help="Run in CI mode and enforce quality gates"
+    ),
 ) -> None:
     """Analyze a repository and build its Knowledge Graph."""
     console.print(
@@ -198,6 +201,52 @@ def analyze(
             console.print("\n[bold yellow]🔍 Key Findings:[/bold yellow]")
             for finding in assessment.findings:
                 console.print(f"  • {finding}")
+
+        # CI Quality Gates
+        if ci:
+            console.print("\n[bold cyan]Evaluating Quality Gates...[/bold cyan]")
+            import os
+
+            try:
+                import tomllib
+            except ImportError:
+                tomllib = None
+
+            gates = {}
+            if tomllib and os.path.exists("pyproject.toml"):
+                try:
+                    with open("pyproject.toml", "rb") as f:
+                        pyproj = tomllib.load(f)
+                    gates = (
+                        pyproj.get("tool", {}).get("osef", {}).get("quality_gates", {})
+                    )
+                except Exception:
+                    pass
+
+            # Default gates if not configured
+            max_broken = gates.get("max_broken_imports", 0)
+            min_doc = gates.get("min_doc_coverage", 0)
+
+            failed = False
+            if assessment.dependencies.broken_imports > max_broken:
+                console.print(
+                    f"[bold red]✖ Quality Gate Failed:[/bold red] Broken imports ({assessment.dependencies.broken_imports}) > maximum allowed ({max_broken})"
+                )
+                failed = True
+
+            if assessment.documentation.coverage_percentage < min_doc:
+                console.print(
+                    f"[bold red]✖ Quality Gate Failed:[/bold red] Documentation coverage ({assessment.documentation.coverage_percentage:.1f}%) < minimum allowed ({min_doc}%)"
+                )
+                failed = True
+
+            if failed:
+                console.print(
+                    "[bold red]CI Pipeline Failed due to Quality Gate violations.[/bold red]"
+                )
+                raise typer.Exit(code=1)
+            else:
+                console.print("[bold green]✔ All Quality Gates passed.[/bold green]")
 
     except Exception as e:
         console.print(f"[bold red]✖ Error during analysis: {e}[/bold red]")
