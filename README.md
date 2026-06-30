@@ -159,8 +159,13 @@ This mode evaluates your codebase against quality gates defined in `pyproject.to
 - ✅ **Enterprise Intelligence** (Organizational Knowledge Model)
 - ✅ **Cross-Domain Correlation**
 
-**Future Ecosystem Expansion**
-- 🚧 Plugin Marketplace
+**Future Ecosystem Expansion (The Plugin Marketplace)**
+While OSEF natively handles architectural standardization, the upcoming **Plugin Marketplace** will allow you to run deep, best-practice code scans by:
+1. **Wrapping Native Analyzers**: Seamlessly integrating industry-standard tools like `ruff`, `eslint`, `semgrep`, or `sonarqube` as plugins. OSEF intercepts their output and attaches the findings directly to the Enterprise Knowledge Graph.
+2. **Custom Policy Packs (EPE)**: Writing specialized Python rules for the Engineering Policy Engine to enforce tight internal coding standards (e.g., "Controllers must never call the database").
+3. **AI-Powered Scans**: Leveraging the Bedrock/LiteLLM integration to execute LLM-driven policies across components to detect anti-patterns and code smells that static tools miss.
+
+- 🚧 UI Marketplace Portal
 - 🚧 AI Engineering Intelligence Agents
 - 🚧 Language Packs (Go, Rust, C#, Kotlin)
 
