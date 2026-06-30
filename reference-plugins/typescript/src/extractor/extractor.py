@@ -88,10 +88,14 @@ class TypeScriptSymbolExtractor:
             name = self._find_child_text(node, "identifier")
             if name:
                 qname = f"{namespace}.{name}" if namespace else name
-                symbols.append(self._build_symbol(NormalizedFunction, node, qname, name))
+                symbols.append(
+                    self._build_symbol(NormalizedFunction, node, qname, name)
+                )
 
         elif node.kind == "method_definition":
-            name = self._find_child_text(node, "property_identifier") or self._find_child_text(node, "identifier")
+            name = self._find_child_text(
+                node, "property_identifier"
+            ) or self._find_child_text(node, "identifier")
             if name:
                 qname = f"{namespace}.{name}" if namespace else name
                 symbols.append(self._build_symbol(NormalizedMethod, node, qname, name))
@@ -103,7 +107,9 @@ class TypeScriptSymbolExtractor:
                     name = self._find_child_text(child, "identifier")
                     if name:
                         qname = f"{namespace}.{name}" if namespace else name
-                        symbols.append(self._build_symbol(NormalizedVariable, node, qname, name))
+                        symbols.append(
+                            self._build_symbol(NormalizedVariable, node, qname, name)
+                        )
 
         elif node.kind == "import_statement":
             # An import statement typically has a 'string' child representing the source
@@ -112,12 +118,14 @@ class TypeScriptSymbolExtractor:
                 if child.kind == "string":
                     source_node = child
                     break
-            
+
             if source_node:
                 # Strip quotes
                 source = source_node.text.strip("'\"")
                 # Add import symbol
-                import_sym = self._build_symbol(NormalizedImport, node, f"import_{source}", "import")
+                import_sym = self._build_symbol(
+                    NormalizedImport, node, f"import_{source}", "import"
+                )
                 import_sym.source = source
                 symbols.append(import_sym)
 
