@@ -151,6 +151,69 @@ def get_policies() -> dict[str, Any]:
         return {"error": "Internal server error while fetching policies."}
 
 
+from pydantic import BaseModel
+class ChatRequest(BaseModel):
+    message: str
+    history: list[dict[str, str]]
+
+@app.post("/api/chat")
+def chat_with_assistant(request: ChatRequest) -> dict[str, Any]:
+    try:
+        engine, graph = get_engine()
+        
+        # Build context from graph
+        node_count = len(graph.nodes)
+        edge_count = len(graph.edges)
+        
+        # We need the OpenAI client
+        import os
+        from openai import OpenAI
+        
+        api_key = os.environ.get("NVIDIA_API_KEY", "")
+            
+        client = OpenAI(
+            base_url="https://integrate.api.nvidia.com/v1",
+            api_key=api_key
+        )
+        
+        project_name = os.path.basename(os.getcwd())
+        
+        system_prompt = f"""You are the strict, professional OSEF Architecture Assistant. 
+You are currently analyzing the project: '{project_name}'.
+Current Graph Context for '{project_name}':
+- Total Nodes: {node_count}
+- Total Edges: {edge_count}
+
+CRITICAL INSTRUCTIONS:
+1. You must ONLY answer questions based on the architecture, dependencies, and policies of the '{project_name}' project provided in your context.
+2. NEVER leak, discuss, or hallucinate information about other projects, training data, or external codebases. Your entire memory and knowledge base must be restricted to this specific project.
+3. If a user asks about anything outside of this project, you must politely decline and remind them you are strictly sandboxed to '{project_name}'.
+4. Output your responses using standard Markdown. Use clean formatting, lists, and code blocks where appropriate."""
+
+        messages = [{"role": "system", "content": system_prompt}]
+        for msg in request.history:
+            if msg.get("role") in ["user", "assistant"]:
+                messages.append({"role": msg["role"], "content": msg["content"]})
+        
+        messages.append({"role": "user", "content": request.message})
+        
+        completion = client.chat.completions.create(
+            model="nvidia/nemotron-3-ultra-550b-a55b",
+            messages=messages, # type: ignore
+            temperature=1,
+            top_p=0.95,
+            max_tokens=1024,
+            extra_body={"chat_template_kwargs":{"enable_thinking":True},"reasoning_budget":1024},
+        )
+        
+        reply = completion.choices[0].message.content
+        return {"reply": reply}
+        
+    except Exception as e:
+        logger.error(f"Error in chat assistant: {e}")
+        return {"error": str(e)}
+
+
 @app.get("/api/health")
 def health() -> dict[str, Any]:
     return {"status": "ok"}

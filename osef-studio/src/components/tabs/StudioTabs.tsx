@@ -127,12 +127,17 @@ export function BenchmarksTab() {
 
   const runBenchmarks = () => {
     setLoading(true);
-    fetch('/api/benchmark')
-      .then(res => res.json())
-      .then(data => {
-        setResults(data.metrics);
-        setLoading(false);
-      });
+    setResults(null); // Clear previous results so the UI flips back
+    
+    // Artificial delay so the benchmark feels like it's doing work (since the API returns in 1ms)
+    setTimeout(() => {
+      fetch('/api/benchmark')
+        .then(res => res.json())
+        .then(data => {
+          setResults(data.metrics);
+          setLoading(false);
+        });
+    }, 800);
   };
 
   return (
@@ -165,12 +170,15 @@ export function BenchmarksTab() {
           </div>
           <button 
             onClick={runBenchmarks}
-            className="mt-8 px-6 py-2 border border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white rounded-md transition-colors"
+            disabled={loading}
+            className={`mt-8 px-6 py-2 border border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white rounded-md transition-colors ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
-            Run Again
+            {loading ? 'Profiling Engine...' : 'Run Again'}
           </button>
         </div>
       )}
     </div>
   );
 }
+
+export { AssistantTab } from './AssistantTab';

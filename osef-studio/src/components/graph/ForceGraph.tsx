@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import ForceGraph2D from 'react-force-graph-2d';
+import ForceGraph3D from 'react-force-graph-3d';
 
 // Domain color mapping
 const DOMAIN_COLORS: Record<string, string> = {
@@ -27,10 +28,12 @@ interface ForceGraphProps {
   data: any;
   onNodeClick?: (node: any) => void;
   searchQuery?: string;
+  is3DMode?: boolean;
 }
 
-export default function ForceGraph({ data, onNodeClick, searchQuery = '' }: ForceGraphProps) {
+export default function ForceGraph({ data, onNodeClick, searchQuery = '', is3DMode = false }: ForceGraphProps) {
   const fgRef = useRef<any>(null);
+  const fg3DRef = useRef<any>(null);
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -73,7 +76,6 @@ export default function ForceGraph({ data, onNodeClick, searchQuery = '' }: Forc
       name: e.relation_type
     }));
     
-    // eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/rules-of-hooks, react-hooks/set-state-in-effect
     setGraphData({ nodes, links } as any);
   }, [data]);
 
@@ -81,33 +83,63 @@ export default function ForceGraph({ data, onNodeClick, searchQuery = '' }: Forc
     if (onNodeClick) onNodeClick(node);
     
     // Center/zoom on node
-    if (fgRef.current) {
+    if (!is3DMode && fgRef.current) {
       fgRef.current.centerAt(node.x, node.y, 1000);
       fgRef.current.zoom(8, 2000);
+    } else if (is3DMode && fg3DRef.current) {
+      // 3D camera zoom
+      const distance = 40;
+      const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
+      fg3DRef.current.cameraPosition(
+        { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }, // new position
+        node, // lookAt ({ x, y, z })
+        3000  // ms transition duration
+      );
     }
-  }, [onNodeClick]);
+  }, [onNodeClick, is3DMode]);
 
   return (
     <div ref={containerRef} className="w-full h-full relative">
       {graphData.nodes.length > 0 ? (
-        <ForceGraph2D
-          ref={fgRef}
-          width={dimensions.width}
-          height={dimensions.height}
-          graphData={graphData}
-          nodeLabel="name"
-          nodeColor={(node: any) => {
-            if (!searchQuery) return node.color;
-            const match = node.name.toLowerCase().includes(searchQuery.toLowerCase());
-            return match ? node.color : 'rgba(255, 255, 255, 0.05)';
-          }}
-          nodeRelSize={4}
-          linkColor={() => 'rgba(255, 255, 255, 0.2)'}
-          linkDirectionalArrowLength={3.5}
-          linkDirectionalArrowRelPos={1}
-          onNodeClick={handleNodeClick}
-          backgroundColor="#00000000" // transparent
-        />
+        is3DMode ? (
+          <ForceGraph3D
+            ref={fg3DRef}
+            width={dimensions.width}
+            height={dimensions.height}
+            graphData={graphData}
+            nodeLabel="name"
+            nodeColor={(node: any) => {
+              if (!searchQuery) return node.color;
+              const match = node.name.toLowerCase().includes(searchQuery.toLowerCase());
+              return match ? node.color : 'rgba(255, 255, 255, 0.05)';
+            }}
+            nodeRelSize={4}
+            linkColor={() => 'rgba(255, 255, 255, 0.2)'}
+            linkDirectionalArrowLength={3.5}
+            linkDirectionalArrowRelPos={1}
+            onNodeClick={handleNodeClick}
+            backgroundColor="#00000000" // transparent
+          />
+        ) : (
+          <ForceGraph2D
+            ref={fgRef}
+            width={dimensions.width}
+            height={dimensions.height}
+            graphData={graphData}
+            nodeLabel="name"
+            nodeColor={(node: any) => {
+              if (!searchQuery) return node.color;
+              const match = node.name.toLowerCase().includes(searchQuery.toLowerCase());
+              return match ? node.color : 'rgba(255, 255, 255, 0.05)';
+            }}
+            nodeRelSize={4}
+            linkColor={() => 'rgba(255, 255, 255, 0.2)'}
+            linkDirectionalArrowLength={3.5}
+            linkDirectionalArrowRelPos={1}
+            onNodeClick={handleNodeClick}
+            backgroundColor="#00000000" // transparent
+          />
+        )
       ) : (
         <div className="absolute inset-0 flex items-center justify-center text-gray-500">
           Loading graph data...
@@ -116,3 +148,4 @@ export default function ForceGraph({ data, onNodeClick, searchQuery = '' }: Forc
     </div>
   );
 }
+

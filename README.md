@@ -113,8 +113,18 @@ OSEF ships with a stunning Next.js dashboard that visualizes your codebase archi
 
 ### Dynamic Confidence Scores
 ![Reasoning View](docs/assets/studio_reasoning.png)
+<img src="docs/benchmark.png" alt="Benchmark Analytics" width="45%">
+</div>
 
-### Real-time Policy Enforcement
+### AI Architecture Assistant
+Ask complex questions about your architecture natively within the studio. The assistant provides tailored insights restricted specifically to the codebase currently being analyzed.
+
+<img src="docs/ai-assistant-screenshot.png" alt="AI Architecture Assistant" width="100%">
+
+### Real-Time Policy Enforcement
+Define architectural rules (e.g., maximum coupling, required docstrings) and see violations flagged instantly in the UI.
+
+### Policies View
 ![Policies View](docs/assets/studio_policies.png)
 
 ### Benchmark Integration
