@@ -175,7 +175,10 @@ def chat_with_assistant(request: ChatRequest) -> dict[str, Any]:
         edge_count = len(graph.edges)
 
         import os
-        from openai import OpenAI
+        try:
+            from openai import OpenAI
+        except ImportError:
+            return {"error": "The 'openai' package is required to use the AI Assistant. Please run `pip install openai` or update your `osef[ui]` installation to install it."}
 
         # Determine API Config
         base_url = "https://integrate.api.nvidia.com/v1"
