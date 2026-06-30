@@ -257,9 +257,13 @@ def scan(
 
 
 @app.command()
-def report(path: str = typer.Argument(".", help="Path to repository")) -> None:
+def report(
+    path: str = typer.Argument(".", help="Path to repository"),
+    format: str = typer.Option("text", "--format", "-f", help="Output format: text, markdown, json"),
+) -> None:
     """Generate a human-readable repository intelligence report."""
-    console.print(f"[bold blue]Generating report for {path}...[/bold blue]")
+    if format == "text":
+        console.print(f"[bold blue]Generating report for {path}...[/bold blue]")
     try:
         builder = PipelineEngine(path)
         graph = builder.build()
@@ -268,10 +272,23 @@ def report(path: str = typer.Argument(".", help="Path to repository")) -> None:
         for node in graph.nodes.values():
             counts[node.type] = counts.get(node.type, 0) + 1
 
-        console.print("\n[bold]Repository Intelligence Report[/bold]")
-        console.print("==============================")
-        for type_name, count in sorted(counts.items()):
-            console.print(f"{type_name.capitalize()}s: [bold cyan]{count}[/bold cyan]")
+        if format == "json":
+            import json
+            print(json.dumps({"nodes": len(graph.nodes), "edges": len(graph.edges), "components": counts}, indent=2))
+        elif format == "markdown":
+            md = f"# Repository Intelligence Report\n\n"
+            md += f"**Total Nodes**: {len(graph.nodes)}  \n"
+            md += f"**Total Edges**: {len(graph.edges)}  \n\n"
+            md += "### Component Breakdown\n"
+            md += "| Type | Count |\n|---|---|\n"
+            for type_name, count in sorted(counts.items()):
+                md += f"| {type_name.capitalize()} | {count} |\n"
+            print(md)
+        else:
+            console.print("\n[bold]Repository Intelligence Report[/bold]")
+            console.print("==============================")
+            for type_name, count in sorted(counts.items()):
+                console.print(f"{type_name.capitalize()}s: [bold cyan]{count}[/bold cyan]")
 
     except Exception as e:
         console.print(f"[bold red]Report generation failed:[/bold red] {e}")
