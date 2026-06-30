@@ -23,6 +23,24 @@ Instead of relying on regex or fragile AST traversal scripts, OSEF parses your r
 
 ---
 
+## 💡 Why use OSEF today? (Use Cases)
+
+Even in its current foundational state, engineering teams gain immediate value from OSEF for four specific scenarios:
+
+1. **Accelerated Developer Onboarding (Visualizing the Spaghetti)**
+   When a new engineer joins a team, reading through hundreds of files to understand how services, models, and controllers interact can take weeks. By running `osef ui`, they get an instant, interactive map of the codebase. They can visually trace exactly what relies on a specific file, making it much easier to understand the blast radius of their changes.
+
+2. **Context-Aware AI Assistance (No More Copy-Pasting to ChatGPT)**
+   Most engineers use AI, but standard AI tools lack context about the *rest* of your repository. Because OSEF feeds its massive **Engineering Knowledge Graph** directly into the AWS Bedrock/LiteLLM integration, you can ask the OSEF Studio questions like *"If I change the authentication middleware, which database controllers will be affected?"* and the AI will answer accurately because it actually "sees" the dependency map.
+
+3. **Automated Architecture Documentation**
+   Engineers hate writing documentation and drawing architectural diagrams (which are usually out of date the minute they are published). By running `osef report . --format markdown` in a CI/CD pipeline, the team can automatically generate and publish a 100% accurate, up-to-date map of their architecture on every single pull request.
+
+4. **Basic Guardrails Against Codebase Decay**
+   As codebases scale, developers inevitably introduce messy dependencies (like frontend UI components importing backend database models). By hooking `osef scan . --ci` into GitHub Actions, the team gets a lightweight quality gate that guarantees the structural integrity of imports and dependencies before code is ever merged.
+
+---
+
 ## ⚡ Why OSEF?
 
 | Feature | Description |
