@@ -66,6 +66,19 @@ class TypeScriptResolver(LanguageResolver):
     def _pass_imports_exports(self, graph: ResolvedSymbolGraph) -> ResolvedSymbolGraph:
         """Pass 2: Resolve cross-module import and export linkages."""
         new_graph = deepcopy(graph)
+        for symbol in new_graph.nodes.values():
+            if symbol.kind == "import":
+                # Create a DEPENDS_ON edge for the import
+                target_source = getattr(symbol, "source", None)
+                if target_source:
+                    new_graph.edges.append(
+                        ResolvedRelationship(
+                            relationship_id=f"{symbol.symbol_id}_imports_{target_source}",
+                            source_symbol_id=symbol.symbol_id,
+                            target_symbol_id=target_source,  # We leave it loose here for semantic engine to resolve against real files
+                            relationship_type="DEPENDS_ON",
+                        )
+                    )
         return new_graph
 
     def _pass_inheritance(self, graph: ResolvedSymbolGraph) -> ResolvedSymbolGraph:

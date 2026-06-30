@@ -9,13 +9,16 @@ sys.path.insert(0, os.path.abspath("reference-plugins/typescript"))
 from src.pipeline import TypeScriptPipeline
 
 
+import os
+
 def test_ecosystem_integration():
     registry = EcosystemRegistry()
     ts_pipeline = TypeScriptPipeline()
-
-    registry.register_plugin(
-        "reference-plugins/typescript/plugin_manifest.json", ts_pipeline
-    )
+    
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    manifest_path = os.path.join(current_dir, "..", "plugin_manifest.json")
+    
+    registry.register_plugin(manifest_path, ts_pipeline)
 
     print("✅ Ecosystem Registry loaded TypeScript Plugin metadata deterministically.")
 

@@ -17,7 +17,6 @@ class TypeScriptPipeline(LanguagePipeline):
     """
 
     def __init__(self):
-        self.parser = TreeSitterTypeScriptAdapter()
         self.builder = NormalizedSymbolBuilder(
             language="typescript",
             parser="tree-sitter",
@@ -31,7 +30,10 @@ class TypeScriptPipeline(LanguagePipeline):
         self.mapper = GraphMapper()
 
     def parse(self, source_file: str):
-        return self.parser.parse(source_file)
+        is_tsx = source_file.endswith(".tsx")
+        # We instantiate the adapter dynamically based on the file type
+        adapter = TreeSitterTypeScriptAdapter(is_tsx=is_tsx)
+        return adapter.parse(source_file)
 
     def extract_symbols(self, ast) -> Sequence[NormalizedSymbol]:
         # Using a fixed hash for tests to simulate proper file hashing

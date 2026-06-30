@@ -97,7 +97,7 @@ class RepositoryScanner:
 
                 if f.endswith(".py"):
                     manifest.python_files.append(rel_f)
-                elif f.endswith(".ts") and not f.endswith(".d.ts"):
+                elif (f.endswith(".ts") or f.endswith(".tsx")) and not f.endswith(".d.ts"):
                     manifest.typescript_files.append(rel_f)
                 elif f.endswith(".java"):
                     manifest.java_files.append(rel_f)

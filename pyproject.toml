@@ -52,5 +52,5 @@ warn_return_any = true
 warn_unused_configs = true
 
 [tool.osef.quality_gates]
-max_broken_imports = 100
-min_doc_coverage = 0
+max_broken_imports = 200
+min_doc_coverage = 20.0

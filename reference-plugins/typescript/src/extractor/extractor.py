@@ -6,6 +6,10 @@ from osef.sdk.language.symbols import (
     NormalizedEnum,
     NormalizedTypeAlias,
     NormalizedNamespace,
+    NormalizedFunction,
+    NormalizedMethod,
+    NormalizedVariable,
+    NormalizedImport,
 )
 from osef.sdk.language.builder import NormalizedSymbolBuilder
 from src.parser.adapter import NormalizedASTNode
@@ -79,6 +83,43 @@ class TypeScriptSymbolExtractor:
                 symbols.append(
                     self._build_symbol(NormalizedTypeAlias, node, qname, name)
                 )
+
+        elif node.kind == "function_declaration":
+            name = self._find_child_text(node, "identifier")
+            if name:
+                qname = f"{namespace}.{name}" if namespace else name
+                symbols.append(self._build_symbol(NormalizedFunction, node, qname, name))
+
+        elif node.kind == "method_definition":
+            name = self._find_child_text(node, "property_identifier") or self._find_child_text(node, "identifier")
+            if name:
+                qname = f"{namespace}.{name}" if namespace else name
+                symbols.append(self._build_symbol(NormalizedMethod, node, qname, name))
+
+        elif node.kind == "lexical_declaration" or node.kind == "variable_declaration":
+            # For variables, we need to dig into the variable_declarator
+            for child in node.children:
+                if child.kind == "variable_declarator":
+                    name = self._find_child_text(child, "identifier")
+                    if name:
+                        qname = f"{namespace}.{name}" if namespace else name
+                        symbols.append(self._build_symbol(NormalizedVariable, node, qname, name))
+
+        elif node.kind == "import_statement":
+            # An import statement typically has a 'string' child representing the source
+            source_node = None
+            for child in node.children:
+                if child.kind == "string":
+                    source_node = child
+                    break
+            
+            if source_node:
+                # Strip quotes
+                source = source_node.text.strip("'\"")
+                # Add import symbol
+                import_sym = self._build_symbol(NormalizedImport, node, f"import_{source}", "import")
+                import_sym.source = source
+                symbols.append(import_sym)
 
         for child in node.children:
             self._walk(child, symbols, namespace)
