@@ -126,7 +126,15 @@ Configure your custom Base URL, API Key, and Model securely in the UI Settings w
 <img src="docs/ai-assistant-screenshot.png" alt="AI Architecture Assistant" width="100%">
 
 ### Real-Time Policy Enforcement
-Define architectural rules (e.g., maximum coupling, required docstrings) and see violations flagged instantly in the UI.
+Define architectural rules (e.g., maximum coupling, required docstrings) and see violations flagged instantly in the UI. 
+You can customize or suppress these policies directly from your `pyproject.toml` using `[tool.osef.rules]`.
+
+### CI/CD Integration (SonarQube-Style Scanning)
+OSEF can act as a strict quality gate in your automated pipelines! Simply run:
+```bash
+osef scan . --ci
+```
+This mode evaluates your codebase against quality gates defined in `pyproject.toml` (under `[tool.osef.quality_gates]`). If thresholds like `max_broken_imports` or `min_doc_coverage` are violated, the scanner automatically exits with a failure code to block the pipeline.
 
 ### Policies View
 ![Policies View](docs/assets/studio_policies.png)
