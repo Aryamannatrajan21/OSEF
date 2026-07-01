@@ -23,7 +23,7 @@ def test_marketplace_client_search() -> None:
         assert results[0]["name"] == "test-plugin"
 
 
-def test_install_plugin_with_signature():
+def test_install_plugin_with_signature() -> None:
     client = MarketplaceClient("http://mock-index.json")
 
     # Create keypair
