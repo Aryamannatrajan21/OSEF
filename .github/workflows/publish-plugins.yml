@@ -57,11 +57,13 @@ jobs:
             --notes "Automatically packaged and signed plugins from the reference-plugins directory."
 
       - name: Commit marketplace-index.json
+        id: cpr
         uses: peter-evans/create-pull-request@v6
+        continue-on-error: true
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "chore(marketplace): update index"
           title: "Update Marketplace Index"
-          body: "Automated PR to update the `marketplace-index.json` after publishing new plugins."
+          body: "Automated PR to update the `marketplace-index.json` after publishing new plugins.\n\n> [!NOTE]\n> If this action fails with a 403, ensure that **'Allow GitHub Actions to create and approve pull requests'** is checked in Settings > Actions > General."
           branch: "update-marketplace-index"
           delete-branch: true
