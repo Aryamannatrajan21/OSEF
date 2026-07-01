@@ -298,7 +298,7 @@ def report(
             if os.path.exists(plugin_path) and plugin_path not in sys.path:
                 sys.path.insert(0, plugin_path)
             try:
-                from osef_intelligence.plugin import IntelligenceAnalyzer
+                from osef_intelligence.plugin import IntelligenceAnalyzer  # type: ignore
 
                 analyzer = IntelligenceAnalyzer(graph)
                 output_data["intelligence"] = {
