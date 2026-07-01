@@ -20,6 +20,7 @@ This roadmap tracks the strategic progression of the Open Source Engineering Fra
 - **Track A — Knowledge Domains**: Delivered reference capabilities for Software (including frameworks like FastAPI), Documentation, Infrastructure, Security, Architecture, Runtime, and Enterprise domains via the Plugin Marketplace.
 - **Track B — Capability Platform Expansion**: Delivered `visualization` (including CLI tools) and `graph` plugins.
 - **Track D — Cross-Domain Intelligence**: Delivered `cross-domain-intelligence` plugin for reusable correlation.
+- **Track G — AI Engineering Intelligence**: Delivered Repository Q&A, Architecture Assistant with rich context injection, and Agent Collaboration via the experimental `future` plugin tools.
 
 ---
 
@@ -27,7 +28,6 @@ This roadmap tracks the strategic progression of the Open Source Engineering Fra
 
 ### Phase II: Ecosystem Engineering (In Progress)
 - **Track E — Engineering Intelligence**: Architecture Drift, Technical Debt, Repository Health, Dependency Risk.
-- **Track G — AI Engineering Intelligence**: Repository Q&A, Architecture Assistant, Agent Collaboration (initiated via the experimental `future` plugin).
 
 ---
 

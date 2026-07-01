@@ -135,6 +135,11 @@ OSEF ships with a stunning Next.js dashboard that visualizes your codebase archi
 ### AI Architecture Assistant
 Ask complex questions about your architecture natively within the studio. The assistant provides tailored insights restricted specifically to the codebase currently being analyzed. 
 
+**🧠 Context-Aware Intelligence:** Unlike standard AI wrappers, the OSEF Assistant dynamically queries the Engineering Knowledge Graph *before* answering. It automatically injects:
+- **Codebase Issues:** Known architectural violations (e.g. high coupling, missing docs).
+- **Component Summaries:** The exact names and structures of top-level modules.
+- **Reasoning Confidence:** The current deterministic validity score of the graph.
+
 **Universal LLM Support (Powered by LiteLLM):** OSEF Studio seamlessly supports over 100+ AI providers natively (OpenAI, Anthropic, Google Gemini, AWS Bedrock, Cohere, Ollama, etc.).
 
 Configure your custom Base URL, API Key, and Model securely in the UI Settings without hardcoding secrets. 
@@ -209,7 +214,7 @@ OSEF ships with an expansive ecosystem of reference plugins that cover the entir
 ### Future Expansion
 - **`visualization`**: Advanced rendering plugins for OSEF Studio (e.g., 3D graph views, heatmap overlays).
 - **`graph`**: Experimental graph database adapters (Neo4j, Amazon Neptune) for the Engineering Knowledge Graph.
-- **`future`**: Incubator for next-generation AI agents and reasoning capabilities.
+- **`future`**: The incubator for **Track G (AI Engineering Intelligence)**. It exposes native deterministic tools (like `dependency_chain`, `deployment_chain`, and `codebase_query`) that allow autonomous AI Agents to interact directly with the Engineering Knowledge Graph.
 
 *Want to build your own? Check out the [Extension Developer Guide](docs/architecture/EXTENSION_DEVELOPER_GUIDE.md).*
 
