@@ -1,11 +1,13 @@
-from typing import List, Dict, Any
+from typing import Dict
 from osef_future.tools import OSEFTool
+
 
 class RepositoryQA:
     """
     A general-purpose AI agent that answers developer questions about the codebase
     by leveraging GraphQuery and the EngineeringReasoner.
     """
+
     def __init__(self, tools: Dict[str, OSEFTool]):
         self.tools = tools
         self.name = "RepositoryQA"

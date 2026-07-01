@@ -1,7 +1,7 @@
-from typing import List, Dict, Any
+from typing import List
 from osef.sdk.plugin_api import BasePlugin
 from osef.core.ekg import KnowledgeGraph
-from osef.core.reasoner import EngineeringReasoner
+
 
 class FutureAgentEnricher(BasePlugin):
     """
@@ -23,11 +23,10 @@ class FutureAgentEnricher(BasePlugin):
         where the AgentHost starts up and exposes the EngineeringReasoner to LLMs.
         """
         # For CI execution, we just register that the AI host is available.
-        graph.add_metadata("ai_agent_host", {
-            "status": "ready",
-            "capabilities": self.capabilities()
-        })
-        
+        graph.add_metadata(
+            "ai_agent_host", {"status": "ready", "capabilities": self.capabilities()}
+        )
+
         # In a real daemon mode, we would instantiate the AgentHost here:
         # host = AgentHost(reasoner=EngineeringReasoner(context=...))
         # host.start()

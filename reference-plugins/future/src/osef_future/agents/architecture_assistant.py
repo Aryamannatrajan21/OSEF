@@ -1,10 +1,12 @@
-from typing import List, Dict, Any
+from typing import Dict
 from osef_future.tools import OSEFTool
+
 
 class ArchitectureAssistant:
     """
     A specialized AI agent that focuses on enforcing and advising on architectural patterns.
     """
+
     def __init__(self, tools: Dict[str, OSEFTool]):
         self.tools = tools
         self.name = "ArchitectureAssistant"
