@@ -12,20 +12,21 @@ This roadmap tracks the strategic progression of the Open Source Engineering Fra
 - **Engineering Platform SDK (EPSDK)**: The `ExtensionHost` and decoupled execution context.
 - **Capability-Driven Runtime**: Shift from inheritance-based providers to composable capabilities.
 - **Platform Validation**: Freezing the core architecture.
-- **Documentation Intelligence Plugin**: The first official reference plugin proving the `GraphDelta` overlays.
+
+### Phase II: Ecosystem Engineering (Completed)
+- **Track F — Enterprise Platform**: Plugin Registry, Marketplace Protocol, Cryptographic Plugin Signing (ed25519), and CLI integration.
+- **Track C — Language Packs**: Delivered reference parsers for Python, TypeScript, Java, and FastAPI.
+- **Track A — Knowledge Domains**: Delivered reference capabilities for Software, Documentation, Infrastructure, Security, Architecture, Runtime, and Enterprise domains via the Plugin Marketplace.
 
 ---
 
 ## Upcoming Milestones
 
-### Phase II: Ecosystem Engineering
+### Phase II: Ecosystem Engineering (In Progress)
 - **Sprint 7.5 & 7.6 — Engineering Intelligence Foundation**: Finalization of the Engineering Ontology, separating the platform into frozen Foundation vs open Ecosystem. Introduction of `GraphQuery` and `EngineeringReasoner`.
-- **Track A — Knowledge Domains**: Software, Documentation, Infrastructure, Security, Architecture, Runtime (Focusing on execution behavior), Enterprise (Focusing on organizational and governance concepts).
 - **Track B — Capability Platform Expansion**: Visualization, Report, Export, Search, Query, CLI.
-- **Track C — Language Packs**: Java, Go, Rust, TypeScript, C#, Kotlin.
 - **Track D — Cross-Domain Intelligence**: Reusable correlation capabilities between Knowledge Domains.
 - **Track E — Engineering Intelligence**: Architecture Drift, Technical Debt, Repository Health, Dependency Risk.
-- **Track F — Enterprise Platform**: Plugin Registry, Marketplace Protocol, Plugin Signing, Compliance Packs.
 - **Track G — AI Engineering Intelligence**: Repository Q&A, Architecture Assistant, Agent Collaboration (consuming deterministic Engineering Reasoner context).
 
 ---
