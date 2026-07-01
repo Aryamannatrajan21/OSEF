@@ -1,116 +1,123 @@
 {
   "plugins": [
     {
-      "name": "visualization",
-      "version": "1.0.0",
-      "description": "visualization plugin for OSEF",
-      "download_url": "https://raw.githubusercontent.com/Aryamannatrajan21/OSEF/main/packages/visualization-1.0.0.tar.gz",
-      "signature": "4b0bf029e373f733279a62efecace48407a410c15878a39d152f04572d4cadabc015ee5ec4d66b2dbe9ec5959a67d6c4988a7a0dcb81151e67c39bb6d441c50a"
-    },
-    {
-      "name": "documentation",
-      "version": "1.0.0",
-      "description": "documentation plugin for OSEF",
-      "download_url": "https://raw.githubusercontent.com/Aryamannatrajan21/OSEF/main/packages/documentation-1.0.0.tar.gz",
-      "signature": "4cc890adb87683a846da219b4c9fabeedd8e1f48f8a6dc05777202857146dc2de5a3a6ceca9421e846205324ad1834e0d6f89f70cbc670ea833e4c98988e0905"
-    },
-    {
-      "name": "docker",
-      "version": "1.0.0",
-      "description": "docker plugin for OSEF",
-      "download_url": "https://raw.githubusercontent.com/Aryamannatrajan21/OSEF/main/packages/docker-1.0.0.tar.gz",
-      "signature": "8c4f28beaeb5f932d13dcaaaafdc164c8d41e2bdecaaaf2a5f90fad50af0f9136a389866dca7716a45683507f9dda50b4f9ad4a9e6611f2ea7d67bb1e6bc4f04"
-    },
-    {
-      "name": "cross-domain-intelligence",
-      "version": "1.0.0",
-      "description": "cross-domain-intelligence plugin for OSEF",
-      "download_url": "https://raw.githubusercontent.com/Aryamannatrajan21/OSEF/main/packages/cross-domain-intelligence-1.0.0.tar.gz",
-      "signature": "2d6225619d31fd6d7e8b09fdfbb51165440fe755848c69ed0d7e319a10225d752ff7e84be27cb12f388fa81a8610029a5693796cab98d24a3851315a2ca5fb01"
-    },
-    {
       "name": "enterprise",
       "version": "1.0.0",
       "description": "enterprise plugin for OSEF",
-      "download_url": "https://raw.githubusercontent.com/Aryamannatrajan21/OSEF/main/packages/enterprise-1.0.0.tar.gz",
-      "signature": "c02b81c6198b97d08347dd672c54ae41eb88679b38edfd7b8259f6652877f81589cab34e2797033b692953ffa3cfb4e693aae065d79618c34a26cd69afe5810e"
-    },
-    {
-      "name": "python",
-      "version": "1.0.0",
-      "description": "python plugin for OSEF",
-      "download_url": "https://raw.githubusercontent.com/Aryamannatrajan21/OSEF/main/packages/python-1.0.0.tar.gz",
-      "signature": "e339826f3506af7abe7664461f340058e965db15f8b27b6ab1ef89288d2091522a54a7ddff33d679bbb5947710afd34ac965b8483c8a51550375fdc37359f007"
-    },
-    {
-      "name": "security",
-      "version": "1.0.0",
-      "description": "security plugin for OSEF",
-      "download_url": "https://raw.githubusercontent.com/Aryamannatrajan21/OSEF/main/packages/security-1.0.0.tar.gz",
-      "signature": "37353975754f51382254df9aa70d80a0144b4e0cc359ab60ef1a4823fe6bfa1ae3f12e33e76ff4e8d6de143dbad8164b74da465b8dc9ff608c9c2ecc1776d205"
-    },
-    {
-      "name": "typescript",
-      "version": "1.0.0",
-      "description": "typescript plugin for OSEF",
-      "download_url": "https://raw.githubusercontent.com/Aryamannatrajan21/OSEF/main/packages/typescript-1.0.0.tar.gz",
-      "signature": "ed1515858b5f5a42e182a6e9fc3a5c6ac3910f9d07c854a33baae0cb242de4c93340986d0b20faf4c82d31d23d3e1cb4f5669e3a5d9d75579055398e300e0900"
-    },
-    {
-      "name": "graph",
-      "version": "1.0.0",
-      "description": "graph plugin for OSEF",
-      "download_url": "https://raw.githubusercontent.com/Aryamannatrajan21/OSEF/main/packages/graph-1.0.0.tar.gz",
-      "signature": "0b518a70b6b8772b5d9a7da90b9b816afec8f581009d4047e036eef4af544cd8adf4e9b2a7f16c76f8632d3ad935f390774dd1fd3908d5cc9f3b0b40ff4f4b0f"
-    },
-    {
-      "name": "runtime",
-      "version": "1.0.0",
-      "description": "runtime plugin for OSEF",
-      "download_url": "https://raw.githubusercontent.com/Aryamannatrajan21/OSEF/main/packages/runtime-1.0.0.tar.gz",
-      "signature": "87a294860b8c633931f94aa1483407c7be493de4df809196b6b5cee2d1722283b3c6898bece8dfc2048a5952d8f772eabf9c509bd745b24ca9e39c79da03260f"
-    },
-    {
-      "name": "java",
-      "version": "1.0.0",
-      "description": "java plugin for OSEF",
-      "download_url": "https://raw.githubusercontent.com/Aryamannatrajan21/OSEF/main/packages/java-1.0.0.tar.gz",
-      "signature": "94741d3b4a14ceedf1bef09d01422afc5845a296102d194c018b40d98ddd83cb0876901cfa9d9ac1d814a2f5704b2a463048ba5444374a8ff94677394709270b"
-    },
-    {
-      "name": "architecture",
-      "version": "1.0.0",
-      "description": "architecture plugin for OSEF",
-      "download_url": "https://raw.githubusercontent.com/Aryamannatrajan21/OSEF/main/packages/architecture-1.0.0.tar.gz",
-      "signature": "93eb60be3a5d035691a323dfee9d86a6a0fc66bc526c544b9103327ef715fa0d774496ddf82a0d1e8784007eb9842cea10132f64421df717568c71456aa5b306"
-    },
-    {
-      "name": "fastapi",
-      "version": "1.0.0",
-      "description": "fastapi plugin for OSEF",
-      "download_url": "https://raw.githubusercontent.com/Aryamannatrajan21/OSEF/main/packages/fastapi-1.0.0.tar.gz",
-      "signature": "9b5aa885907d4248526436e36f8e80be4ba679c064fc8ff488490c44f1633a12b836ab09fc22307b357fcab7faa63a3c2adeef59e199594340a48a4d44b73a00"
-    },
-    {
-      "name": "infrastructure",
-      "version": "1.0.0",
-      "description": "infrastructure plugin for OSEF",
-      "download_url": "https://raw.githubusercontent.com/Aryamannatrajan21/OSEF/main/packages/infrastructure-1.0.0.tar.gz",
-      "signature": "67aca64fc1dedb81e90dc21f2bbf8c8759c8db35b8738b19d1a313559d35834e05871dfd76ad87a77f0929ad86939883c011cb0eb16083490779a77fb1182600"
-    },
-    {
-      "name": "future",
-      "version": "1.0.0",
-      "description": "future plugin for OSEF",
-      "download_url": "https://raw.githubusercontent.com/Aryamannatrajan21/OSEF/main/packages/future-1.0.0.tar.gz",
-      "signature": "f00f9a2af451cc7fad2cca10720bdec8dd10709683ff39b7a67a876f17bafce4f257ca66029879c31346d5ae1c221fa016306d93a30723607b203ae0212e6a07"
+      "download_url": "https://github.com/Aryamannatrajan21/OSEF/releases/download/plugins-latest/enterprise-1.0.0.tar.gz",
+      "signature": "095488d75af3764ada2fc6ad0bb0daf0e8dcf7f8830d7b211d2cf07ccc77ce360e0f525a00767809efc0a27efccbe62c6a6098e647b7f0b16068f9ccb649820e"
     },
     {
       "name": "github-actions",
       "version": "1.0.0",
       "description": "github-actions plugin for OSEF",
-      "download_url": "https://raw.githubusercontent.com/Aryamannatrajan21/OSEF/main/packages/github-actions-1.0.0.tar.gz",
-      "signature": "2a1753768cae6d12ec30ee49773890af986dad478b16fc045b7cfcaca6deddfcf803dbc3e3c81aee31c1dea5e177af7ef0084915325db6379d826cee8c043507"
+      "download_url": "https://github.com/Aryamannatrajan21/OSEF/releases/download/plugins-latest/github-actions-1.0.0.tar.gz",
+      "signature": "8bf3fc4cf33efa2fc381fe6829d349a2117761fee20a35db4f43c2953e35280d06d44222e1f273e2feebe7b2a4d8b6868cf74a2e9718fe24261679f37d275106"
+    },
+    {
+      "name": "intelligence",
+      "version": "1.0.0",
+      "description": "intelligence plugin for OSEF",
+      "download_url": "https://github.com/Aryamannatrajan21/OSEF/releases/download/plugins-latest/intelligence-1.0.0.tar.gz",
+      "signature": "a8aab4cff4558d859f21952b6a886817a2f99f5a1635eb9a20c04467e8e22ef2823b889ad4fb68236887a74185d22d3831df59ea6fa4b44687f44bac7623e90a"
+    },
+    {
+      "name": "architecture",
+      "version": "1.0.0",
+      "description": "architecture plugin for OSEF",
+      "download_url": "https://github.com/Aryamannatrajan21/OSEF/releases/download/plugins-latest/architecture-1.0.0.tar.gz",
+      "signature": "f579b746840e2159c5f0694439edb2ba2363500562c0b2335024d0c0f546aa13e16f069c7ff28507ad710885c085a49785175d1d7f6601ad8c1ca4b8c7a8c209"
+    },
+    {
+      "name": "infrastructure",
+      "version": "1.0.0",
+      "description": "infrastructure plugin for OSEF",
+      "download_url": "https://github.com/Aryamannatrajan21/OSEF/releases/download/plugins-latest/infrastructure-1.0.0.tar.gz",
+      "signature": "bc1edcfb05bb9f33460088bf8e053d5ea3f311eb1864e9fcfda5ed4b1ba093ada3d9e1934eab39c5bf200aa4169aa369a39edb7d6d38be0264a7e3bb8c1cc40b"
+    },
+    {
+      "name": "python",
+      "version": "1.0.0",
+      "description": "python plugin for OSEF",
+      "download_url": "https://github.com/Aryamannatrajan21/OSEF/releases/download/plugins-latest/python-1.0.0.tar.gz",
+      "signature": "716adb1f162ebd9dba0851384548173788134f38f7384f4573bca791b89e7a232465eca0b3b0d7b9a9f857b9a2442a0c555f94195db6f19a2cd9d5ad0d4b4906"
+    },
+    {
+      "name": "visualization",
+      "version": "1.0.0",
+      "description": "visualization plugin for OSEF",
+      "download_url": "https://github.com/Aryamannatrajan21/OSEF/releases/download/plugins-latest/visualization-1.0.0.tar.gz",
+      "signature": "e92d4802e657944ce1ea45426ff52f835ab884d4316f9ee2656d5eb7068b2636e354306f497c0734eb2db6a37f3ad417a7d9b210a22c9d04404d14ed1874e908"
+    },
+    {
+      "name": "docker",
+      "version": "1.0.0",
+      "description": "docker plugin for OSEF",
+      "download_url": "https://github.com/Aryamannatrajan21/OSEF/releases/download/plugins-latest/docker-1.0.0.tar.gz",
+      "signature": "5f17fbb9a1a4546d014976b55a21944423554f422124f9d4df4aa23dd7dc37e4397e9ca703604115eba52e2132a711148c1b1fe9a3d444a5a9baa86c3fc9ad05"
+    },
+    {
+      "name": "runtime",
+      "version": "1.0.0",
+      "description": "runtime plugin for OSEF",
+      "download_url": "https://github.com/Aryamannatrajan21/OSEF/releases/download/plugins-latest/runtime-1.0.0.tar.gz",
+      "signature": "6feea8732b02eeb7e35640d03dfc7a70a41389a4fa2117ba4ef2bd91e42c7952b7cd147c06fecbeb762fc59877a19306555941ea15b4b775aa649b4072cea601"
+    },
+    {
+      "name": "fastapi",
+      "version": "1.0.0",
+      "description": "fastapi plugin for OSEF",
+      "download_url": "https://github.com/Aryamannatrajan21/OSEF/releases/download/plugins-latest/fastapi-1.0.0.tar.gz",
+      "signature": "857b1b285b5b178222ee8e1975dd17e950b79ab8f82ed714b82d14a224c99d4f50f056d89b056fbdf420e9ccb794c35f03d82b9efd5a61febce08ff2315ad801"
+    },
+    {
+      "name": "typescript",
+      "version": "1.0.0",
+      "description": "typescript plugin for OSEF",
+      "download_url": "https://github.com/Aryamannatrajan21/OSEF/releases/download/plugins-latest/typescript-1.0.0.tar.gz",
+      "signature": "78dcafd3cc0b2a961b7142c6f2ab4006dd6e77360cd78cfa3c171e21f772558e58d69668f316166eef787cfe00c62108621714b42ca84e17651c59651e77530e"
+    },
+    {
+      "name": "documentation",
+      "version": "1.0.0",
+      "description": "documentation plugin for OSEF",
+      "download_url": "https://github.com/Aryamannatrajan21/OSEF/releases/download/plugins-latest/documentation-1.0.0.tar.gz",
+      "signature": "b48a21dc89ffee9d3487a38151a93cbc5677622afc9efe50c02f403df8afb087a495d22da1d40006433f3204511b5ae5c3b56f84e89d31df1a652b434fe39c06"
+    },
+    {
+      "name": "security",
+      "version": "1.0.0",
+      "description": "security plugin for OSEF",
+      "download_url": "https://github.com/Aryamannatrajan21/OSEF/releases/download/plugins-latest/security-1.0.0.tar.gz",
+      "signature": "3de3937d2a19f92e5622f008b93112a6cb555e3202da2aa6298653ccadf1b01a3bbb1756a346b594f5fd70cb2e853c7eb78e42b32f346c58cb831b324658150f"
+    },
+    {
+      "name": "graph",
+      "version": "1.0.0",
+      "description": "graph plugin for OSEF",
+      "download_url": "https://github.com/Aryamannatrajan21/OSEF/releases/download/plugins-latest/graph-1.0.0.tar.gz",
+      "signature": "cb0038c68cf81cba5254a8d30ec8bae88db9e80007cb598ceadfb8986fef351839e06c450c2d9dba598ea0c13942dc1336fb1ce54de7d259eb7cdba2981c060e"
+    },
+    {
+      "name": "future",
+      "version": "1.0.0",
+      "description": "future plugin for OSEF",
+      "download_url": "https://github.com/Aryamannatrajan21/OSEF/releases/download/plugins-latest/future-1.0.0.tar.gz",
+      "signature": "769dca23d97924a1e9eba57f87a0d0459bd1934308105c1871514229220c59cd1e529b5b63ddf8680b8e3f1b347ad5a0555035e9619c0744ea0200088c2e320a"
+    },
+    {
+      "name": "cross-domain-intelligence",
+      "version": "1.0.0",
+      "description": "cross-domain-intelligence plugin for OSEF",
+      "download_url": "https://github.com/Aryamannatrajan21/OSEF/releases/download/plugins-latest/cross-domain-intelligence-1.0.0.tar.gz",
+      "signature": "a6a585fa19b0fd157bfa2bde9451eadf085012f3a37e940184c72378662b8ff1bb6bb05ccb6c473c541583cb2bf8a12a6dfd030fa16e5a9ad38f774c952d7b0d"
+    },
+    {
+      "name": "java",
+      "version": "1.0.0",
+      "description": "java plugin for OSEF",
+      "download_url": "https://github.com/Aryamannatrajan21/OSEF/releases/download/plugins-latest/java-1.0.0.tar.gz",
+      "signature": "2ec69d1b76ae0252241d14dc2868e6f4c56b7a653702770ee8a52dc37edb57affb87024e902bff44e01294beb0d0a1cd4baa4bff94543043942610cf3cf55b0f"
     }
   ]
 }
