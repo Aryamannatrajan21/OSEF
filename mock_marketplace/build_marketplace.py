@@ -37,7 +37,7 @@ def main():
                     description = manifest.get("description", description)
                     version = manifest.get("version", version)
                     name = manifest.get("name", name)
-                except:
+                except Exception:
                     pass
 
         # Create tar.gz

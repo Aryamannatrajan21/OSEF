@@ -31,7 +31,7 @@ def test_install_plugin_with_signature() -> None:
 
     # Create mock tar.gz
     with tempfile.NamedTemporaryFile(delete=False, suffix=".tar.gz") as f:
-        with tarfile.open(fileobj=f, mode="w:gz") as tar:
+        with tarfile.open(fileobj=f, mode="w:gz"):
             # Just create an empty tar
             pass
         tar_path = f.name
