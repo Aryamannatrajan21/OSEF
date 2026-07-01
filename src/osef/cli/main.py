@@ -280,24 +280,72 @@ def report(
         if format == "json":
             import json
 
-            print(
-                json.dumps(
-                    {
-                        "nodes": len(graph.nodes),
-                        "edges": len(graph.edges),
-                        "components": counts,
-                    },
-                    indent=2,
+            output_data = {
+                "nodes": len(graph.nodes),
+                "edges": len(graph.edges),
+                "components": counts,
+            }
+
+            # Try loading intelligence
+            import sys
+
+            plugin_path = os.path.abspath(
+                os.path.join(
+                    os.path.dirname(__file__),
+                    "../../../reference-plugins/intelligence/src",
                 )
             )
+            if os.path.exists(plugin_path) and plugin_path not in sys.path:
+                sys.path.insert(0, plugin_path)
+            try:
+                from osef_intelligence.plugin import IntelligenceAnalyzer
+
+                analyzer = IntelligenceAnalyzer(graph)
+                output_data["intelligence"] = {
+                    "technical_debt": analyzer.get_technical_debt(),
+                    "repository_health": analyzer.get_repository_health(),
+                }
+            except ImportError:
+                pass
+
+            print(json.dumps(output_data, indent=2))
+
         elif format == "markdown":
             md = "# Repository Intelligence Report\n\n"
             md += f"**Total Nodes**: {len(graph.nodes)}  \n"
             md += f"**Total Edges**: {len(graph.edges)}  \n\n"
+
+            # Try loading intelligence
+            import sys
+
+            plugin_path = os.path.abspath(
+                os.path.join(
+                    os.path.dirname(__file__),
+                    "../../../reference-plugins/intelligence/src",
+                )
+            )
+            if os.path.exists(plugin_path) and plugin_path not in sys.path:
+                sys.path.insert(0, plugin_path)
+            try:
+                from osef_intelligence.plugin import IntelligenceAnalyzer
+
+                analyzer = IntelligenceAnalyzer(graph)
+                health = analyzer.get_repository_health()
+                debt = analyzer.get_technical_debt()
+
+                md += "### 🧠 Engineering Intelligence\n"
+                md += f"- **Repository Health Grade:** {health['grade']} (Score: {health['health_score']})\n"
+                md += f"- **Technical Debt Score:** {debt['score']} (Points: {debt['total_debt_points']})\n"
+                md += f"- **High Coupling Nodes:** {debt['high_coupled_nodes']}\n"
+                md += f"- **Undocumented Nodes:** {debt['missing_docs_nodes']}\n\n"
+            except ImportError:
+                pass
+
             md += "### Component Breakdown\n"
             md += "| Type | Count |\n|---|---|\n"
             for type_name, count in sorted(counts.items()):
                 md += f"| {type_name.capitalize()} | {count} |\n"
+
             print(md)
         else:
             console.print("\n[bold]Repository Intelligence Report[/bold]")

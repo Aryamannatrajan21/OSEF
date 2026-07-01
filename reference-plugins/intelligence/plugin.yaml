@@ -1,0 +1,13 @@
+id: osef-intelligence
+name: "OSEF Intelligence"
+version: 1.0.0
+publisher: osef-core
+description: "Provides high-level Engineering Intelligence metrics including Technical Debt and Repository Health."
+
+dependencies:
+  osef: ">=0.1.0"
+  osef-architecture: ">=1.0.0"
+
+capabilities:
+  analyzer:
+    entrypoint: osef_intelligence.plugin:IntelligenceAnalyzer

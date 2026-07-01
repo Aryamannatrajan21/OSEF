@@ -108,6 +108,38 @@ def get_stats() -> dict[str, Any]:
         return {"error": "Internal server error while fetching stats."}
 
 
+@app.get("/api/intelligence")
+def get_intelligence() -> dict[str, Any]:
+    try:
+        _, graph = get_engine()
+        import sys
+        import os
+
+        # We add the intelligence plugin to the path temporarily if not installed
+        plugin_path = os.path.abspath(
+            os.path.join(
+                os.path.dirname(__file__), "../../../reference-plugins/intelligence/src"
+            )
+        )
+        if os.path.exists(plugin_path) and plugin_path not in sys.path:
+            sys.path.insert(0, plugin_path)
+
+        try:
+            from osef_intelligence.plugin import IntelligenceAnalyzer
+
+            analyzer = IntelligenceAnalyzer(graph)
+            return {
+                "technical_debt": analyzer.get_technical_debt(),
+                "repository_health": analyzer.get_repository_health(),
+            }
+        except ImportError:
+            return {"error": "Intelligence plugin not installed."}
+
+    except Exception as e:
+        logger.error(f"Error fetching intelligence: {e}")
+        return {"error": "Internal server error while fetching intelligence."}
+
+
 @app.get("/api/benchmark")
 def run_benchmark() -> dict[str, Any]:
     try:

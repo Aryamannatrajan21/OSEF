@@ -1,0 +1,11 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "osef-intelligence"
+version = "1.0.0"
+description = "OSEF Intelligence Metrics (Track E)"
+dependencies = [
+    "osef>=0.1.0"
+]
