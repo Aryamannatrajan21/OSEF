@@ -4,11 +4,11 @@ from osef.sdk.language.symbols import NormalizedSymbol
 from osef.sdk.language.resolver import ResolvedSymbolGraph
 from osef.sdk.language.facts import SemanticFact
 from osef.sdk.language.builder import NormalizedSymbolBuilder
-from src.parser.tree_sitter_adapter import TreeSitterTypeScriptAdapter
-from src.extractor.extractor import TypeScriptSymbolExtractor
-from src.resolver.resolver import TypeScriptResolver
-from src.semantics.engine import TypeScriptSemanticEngine
-from src.projections.mapper import GraphMapper, GraphDelta
+from .parser.tree_sitter_adapter import TreeSitterTypeScriptAdapter
+from .extractor.extractor import TypeScriptSymbolExtractor
+from .resolver.resolver import TypeScriptResolver
+from .semantics.engine import TypeScriptSemanticEngine
+from .projections.mapper import GraphMapper, GraphDelta
 
 
 class TypeScriptPipeline(LanguagePipeline):

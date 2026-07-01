@@ -1,0 +1,37 @@
+id: osef_documentation
+name: Documentation Intelligence Plugin
+description: Enriches the Engineering Knowledge Graph with documentation intelligence.
+version: 1.0.0
+author: OSEF Core Team
+license: Apache-2.0
+homepage: https://github.com/Aryamannatrajan21/OSEF
+documentation: https://github.com/Aryamannatrajan21/OSEF/tree/main/reference-plugins/documentation/docs
+sdk_version: ^0.4.0
+graph_schema: ^4.0.0
+policy_api: ^2.0.0
+capabilities:
+  provides_graph_enrichment:
+    name: "GraphEnrichmentCapability"
+    version: "1.0.0"
+  provides_rule_packs:
+    name: "PolicyCapability"
+    version: "1.0.0"
+  provides_cli_commands:
+    name: "CLIExtensionCapability"
+    version: "1.0.0"
+  provides_reports:
+    name: "ReportCapability"
+    version: "1.0.0"
+  supports_sdk:
+    name: "osef_sdk"
+    version: "0.4.0"
+  supports_graph_schema:
+    name: "ekg"
+    version: "4.0.0"
+entry_points:
+  plugin: osef_documentation.plugin:DocumentationPlugin
+keywords:
+  - documentation
+  - markdown
+  - enrichment
+  - intelligence

@@ -1,0 +1,20 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "osef-visualization"
+version = "1.0.0rc1"
+description = "OSEF Engineering Visualization Platform"
+requires-python = ">=3.12"
+dependencies = [
+    "osef",
+    "pydantic>=2.0.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "mypy",
+    "ruff"
+]

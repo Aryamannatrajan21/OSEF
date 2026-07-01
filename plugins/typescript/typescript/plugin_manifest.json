@@ -1,0 +1,30 @@
+{
+  "language": "typescript",
+  "language_version": "5.0",
+  "sdk_version": "0.1.0",
+  "graph_schema_version": "5.0",
+  "parser_backend": "tree-sitter",
+  "plugin_version": "0.1.0",
+  "quality_tier": "reference",
+  "certification": {
+    "parser": "PASS",
+    "symbols": "PASS",
+    "resolver": "PASS",
+    "semantics": "PASS",
+    "graph": "PASS",
+    "platform_validation": "PASS",
+    "determinism": "PASS"
+  },
+  "supported_profiles": [
+    "backend",
+    "frontend",
+    "security"
+  ],
+  "supported_file_extensions": [
+    ".ts",
+    ".tsx",
+    ".js",
+    ".jsx"
+  ],
+  "benchmark_results": {}
+}

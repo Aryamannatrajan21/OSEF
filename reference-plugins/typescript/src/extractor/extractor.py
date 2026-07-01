@@ -61,6 +61,7 @@ class TypeScriptSymbolExtractor:
             if name:
                 qname = f"{namespace}.{name}" if namespace else name
                 symbols.append(self._build_symbol(NormalizedClass, node, qname, name))
+                namespace = qname
 
         elif node.kind == "interface_declaration":
             name = self._find_child_text(node, "type_identifier")
@@ -69,12 +70,14 @@ class TypeScriptSymbolExtractor:
                 symbols.append(
                     self._build_symbol(NormalizedInterface, node, qname, name)
                 )
+                namespace = qname
 
         elif node.kind == "enum_declaration":
             name = self._find_child_text(node, "identifier")
             if name:
                 qname = f"{namespace}.{name}" if namespace else name
                 symbols.append(self._build_symbol(NormalizedEnum, node, qname, name))
+                namespace = qname
 
         elif node.kind == "type_alias_declaration":
             name = self._find_child_text(node, "type_identifier")

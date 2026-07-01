@@ -6,11 +6,11 @@ from osef.sdk.language.resolver import ResolvedSymbolGraph
 from osef.sdk.language.facts import SemanticFact
 from osef.sdk.language.builder import NormalizedSymbolBuilder
 
-from src.parser.adapter import TreeSitterJavaAdapter
-from src.extractor.extractor import JavaSymbolExtractor
-from src.resolver.resolver import JavaResolver
-from src.semantics.engine import JavaSemanticEngine
-from src.projections.mapper import GraphMapper, GraphDelta
+from .parser.adapter import TreeSitterJavaAdapter
+from .extractor.extractor import JavaSymbolExtractor
+from .resolver.resolver import JavaResolver
+from .semantics.engine import JavaSemanticEngine
+from .projections.mapper import GraphMapper, GraphDelta
 
 
 class JavaPipeline(LanguagePipeline):

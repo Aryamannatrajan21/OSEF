@@ -1,0 +1,22 @@
+name: osef-java-reference
+version: "1.0.0"
+type: "language-pack"
+tier: "tier-1-official"
+description: "Reference implementation of the Java language pack for OSEF"
+capabilities:
+  - capability: "LanguageCapability"
+    languages:
+      - "java"
+    extensions:
+      - ".java"
+profiles:
+  - default
+  - complete
+certification:
+  parser_certified: false
+  symbol_certified: false
+  resolver_certified: false
+  semantic_certified: false
+  graph_certified: false
+  pipeline_certified: false
+  language_certified: false

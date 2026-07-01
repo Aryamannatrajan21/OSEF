@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "target": ".",
+    "type": "Workspace"
+  },
+  "repository": {
+    "language": null,
+    "framework": null,
+    "repo_size": null,
+    "loc": null,
+    "packages": null,
+    "dependencies": null,
+    "commit": null,
+    "branch": null,
+    "analysis_date": "2026-07-01T13:57:47.637137"
+  },
+  "profile": "core",
+  "plugin_matrix": {},
+  "domain_coverage": [],
+  "graph_statistics": {
+    "node_count": 3633,
+    "edge_count": 4982,
+    "components": 0,
+    "services": 0
+  },
+  "correlation_statistics": {},
+  "reasoning_statistics": {},
+  "policy_statistics": {},
+  "certification": {},
+  "performance": {
+    "build_time_seconds": 2.675095796585083
+  },
+  "sdk_compatibility": {},
+  "engineering_confidence": {
+    "overall": "HIGH"
+  },
+  "recommendations": []
+}

@@ -52,3 +52,5 @@ node_modules/
 osef-studio/node_modules/
 osef-studio/.next/
 plugin_private_key*.pem
+brag-output/
+test_dl.tar.gz
