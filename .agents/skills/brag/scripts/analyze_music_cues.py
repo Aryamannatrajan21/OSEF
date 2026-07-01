@@ -93,7 +93,9 @@ def _score_frame(
     }
 
 
-def _dedupe_cues(cues: list[dict[str, Any]], min_gap: float = 0.18) -> list[dict[str, Any]]:
+def _dedupe_cues(
+    cues: list[dict[str, Any]], min_gap: float = 0.18
+) -> list[dict[str, Any]]:
     sorted_by_strength = sorted(cues, key=lambda item: item["intensity"], reverse=True)
     accepted: list[dict[str, Any]] = []
     for cue in sorted_by_strength:
@@ -133,7 +135,10 @@ def analyze_track(
     onset_norm = _normalize(onset_env)
 
     local_contrast = np.array(
-        [_local_contrast(onset_norm, frame, actual_sr) for frame in range(onset_norm.size)]
+        [
+            _local_contrast(onset_norm, frame, actual_sr)
+            for frame in range(onset_norm.size)
+        ]
     )
     contrast_norm = _normalize(local_contrast)
 
@@ -161,7 +166,9 @@ def analyze_track(
         units="frames",
     )
     beat_frames = np.asarray(beat_frames, dtype=int)
-    beat_times = librosa.frames_to_time(beat_frames, sr=actual_sr, hop_length=HOP_LENGTH)
+    beat_times = librosa.frames_to_time(
+        beat_frames, sr=actual_sr, hop_length=HOP_LENGTH
+    )
 
     beats: list[dict[str, Any]] = []
     cue_candidates: list[dict[str, Any]] = []
@@ -205,9 +212,7 @@ def analyze_track(
         )
 
     strong_cues = [
-        cue
-        for cue in _dedupe_cues(cue_candidates)
-        if cue["intensity"] >= 0.45
+        cue for cue in _dedupe_cues(cue_candidates) if cue["intensity"] >= 0.45
     ]
     strongest = sorted(strong_cues, key=lambda cue: cue["intensity"], reverse=True)[:64]
     strong_cues = sorted(strongest, key=lambda cue: cue["time"])
@@ -229,7 +234,12 @@ def analyze_track(
         },
         "scoring": {
             "intensityFormula": "0.45*onset_strength + 0.25*local_onset_contrast + 0.20*rms + 0.10*bass_energy",
-            "features": ["onset_strength", "local_onset_contrast", "rms", "bass_energy"],
+            "features": [
+                "onset_strength",
+                "local_onset_contrast",
+                "rms",
+                "bass_energy",
+            ],
             "normalization": "Per-track robust normalization to 0-1 using the 98th percentile, then clamped.",
             "strongCueMinimumIntensity": 0.45,
             "strongCueMaxCount": 64,
@@ -244,7 +254,9 @@ def analyze_track(
     window_cues = [
         cue for cue in strong_cues if window_start <= cue["time"] <= window_end
     ]
-    top_window_cues = sorted(window_cues, key=lambda cue: cue["intensity"], reverse=True)[:top_cues]
+    top_window_cues = sorted(
+        window_cues, key=lambda cue: cue["intensity"], reverse=True
+    )[:top_cues]
     reveal_candidates = top_window_cues[: min(5, len(top_window_cues))]
 
     markdown = "\n".join(
