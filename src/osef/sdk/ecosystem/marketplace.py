@@ -14,7 +14,7 @@ class MarketplaceClient:
     def fetch_index(self) -> None:
         """Fetches the marketplace index."""
         try:
-            response = httpx.get(self.index_url)
+            response = httpx.get(self.index_url, follow_redirects=True)
             response.raise_for_status()
             self.index_data = response.json()
         except Exception as e:
@@ -75,7 +75,7 @@ class MarketplaceClient:
 
         try:
             # Download the tar.gz file
-            response = httpx.get(download_url)
+            response = httpx.get(download_url, follow_redirects=True)
             response.raise_for_status()
 
             with tempfile.NamedTemporaryFile(
