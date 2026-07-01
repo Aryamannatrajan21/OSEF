@@ -165,27 +165,53 @@ This mode evaluates your codebase against quality gates defined in `pyproject.to
 
 ---
 
+## 🛒 OSEF Plugin Marketplace (New in v1.0.0 LTS)
+
+OSEF now features a fully decentralized, cryptographically verified Plugin Marketplace! You can extend OSEF's core capabilities by downloading intelligent plugins directly from the CLI.
+
+```bash
+# Search for plugins (e.g., search for 'python' or 'docker')
+osef plugin search python
+
+# Install a plugin (automatically verifies ed25519 signatures)
+osef plugin install python
+```
+
+The marketplace architecture ensures that every plugin is strictly versioned and signed by the publisher's private key, guaranteeing that no tampered code executes in your Engineering Policy Engine.
+
+---
+
 ## 🔌 Plugin Ecosystem
 
-**Current Knowledge Domains (Reference Plugins)**
-- ✅ **Software Intelligence** (Python, TypeScript, Java Parsers)
-- ✅ **Documentation Intelligence**
-- ✅ **Infrastructure Intelligence** (Docker, Kubernetes)
-- ✅ **Security Intelligence**
-- ✅ **Architecture Intelligence**
-- ✅ **Runtime Intelligence**
-- ✅ **Enterprise Intelligence** (Organizational Knowledge Model)
-- ✅ **Cross-Domain Correlation**
+OSEF ships with an expansive ecosystem of reference plugins that cover the entire engineering lifecycle. You can install any of the following 16 plugins today:
 
-**Future Ecosystem Expansion (The Plugin Marketplace)**
-While OSEF natively handles architectural standardization, the upcoming **Plugin Marketplace** will allow you to run deep, best-practice code scans by:
-1. **Wrapping Native Analyzers**: Seamlessly integrating industry-standard tools like `ruff`, `eslint`, `semgrep`, or `sonarqube` as plugins. OSEF intercepts their output and attaches the findings directly to the Enterprise Knowledge Graph.
-2. **Custom Policy Packs (EPE)**: Writing specialized Python rules for the Engineering Policy Engine to enforce tight internal coding standards (e.g., "Controllers must never call the database").
-3. **AI-Powered Scans**: Leveraging the Bedrock/LiteLLM integration to execute LLM-driven policies across components to detect anti-patterns and code smells that static tools miss.
+### Language & Framework Parsers
+- **`python`**: Natively parses Python AST into the Symbol Table IR, extracting classes, functions, decorators, and imports.
+- **`typescript`**: Parses TypeScript/JavaScript into the EKG, tracking interface implementations and module exports.
+- **`java`**: Extracts Spring Boot and standard Java topologies, mapping Maven dependencies to runtime paths.
+- **`fastapi`**: A specialized semantic enricher that detects FastAPI routes, Pydantic schemas, and dependency injections.
 
-- 🚧 UI Marketplace Portal
-- 🚧 AI Engineering Intelligence Agents
-- 🚧 Language Packs (Go, Rust, C#, Kotlin)
+### Infrastructure & Operations
+- **`docker`**: Parses `Dockerfile` and `docker-compose.yml` files to link containerized services back to their source code in the graph.
+- **`github-actions`**: Analyzes CI/CD pipelines to ensure architectural quality gates are properly enforced in your workflows.
+- **`infrastructure`**: Correlates cloud configurations (e.g., Terraform, AWS CDK) with application endpoints.
+
+### Engineering & Security
+- **`architecture`**: Applies strict architectural policy rules (e.g., Domain-Driven Design constraints, Hexagonal Architecture bounds).
+- **`security`**: Scans the AST for anti-patterns, exposed secrets, and vulnerable dependency chains in the knowledge graph.
+- **`runtime`**: Models runtime execution paths, memory boundaries, and performance bottlenecks.
+
+### Documentation & Knowledge
+- **`documentation`**: Enforces docstring standards and automatically maps Markdown/Swagger documentation to the source code implementation.
+- **`enterprise`**: Models organizational constraints, mapping specific microservices and code domains to specific teams and owners.
+- **`cross-domain-intelligence`**: The master correlation engine that links infrastructure, security, and application code into a single unified context.
+
+### Future Expansion
+- **`visualization`**: Advanced rendering plugins for OSEF Studio (e.g., 3D graph views, heatmap overlays).
+- **`graph`**: Experimental graph database adapters (Neo4j, Amazon Neptune) for the Engineering Knowledge Graph.
+- **`future`**: Incubator for next-generation AI agents and reasoning capabilities.
+
+*Want to build your own? Check out the [Extension Developer Guide](docs/architecture/EXTENSION_DEVELOPER_GUIDE.md).*
 
 ---
 
