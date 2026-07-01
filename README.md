@@ -465,6 +465,11 @@ Please read our [Contributing Guidelines](CONTRIBUTING.md) to get started.
 - **Issues**: [GitHub Issues](https://github.com/Aryamannatrajan21/OSEF/issues)
 - **Wiki**: [GitHub Wiki](https://github.com/Aryamannatrajan21/OSEF/wiki)
 
+<br>
+<div align="center">
+  <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7478049095840944128?compact=1" height="399" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+</div>
+
 ---
 
 ## 📄 License
