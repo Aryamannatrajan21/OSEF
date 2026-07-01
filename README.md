@@ -467,7 +467,9 @@ Please read our [Contributing Guidelines](CONTRIBUTING.md) to get started.
 
 <br>
 <div align="center">
-  <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7478049095840944128?compact=1" height="399" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+  <a href="https://www.linkedin.com/feed/update/urn:li:ugcPost:7478049095840944128">
+    <img src="https://img.shields.io/badge/LinkedIn-Watch_the_v1.0_Launch_Video-0077b5?style=for-the-badge&logo=linkedin" alt="Watch Launch Video">
+  </a>
 </div>
 
 ---

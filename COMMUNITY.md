@@ -7,8 +7,7 @@ We use GitHub Discussions as our primary asynchronous communication platform.
 *(Link to GitHub Discussions will be active upon repository publication).*
 
 - **Announcements:** Major milestones, RFC approvals, and release notes.
-  <br>
-  <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7478049095840944128?compact=1" height="399" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+  - [![Watch the Launch Trailer on LinkedIn](https://img.shields.io/badge/LinkedIn-Watch_Launch_Video-0077b5?logo=linkedin)](https://www.linkedin.com/feed/update/urn:li:ugcPost:7478049095840944128)
 - **Q&A:** Stuck on setting up your environment? Ask here.
 - **Ideas & Architecture:** Want to bounce an idea before writing a formal RFC? Start a thread here.
 
