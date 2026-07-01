@@ -9,11 +9,17 @@ on:
       - 'scripts/publish_plugins.py'
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   publish:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
       - uses: actions/checkout@v4
@@ -22,6 +28,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+          cache: 'pip'
 
       - name: Install dependencies
         run: |
@@ -50,9 +57,11 @@ jobs:
             --notes "Automatically packaged and signed plugins from the reference-plugins directory."
 
       - name: Commit marketplace-index.json
-        run: |
-          git config --global user.name "GitHub Actions Bot"
-          git config --global user.email "actions@github.com"
-          git add marketplace-index.json
-          git commit -m "chore(marketplace): update index [skip ci]" || echo "No changes to commit"
-          git push origin main
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore(marketplace): update index"
+          title: "Update Marketplace Index"
+          body: "Automated PR to update the `marketplace-index.json` after publishing new plugins."
+          branch: "update-marketplace-index"
+          delete-branch: true
