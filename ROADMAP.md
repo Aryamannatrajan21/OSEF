@@ -21,13 +21,15 @@ This roadmap tracks the strategic progression of the Open Source Engineering Fra
 - **Track B — Capability Platform Expansion**: Delivered `visualization` (including CLI tools) and `graph` plugins.
 - **Track D — Cross-Domain Intelligence**: Delivered `cross-domain-intelligence` plugin for reusable correlation.
 - **Track G — AI Engineering Intelligence**: Delivered Repository Q&A, Architecture Assistant with rich context injection, and Agent Collaboration via the experimental `future` plugin tools.
+- **Track C — Context Resolution**: Path alignment & workspace normalization, multi-root project boundaries handling.
+- **Track E — Engineering Intelligence**: Architecture Drift Analysis, Technical Debt Scoring (High Coupling, Missing Docs), Repository Health Grading, and Dependency Risk Analysis.
 
 ---
 
 ## Upcoming Milestones
 
 ### Phase II: Ecosystem Engineering (In Progress)
-- **Track E — Engineering Intelligence**: Architecture Drift, Technical Debt, Repository Health, Dependency Risk.
+- None at this time. All Phase II core tracks have an MVP foundation!
 
 ---
 

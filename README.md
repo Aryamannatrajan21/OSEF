@@ -188,7 +188,7 @@ The marketplace architecture ensures that every plugin is strictly versioned and
 
 ## 🔌 Plugin Ecosystem
 
-OSEF ships with an expansive ecosystem of reference plugins that cover the entire engineering lifecycle. You can install any of the following 16 plugins today:
+OSEF ships with an expansive ecosystem of reference plugins that cover the entire engineering lifecycle. You can install any of the following 17 plugins today:
 
 ### Language & Framework Parsers
 - **`python`**: Natively parses Python AST into the Symbol Table IR, extracting classes, functions, decorators, and imports.
@@ -203,6 +203,7 @@ OSEF ships with an expansive ecosystem of reference plugins that cover the entir
 
 ### Engineering & Security
 - **`architecture`**: Applies strict architectural policy rules (e.g., Domain-Driven Design constraints, Hexagonal Architecture bounds).
+- **`intelligence`**: Extracts Track E metrics including Repository Health grades and Technical Debt scores (coupling & missing docs) directly from the graph.
 - **`security`**: Scans the AST for anti-patterns, exposed secrets, and vulnerable dependency chains in the knowledge graph.
 - **`runtime`**: Models runtime execution paths, memory boundaries, and performance bottlenecks.
 
