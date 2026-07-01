@@ -14,20 +14,20 @@ This roadmap tracks the strategic progression of the Open Source Engineering Fra
 - **Platform Validation**: Freezing the core architecture.
 
 ### Phase II: Ecosystem Engineering (Completed)
+- **Sprint 7.5 & 7.6 — Engineering Intelligence Foundation**: Finalized the Engineering Ontology. Introduced `GraphQuery` and `EngineeringReasoner` into OSEF core (`src/osef/core`).
 - **Track F — Enterprise Platform**: Plugin Registry, Marketplace Protocol, Cryptographic Plugin Signing (ed25519), and CLI integration.
 - **Track C — Language Packs**: Delivered reference parsers for Python, TypeScript, and Java.
 - **Track A — Knowledge Domains**: Delivered reference capabilities for Software (including frameworks like FastAPI), Documentation, Infrastructure, Security, Architecture, Runtime, and Enterprise domains via the Plugin Marketplace.
+- **Track B — Capability Platform Expansion**: Delivered `visualization` (including CLI tools) and `graph` plugins.
+- **Track D — Cross-Domain Intelligence**: Delivered `cross-domain-intelligence` plugin for reusable correlation.
 
 ---
 
 ## Upcoming Milestones
 
 ### Phase II: Ecosystem Engineering (In Progress)
-- **Sprint 7.5 & 7.6 — Engineering Intelligence Foundation**: Finalization of the Engineering Ontology, separating the platform into frozen Foundation vs open Ecosystem. Introduction of `GraphQuery` and `EngineeringReasoner`.
-- **Track B — Capability Platform Expansion**: Visualization, Report, Export, Search, Query, CLI.
-- **Track D — Cross-Domain Intelligence**: Reusable correlation capabilities between Knowledge Domains.
 - **Track E — Engineering Intelligence**: Architecture Drift, Technical Debt, Repository Health, Dependency Risk.
-- **Track G — AI Engineering Intelligence**: Repository Q&A, Architecture Assistant, Agent Collaboration (consuming deterministic Engineering Reasoner context).
+- **Track G — AI Engineering Intelligence**: Repository Q&A, Architecture Assistant, Agent Collaboration (initiated via the experimental `future` plugin).
 
 ---
 
