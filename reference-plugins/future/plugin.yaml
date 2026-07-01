@@ -1,0 +1,35 @@
+id: osef_future
+name: OSEF Future - AI Engineering Intelligence
+description: Incubator for next-generation AI agents and reasoning capabilities.
+version: 1.0.0-rc1
+author: Antigravity
+license: Apache-2.0
+sdk_version: 1.0.0-rc1
+graph_schema: 4.0.0
+policy_api: 2.0.0
+
+capabilities:
+  supports_sdk:
+    version: 1.0.0-rc1
+
+knowledge_domain:
+  name: "Future (AI Agents)"
+  version: "1.0.0-rc1"
+  node_types:
+    - "AI.Agent"
+    - "AI.Query"
+    - "AI.Hypothesis"
+  edge_types:
+    - "INVESTIGATES"
+    - "CONCLUDES"
+  adapters:
+    - "AgentHostAdapter"
+  projections:
+    - "AgentCollaborationProjection"
+  dashboards:
+    - "AgentActivityDashboard"
+  policy_packs:
+    - "AgentSafetyPolicies"
+
+entry_points:
+  plugin: "osef_future.plugin:FutureAgentEnricher"

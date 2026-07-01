@@ -1,0 +1,18 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "osef-future"
+version = "1.0.0-rc1"
+description = "OSEF Future AI Intelligence Plugin"
+authors = [
+    { name = "Antigravity", email = "antigravity@osef.dev" }
+]
+dependencies = [
+    "osef-sdk>=1.0.0",
+    "pydantic>=2.0.0"
+]
+
+[project.entry-points."osef.plugins"]
+osef_future = "osef_future.plugin:FutureAgentEnricher"
