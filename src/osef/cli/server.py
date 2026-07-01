@@ -188,6 +188,24 @@ def chat_with_assistant(request: ChatRequest) -> dict[str, Any]:
         node_count = len(graph.nodes)
         edge_count = len(graph.edges)
 
+        # Get actual policy violations and codebase issues
+        policies_response = get_policies()
+        violations = policies_response.get("violations", [])
+        issues_summary = "\n".join(
+            [
+                f"- [{v['severity'].upper()}] {v['id']}: {v['message']}"
+                for v in violations
+            ]
+        )
+        if not issues_summary:
+            issues_summary = "No architectural policy violations detected."
+
+        # Provide a sample of top-level modules/components
+        modules = [n.name for n in graph.nodes.values() if n.type == "module"][:20]
+        modules_summary = (
+            ", ".join(modules) if modules else "No explicit modules detected."
+        )
+
         import os
 
         try:
@@ -224,11 +242,16 @@ You are currently analyzing the project: '{project_name}'.
 Current Graph Context for '{project_name}':
 - Total Nodes: {node_count}
 - Total Edges: {edge_count}
+- Top-Level Modules Identified: {modules_summary}
+- Overall Reasoning Confidence: {engine.confidence_score.overall_confidence:.2f}
+
+CODEBASE ISSUES AND POLICY VIOLATIONS:
+{issues_summary}
 
 CRITICAL INSTRUCTIONS:
-1. You must ONLY answer questions based on the architecture, dependencies, and policies of the '{project_name}' project provided in your context.
-2. NEVER leak, discuss, or hallucinate information about other projects, training data, or external codebases. Your entire memory and knowledge base must be restricted to this specific project.
-3. If a user asks about anything outside of this project, you must politely decline and remind them you are strictly sandboxed to '{project_name}'.
+1. You must ONLY answer questions based on the architecture, dependencies, and policies of the '{project_name}' project provided in your context. 
+2. When asked about codebase issues, you MUST refer to the exact Codebase Issues listed above.
+3. NEVER leak, discuss, or hallucinate information about other projects, training data, or external codebases. Your entire memory and knowledge base must be restricted to this specific project.
 4. Output your responses using standard Markdown. Use clean formatting, lists, and code blocks where appropriate."""
 
         messages = [{"role": "system", "content": system_prompt}]
