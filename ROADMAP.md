@@ -15,8 +15,8 @@ This roadmap tracks the strategic progression of the Open Source Engineering Fra
 
 ### Phase II: Ecosystem Engineering (Completed)
 - **Track F — Enterprise Platform**: Plugin Registry, Marketplace Protocol, Cryptographic Plugin Signing (ed25519), and CLI integration.
-- **Track C — Language Packs**: Delivered reference parsers for Python, TypeScript, Java, and FastAPI.
-- **Track A — Knowledge Domains**: Delivered reference capabilities for Software, Documentation, Infrastructure, Security, Architecture, Runtime, and Enterprise domains via the Plugin Marketplace.
+- **Track C — Language Packs**: Delivered reference parsers for Python, TypeScript, and Java.
+- **Track A — Knowledge Domains**: Delivered reference capabilities for Software (including frameworks like FastAPI), Documentation, Infrastructure, Security, Architecture, Runtime, and Enterprise domains via the Plugin Marketplace.
 
 ---
 
