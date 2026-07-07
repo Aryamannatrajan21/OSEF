@@ -15,10 +15,10 @@ class EKGContextService:
 
     def __init__(self, path: str = ".") -> None:
         self.path = path
-        self.graph = None
+        self.graph: Optional[Any] = None
         self.query: Optional[GraphQuery] = None
         self.findings: List[Any] = []
-        self.assessment = None
+        self.assessment: Optional[Any] = None
 
     def _ensure_loaded(self) -> None:
         if self.graph is not None:
@@ -42,7 +42,7 @@ class EKGContextService:
                 or nid.endswith(f"/{identifier}")
                 or nid.endswith(f".{identifier}")
             ):
-                return nid
+                return str(nid)
         return None
 
     def get_blast_radius(self, node_id: str) -> Dict[str, Any]:

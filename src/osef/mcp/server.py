@@ -89,6 +89,7 @@ class MCPServer:
 
     def execute_tool(self, name: str, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Execute an MCP tool and return standard MCP result content."""
+        res: Any
         if name == "blast_radius":
             res = self.service.get_blast_radius(arguments.get("node_id", ""))
         elif name == "dependency_path":

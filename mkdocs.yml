@@ -12,10 +12,55 @@ nav:
   - Getting Started:
     - Installation: installation.md
     - Quick Start: quickstart.md
-  - Architecture: architecture.md
+  - Architecture:
+    - Overview: architecture.md
+    - Core Engine & Graph:
+      - Policy Engine Architecture: architecture/POLICY_ENGINE_ARCHITECTURE.md
+      - Graph Schema: architecture/GRAPH_SCHEMA.md
+      - Semantic Model: architecture/SEMANTIC_MODEL.md
+      - Semantic Enrichment: architecture/SEMANTIC_ENRICHMENT_SPEC.md
+      - Call Graph: architecture/CALL_GRAPH_SPEC.md
+      - Symbol Table: architecture/SYMBOL_TABLE_SPEC.md
+      - Event Bus: architecture/EVENT_BUS_SPEC.md
+      - Parser Contract: architecture/PARSER_CONTRACT.md
+      - Analyzer Interface: architecture/ANALYZER_INTERFACE.md
+      - Query API: architecture/QUERY_API_SPEC.md
+    - Policy Engine (EPE):
+      - EPE API: architecture/EPE_API.md
+      - EPE Lifecycle: architecture/EPE_LIFECYCLE.md
+      - EPE Testing Guide: architecture/EPE_TESTING_GUIDE.md
+      - Policy Specification: architecture/POLICY_SPECIFICATION.md
+      - Rule Pack Specification: architecture/RULE_PACK_SPECIFICATION.md
+      - Rule Writing Guide: architecture/RULE_WRITING_GUIDE.md
+    - Intelligence & Benchmarking:
+      - Engineering Intelligence: architecture/ENGINEERING_INTELLIGENCE_SPEC.md
+      - Configuration Intelligence: architecture/CONFIGURATION_INTELLIGENCE_SPEC.md
+      - Benchmarking Guide: architecture/BENCHMARKING_GUIDE.md
+    - Plugins & Extensions:
+      - Plugin API: architecture/PLUGIN_API.md
+      - Plugin Manifest: architecture/PLUGIN_MANIFEST_SPEC.md
+      - Plugin Capabilities: architecture/PLUGIN_CAPABILITIES_SPEC.md
+      - Plugin Registry: architecture/PLUGIN_REGISTRY_SPEC.md
+      - Plugin Sandbox: architecture/PLUGIN_SANDBOX_SPEC.md
+      - Plugin SDK: architecture/PLUGIN_SDK_SPEC.md
+      - Plugin Security Model: architecture/PLUGIN_SECURITY_MODEL.md
+      - Plugin State: architecture/PLUGIN_STATE_SPEC.md
+      - Marketplace Protocol: architecture/MARKETPLACE_PROTOCOL.md
+      - CLI Extension: architecture/CLI_EXTENSION_SPEC.md
+      - Extension Context: architecture/EXTENSION_CONTEXT_SPEC.md
+      - Extension Developer Guide: architecture/EXTENSION_DEVELOPER_GUIDE.md
+      - Extension Host: architecture/EXTENSION_HOST_SPEC.md
+      - Report SDK: architecture/REPORT_SDK_SPEC.md
+      - Public API Policy: architecture/PUBLIC_API_POLICY.md
+      - SDK Stability Levels: architecture/SDK_STABILITY_LEVELS.md
+      - SDK Versioning: architecture/SDK_VERSIONING_SPEC.md
   - Specifications:
     - Product Requirements Document: PRD.md
     - Software Requirements Specification: SRS.md
+    - Cross-Language Certification: CROSS_LANGUAGE_CERTIFICATION_SPEC.md
+    - Engineering Concept Spec: ENGINEERING_CONCEPT_SPEC.md
+    - Language Equivalence Spec: LANGUAGE_EQUIVALENCE_SPEC.md
+    - Java Mapping: JAVA_LANGUAGE_MAPPING.md
   - Engineering Knowledge Graph: ekg.md
   - Reference:
     - CLI Reference: cli_reference.md

@@ -82,8 +82,8 @@ def check(
         console.print(f"[bold green]✔ Checked {len(findings)} findings.[/bold green]")
 
     if output:
-        with open(output, "w", encoding="utf-8") as f:
-            f.write(out_str)
+        with open(output, "w", encoding="utf-8") as out_file:
+            out_file.write(out_str)
         console.print(
             f"[bold green]✔ Saved {format.upper()} report to {output}[/bold green]"
         )

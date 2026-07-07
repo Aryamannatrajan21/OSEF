@@ -2,7 +2,7 @@ import json
 import os
 from pathlib import Path
 from typing import Any, Dict, List
-import yaml
+import yaml  # type: ignore[import-untyped]
 from rich.console import Console
 
 console = Console()

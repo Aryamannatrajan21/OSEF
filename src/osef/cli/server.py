@@ -213,7 +213,7 @@ def get_dependencies() -> dict[str, Any]:
 def get_plugins() -> dict[str, Any]:
     try:
         import os
-        import yaml
+        import yaml  # type: ignore[import-untyped]
 
         plugins = []
         plugins_dir = "reference-plugins"
