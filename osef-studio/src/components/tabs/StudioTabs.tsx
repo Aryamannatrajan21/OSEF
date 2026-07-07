@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import { Layers, ShieldCheck, Activity, BarChart, ShieldAlert } from 'lucide-react';
+import { Layers, ShieldCheck, Activity, BarChart, ShieldAlert, Package, Cpu, ShoppingBag, CheckCircle } from 'lucide-react';
 
 export function ArchitectureTab() {
   const [stats, setStats] = useState<any>(null);
@@ -96,26 +96,88 @@ export function PoliciesTab() {
 
   return (
     <div className="flex-1 flex flex-col p-8 overflow-y-auto">
-      <h2 className="text-2xl font-bold text-white mb-6 flex items-center"><ShieldCheck className="mr-3 text-red-400" /> Policy Enforcement</h2>
-      <div className="glass-panel p-6 rounded-lg border border-[var(--panel-border)] max-w-2xl">
-        <div className="flex items-center mb-4">
+      <h2 className="text-2xl font-bold text-white mb-6 flex items-center"><ShieldCheck className="mr-3 text-red-400" /> Policy Enforcement & Engineering Rules</h2>
+      <div className="glass-panel p-6 rounded-lg border border-[var(--panel-border)] max-w-4xl">
+        <div className="flex items-center mb-6">
           <ShieldAlert className="text-yellow-500 mr-3" size={24} />
-          <h3 className="text-white text-lg">{violations.length} Policy Violations Detected</h3>
+          <h3 className="text-white text-lg font-semibold">{violations.length} Policy Findings Detected</h3>
         </div>
         <ul className="space-y-4">
           {violations.map((v: any, idx: number) => (
-            <li key={idx} className={`bg-black/40 p-4 rounded-md border ${v.severity === 'error' ? 'border-red-500/30' : 'border-yellow-500/30'}`}>
-              <p className={`${v.severity === 'error' ? 'text-red-400' : 'text-yellow-400'} font-medium`}>{v.id}</p>
-              <p className="text-gray-400 text-sm mt-1">{v.message}</p>
+            <li key={idx} className={`bg-black/40 p-5 rounded-lg border ${v.severity === 'error' ? 'border-red-500/40' : 'border-yellow-500/40'}`}>
+              <div className="flex justify-between items-start">
+                <span className={`px-2 py-0.5 rounded text-xs font-mono uppercase tracking-wider ${v.severity === 'error' ? 'bg-red-500/20 text-red-400 border border-red-500/30' : 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'}`}>
+                  {v.category || v.severity}
+                </span>
+                <span className="text-gray-500 text-xs font-mono">{v.id}</span>
+              </div>
+              <h4 className="text-white font-medium text-base mt-2">{v.title || v.id}</h4>
+              <p className="text-gray-300 text-sm mt-1">{v.message}</p>
+              {v.recommendation && (
+                <div className="mt-3 bg-white/5 p-3 rounded border border-white/10 text-xs text-gray-300">
+                  <span className="text-[var(--accent)] font-semibold uppercase tracking-wider block mb-1">Recommendation</span>
+                  {v.recommendation}
+                </div>
+              )}
             </li>
           ))}
           {violations.length === 0 && (
-            <li className="bg-black/40 p-4 rounded-md border border-green-500/30">
-              <p className="text-green-400 font-medium">All Clear!</p>
-              <p className="text-gray-400 text-sm mt-1">No violations found in the engineering baseline.</p>
+            <li className="bg-black/40 p-6 rounded-lg border border-green-500/30 text-center">
+              <p className="text-green-400 font-semibold text-lg">Engineering Baseline Verified</p>
+              <p className="text-gray-400 text-sm mt-1">No violations or architectural drift detected in the repository.</p>
             </li>
           )}
         </ul>
+      </div>
+    </div>
+  );
+}
+
+export function DependenciesTab() {
+  const [deps, setDeps] = useState<any>(null);
+
+  useEffect(() => {
+    fetch('/api/dependencies')
+      .then(res => res.json())
+      .then(data => setDeps(data));
+  }, []);
+
+  if (!deps) return <div className="p-8 text-white">Analyzing dependency health...</div>;
+
+  return (
+    <div className="flex-1 flex flex-col p-8 overflow-y-auto">
+      <h2 className="text-2xl font-bold text-white mb-6 flex items-center"><Package className="mr-3 text-green-400" /> Dependency Health & Import Explorer</h2>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div className="glass-panel p-6 rounded-lg border border-[var(--panel-border)]">
+          <h3 className="text-gray-400 text-xs mb-2 uppercase tracking-wider">Total Imports</h3>
+          <p className="text-3xl font-bold text-white">{deps.total_imports ?? 0}</p>
+        </div>
+        <div className="glass-panel p-6 rounded-lg border border-[var(--panel-border)]">
+          <h3 className="text-gray-400 text-xs mb-2 uppercase tracking-wider">Resolved Imports</h3>
+          <p className="text-3xl font-bold text-[#10b981]">{deps.resolved_imports ?? 0}</p>
+        </div>
+        <div className="glass-panel p-6 rounded-lg border border-[var(--panel-border)]">
+          <h3 className="text-gray-400 text-xs mb-2 uppercase tracking-wider">Broken Imports</h3>
+          <p className="text-3xl font-bold text-red-400">{deps.broken_imports ?? 0}</p>
+        </div>
+        <div className="glass-panel p-6 rounded-lg border border-[var(--panel-border)]">
+          <h3 className="text-gray-400 text-xs mb-2 uppercase tracking-wider">External Packages</h3>
+          <p className="text-3xl font-bold text-blue-400">{deps.external_packages ? deps.external_packages.length : 0}</p>
+        </div>
+      </div>
+      <div className="glass-panel p-6 rounded-lg border border-[var(--panel-border)] max-w-4xl">
+        <h3 className="text-white text-lg font-semibold mb-4">External Package Dependencies</h3>
+        <div className="flex flex-wrap gap-2">
+          {deps.external_packages && deps.external_packages.length > 0 ? (
+            deps.external_packages.map((pkg: string, idx: number) => (
+              <span key={idx} className="bg-white/5 border border-white/10 px-3 py-1.5 rounded-md text-sm text-gray-200 font-mono">
+                {pkg}
+              </span>
+            ))
+          ) : (
+            <p className="text-gray-500 text-sm">No external dependencies detected or graph unindexed.</p>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -177,6 +239,104 @@ export function BenchmarksTab() {
           </button>
         </div>
       )}
+    </div>
+  );
+}
+
+export function PluginsTab() {
+  const [plugins, setPlugins] = useState<any>(null);
+
+  useEffect(() => {
+    fetch('/api/plugins')
+      .then(res => res.json())
+      .then(data => setPlugins(data.plugins || []));
+  }, []);
+
+  if (!plugins) return <div className="p-8 text-white">Loading language adapters...</div>;
+
+  return (
+    <div className="flex-1 flex flex-col p-8 overflow-y-auto">
+      <h2 className="text-2xl font-bold text-white mb-6 flex items-center"><Cpu className="mr-3 text-purple-400" /> Language Adapters & Reference Plugins</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
+        {plugins.map((p: any, idx: number) => (
+          <div key={idx} className="glass-panel p-6 rounded-lg border border-[var(--panel-border)] flex flex-col justify-between">
+            <div>
+              <div className="flex justify-between items-start mb-2">
+                <h3 className="text-white text-lg font-semibold">{p.name || p.id}</h3>
+                <span className="px-2 py-0.5 rounded text-xs font-mono bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                  v{p.version || '0.1.0'}
+                </span>
+              </div>
+              <p className="text-gray-400 text-sm mb-4">{p.description}</p>
+            </div>
+            <div className="flex flex-wrap gap-1.5 pt-3 border-t border-white/5">
+              {(Array.isArray(p.capabilities) ? p.capabilities : (p.capabilities ? Object.keys(p.capabilities) : ['language_adapter', 'symbol_table'])).map((cap: any, cIdx: number) => {
+                const label = typeof cap === 'object' && cap !== null ? (cap.capability || cap.name || JSON.stringify(cap)) : String(cap);
+                return (
+                  <span key={cIdx} className="bg-black/40 px-2 py-0.5 rounded text-xs text-gray-300 font-mono">
+                    {label}
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+        {plugins.length === 0 && (
+          <p className="text-gray-500 text-sm">No reference plugins loaded.</p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export function MarketplaceTab() {
+  const [plugins, setPlugins] = useState<any>(null);
+
+  useEffect(() => {
+    fetch('/api/marketplace')
+      .then(res => res.json())
+      .then(data => setPlugins(data.plugins || []));
+  }, []);
+
+  if (!plugins) return <div className="p-8 text-white">Loading marketplace index...</div>;
+
+  return (
+    <div className="flex-1 flex flex-col p-8 overflow-y-auto">
+      <h2 className="text-2xl font-bold text-white mb-6 flex items-center"><ShoppingBag className="mr-3 text-blue-400" /> Ecosystem Plugin Marketplace</h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl">
+        {plugins.map((p: any, idx: number) => (
+          <div key={idx} className="glass-panel p-6 rounded-lg border border-[var(--panel-border)] flex flex-col justify-between">
+            <div>
+              <div className="flex justify-between items-start mb-2">
+                <h3 className="text-white text-lg font-semibold flex items-center gap-1.5">
+                  {p.name || p.id}
+                  {p.certified && <span title="Official Certified Plugin"><CheckCircle size={14} className="text-[#10b981]" /></span>}
+                </h3>
+                <span className="px-2 py-0.5 rounded text-xs font-mono bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                  {p.tier || 'Community'}
+                </span>
+              </div>
+              <p className="text-gray-400 text-sm mb-4">{p.description}</p>
+            </div>
+            <div>
+              <div className="flex flex-wrap gap-1 mb-3">
+                {(Array.isArray(p.capabilities) ? p.capabilities : (p.capabilities ? Object.keys(p.capabilities) : ['signed_bundle', 'community_tier'])).slice(0, 3).map((cap: any, cIdx: number) => {
+                  const label = typeof cap === 'object' && cap !== null ? (cap.capability || cap.name || JSON.stringify(cap)) : String(cap);
+                  return (
+                    <span key={cIdx} className="bg-white/5 px-2 py-0.5 rounded text-[10px] text-gray-300 font-mono">
+                      {label}
+                    </span>
+                  );
+                })}
+              </div>
+              <div className="flex justify-between items-center pt-3 border-t border-white/5 text-xs text-gray-500 font-mono">
+                <span>v{p.version}</span>
+                <span className="text-[var(--accent)] cursor-pointer hover:underline">osef plugin install {p.id || p.name}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

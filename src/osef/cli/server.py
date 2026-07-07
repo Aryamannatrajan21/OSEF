@@ -156,59 +156,141 @@ def run_benchmark() -> dict[str, Any]:
 @app.get("/api/policies")
 def get_policies() -> dict[str, Any]:
     try:
-        engine, graph = get_engine()
+        _, graph = get_engine()
+        from osef.epe.setup import get_default_engine
+
+        engine = get_default_engine()
+        findings = engine.evaluate(graph)
         violations = []
-
-        import os
-        import tomllib
-
-        config = {}
-        if os.path.exists("pyproject.toml"):
-            try:
-                with open("pyproject.toml", "rb") as f:
-                    pyproject = tomllib.load(f)
-                config = pyproject.get("tool", {}).get("osef", {}).get("rules", {})
-            except Exception:
-                pass
-
-        # Rule 1: Missing Docstrings
-        if config.get("Documentation.MissingDocstring", True):
-            nodes_missing_docs = [
-                n
-                for n in graph.nodes.values()
-                if n.type in ["function", "class", "module"] and not n.description
-            ]
-            if nodes_missing_docs:
-                violations.append(
-                    {
-                        "id": "Documentation.MissingDocstring",
-                        "severity": "warning",
-                        "message": f"Found {len(nodes_missing_docs)} entities missing docstrings (e.g., {nodes_missing_docs[0].name})",
-                    }
-                )
-
-        # Rule 2: High Coupling
-        if config.get("Architecture.HighCoupling", True):
-            from collections import defaultdict
-
-            outgoing_counts: dict[str, int] = defaultdict(int)
-            for e in graph.edges:
-                outgoing_counts[e.source_id] += 1
-
-            for n in graph.nodes.values():
-                if outgoing_counts[n.id] > 30:
-                    violations.append(
-                        {
-                            "id": "Architecture.HighCoupling",
-                            "severity": "error",
-                            "message": f"Node {n.name} has extremely high coupling ({outgoing_counts[n.id]} outgoing dependencies)",
-                        }
-                    )
-
+        for f in findings:
+            sev_str = str(
+                f.severity.value if hasattr(f.severity, "value") else f.severity
+            ).lower()
+            violations.append(
+                {
+                    "id": f.provenance.rule_id,
+                    "title": f.title,
+                    "severity": "error"
+                    if sev_str in ("critical", "high")
+                    else "warning",
+                    "message": f.description,
+                    "category": str(
+                        f.category.value if hasattr(f.category, "value") else f.category
+                    ),
+                    "recommendation": f.recommendation.description
+                    if f.recommendation
+                    else "",
+                    "affected_nodes": f.evidence.affected_nodes if f.evidence else [],
+                }
+            )
         return {"violations": violations}
     except Exception as e:
         logger.error(f"Error fetching policies: {e}")
         return {"error": "Internal server error while fetching policies."}
+
+
+@app.get("/api/dependencies")
+def get_dependencies() -> dict[str, Any]:
+    try:
+        _, graph = get_engine()
+        from osef.intelligence.layer import IntelligenceLayer
+
+        intel = IntelligenceLayer(graph)
+        assessment = intel.assess()
+        deps = assessment.dependencies
+        return {
+            "total_imports": deps.total_imports,
+            "resolved_imports": deps.resolved_imports,
+            "broken_imports": deps.broken_imports,
+            "external_packages": deps.external_dependencies,
+        }
+    except Exception as e:
+        logger.error(f"Error fetching dependencies: {e}")
+        return {"error": "Internal server error while fetching dependencies."}
+
+
+@app.get("/api/plugins")
+def get_plugins() -> dict[str, Any]:
+    try:
+        import os
+        import yaml
+
+        plugins = []
+        plugins_dir = "reference-plugins"
+        if os.path.exists(plugins_dir):
+            for d in os.listdir(plugins_dir):
+                manifest_path = os.path.join(plugins_dir, d, "plugin.yaml")
+                if os.path.exists(manifest_path):
+                    with open(manifest_path, "r", encoding="utf-8") as f:
+                        data = yaml.safe_load(f)
+                        if data:
+                            plugins.append(data)
+        return {"plugins": plugins}
+    except Exception as e:
+        logger.error(f"Error fetching plugins: {e}")
+        return {"error": "Internal server error while fetching plugins."}
+
+
+@app.get("/api/marketplace")
+def get_marketplace() -> dict[str, Any]:
+    try:
+        import json
+        import os
+
+        index_path = "marketplace-index.json"
+        if os.path.exists(index_path):
+            with open(index_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                return {
+                    "plugins": data.get("plugins", data)
+                    if isinstance(data, dict)
+                    else data
+                }
+        return {"plugins": []}
+    except Exception as e:
+        logger.error(f"Error fetching marketplace: {e}")
+        return {"error": "Internal server error while fetching marketplace."}
+
+
+@app.get("/api/health-report")
+def get_health_report() -> dict[str, Any]:
+    try:
+        _, graph = get_engine()
+        from osef.intelligence.layer import IntelligenceLayer
+
+        intel = IntelligenceLayer(graph)
+        assessment = intel.assess()
+
+        health_score = 85.0
+        tech_debt = "Low"
+        if assessment.dependencies.broken_imports > 10:
+            health_score = 70.0
+            tech_debt = "Moderate"
+        elif assessment.documentation.coverage_percentage < 30.0:
+            health_score = 80.0
+
+        dep_score = 100.0
+        if assessment.dependencies.total_imports > 0:
+            dep_score = round(
+                (
+                    assessment.dependencies.resolved_imports
+                    / assessment.dependencies.total_imports
+                )
+                * 100.0,
+                1,
+            )
+
+        return {
+            "health_score": health_score,
+            "technical_debt": tech_debt,
+            "dependency_score": dep_score,
+            "documentation_score": round(
+                assessment.documentation.coverage_percentage, 1
+            ),
+        }
+    except Exception as e:
+        logger.error(f"Error fetching health report: {e}")
+        return {"error": "Internal server error while fetching health report."}
 
 
 @app.post("/api/chat")

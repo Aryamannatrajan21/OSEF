@@ -125,3 +125,20 @@ def dashboard() -> None:
     """Generate and view the public benchmark dashboard."""
     console.print("[bold blue]Generating Dashboard...[/bold blue]")
     console.print("Dashboard exported successfully.")
+
+
+@app.command("publish")
+def publish(
+    target: str = ".",
+    out_dir: str = "benchmark-site",
+) -> None:
+    """Run benchmark evaluation on a target repository and publish a static HTML/JSON leaderboard bundle."""
+    try:
+        from osef.cli.benchmark_publish import publish_benchmark
+
+        publish_benchmark(target=target, out_dir=out_dir)
+    except Exception as e:
+        console.print(
+            f"[bold red]Error publishing benchmark leaderboard: {e}[/bold red]"
+        )
+        raise typer.Exit(1)

@@ -128,29 +128,26 @@ class PipelineEngine:
                 import importlib.util
                 from pathlib import Path
 
-                # Use current working directory or predefined path since root_path is the project being analyzed
+                # Check repo root first (dev mode), then package directory (installed wheel mode)
                 project_root = Path(__file__).parent.parent.parent.parent
-                ts_plugin_path = (
-                    project_root
-                    / "reference-plugins"
-                    / "typescript"
-                    / "src"
-                    / "pipeline.py"
+                repo_plugins = project_root / "reference-plugins"
+                pkg_plugins = Path(__file__).parent.parent / "reference-plugins"
+                ref_plugins_dir = (
+                    repo_plugins
+                    if (repo_plugins / "typescript").exists()
+                    else pkg_plugins
                 )
-                if ts_plugin_path.exists():
-                    # Temporarily append to path to allow relative imports inside the plugin
-                    plugin_src_dir = str(
-                        project_root / "reference-plugins" / "typescript"
-                    )
-                    sys.path.insert(0, plugin_src_dir)
+                ts_plugin_path = ref_plugins_dir / "typescript" / "src" / "pipeline.py"
 
-                    spec = importlib.util.spec_from_file_location(
-                        "ts_pipeline_module", ts_plugin_path
-                    )
-                    if spec and spec.loader:
-                        ts_module = importlib.util.module_from_spec(spec)
-                        # We must manually load the module
-                        spec.loader.exec_module(ts_module)
+                if ts_plugin_path.exists():
+                    added = False
+                    if str(ref_plugins_dir) not in sys.path:
+                        sys.path.insert(0, str(ref_plugins_dir))
+                        added = True
+                    try:
+                        import importlib
+
+                        ts_module = importlib.import_module("typescript.src.pipeline")
                         ts_pipeline = ts_module.TypeScriptPipeline()
 
                         for ts_file in manifest.typescript_files:
@@ -176,6 +173,7 @@ class PipelineEngine:
                                 )
                                 self.graph.add_node(n)
 
+                            # Create Edge from delta
                             for edge in delta.edges:
                                 e = EKGEdge(
                                     source_id=edge.source_id,
@@ -184,9 +182,11 @@ class PipelineEngine:
                                     metadata=edge.metadata,
                                 )
                                 self.graph.add_edge(e)
+                    finally:
+                        if added and str(ref_plugins_dir) in sys.path:
+                            sys.path.remove(str(ref_plugins_dir))
                 else:
                     raise ImportError("TypeScript plugin not found.")
-                sys.path.pop(0)
             except Exception as e:
                 logger.warning(
                     f"Failed to load native TypeScript parser ({e}). Falling back to regex parser."
@@ -217,25 +217,24 @@ class PipelineEngine:
                     from pathlib import Path
 
                     project_root = Path(__file__).parent.parent.parent.parent
-                    java_plugin_path = (
-                        project_root
-                        / "reference-plugins"
-                        / "java"
-                        / "src"
-                        / "pipeline.py"
+                    repo_plugins = project_root / "reference-plugins"
+                    pkg_plugins = Path(__file__).parent.parent / "reference-plugins"
+                    ref_plugins_dir = (
+                        repo_plugins
+                        if (repo_plugins / "java").exists()
+                        else pkg_plugins
                     )
-                    if java_plugin_path.exists():
-                        plugin_src_dir = str(
-                            project_root / "reference-plugins" / "java"
-                        )
-                        sys.path.insert(0, plugin_src_dir)
+                    java_plugin_path = ref_plugins_dir / "java" / "src" / "pipeline.py"
 
-                        spec = importlib.util.spec_from_file_location(
-                            "java_pipeline_module", java_plugin_path
-                        )
-                        if spec and spec.loader:
-                            java_module = importlib.util.module_from_spec(spec)
-                            spec.loader.exec_module(java_module)
+                    if java_plugin_path.exists():
+                        added = False
+                        if str(ref_plugins_dir) not in sys.path:
+                            sys.path.insert(0, str(ref_plugins_dir))
+                            added = True
+                        try:
+                            import importlib
+
+                            java_module = importlib.import_module("java.src.pipeline")
                             java_pipeline = java_module.JavaPipeline()
 
                             for java_file in java_files:
@@ -272,8 +271,9 @@ class PipelineEngine:
                                         metadata={},
                                     )
                                     self.graph.add_edge(ekg_edge)
-
-                        sys.path.pop(0)
+                        finally:
+                            if added and str(ref_plugins_dir) in sys.path:
+                                sys.path.remove(str(ref_plugins_dir))
                     else:
                         raise ImportError("Java plugin not found.")
                 except Exception as err:

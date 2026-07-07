@@ -284,8 +284,51 @@ osef report --format markdown
 | `osef plugin install <name>` | Downloads, verifies, and installs a plugin. |
 | `osef plugin sign <path> <key>` | Signs a plugin package for publication. |
 | `osef plugin keygen` | Generates ed25519 keys for plugin signing. |
+| `osef mcp serve <path>` | Launches the Model Context Protocol (MCP) server over stdio. |
 
 > See the full [CLI Extension Specification](docs/architecture/CLI_EXTENSION_SPEC.md) for how to build custom commands.
+
+---
+
+## 🌐 Universal Distribution & IDE Integration
+
+OSEF is engineered for seamless distribution across operating systems, CI/CD pipelines, and development environments.
+
+### Docker & Containerization
+Run OSEF without installing dependencies locally using the official OCI container image:
+```bash
+# Build Docker image
+docker build -t osef:latest .
+
+# Run repository scan in container
+docker run --rm -v $(pwd):/workspace -w /workspace osef:latest scan .
+```
+
+### VS Code & Antigravity IDE
+The OSEF VS Code / Antigravity IDE extension automatically discovers workspace virtual environments (`.venv` or `venv` on Linux/macOS and Windows) to execute policy checks and graph validations without path configuration.
+- To configure Model Context Protocol (MCP) servers for autonomous AI agents, add `.vscode/mcp.json` to your repository:
+```json
+{
+  "$schema": "https://raw.githubusercontent.com/modelcontextprotocol/specification/main/schema/2024-11-05/client-config.json",
+  "mcpServers": {
+    "osef-ekg": {
+      "command": "osef",
+      "args": ["mcp", "serve", "${workspaceFolder}"]
+    }
+  }
+}
+```
+
+### GitHub Actions (CI/CD)
+Integrate OSEF policy evaluations into your GitHub Actions workflows using our official composite action:
+```yaml
+- name: Evaluate OSEF Architectural Policies
+  uses: Aryamannatrajan21/OSEF@main
+  with:
+    target-path: '.'
+    output-file: 'osef-results.sarif'
+    python-version: '3.12'
+```
 
 ---
 

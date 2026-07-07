@@ -1,0 +1,34 @@
+name: "OSEF Policy Evaluation"
+description: "Run Open Source Engineering Framework (OSEF) architectural policy evaluation and export SARIF 2.1.0."
+author: "OSEF Project"
+inputs:
+  target-path:
+    description: "Path to repository or workspace to analyze"
+    required: false
+    default: "."
+  output-file:
+    description: "Path where SARIF report file should be written"
+    required: false
+    default: "osef-policy-results.sarif"
+  python-version:
+    description: "Python version to use for OSEF engine"
+    required: false
+    default: "3.12"
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - name: Install OSEF Engine
+      shell: bash
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install osef
+
+    - name: Evaluate Engineering Policy
+      shell: bash
+      run: |
+        osef policy check ${{ inputs.target-path }} --format sarif --output ${{ inputs.output-file }}

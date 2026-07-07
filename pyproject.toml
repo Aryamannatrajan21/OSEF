@@ -4,6 +4,7 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel.force-include]
 "osef-studio/out" = "osef/cli/ui"
+"reference-plugins" = "osef/reference-plugins"
 
 [project]
 name = "osef"

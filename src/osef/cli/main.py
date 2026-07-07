@@ -19,6 +19,8 @@ from osef.core.certification_engine import CertificationEngine
 from osef.sdk.validation.engine import PlatformValidationEngine
 from osef.cli.benchmark import app as benchmark_app
 from osef.cli.marketplace import app as marketplace_app
+from osef.cli.policy import app as policy_app
+from osef.cli.mcp import app as mcp_app
 
 app = typer.Typer(
     help="Open Source Engineering Framework",
@@ -34,6 +36,10 @@ app.add_typer(ecosystem_app, name="ecosystem")
 app.add_typer(marketplace_app, name="plugin")
 
 app.add_typer(benchmark_app, name="benchmark")
+
+app.add_typer(policy_app, name="policy")
+
+app.add_typer(mcp_app, name="mcp")
 
 console = Console()
 
@@ -87,8 +93,38 @@ def validate(
     disable: List[str] = typer.Option(
         [], "--disable", help="Disable specific plugins or profiles"
     ),
+    format: str = typer.Option(
+        "table", "--format", "-f", help="Output format: table, sarif, or junit"
+    ),
 ) -> None:
     """Validate project structure and Engineering Knowledge Graph."""
+    if format in ("sarif", "junit") and target_type in (
+        "repository",
+        "workspace",
+        "dir",
+        "path",
+    ):
+        try:
+            from osef.epe.setup import get_default_engine
+
+            builder = PipelineEngine(target)
+            graph = builder.build()
+            findings = get_default_engine().evaluate(graph)
+            if format == "sarif":
+                from osef.epe.output.sarif import SarifSerializer
+
+                console.print(SarifSerializer.serialize(findings))
+            else:
+                from osef.epe.output.junit import JunitSerializer
+
+                console.print(JunitSerializer.serialize(findings))
+            return
+        except Exception as e:
+            console.print(
+                f"[bold red]Validation failed in {format} mode:[/bold red] {e}"
+            )
+            raise typer.Exit(code=1)
+
     console.print(
         f"[bold blue]Validating {target_type} '{target}' using profiles '{profile}'...[/bold blue]"
     )
@@ -155,8 +191,31 @@ def scan(
     ci: bool = typer.Option(
         False, "--ci", help="Run in CI mode and enforce quality gates"
     ),
+    format: str = typer.Option(
+        "table", "--format", "-f", help="Output format: table, sarif, or junit"
+    ),
 ) -> None:
     """Analyze a repository and build its Knowledge Graph."""
+    if format in ("sarif", "junit"):
+        try:
+            from osef.epe.setup import get_default_engine
+
+            builder = PipelineEngine(path)
+            graph = builder.build()
+            findings = get_default_engine().evaluate(graph)
+            if format == "sarif":
+                from osef.epe.output.sarif import SarifSerializer
+
+                console.print(SarifSerializer.serialize(findings))
+            else:
+                from osef.epe.output.junit import JunitSerializer
+
+                console.print(JunitSerializer.serialize(findings))
+            return
+        except Exception as e:
+            console.print(f"[bold red]Scan failed in {format} mode:[/bold red] {e}")
+            raise typer.Exit(code=1)
+
     console.print(
         f"[bold blue]Analyzing repository at {path} with profiles '{profile}'...[/bold blue]"
     )

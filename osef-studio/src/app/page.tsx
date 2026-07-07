@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import NodeSidebar from '@/components/sidebar/NodeSidebar';
 import { Search, Activity, Layers, ShieldCheck, Box, Settings, X } from 'lucide-react';
-import { ArchitectureTab, ReasoningTab, PoliciesTab, BenchmarksTab, AssistantTab } from '@/components/tabs/StudioTabs';
+import { ArchitectureTab, ReasoningTab, PoliciesTab, BenchmarksTab, AssistantTab, DependenciesTab, PluginsTab, MarketplaceTab } from '@/components/tabs/StudioTabs';
 
 // ForceGraph must be dynamically imported with ssr: false because it uses canvas/window APIs
 const ForceGraph = dynamic(() => import('@/components/graph/ForceGraph'), { 
@@ -91,7 +91,7 @@ export default function OsefStudio() {
       });
   }, []);
 
-  const TABS = ['Graph', 'Architecture', 'Reasoning', 'Policies', 'Benchmarks', 'Assistant'];
+  const TABS = ['Graph', 'Architecture', 'Reasoning', 'Policies', 'Dependencies', 'Plugins', 'Marketplace', 'Benchmarks', 'Assistant'];
 
   return (
     <main className={`w-screen h-screen relative overflow-hidden transition-colors duration-500 ${isDarkMode ? 'bg-[var(--background)]' : 'bg-gray-100 text-gray-900'}`}>
@@ -157,6 +157,12 @@ export default function OsefStudio() {
           <ReasoningTab />
         ) : activeTab === 'Policies' ? (
           <PoliciesTab />
+        ) : activeTab === 'Dependencies' ? (
+          <DependenciesTab />
+        ) : activeTab === 'Plugins' ? (
+          <PluginsTab />
+        ) : activeTab === 'Marketplace' ? (
+          <MarketplaceTab />
         ) : activeTab === 'Benchmarks' ? (
           <BenchmarksTab />
         ) : activeTab === 'Assistant' ? (

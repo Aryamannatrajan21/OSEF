@@ -108,3 +108,18 @@ def install(
     except Exception as e:
         console.print(f"[bold red]Error installing plugin: {e}[/bold red]")
         raise typer.Exit(1)
+
+
+@app.command("build")
+def build(
+    out_dir: str = "marketplace-site",
+    index_path: str = "marketplace-index.json",
+) -> None:
+    """Build a static HTML/JSON site bundle for the plugin marketplace."""
+    try:
+        from osef.cli.marketplace_build import build_marketplace
+
+        build_marketplace(out_dir=out_dir, index_path=index_path)
+    except Exception as e:
+        console.print(f"[bold red]Error building marketplace site: {e}[/bold red]")
+        raise typer.Exit(1)

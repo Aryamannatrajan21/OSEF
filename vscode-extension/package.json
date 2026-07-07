@@ -1,0 +1,64 @@
+{
+  "name": "osef-vscode",
+  "displayName": "OSEF Studio & Policy Workbench",
+  "description": "Official VS Code extension for the Open Source Engineering Framework (OSEF)",
+  "version": "0.1.1",
+  "publisher": "osef",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other",
+    "Visualization",
+    "Linters"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:osef.startStudio",
+    "onCommand:osef.validateRepo",
+    "onCommand:osef.policyCheck"
+  ],
+  "main": "./src/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "osef.startStudio",
+        "title": "OSEF: Open Studio Workbench",
+        "category": "OSEF"
+      },
+      {
+        "command": "osef.validateRepo",
+        "title": "OSEF: Validate Repository Graph",
+        "category": "OSEF"
+      },
+      {
+        "command": "osef.policyCheck",
+        "title": "OSEF: Evaluate Policies & SARIF Check",
+        "category": "OSEF"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "osef-explorer",
+          "title": "OSEF Studio",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "osef-explorer": [
+        {
+          "id": "osef-status-view",
+          "name": "Engineering Status"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.80.0"
+  }
+}
