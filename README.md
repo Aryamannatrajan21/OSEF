@@ -83,7 +83,7 @@ graph TD
     class J highlight;
 ```
 
-> **Read the specs**: Discover the internal design in our [Architecture Index](ARCHITECTURE_INDEX.md).
+> **Read the specs**: Discover the internal design in our [Specifications Index](SPECIFICATIONS.md) and [Architecture Overview](docs/architecture.md).
 
 ---
 
@@ -115,13 +115,16 @@ graph TD
 - ✅ **Highly Optimized Parser** (Scales to 18,000+ node architectures seamlessly)
 - ✅ **Knowledge Domains**: Software, Documentation, Infrastructure, Security, Architecture, Runtime.
 - ✅ **TypeScript, Java, Python Parsers**
+- ✅ **Model Context Protocol (MCP) Server** (JSON-RPC stdio integration for AI IDEs)
+- ✅ **Universal Distribution** (Docker OCI containers, VS Code VSIX extension, GitHub Actions)
+- ✅ **Standardized Policy Export** (SARIF 2.1.0 and JUnit XML reports)
 - 🚧 **Go, Rust Parsers** *(In Progress)*
 
 ---
 
 ## 🖥️ OSEF Studio
 
-OSEF ships with a stunning Next.js dashboard that visualizes your codebase architecture and policies in real-time. Simply run `osef ui` to launch it locally!
+OSEF ships with an interactive Next.js dashboard that visualizes your codebase architecture and policies in real-time. Simply run `osef ui` to launch it locally!
 
 ### Interactive Graph Visualization
 ![Graph View](docs/assets/studio_graph.png)
@@ -280,6 +283,8 @@ osef report --format markdown
 | `osef report` | Outputs findings into Markdown, JSON, or HTML. |
 | `osef certify` | Runs the Certification Engine against canonical fixtures. |
 | `osef doctor` | Validates environment and installed plugins. |
+| `osef ecosystem` | Evaluates ecosystem readiness and integration status. |
+| `osef validate` | Validates repository graph structures and symbol table schemas. |
 | `osef plugin search <query>` | Searches the marketplace index for available plugins. |
 | `osef plugin install <name>` | Downloads, verifies, and installs a plugin. |
 | `osef plugin sign <path> <key>` | Signs a plugin package for publication. |
@@ -292,7 +297,7 @@ osef report --format markdown
 
 ## 🌐 Universal Distribution & IDE Integration
 
-OSEF is engineered for seamless distribution across operating systems, CI/CD pipelines, and development environments.
+OSEF is engineered for seamless distribution across operating systems, CI/CD pipelines, and development environments, prioritizing open industry standards (SARIF 2.1.0, JUnit XML, Model Context Protocol schemas) over proprietary syncs.
 
 ### Docker & Containerization
 Run OSEF without installing dependencies locally using the official OCI container image:
@@ -334,7 +339,7 @@ Integrate OSEF policy evaluations into your GitHub Actions workflows using our o
 
 ## 🧪 The OSEF Benchmark Validation Suite
 
-To guarantee deterministic parsing, reasoning, and graph generation, **OSEF v1.0.0 LTS** ships with a built-in validation platform. The benchmark corpus tests the engine against a massive suite of real-world codebases spanning 4 tiers of architectural complexity.
+To guarantee deterministic parsing, reasoning, and graph generation, **OSEF v1.0.0 LTS** ships with a built-in validation platform. The benchmark corpus tests the engine against a comprehensive suite of real-world codebases spanning 4 tiers of architectural complexity.
 
 | Complexity | Scale | Target Codebases | Goal |
 | :--- | :--- | :--- | :--- |
@@ -466,7 +471,7 @@ OSEF/
 OSEF's documentation is treated as a first-class product feature. We operate on a strict *Documentation Freeze* model where architecture contracts are immutable.
 
 - 🧭 **[Specifications Index](SPECIFICATIONS.md)**: The master index of all frozen architectural contracts.
-- 🏗️ **[Architecture Index](ARCHITECTURE_INDEX.md)**: A guided tour of OSEF's internal design.
+- 🏗️ **[Architecture Overview](docs/architecture.md)**: A guided tour of OSEF's internal design.
 - 🛠️ **[Extension Developer Guide](docs/architecture/EXTENSION_DEVELOPER_GUIDE.md)**: How to build an OSEF Plugin.
 - 🗺️ **[Roadmap](ROADMAP.md)**: Our strategic vision.
 - 📝 **[Changelog](CHANGELOG.md)**: Historical architectural milestones.
@@ -483,12 +488,18 @@ OSEF's documentation is treated as a first-class product feature. We operate on 
 - Capability-Driven Runtime
 - Platform Validation (Documentation Intelligence Plugin)
 
-**Phase II — Ecosystem Engineering (Active)**
+**Phase II — Ecosystem Engineering (Completed)**
 - Reference Plugins
 - Language Packs
 - Enterprise Packs
 - Marketplace
 - AI Engineering Intelligence
+
+**Phase III — Universal Distribution & Ecosystem Standardization (Completed)**
+- Universal Docker OCI Containerization
+- VS Code / Antigravity IDE Integration (.vsix & auto-discovery)
+- Model Context Protocol (MCP) stdio Server
+- Standardized SARIF 2.1.0 and JUnit XML Interchange
 
 > Read the full [Roadmap](ROADMAP.md).
 
