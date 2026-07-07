@@ -30,6 +30,7 @@ jobs:
       - name: Install OSEF Engine
         run: |
           pip install --upgrade pip
+          mkdir -p osef-studio/out
           pip install -e .
 
       - name: Run OSEF Policy Check (SARIF output)

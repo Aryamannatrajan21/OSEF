@@ -27,6 +27,7 @@ runs:
       run: |
         python -m pip install --upgrade pip
         if [ -f "${{ inputs.target-path }}/pyproject.toml" ]; then
+          mkdir -p "${{ inputs.target-path }}/osef-studio/out"
           python -m pip install -e "${{ inputs.target-path }}"
         else
           python -m pip install osef
