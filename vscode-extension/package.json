@@ -8,6 +8,11 @@
     "type": "git",
     "url": "https://github.com/Aryamannatrajan21/OSEF.git"
   },
+  "bugs": {
+    "url": "https://github.com/Aryamannatrajan21/OSEF/issues"
+  },
+  "homepage": "https://github.com/Aryamannatrajan21/OSEF#readme",
+  "qna": "https://github.com/Aryamannatrajan21/OSEF/discussions",
   "icon": "media/osef_logo.png",
   "license": "Apache-2.0",
   "engines": {
