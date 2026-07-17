@@ -35,7 +35,7 @@ docs = [
     "mkdocs-material>=9.0.0"
 ]
 ui = [
-    "fastapi>=0.100.0",
+    "fastapi>=0.139.2",
     "uvicorn>=0.20.0",
     "litellm>=1.0.0",
     "boto3>=1.0.0"
