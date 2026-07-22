@@ -8,15 +8,19 @@ class SarifSerializer:
     """Serializes EPE policy evaluation Findings to SARIF 2.1.0 format."""
 
     @staticmethod
-    def serialize(findings: List[Finding]) -> str:
-        return json.dumps(SarifSerializer.to_dict(findings), indent=2)
+    def serialize(findings: List[Finding], include_notes: bool = False) -> str:
+        return json.dumps(
+            SarifSerializer.to_dict(findings, include_notes=include_notes), indent=2
+        )
 
     @staticmethod
-    def to_dict(findings: List[Finding]) -> Dict[str, Any]:
+    def to_dict(findings: List[Finding], include_notes: bool = False) -> Dict[str, Any]:
         rules_map: Dict[str, Dict[str, Any]] = {}
         results: List[Dict[str, Any]] = []
 
         for finding in findings:
+            if not include_notes and finding.severity in (Severity.LOW, Severity.INFO):
+                continue
             rule_id = finding.provenance.rule_id
             if rule_id not in rules_map:
                 rules_map[rule_id] = {

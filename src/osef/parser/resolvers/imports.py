@@ -46,15 +46,31 @@ class ImportResolver:
 
         for p in [Path.cwd(), *Path.cwd().parents]:
             if (p / "pyproject.toml").exists():
-                try:
-                    content = (p / "pyproject.toml").read_text(errors="ignore")
-                    for line in content.splitlines():
-                        m = re.findall(r'"([a-zA-Z0-9_\-]+)(?:[><=~\[].*)?"', line)
-                        for dep in m:
-                            deps.add(dep.lower())
-                            deps.add(dep.split("-")[0].lower())
-                except Exception:
-                    pass
+                for py_file in p.rglob("pyproject.toml"):
+                    if "node_modules" in str(py_file) or ".venv" in str(py_file):
+                        continue
+                    try:
+                        content = py_file.read_text(errors="ignore")
+                        for line in content.splitlines():
+                            m = re.findall(r'"([a-zA-Z0-9_\-]+)(?:[><=~\[].*)?"', line)
+                            for dep in m:
+                                deps.add(dep.lower())
+                                deps.add(dep.split("-")[0].lower())
+                    except Exception:
+                        pass
+                for req_file in p.rglob("requirements*.txt"):
+                    if "node_modules" in str(req_file) or ".venv" in str(req_file):
+                        continue
+                    try:
+                        for line in req_file.read_text(errors="ignore").splitlines():
+                            line = line.strip().split("#")[0]
+                            if line and not line.startswith("-"):
+                                dep = re.split(r"[><=~\[!]", line)[0].strip().lower()
+                                if dep:
+                                    deps.add(dep)
+                                    deps.add(dep.split("-")[0].lower())
+                    except Exception:
+                        pass
                 for pkg_file in p.rglob("package.json"):
                     if "node_modules" in str(pkg_file):
                         continue
