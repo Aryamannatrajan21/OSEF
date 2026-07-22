@@ -56,6 +56,7 @@ class ImportResolver:
                             m = re.findall(r'"([a-zA-Z0-9_\-]+)(?:[><=~\[].*)?"', line)
                             for dep in m:
                                 deps.add(dep.lower())
+                                deps.add(dep.replace("-", "_").lower())
                                 deps.add(dep.split("-")[0].lower())
                     except Exception:
                         pass
@@ -69,6 +70,7 @@ class ImportResolver:
                                 dep = re.split(r"[><=~\[!]", line)[0].strip().lower()
                                 if dep:
                                     deps.add(dep)
+                                    deps.add(dep.replace("-", "_"))
                                     deps.add(dep.split("-")[0].lower())
                     except Exception:
                         pass
@@ -137,6 +139,7 @@ class ImportResolver:
                         imp.metadata["is_external"] = "true"
                     elif (
                         top_level.lower() in deps
+                        or top_level.lower().replace("_", "-") in deps
                         or target.split("/")[0] in deps
                         or importlib.util.find_spec(top_level) is not None
                     ):
