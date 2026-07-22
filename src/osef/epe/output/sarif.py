@@ -40,7 +40,7 @@ class SarifSerializer:
             level = "warning"
             if finding.severity in (Severity.CRITICAL, Severity.HIGH):
                 level = "error"
-            elif finding.severity == Severity.INFO:
+            elif finding.severity in (Severity.LOW, Severity.INFO):
                 level = "note"
 
             locations: List[Dict[str, Any]] = []

@@ -342,6 +342,18 @@ class PipelineEngine:
             if symbol.type == "import" and symbol.metadata.get("resolved") == "true":
                 target_id = symbol.metadata.get("resolved_to")
                 if target_id:
+                    if target_id not in self.graph.nodes:
+                        self.graph.add_node(
+                            Node(
+                                id=target_id,
+                                type="external_module",
+                                name=target_id.split(":")[-1]
+                                if ":" in target_id
+                                else target_id,
+                                description="External dependency or standard library module",
+                                metadata={"is_external": "true"},
+                            )
+                        )
                     self.graph.add_edge(
                         Edge(
                             source_id=symbol.id,
@@ -351,11 +363,14 @@ class PipelineEngine:
                     )
 
             for callee_id in symbol.related_ids.get("CALLS", []):
-                self.graph.add_edge(
-                    Edge(
-                        source_id=symbol.id, target_id=callee_id, relation_type="CALLS"
+                if callee_id in self.graph.nodes:
+                    self.graph.add_edge(
+                        Edge(
+                            source_id=symbol.id,
+                            target_id=callee_id,
+                            relation_type="CALLS",
+                        )
                     )
-                )
 
         if not self.graph.validate_graph():
             raise RuntimeError("Generated EKG is invalid (dangling edges).")

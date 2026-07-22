@@ -35,3 +35,20 @@ class ImportResolver:
                     imp.metadata["resolved"] = "true"
                     imp.metadata["resolved_to"] = mod.id
                     break
+
+            if imp.metadata.get("resolved") != "true":
+                top_level = target.split(".")[0]
+                try:
+                    import sys
+                    import importlib.util
+
+                    if top_level in getattr(sys, "stdlib_module_names", ()):
+                        imp.metadata["resolved"] = "true"
+                        imp.metadata["resolved_to"] = f"stdlib:{top_level}"
+                        imp.metadata["is_external"] = "true"
+                    elif importlib.util.find_spec(top_level) is not None:
+                        imp.metadata["resolved"] = "true"
+                        imp.metadata["resolved_to"] = f"package:{top_level}"
+                        imp.metadata["is_external"] = "true"
+                except Exception:
+                    pass

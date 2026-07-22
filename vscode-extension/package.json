@@ -2,7 +2,7 @@
   "name": "osef-vscode",
   "displayName": "OSEF Studio & Policy Workbench",
   "description": "Official VS Code extension for the Open Source Engineering Framework (OSEF)",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "publisher": "osef",
   "repository": {
     "type": "git",
