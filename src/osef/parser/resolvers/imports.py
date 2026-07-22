@@ -12,9 +12,10 @@ class ImportResolver:
 
     def __init__(self, symbol_table: SymbolTable):
         self.symbol_table = symbol_table
+        self._project_deps: set[str] | None = None
 
     def _get_project_dependencies(self) -> set[str]:
-        if getattr(self, "_project_deps", None) is not None:
+        if self._project_deps is not None:
             return self._project_deps
         deps = {
             "fastapi",
