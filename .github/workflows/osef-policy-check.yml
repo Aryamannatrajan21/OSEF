@@ -38,7 +38,7 @@ jobs:
           osef policy check . --format sarif --output osef-policy-results.sarif
 
       - name: Upload SARIF report to GitHub Advanced Security
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4.37.3
         if: always()
         continue-on-error: true
         with:
